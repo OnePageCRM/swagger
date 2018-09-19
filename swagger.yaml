@@ -73,7 +73,7 @@ info:
     <p class="url"><code class="bluetext"><span class="delete-text">DELETE</span> contacts/51f251d5eb899749f7000006.json?undo=true</code></p>
 
     <br><br>
-    <h3>Limit Listings by Time</h3>
+    <h3>Sort Listings by Time</h3>
       <p>
         When fetching collections, you can request the API only returns records that were modified in a given time range.
       </p>
@@ -88,27 +88,27 @@ info:
         <tbody>
           <tr>
             <td>date_filter</td>
-            <td>time</td>
+            <td>Unix timestamp</td>
             <td>Filter returned data by a particular field when combined with since and until.</td>
           </tr>
           <tr>
             <td>since</td>
-            <td>time</td>
+            <td>Unix timestamp</td>
             <td>Return resources with dates in the provided date_filter parameter since this time. Otherwise it will return resources that were modified since this time.</td>
           </tr>
           <tr>
             <td>until</td>
-            <td>time</td>
+            <td>Unix timestamp</td>
             <td>Return resources with dates in the provided date_filter parameter until this time. Otherwise it will return resources that were modified until this time.</td>
           </tr>
           <tr>
-            <td class="nowrap">unmodified_since</td>
-            <td class="nowrap">time</td>
+            <td>unmodified_since</td>
+            <td>Unix timestamp</td>
             <td>Return only records that were unmodified since specified time.</td>
           </tr>
           <tr>
             <td>modified_since</td>
-            <td>time</td>
+            <td>Unix timestamp</td>
             <td>Return only records that were modified since specified time.</td>
           </tr>
         <tbody>
