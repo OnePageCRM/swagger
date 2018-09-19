@@ -243,8 +243,6 @@ info:
 servers:
 - url: 'https://app.onepagecrm.com/api/v3'
   description: Production Application Server
-- url: 'https://staging.onepagecrm.com/api/v3'
-  description: Staging Application Server
 security:
 - BasicAuth: []
 tags:
