@@ -11,9 +11,9 @@ info:
     <h3>Authentication</h3>
     The OnePageCRM API makes use of
     <a target="_blank" href="https://en.wikipedia.org/wiki/Basic_access_authentication">HTTP Basic Authentication</a>.
-    To authenticate using HTTP Basic Auth, you need the <code>user_id</code> and <code>auth_key</code> associated
+    To authenticate using HTTP Basic Auth, you need the <code>user_id</code> and <code>api_key</code> associated
     with your OnePageCRM account. Your username is your <code>user_id</code> and your password is your
-    <code>auth_key</code>.<br>
+    <code>api_key</code>.<br>
 
     <br>
     <i>This information can be found by logging into your OnePageCRM account and navigating to
@@ -210,7 +210,7 @@ info:
           Click the green "Authorise" button below
         </li>
         <li>
-          Supply your username (<code>user_id</code>) and password (<code>auth_key</code>)
+          Supply your username (<code>user_id</code>) and password (<code>api_key</code>)
         </li>
         <li>
           Find the endpoint you wish to interact with, and method you wish to use
@@ -383,7 +383,7 @@ paths:
           $ref: '#/components/responses/401'
   /change_auth_key:
     post:
-      summary: Invalidate auth key and return a new auth key
+      summary: Invalidate the current api key and return a new api key
       description: >-
         **Warning:** This will change the user's authentication key, and therefore log them out of all applications. <br>
         Note: this includes the mobile applications. <br>
