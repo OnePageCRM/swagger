@@ -381,22 +381,6 @@ paths:
           $ref: '#/components/responses/400'
         401:
           $ref: '#/components/responses/401'
-#  /logout:
-#    post:
-#      summary: Log the user out of all applications (including mobile)
-#      description: >-
-#        **Warning:** This will log the user out of all applications, by changing their authentication key. <br>
-#        If you wish to log a user out - instead just forget their auth key. Note: this includes the mobile applications. <br>
-#      parameters: []
-#      tags:
-#      - Authentication
-#      responses:
-#        201:
-#          $ref: '#/components/responses/201'
-#        400:
-#          $ref: '#/components/responses/400'
-#        401:
-#          $ref: '#/components/responses/401'
   /change_auth_key:
     post:
       summary: Invalidate auth key and return a new auth key
