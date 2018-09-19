@@ -21,60 +21,6 @@ info:
     and selecting the configuration tab.</i><br>
 
     <br><br>
-    <h3>Formats</h3>
-    The API can send <u>and</u> receive data in <code>XML</code> and <code>JSON</code>, as well as receive data as
-    URL encoded query strings.
-
-    <br>
-    To send and receive <code>XML</code> or <code>JSON</code> you need to include the correct
-    <code>content-type</code> header and replace the <code>.format</code> in the URL.
-
-    <br>
-    <table class="table table-striped table-bordered">
-      <thead>
-        <tr>
-          <td>Type</td>
-          <td>Content-Type</td>
-          <td>.format</td>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="name">JSON</td>
-          <td>application/json</td>
-          <td>.json</td>
-        </tr>
-        <tr>
-          <td class="name">XML</td>
-          <td>application/xml</td>
-          <td>.xml</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <br>
-    <h3>Partial Updates</h3>
-    You can partially update or create resources through our API by including the value <code>partial=true</code> in
-    the <code>POST</code>/<code>PUT</code> request body or in the request params. This is the equivalent of using
-    the emerging RESTful API standard’s <code>PATCH</code> method.<br>
-
-    <br>
-    When creating a resource ‘partially’ using a <code>POST</code> request you don’t need to include all of the
-    resource’s fields. All fields will be automatically set to <code>null</code> if they are not included. Note
-    that the <code>POST</code> could still fail when partially creating a resource but not including the minimum
-    required fields.<br>
-
-    <br>
-    When updating a resource ‘partially’ using a <code>PUT</code> request, any fields you don’t include will stay the
-    same as before.
-    <br><br>
-    <div class="alert alert-danger">
-      <strong>Warning:</strong> You need to exercise caution when partially updating sub resources. If you tried
-      only updating a contact’s phone numbers you need to include all phone numbers that you don’t want to be deleted,
-      as we don’t extend the partial update feature to sub resources.
-    </div>
-
-    <br><br>
     <h3>Pagination</h3>
     <p>Whenever you are fetching a list of records, you can paginate the response with these standard parameters:</p>
     <table class="table table-striped table-bordered">
