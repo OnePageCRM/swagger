@@ -334,7 +334,7 @@ paths:
         -> User specific config e.g. date format, time zone info. <br>
       parameters: []
       tags:
-      - Authentication
+      - Bootstrap
       responses:
         200:
           description: OK
@@ -404,7 +404,7 @@ paths:
         **Warning:** This will change the user's authentication key, and therefore log them out of all applications. <br>
         Note: this includes the mobile applications. <br>
       tags:
-      - Authentication
+      - Bootstrap
       responses:
         201:
           description: Created
