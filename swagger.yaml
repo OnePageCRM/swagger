@@ -462,7 +462,6 @@ paths:
                   $ref: '#/components/schemas/User/properties/company_name'
                 bcc_email:
                   type: string
-                  required: false
                   description: >-
                     Should the BCC email address be re-generated for this user (you can only update this field for yourself)
                   example: 'true'
@@ -1882,13 +1881,11 @@ paths:
                 linked_deal_id:
                   type: string
                   format: bson-id
-                  required: false
                   nullable: true
                   example: ''
                 user_ids_to_notify:
                   type: array
                   description: A list of user IDs to notify
-                  required: false
                   items:
                     type: string
                     format: bson-id
@@ -1981,13 +1978,11 @@ paths:
                 linked_deal_id:
                   type: string
                   format: bson-id
-                  required: false
                   nullable: true
                   example: ''
                 user_ids_to_notify:
                   type: array
                   description: A list of user IDs to notify
-                  required: false
                   items:
                     type: string
                     format: bson-id
@@ -2058,19 +2053,20 @@ paths:
         required: true
         content:
           application/json:
+            required:
+              - reference_type
+              - key
             schema:
               properties:
                 reference_id:
                   type: string
                   format: bson-id
                   description: ID of the note associated with the attachment
-                  required: false
                   example: 5afc1b69d556730b580596cb
                 reference_type:
                   type: string
                   description: Type of resource is associated with the attachment
                   enum: [ deal, note, call ]
-                  required: true
                   example: note
                 contact_id:
                   $ref: '#/components/schemas/Note/properties/contact_id'
@@ -2080,7 +2076,6 @@ paths:
                   type: string
                   description: >-
                     The same key used in the `attachments/s3_form`, composed as `{contact_id}/{timestamp}/{filename}`
-                  required: true
                   example: 5ae06ef9d55673108fe8877f/1530520812224/mario.jpg
                 size:
                   $ref: '#/components/schemas/Attachment/properties/size'
@@ -2089,13 +2084,11 @@ paths:
                   description: Type of external link (for external `storage_provider`s)
                   enum: [ dropbox, google_drive, evernote ]
                   nullable: true
-                  required: false
                   example: ''
                 external_url:
                   type: string
                   description: URL for the file (for use with external `storage_provider`s)
                   nullable: true
-                  required: false
                   example: ''
       responses:
         201:
@@ -2214,7 +2207,6 @@ paths:
                 user_ids_to_notify:
                   type: array
                   description: A list of user IDs to notify
-                  required: false
                   items:
                     type: string
                     format: bson-id
@@ -2315,7 +2307,6 @@ paths:
                 user_ids_to_notify:
                   type: array
                   description: A list of user IDs to notify
-                  required: false
                   items:
                     type: string
                     format: bson-id
@@ -2387,18 +2378,19 @@ paths:
         content:
           application/json:
             schema:
+              required:
+                - reference_type
+                - key
               properties:
                 reference_id:
                   type: string
                   format: bson-id
                   description: ID of the call associated with the attachment
-                  required: false
                   example: 5afc1b69d556730b580596cb
                 reference_type:
                   type: string
                   description: Type of resource is associated with the attachment
                   enum: [ deal, note, call ]
-                  required: true
                   example: call
                 contact_id:
                   $ref: '#/components/schemas/Note/properties/contact_id'
@@ -2408,7 +2400,6 @@ paths:
                   type: string
                   description: >-
                     The same key used in the `attachments/s3_form`, composed as `{contact_id}/{timestamp}/{filename}`
-                  required: true
                   example: 5ae06ef9d55673108fe8877f/1530520812224/mario.jpg
                 size:
                   $ref: '#/components/schemas/Attachment/properties/size'
@@ -2417,13 +2408,11 @@ paths:
                   description: Type of external link (for external `storage_provider`s)
                   enum: [ dropbox, google_drive, evernote ]
                   nullable: true
-                  required: false
                   example: ''
                 external_url:
                   type: string
                   description: URL for the file (for use with external `storage_provider`s)
                   nullable: true
-                  required: false
                   example: ''
       responses:
         201:
@@ -2853,18 +2842,19 @@ paths:
         content:
           application/json:
             schema:
+              required:
+                - reference_type
+                - key
               properties:
                 reference_id:
                   type: string
                   format: bson-id
                   description: ID of the deal associated with the attachment
-                  required: false
                   example: 5afc1b69d556730b580596cb
                 reference_type:
                   type: string
                   description: Type of resource is associated with the attachment
                   enum: [ deal, note, call ]
-                  required: true
                   example: deal
                 contact_id:
                   $ref: '#/components/schemas/Note/properties/contact_id'
@@ -2874,7 +2864,6 @@ paths:
                   type: string
                   description: >-
                     The same key used in the `attachments/s3_form`, composed as `{contact_id}/{timestamp}/{filename}`
-                  required: true
                   example: 5ae06ef9d55673108fe8877f/1530520812224/mario.jpg
                 size:
                   $ref: '#/components/schemas/Attachment/properties/size'
@@ -2883,13 +2872,11 @@ paths:
                   description: Type of external link (for external `storage_provider`s)
                   enum: [ dropbox, google_drive, evernote ]
                   nullable: true
-                  required: false
                   example: ''
                 external_url:
                   type: string
                   description: URL for the file (for use with external `storage_provider`s)
                   nullable: true
-                  required: false
                   example: ''
       responses:
         201:
@@ -3023,18 +3010,19 @@ paths:
         content:
           application/json:
             schema:
+              required:
+                - reference_type
+                - key
               properties:
                 reference_id:
                   type: string
                   format: bson-id
                   description: ID of the note associated with the attachment
-                  required: false
                   example: 5afc1b69d556730b580596cb
                 reference_type:
                   type: string
                   description: Type of resource is associated with the attachment
                   enum: [ deal, note, call ]
-                  required: true
                   example: note
                 contact_id:
                   $ref: '#/components/schemas/Note/properties/contact_id'
@@ -3044,7 +3032,6 @@ paths:
                   type: string
                   description: >-
                     The same key used in the `attachments/s3_form`, composed as `{contact_id}/{timestamp}/{filename}`
-                  required: true
                   example: 5ae06ef9d55673108fe8877f/1530520812224/mario.jpg
                 size:
                   $ref: '#/components/schemas/Attachment/properties/size'
@@ -3053,13 +3040,11 @@ paths:
                   description: Type of external link (for external `storage_provider`s)
                   enum: [ dropbox, google_drive, evernote ]
                   nullable: true
-                  required: false
                   example: ''
                 external_url:
                   type: string
                   description: URL for the file (for use with external `storage_provider`s)
                   nullable: true
-                  required: false
                   example: ''
       responses:
         201:
@@ -4231,12 +4216,13 @@ paths:
         content:
           application/json:
             schema:
+              required:
+                - contact_id
               properties:
                 contact_id:
                   type: string
                   format: bson-id
                   description: The ID of the contact to link with the company
-                  required: true
                   example: 5ae06ef9d55673108fe8877b
       responses:
         201:
@@ -5572,13 +5558,11 @@ paths:
                 linked_deal_id:
                   type: string
                   format: bson-id
-                  required: false
                   nullable: true
                   example: ''
                 user_ids_to_notify:
                   type: array
                   description: A list of user IDs to notify
-                  required: false
                   items:
                     type: string
                     format: bson-id
@@ -5698,7 +5682,6 @@ paths:
                 user_ids_to_notify:
                   type: array
                   description: A list of user IDs to notify
-                  required: false
                   items:
                     type: string
                     format: bson-id
@@ -6239,7 +6222,6 @@ paths:
                 comment:
                   type: string
                   maxLength: 140 chars
-                  required: false
                   example: Joe is not interested in buying windmills at this time.
       responses:
         200:
@@ -6361,7 +6343,6 @@ paths:
                   type: string
                   description: The name of the company the contact is joining (leave blank to remain without a company)
                   maxLength: 55 chars
-                  required: false
                   example: Fancy New Company Inc.
       responses:
         200:
