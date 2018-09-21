@@ -2050,7 +2050,6 @@ paths:
       parameters:
       - $ref: '#/components/parameters/path_note_id'
       requestBody:
-        required: true
         content:
           application/json:
             required:
@@ -6930,7 +6929,7 @@ components:
           type: boolean
           description: Is the contact starred?
           example: true
-          deafult: false
+          default: false
         photo_url:
           type: string
           description: URL of the contact's photo
@@ -7404,20 +7403,20 @@ components:
           format: date
           description: The date the deal is expected to close (status should be `pending`)
           example: '2018-04-15'
-          deafult: Today's date
+          default: Today's date
         close_date:
           type: string
           format: date
           description: The date the deal actually closed (status should be `won` or `lost`)
           example: '2018-04-15'
-          deafult: Today's date
+          default: Today's date
         date:
           type: string
           format: date
           description: Expected close date (for `pending` deals), close date (for deals of status `won` or `lost`)
           readOnly: true
           example: '2018-04-15'
-          deafult: Today's date
+          default: Today's date
         amount:
           type: number
           format: float
@@ -8330,7 +8329,7 @@ components:
         while the `users` array contains the same breakdown but per user.
       properties:
         all:
-          desciptions: Counters for the entire account
+          description: Counters for the entire account
           type: array
           items:
             properties:
@@ -8502,7 +8501,7 @@ components:
                 readOnly: true
                 example: 27
         users:
-          desciptions: Counters per user
+          description: Counters per user
           type: array
           items:
             properties:
