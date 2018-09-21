@@ -2050,12 +2050,13 @@ paths:
       parameters:
       - $ref: '#/components/parameters/path_note_id'
       requestBody:
+        required: true
         content:
           application/json:
-            required:
+            schema:
+              required:
               - reference_type
               - key
-            schema:
               properties:
                 reference_id:
                   type: string
