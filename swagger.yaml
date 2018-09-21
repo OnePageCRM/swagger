@@ -276,7 +276,7 @@ tags:
 paths:
   /bootstrap:
     get:
-      summary: Get useful information about the logged API user's account
+      summary: Get useful information about the logged API users account
       description: >-
         Includes things like: <br>
         -> Global account config e.g. lead sources and deal stages. <br>
@@ -334,7 +334,7 @@ paths:
     post:
       summary: Invalidate the current api key and return a new api key
       description: >-
-        **Warning:** This will change the user's authentication key, and therefore log them out of all applications. <br>
+        **Warning:** This will change the users authentication key, and therefore log them out of all applications. <br>
         Note: this includes the mobile applications. <br>
       tags:
       - Bootstrap
@@ -363,7 +363,7 @@ paths:
           $ref: '#/components/responses/401'
   /users:
     get:
-      summary: Get the list of users (for the logged API user's account)
+      summary: Get the list of users (for the logged API users account)
       tags:
       - Users
       parameters: []
@@ -496,7 +496,7 @@ paths:
           $ref: '#/components/responses/500'
   /lead_sources:
     get:
-      summary: Get the list of lead sources (for the logged API user's account)
+      summary: Get the list of lead sources (for the logged API users account)
       tags:
       - Lead Sources
       parameters: []
@@ -679,7 +679,7 @@ paths:
           $ref: '#/components/responses/500'
   /statuses:
     get:
-      summary: Get the list of statuses (for the logged API user's account)
+      summary: Get the list of statuses (for the logged API users account)
       description:
       tags:
       - Statuses
@@ -871,7 +871,7 @@ paths:
           $ref: '#/components/responses/500'
   /deal_fields:
     get:
-      summary: Get the list of deal fields (for the logged API user's account)
+      summary: Get the list of deal fields (for the logged API users account)
       description:
       tags:
       - Deal Fields
@@ -1201,7 +1201,7 @@ paths:
           $ref: '#/components/responses/500'
   /custom_fields:
     get:
-      summary: Get the list of custom fields (for the logged API user's account)
+      summary: Get the list of custom fields (for the logged API users account)
       description:
       tags:
       - Custom Fields
@@ -1407,7 +1407,7 @@ paths:
           $ref: '#/components/responses/500'
   /company_fields:
     get:
-      summary: Get the list of company fields (for the logged API user's account)
+      summary: Get the list of company fields (for the logged API users account)
       description:
       tags:
       - Company Fields
@@ -1613,7 +1613,7 @@ paths:
           $ref: '#/components/responses/500'
   /predefined_actions:
     get:
-      summary: Get the list of predefined actions (for the logged API user's account)
+      summary: Get the list of predefined actions (for the logged API users account)
       description:
       tags:
       - Predefined Actions
@@ -2445,7 +2445,7 @@ paths:
           $ref: '#/components/responses/500'
   /call_results:
     get:
-      summary: Get the list of call results (for the logged API user's account)
+      summary: Get the list of call results (for the logged API users account)
       description: >-
         Includes: <br>
         -> The call results for the account. <br>
@@ -3502,7 +3502,7 @@ paths:
           $ref: '#/components/responses/500'
   /actions/{action_id}/promote:
     put:
-      summary: Specify action to be promoted as the logged API user's next action
+      summary: Specify action to be promoted as the logged API users next action
       description: >-
         Only use this method if there is no next action already assigned, otherwise see similar `swap` request. <br>
       tags:
@@ -3578,7 +3578,7 @@ paths:
   /actions/{action_id}/swap:
     put:
       summary: >-
-        Specify action to be swapped in as the logged API user's next action
+        Specify action to be swapped in as the logged API users next action
       description: >-
         Resolve date conflicts between next action and dated queued action by swapping them. <br> <br>
         The swap should consist of: <br>
@@ -3621,7 +3621,7 @@ paths:
           $ref: '#/components/responses/500'
   /filters:
     get:
-      summary: Get the list of custom filters (for the logged API user's account)
+      summary: Get the list of custom filters (for the logged API users account)
       description:
       tags:
       - Filters
@@ -6393,7 +6393,7 @@ paths:
     get:
       summary: Get a list of contacts prioritized by their next action
       description: >-
-        Defaults to the logged API user's action stream. <br>
+        Defaults to the logged API users action stream. <br>
       tags:
       - Action Stream
       parameters:
@@ -6595,7 +6595,7 @@ paths:
           $ref: '#/components/responses/500'
   /webhooks:
     get:
-      summary: Get all webhooks (associated with the logged API user's account)
+      summary: Get all webhooks (associated with the logged API users account)
       description:
       tags:
       - Web Hooks
@@ -6720,13 +6720,13 @@ components:
           readOnly: true
         team:
           type: array
-          description: List of users who make up the rest of the logged API user's team
+          description: List of users who make up the rest of the logged API users team
           readOnly: true
           items:
             $ref: '#/components/schemas/User'
         account_type:
           type: string
-          description: Descriptor for the type of the logged API user's account
+          description: Descriptor for the type of the logged API users account
           enum:
           - pro
           - trial
@@ -6743,31 +6743,31 @@ components:
           readOnly: true
         custom_fields:
           type: array
-          description: List of custom fields for the logged API user's account
+          description: List of custom fields for the logged API users account
           readOnly: true
           items:
             $ref: '#/components/schemas/Custom_field'
         company_fields:
           type: array
-          description: List of company fields for the logged API user's account
+          description: List of company fields for the logged API users account
           readOnly: true
           items:
             $ref: '#/components/schemas/Company_field'
         deal_fields:
           type: array
-          description: List of deal fields for the logged API user's account
+          description: List of deal fields for the logged API users account
           readOnly: true
           items:
             $ref: '#/components/schemas/Deal_field'
         filters:
           type: array
-          description: List of custom filters for the logged API's user's account
+          description: List of custom filters for the logged API's users account
           readOnly: true
           items:
             $ref: '#/components/schemas/Filter'
         call_results:
           type: array
-          description: List of call results for the logged API's user's account
+          description: List of call results for the logged API's users account
           items:
             type: string
           readOnly: true
@@ -6779,7 +6779,7 @@ components:
             other: Other
         call_results_order:
           type: array
-          description: Order for the list of call results for the logged API's user's account
+          description: Order for the list of call results for the logged API's users account
           items:
             type: string
           readOnly: true
@@ -6882,7 +6882,7 @@ components:
           example: https://{foo.bar}/jane-doe.jpg
         country_code:
           type: string
-          description: ISO-3166 country code of the user's address
+          description: ISO-3166 country code of the users address
           readOnly: true
           example: IE
         bcc_email:
@@ -7027,7 +7027,7 @@ components:
           format: bson-id
           description: ID of the user, to whom the contact belongs
           example: 5aba31e99007ba0f570c92a5
-          default: Logged API user's ID
+          default: Logged API users ID
         custom_fields:
           type: array
           items:
@@ -7284,7 +7284,7 @@ components:
           format: bson-id
           description: ID of the user, to whom the action is assigned
           example: 5aaa9b009007ba08c9ebaef7
-          default: Logged API user's ID
+          default: Logged API users ID
         contact_id:
           type: string
           format: bson-id
@@ -7373,7 +7373,7 @@ components:
           format: bson-id
           description: ID of the user, to whom the deal belongs
           example: 5aba31e99007ba0f570c12f7
-          default: Logged API user's ID
+          default: Logged API users ID
         name:
           type: string
           description: Name of the deal
@@ -7860,7 +7860,7 @@ components:
           default: none
         date_format:
           type: string
-          description: The logged API user's preferred format for date strings
+          description: The logged API users preferred format for date strings
           example: '%d/%m/%Y'
         time_with_ampm:
           type: boolean
