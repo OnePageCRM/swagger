@@ -2,10 +2,15 @@ openapi: 3.0.0
 info:
   title: OnePageCRM API
   description: >-
-    <i>- OnePageCRM converts the complexity of a CRM system to a simple to-do list.<br>
-    - For more information on OnePageCRM please visit our [website](https://www.onepagecrm.com).<br>
-    - If you have trouble using this API or notice any issue with this documentation please contact us on our
-    [developer forum](http://forum.developer.onepagecrm.com/).</i>
+    <i>OnePageCRM converts the complexity of a CRM system to a simple to-do list. For more information on OnePageCRM please visit our [website](https://www.onepagecrm.com).</i><br><br>
+
+    <h3>OpenAPI 3 Compliance</h3>
+    We've rebuilt the OnepageCRM's API documentation from the ground up to be cleaner, simpler and to comply with the <a target="_blank" href="https://github.com/OAI/OpenAPI-Specification">OpenAPI3 specification</a>. <br>
+    We are also releasing our OpenAPI 3 compliant documentation to the public: <a target="_blank" href="https://github.com/OnePageCRM/swagger">https://github.com/OnePageCRM/swagger</a>.<br>
+    If you think our docs could be clearer or notice any issues, please let us know. We would also be delighted to receive your pull requests. <br>
+    You can find a list of tools to work with OpenAPI <a href="http://openapi.tools/">here</a>. Feel free to use any and all of these tools with the the OnepageCRM spec. For example you could generate a client sdk for your favourite language based on this spec.<br>
+    In rewriting this documentation we have exposed lots of new features of the API. We hope you enjoy using them! <br>
+    If you have trouble using the OnepageCRM API or notice any issue with this documentation please contact us on our <a href="http://forum.developer.onepagecrm.com/">developer forum</a>.
 
     <br><br>
     <h3>Authentication</h3>
