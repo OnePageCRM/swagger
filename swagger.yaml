@@ -8,7 +8,7 @@ info:
     We've rebuilt the OnepageCRM's API documentation from the ground up to be cleaner, simpler and to comply with the <a target="_blank" href="https://github.com/OAI/OpenAPI-Specification">OpenAPI3 specification</a>. <br>
     We are also releasing our OpenAPI 3 compliant documentation to the public: <a target="_blank" href="https://github.com/OnePageCRM/swagger">https://github.com/OnePageCRM/swagger</a>.<br>
     If you think our docs could be clearer or notice any issues, please let us know. We would also be delighted to receive your pull requests. <br>
-    You can find a list of tools to work with OpenAPI <a href="http://openapi.tools/">here</a>. Feel free to use any and all of these tools with the the OnepageCRM spec. For example you could generate a client sdk for your favourite language based on this spec.<br>
+    You can find a list of tools to work with OpenAPI <a href="http://openapi.tools/">here</a>. Feel free to use any and all of these tools with the the OnepageCRM spec. For example you could generate a client sdk for your favourite language or mock API responses.<br>
     In rewriting this documentation we have exposed lots of new features of the API. We hope you enjoy using them! <br>
     If you have trouble using the OnepageCRM API or notice any issue with this documentation please contact us on our <a href="http://forum.developer.onepagecrm.com/">developer forum</a>.
 
@@ -7153,6 +7153,8 @@ components:
         Referred to as 'organizations' in the web application. Companies are logical collections of Contacts and
         related sub-resources e.g. Deals, Actions and some basic info on the org. e.g. postal address, website. A
         Company may not be created directly or exist without a Contact.
+      required:
+        - name
       properties:
         id:
           type: string
@@ -7164,7 +7166,6 @@ components:
           type: string
           description: Name of the company
           maxLength: 55 chars
-          required: true
           example: Crockett & Tubbs Security
         description:
           type: string
@@ -7286,6 +7287,10 @@ components:
       description: >-
         Completable tasks related to Contacts. ASAP first, then dated actions ordered by due date (overdue first),
         followed by waiting for (blocked) and finally queued actions (without any date).
+      required:
+        - assignee_id
+        - contact_id
+        - text
       properties:
         id:
           type: string
@@ -7297,20 +7302,17 @@ components:
           type: string
           format: bson-id
           description: ID of the user, to whom the action is assigned
-          required: false
           example: 5aaa9b009007ba08c9ebaef7
           default: Logged API user's ID
         contact_id:
           type: string
           format: bson-id
           description: ID of the contact, with whom the action is associated
-          required: true
           example: 5aba31ea9007ba0f570c92d4
         text:
           type: string
           description: The main text/description of the action
           maxLength: 140 chars
-          required: true
           example: '#1 Email Jane introducing our organization'
         status:
           type: string
@@ -7369,6 +7371,10 @@ components:
       description: >-
         Represent (potential) financial transactions with your contacts. Deals include information like amount,
         deal stage, closed date or expected close date. Deals support file attachments.
+      required:
+        - contact_id
+        - owner_id
+        - name
       properties:
         id:
           type: string
@@ -7380,20 +7386,17 @@ components:
           type: string
           format: bson-id
           description: ID of the contact, to whom the deal belongs
-          required: true
           example: 5aaa9b059007ba08c9ebaf58
         owner_id:
           type: string
           format: bson-id
           description: ID of the user, to whom the deal belongs
-          required: false
           example: 5aba31e99007ba0f570c12f7
           default: Logged API user's ID
         name:
           type: string
           description: Name of the deal
           maxLength: 60 chars
-          required: true
           example: Solar panels
         text:
           type: string
@@ -7573,6 +7576,9 @@ components:
       description: >-
         Allow you to keep track of additional information related to your contacts. Notes can include any
         information you feel is relevant e.g. interactions with that contact. Notes support file attachments.
+      required:
+        - contact_id
+        - text
       properties:
         id:
           type: string
@@ -7584,13 +7590,11 @@ components:
           type: string
           format: bson-id
           description: ID of the contact, to whom the note belongs
-          required: true
           example: 5ae06ef9d55673108fe8877f
         text:
           type: string
           description: Extra details related to the note(supports `[b]bold[/b]` and `[i]italic[/i]` formatting)
           maxLength: 7168 chars
-          required: true
           example: I met Jane Doe at the ABC conference. She's interested in hearing about XYZ.
         date:
           type: string
@@ -7630,6 +7634,8 @@ components:
       description: >-
         Allow you to keep track of phone calls made to your contacts. Calls include information like the phone
         number dialled and the call result. Calls support file attachments.
+      required:
+        - contact_id
       properties:
         id:
           type: string
@@ -7641,7 +7647,6 @@ components:
           type: string
           format: bson-id
           description: ID of the contact, to whom the call belongs
-          required: true
           example: 5ae06ef9d55673108fe8877f
         text:
           type: string
@@ -7735,6 +7740,9 @@ components:
       description: >-
         Additional files associated with Deals, Notes or Calls. They can be uploaded and stored in S3,
         or stored in external providers i.e. Google Drive, Dropbox, Evernote.
+      required:
+        - filename
+        - size
       properties:
         id:
           type: string
@@ -7745,13 +7753,11 @@ components:
         filename:
           type: string
           description: Name of the attachment file
-          required: true
           example: mario.jpg
         size:
           type: integer
           format: int32
           description: Size of the attachment file (in bytes)
-          required: true
           example: 3841
         storage_provider:
           type: string
@@ -7958,6 +7964,9 @@ components:
       description: >-
         Values which help qualify where contacts are in the sales pipeline. The list of Statuses is
         already populated but it may be updated if needed, to better fit your organization.
+      required:
+        - text
+        - color
       properties:
         id:
           type: string
@@ -7983,7 +7992,6 @@ components:
           type: string
           description: Display text of the status
           maxLength: 20 chars
-          required: true
           example: Prospect
         description:
           type: string
@@ -7994,7 +8002,6 @@ components:
           type: string
           format: hex-color
           description: The color of the status (six character hex value)
-          required: true
           enum:
           - '666666'
           - '3399ff'
@@ -8040,6 +8047,8 @@ components:
       description: >-
         A way to classify the source of any contact that is added to OnePageCRM. Like Statuses, this list is
         pre-populated, and can be later edited to fit individual needs.
+      required:
+        - text
       properties:
         id:
           type: string
@@ -8051,7 +8060,6 @@ components:
           type: string
           description: Description of the lead source
           maxLength: 40 chars
-          required: true
           example: Advertisement
         counts:
           type: integer
@@ -8144,6 +8152,9 @@ components:
       description: >-
         Template actions users may use frequently in their sales process. Referred to as 'Saved Actions' in
         the web application.
+      required:
+        - text
+        - days
       properties:
         id:
           type: string
@@ -8154,16 +8165,17 @@ components:
         text:
           type: string
           description: Description text of the predefined action
-          required: true
           example: '#1 Email [firstname] introducing our organization'
         days:
           type: integer
           format: int32
           description: Suggested number of days until the action becomes due
-          required: true
           example: 4
     Custom_field:
       description: Extra user-configurable data fields for Contacts. Only editable by admins.
+      required:
+        - name
+        - type
       properties:
         id:
           type: string
@@ -8175,7 +8187,6 @@ components:
           type: string
           description: Name of the custom field
           maxLength: 60 chars
-          required: true
           example: Favorite season
         type:
           type: string
@@ -8188,7 +8199,6 @@ components:
           - number
           - select_box
           - single_line_text
-          required: true
           example: select_box
         position:
           type: integer
@@ -8207,6 +8217,9 @@ components:
           - Winter
     Company_field:
       description: Extra user-configurable data fields for Companies. Only editable by admins.
+      required:
+        - name
+        - type
       properties:
         id:
           type: string
@@ -8218,7 +8231,6 @@ components:
           type: string
           description: Name of the company field
           maxLength: 60 chars
-          required: true
           example: Company size
         type:
           type: string
@@ -8230,7 +8242,6 @@ components:
           - number
           - select_box
           - single_line_text
-          required: true
           example: select_box
         position:
           type: integer
@@ -8248,6 +8259,9 @@ components:
           - Large
     Deal_field:
       description: Extra user-configurable data fields for Deals. Only editable by admins.
+      required:
+        - name
+        - type
       properties:
         id:
           type: string
@@ -8259,7 +8273,6 @@ components:
           type: string
           description: Name of the deal field
           maxItems: 60 chars
-          required: true
           example: Deal size
         type:
           description: Type of the deal field
@@ -8271,7 +8284,6 @@ components:
           - number
           - select_box
           - single_line_text
-          required: true
           example: select_box
         position:
           type: integer
@@ -8289,17 +8301,21 @@ components:
           - Large
     Cost_setup:
       description: Settings related to deals e.g. cost, commission. Disabled by default.
+      required:
+        - cost_enabled
+        - cost_required
+        - commission_base
+        - commission_percentage
+
       properties:
         cost_enabled:
           type: boolean
           description: Is the cost field enabled for deals?
-          required: true
           example: false
         cost_required:
           # cost_required field is deprecated
           type: boolean
           description: Is the cost field required when saving a deal?
-          required: true
           example: false
         commission_base:
           type: string
@@ -8307,12 +8323,10 @@ components:
           enum:
           - amount
           - margin
-          required: true
           example: amount
         commission_percentage:
           type: number
           description: The default percentage commission is to be calculated at
-          required: true
           example: 10.0
     Deal_stage:
       description: The various stages that a deal goes through in the sales pipeline.
