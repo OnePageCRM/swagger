@@ -11,7 +11,7 @@ In rewriting this documentation we have exposed lots of new features of the API.
 ##Generate Client Libraries using openapi-generator
 Openapi-generator is an open source tool that can be used to generate API client libraries (SDK generation). 
 
-To generate a Ruby client library run the following 
+To generate a Ruby client library, clone this repo and then run the following 
 
     docker run --rm -v ${PWD}:/local openapitools/openapi-generator-cli generate \
     -i https://raw.githubusercontent.com/OnePageCRM/swagger/master/swagger.yaml \
