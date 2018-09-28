@@ -516,19 +516,7 @@ paths:
                   data:
                     type: array
                     items:
-                      properties:
-                        id:
-                          $ref: '#/components/schemas/Lead_source/properties/id'
-                        text:
-                          $ref: '#/components/schemas/Lead_source/properties/text'
-                        counts:
-                          $ref: '#/components/schemas/Lead_source/properties/counts'
-                        total_count:
-                          $ref: '#/components/schemas/Lead_source/properties/total_count'
-                        action_stream_count:
-                          $ref: '#/components/schemas/Lead_source/properties/action_stream_count'
-                        team_counts:
-                          $ref: '#/components/schemas/Lead_source/properties/team_counts'
+                      $ref: '#/components/schemas/Lead_source'
         400:
           $ref: '#/components/responses/400'
         401:
@@ -551,9 +539,7 @@ paths:
         content:
           application/json:
             schema:
-              properties:
-                text:
-                  $ref: '#/components/schemas/Lead_source/properties/text'
+              $ref: '#/components/schemas/Lead_source'
       responses:
         201:
           description: Created
@@ -626,9 +612,7 @@ paths:
         content:
           application/json:
             schema:
-              properties:
-                text:
-                  $ref: '#/components/schemas/Lead_source/properties/text'
+              $ref: '#/components/schemas/Lead_source'
       responses:
         200:
           description: OK
@@ -726,13 +710,7 @@ paths:
         content:
           application/json:
             schema:
-              properties:
-                text:
-                  $ref: '#/components/schemas/Status/properties/text'
-                description:
-                  $ref: '#/components/schemas/Status/properties/description'
-                color:
-                  $ref: '#/components/schemas/Status/properties/color'
+              $ref: '#/components/schemas/Status'
       responses:
         201:
           description: Created
@@ -811,13 +789,7 @@ paths:
         content:
           application/json:
             schema:
-              properties:
-                text:
-                  $ref: '#/components/schemas/Status/properties/text'
-                description:
-                  $ref: '#/components/schemas/Status/properties/description'
-                color:
-                  $ref: '#/components/schemas/Status/properties/color'
+              $ref: '#/components/schemas/Status'
       responses:
         200:
           description: OK
@@ -1618,11 +1590,7 @@ paths:
         content:
           application/json:
             schema:
-              properties:
-                text:
-                  $ref: '#/components/schemas/Predefined_action/properties/text'
-                days:
-                  $ref: '#/components/schemas/Predefined_action/properties/days'
+              $ref: '#/components/schemas/Predefined_action'
       responses:
         201:
           description: Created
@@ -1701,11 +1669,7 @@ paths:
         content:
           application/json:
             schema:
-              properties:
-                text:
-                  $ref: '#/components/schemas/Predefined_action/properties/text'
-                days:
-                  $ref: '#/components/schemas/Predefined_action/properties/days'
+              $ref: '#/components/schemas/Predefined_action'
       responses:
         200:
           description: OK
@@ -7626,6 +7590,7 @@ components:
           type: string
           description: Shortened name of the creator of the call
           example: Jane D.
+          readOnly: true
           default: Logged API user
         attachments:
           type: array
@@ -7923,6 +7888,7 @@ components:
           - custom1
           - custom2
           - customX
+          readOnly: true
           example: prospect
           default: lead
         text:
