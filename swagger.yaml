@@ -339,7 +339,7 @@ paths:
           $ref: '#/components/responses/401'
   /change_auth_key:
     post:
-      summary: Invalidate the current api key and return a new api key
+      summary: Invalidate the current API key and return a new API key
       description: >-
         **Warning:** This will change the users authentication key, and therefore log them out of all applications. <br>
         Note: this includes the mobile applications. <br>
@@ -361,7 +361,7 @@ paths:
                   data:
                     properties:
                       auth_key:
-                        description: New Api Key
+                        description: New API Key
                         type: string
                         example: wbJBo+odEikiDOjdnL+P+0fl+Dbgk84747jFtyOZghs=
         400:
