@@ -932,13 +932,7 @@ paths:
         content:
           application/json:
             schema:
-              properties:
-                name:
-                  $ref: '#/components/schemas/Deal_field/properties/name'
-                type:
-                  $ref: '#/components/schemas/Deal_field/properties/type'
-                choices:
-                  $ref: '#/components/schemas/Deal_field/properties/choices'
+              $ref: '#/components/schemas/Deal_field'
       responses:
         201:
           description: Created
@@ -1017,13 +1011,7 @@ paths:
         content:
           application/json:
             schema:
-              properties:
-                name:
-                  $ref: '#/components/schemas/Deal_field/properties/name'
-                type:
-                  $ref: '#/components/schemas/Deal_field/properties/type'
-                choices:
-                  $ref: '#/components/schemas/Deal_field/properties/choices'
+              $ref: '#/components/schemas/Deal_field'
       responses:
         200:
           description: OK
@@ -1125,15 +1113,7 @@ paths:
         content:
           application/json:
             schema:
-              properties:
-                cost_enabled:
-                  $ref: '#/components/schemas/Cost_setup/properties/cost_enabled'
-                cost_required:
-                  $ref: '#/components/schemas/Cost_setup/properties/cost_required'
-                commission_base:
-                  $ref: '#/components/schemas/Cost_setup/properties/commission_base'
-                commission_percentage:
-                  $ref: '#/components/schemas/Cost_setup/properties/commission_percentage'
+              $ref: '#/components/schemas/Cost_setup'
       responses:
         200:
           description: OK
@@ -1262,13 +1242,7 @@ paths:
         content:
           application/json:
             schema:
-              properties:
-                name:
-                  $ref: '#/components/schemas/Custom_field/properties/name'
-                type:
-                  $ref: '#/components/schemas/Custom_field/properties/type'
-                choices:
-                  $ref: '#/components/schemas/Custom_field/properties/choices'
+              $ref: '#/components/schemas/Custom_field'
       responses:
         201:
           description: Created
@@ -1347,13 +1321,7 @@ paths:
         content:
           application/json:
             schema:
-              properties:
-                name:
-                  $ref: '#/components/schemas/Custom_field/properties/name'
-                type:
-                  $ref: '#/components/schemas/Custom_field/properties/type'
-                choices:
-                  $ref: '#/components/schemas/Custom_field/properties/choices'
+              $ref: '#/components/schemas/Custom_field'
       responses:
         200:
           description: OK
@@ -1468,13 +1436,7 @@ paths:
         content:
           application/json:
             schema:
-              properties:
-                name:
-                  $ref: '#/components/schemas/Company_field/properties/name'
-                type:
-                  $ref: '#/components/schemas/Company_field/properties/type'
-                choices:
-                  $ref: '#/components/schemas/Company_field/properties/choices'
+              $ref: '#/components/schemas/Company_field'
       responses:
         201:
           description: Created
@@ -1553,13 +1515,7 @@ paths:
         content:
           application/json:
             schema:
-              properties:
-                name:
-                  $ref: '#/components/schemas/Company_field/properties/name'
-                type:
-                  $ref: '#/components/schemas/Company_field/properties/type'
-                choices:
-                  $ref: '#/components/schemas/Company_field/properties/choices'
+              $ref: '#/components/schemas/Company_field'
       responses:
         200:
           description: OK
@@ -8287,16 +8243,15 @@ components:
         - cost_required
         - commission_base
         - commission_percentage
-
       properties:
         cost_enabled:
           type: boolean
           description: Is the cost field enabled for deals?
           example: false
         cost_required:
-          # cost_required field is deprecated
           type: boolean
           description: Is the cost field required when saving a deal?
+          deprecated: true
           example: false
         commission_base:
           type: string
