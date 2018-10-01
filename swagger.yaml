@@ -283,7 +283,7 @@ tags:
 paths:
   /bootstrap:
     get:
-      summary: Get useful information about the logged API users account
+      summary: Get useful information about the logged API user's account
       description: >-
         Includes things like: <br>
         -> Global account config e.g. lead sources and deal stages. <br>
@@ -370,7 +370,7 @@ paths:
           $ref: '#/components/responses/401'
   /users:
     get:
-      summary: Get the list of users (for the logged API users account)
+      summary: Get the list of users (for the logged API user's account)
       tags:
       - Users
       parameters: []
@@ -503,7 +503,7 @@ paths:
           $ref: '#/components/responses/500'
   /lead_sources:
     get:
-      summary: Get the list of lead sources (for the logged API users account)
+      summary: Get the list of lead sources (for the logged API user's account)
       tags:
       - Lead Sources
       parameters: []
@@ -686,7 +686,7 @@ paths:
           $ref: '#/components/responses/500'
   /statuses:
     get:
-      summary: Get the list of statuses (for the logged API users account)
+      summary: Get the list of statuses (for the logged API user's account)
       description:
       tags:
       - Statuses
@@ -878,7 +878,7 @@ paths:
           $ref: '#/components/responses/500'
   /deal_fields:
     get:
-      summary: Get the list of deal fields (for the logged API users account)
+      summary: Get the list of deal fields (for the logged API user's account)
       description:
       tags:
       - Deal Fields
@@ -1188,7 +1188,7 @@ paths:
           $ref: '#/components/responses/500'
   /custom_fields:
     get:
-      summary: Get the list of custom fields (for the logged API users account)
+      summary: Get the list of custom fields (for the logged API user's account)
       description:
       tags:
       - Custom Fields
@@ -1382,7 +1382,7 @@ paths:
           $ref: '#/components/responses/500'
   /company_fields:
     get:
-      summary: Get the list of company fields (for the logged API users account)
+      summary: Get the list of company fields (for the logged API user's account)
       description:
       tags:
       - Company Fields
@@ -1576,7 +1576,7 @@ paths:
           $ref: '#/components/responses/500'
   /predefined_actions:
     get:
-      summary: Get the list of predefined actions (for the logged API users account)
+      summary: Get the list of predefined actions (for the logged API user's account)
       description:
       tags:
       - Predefined Actions
@@ -2342,8 +2342,8 @@ paths:
           application/json:
             schema:
               required:
-                - reference_type
-                - key
+              - reference_type
+              - key
               properties:
                 reference_id:
                   type: string
@@ -2408,7 +2408,7 @@ paths:
           $ref: '#/components/responses/500'
   /call_results:
     get:
-      summary: Get the list of call results (for the logged API users account)
+      summary: Get the list of call results (for the logged API user's account)
       description: >-
         Includes: <br>
         -> The call results for the account. <br>
@@ -2806,8 +2806,8 @@ paths:
           application/json:
             schema:
               required:
-                - reference_type
-                - key
+              - reference_type
+              - key
               properties:
                 reference_id:
                   type: string
@@ -2974,8 +2974,8 @@ paths:
           application/json:
             schema:
               required:
-                - reference_type
-                - key
+              - reference_type
+              - key
               properties:
                 reference_id:
                   type: string
@@ -3584,7 +3584,7 @@ paths:
           $ref: '#/components/responses/500'
   /filters:
     get:
-      summary: Get the list of custom filters (for the logged API users account)
+      summary: Get the list of custom filters (for the logged API user's account)
       description:
       tags:
       - Filters
@@ -4180,7 +4180,7 @@ paths:
           application/json:
             schema:
               required:
-                - contact_id
+              - contact_id
               properties:
                 contact_id:
                   type: string
@@ -6558,7 +6558,7 @@ paths:
           $ref: '#/components/responses/500'
   /webhooks:
     get:
-      summary: Get all webhooks (associated with the logged API users account)
+      summary: Get all webhooks (associated with the logged API user's account)
       description:
       tags:
       - Web Hooks
@@ -6689,7 +6689,7 @@ components:
             $ref: '#/components/schemas/User'
         account_type:
           type: string
-          description: Descriptor for the type of the logged API users account
+          description: Descriptor for the type of the logged API user's account
           enum:
           - pro
           - trial
@@ -6706,19 +6706,19 @@ components:
           readOnly: true
         custom_fields:
           type: array
-          description: List of custom fields for the logged API users account
+          description: List of custom fields for the logged API user's account
           readOnly: true
           items:
             $ref: '#/components/schemas/Custom_field'
         company_fields:
           type: array
-          description: List of company fields for the logged API users account
+          description: List of company fields for the logged API user's account
           readOnly: true
           items:
             $ref: '#/components/schemas/Company_field'
         deal_fields:
           type: array
-          description: List of deal fields for the logged API users account
+          description: List of deal fields for the logged API user's account
           readOnly: true
           items:
             $ref: '#/components/schemas/Deal_field'
@@ -7098,7 +7098,7 @@ components:
         related sub-resources e.g. Deals, Actions and some basic info on the org. e.g. postal address, website. A
         Company may not be created directly or exist without a Contact.
       required:
-        - name
+      - name
       properties:
         id:
           type: string
@@ -7232,9 +7232,9 @@ components:
         Completable tasks related to Contacts. ASAP first, then dated actions ordered by due date (overdue first),
         followed by waiting for (blocked) and finally queued actions (without any date).
       required:
-        - assignee_id
-        - contact_id
-        - text
+      - assignee_id
+      - contact_id
+      - text
       properties:
         id:
           type: string
@@ -7316,9 +7316,9 @@ components:
         Represent (potential) financial transactions with your contacts. Deals include information like amount,
         deal stage, closed date or expected close date. Deals support file attachments.
       required:
-        - contact_id
-        - owner_id
-        - name
+      - contact_id
+      - owner_id
+      - name
       properties:
         id:
           type: string
@@ -7521,8 +7521,8 @@ components:
         Allow you to keep track of additional information related to your contacts. Notes can include any
         information you feel is relevant e.g. interactions with that contact. Notes support file attachments.
       required:
-        - contact_id
-        - text
+      - contact_id
+      - text
       properties:
         id:
           type: string
@@ -7579,7 +7579,7 @@ components:
         Allow you to keep track of phone calls made to your contacts. Calls include information like the phone
         number dialled and the call result. Calls support file attachments.
       required:
-        - contact_id
+      - contact_id
       properties:
         id:
           type: string
@@ -7685,8 +7685,8 @@ components:
         Additional files associated with Deals, Notes or Calls. They can be uploaded and stored in S3,
         or stored in external providers i.e. Google Drive, Dropbox, Evernote.
       required:
-        - filename
-        - size
+      - filename
+      - size
       properties:
         id:
           type: string
@@ -7909,8 +7909,8 @@ components:
         Values which help qualify where contacts are in the sales pipeline. The list of Statuses is
         already populated but it may be updated if needed, to better fit your organization.
       required:
-        - text
-        - color
+      - text
+      - color
       properties:
         id:
           type: string
@@ -7992,7 +7992,7 @@ components:
         A way to classify the source of any contact that is added to OnePageCRM. Like Statuses, this list is
         pre-populated, and can be later edited to fit individual needs.
       required:
-        - text
+      - text
       properties:
         id:
           type: string
@@ -8097,8 +8097,8 @@ components:
         Template actions users may use frequently in their sales process. Referred to as 'Saved Actions' in
         the web application.
       required:
-        - text
-        - days
+      - text
+      - days
       properties:
         id:
           type: string
@@ -8118,8 +8118,8 @@ components:
     Custom_field:
       description: Extra user-configurable data fields for Contacts. Only editable by admins.
       required:
-        - name
-        - type
+      - name
+      - type
       properties:
         id:
           type: string
@@ -8162,8 +8162,8 @@ components:
     Company_field:
       description: Extra user-configurable data fields for Companies. Only editable by admins.
       required:
-        - name
-        - type
+      - name
+      - type
       properties:
         id:
           type: string
@@ -8204,8 +8204,8 @@ components:
     Deal_field:
       description: Extra user-configurable data fields for Deals. Only editable by admins.
       required:
-        - name
-        - type
+      - name
+      - type
       properties:
         id:
           type: string
@@ -8246,10 +8246,10 @@ components:
     Cost_setup:
       description: Settings related to deals e.g. cost, commission. Disabled by default.
       required:
-        - cost_enabled
-        - cost_required
-        - commission_base
-        - commission_percentage
+      - cost_enabled
+      - cost_required
+      - commission_base
+      - commission_percentage
       properties:
         cost_enabled:
           type: boolean
