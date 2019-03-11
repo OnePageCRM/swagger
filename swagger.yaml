@@ -6917,7 +6917,7 @@ components:
                 example: joe.bloggs@{foo.bar}
         address_list:
           type: array
-          maxItems: 1 address
+          maxItems: 2 addresses
           items:
             $ref: '#/components/schemas/Address'
         status:
@@ -7645,6 +7645,17 @@ components:
           type: string
           description: ISO-3166 country code
           example: IE
+        type:
+          type: string
+          description: Type of the address
+          default: work
+          enum:
+          - work
+          - home
+          - billing
+          - delivery
+          - other
+          example: delivery
     Attachment:
       description: >-
         Additional files associated with Deals, Notes or Calls. They can be uploaded and stored in S3,
