@@ -7580,6 +7580,16 @@ components:
                 type: string
                 description: Value for the deal field
                 example: Large
+        has_deal_items:
+          type: boolean
+          description: Does the deal have deal items?
+          readOnly: true
+          example: true
+        deal_items:
+          type: array
+          readOnly: true
+          items:
+            $ref: '#/components/schemas/Deal_item'
         author:
           type: string
           description: Shortened name of the creator of the deal
@@ -8280,6 +8290,68 @@ components:
           description: ID of the predefined item group. Can be empty if the item is not in a group.
           readOnly: true
           example: 5c9a53599007ba58f13c8119
+    Deal_item:
+      description: >-
+        Deal can include some deal items.
+      properties:
+        id:
+          type: string
+          format: bson-id
+          description: ID of the deal item
+          example: 5c7973019007ba3f7519e86a
+        name:
+          type: string
+          description: Name of the deal item
+          example: "Video Production"
+        description:
+          type: string
+          description: Description text of the deal item
+          example: "Script and video editing"
+        cost:
+          type: number
+          format: float
+          description: Cost of the deal item
+          example: 500
+        price:
+          type: number
+          format: float
+          description: Price of the deal item
+          example: 800
+        amount:
+          type: number
+          format: float
+          description: Amount of the deal items
+          example: 1600
+        qty:
+          type: integer
+          format: int32
+          description: Quantity of deal items
+          example: 2
+        deal_id:
+          type: string
+          format: bson-id
+          description: ID of the parent deal
+          example: 5aaa9b059007ba08c9ebaf58
+        predefined_item_id:
+          type: string
+          format: bson-id
+          description: ID of the predefined item used for deal item creation. Can be empty.
+          example: 5c6abf565481dd28ff1bc6a8
+        position:
+          type: integer
+          format: int32
+          description: Position of the predefined item in the items list
+          example: 1
+        created_at:
+          type: string
+          format: date-time
+          description: Creation time of the deal item
+          example: '2019-03-01T17:59:29Z'
+        modified_at:
+          type: string
+          format: date-time
+          description: Last modification time of the deal item
+          example: '2019-03-01T17:59:29Z'
     Predefined_item_group:
       description: >-
         Predefined items can be grouped.
