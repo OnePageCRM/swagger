@@ -1776,7 +1776,7 @@ paths:
           $ref: '#/components/responses/500'
   /predefined_items/{predefined_item_id}:
     get:
-      summary: Get a specific predefined deal item
+      summary: Get a specific predefined item
       description:
       tags:
       - Predefined Items
