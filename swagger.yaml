@@ -2735,7 +2735,7 @@ paths:
                         example: Large
                 has_deal_items:
                   type: boolean
-                  description: Must to be true to create and keep deal items. When it's false, deal items will be removed.
+                  description: Must to be true to create or keep deal items. When it's false, deal items will be removed.
                   default: false
                   example: true
                 deal_items:
@@ -2891,6 +2891,41 @@ paths:
                         type: string
                         description: Value for the deal field
                         example: Large
+                has_deal_items:
+                  type: boolean
+                  description: Must to be true to create or keep deal items. When it's false, deal items will be removed.
+                  default: false
+                  example: true
+                deal_items:
+                  type: array
+                  description: All previous saved deal items that are not in the list now, will be deleted. Empty list will remove all existing items.
+                  items:
+                    type: object
+                    required:
+                    - name
+                    - description
+                    - cost
+                    - price
+                    - qty
+                    properties:
+                      id:
+                        type: string
+                        format: bson-id
+                        description: All already saved deal items must have ID param. Deal items without ID will be saved as a new items.
+                        example: 5c7973019007ba3f7519e86a
+                      name:
+                        $ref: '#/components/schemas/Deal_item/properties/name'
+                      description:
+                        $ref: '#/components/schemas/Deal_item/properties/description'
+                      cost:
+                        $ref: '#/components/schemas/Deal_item/properties/cost'
+                      price:
+                        $ref: '#/components/schemas/Deal_item/properties/price'
+                      qty:
+                        $ref: '#/components/schemas/Deal_item/properties/qty'
+                      predefined_item_id:
+                        $ref: '#/components/schemas/Deal_item/properties/predefined_item_id'
+
       responses:
         200:
           description: OK
