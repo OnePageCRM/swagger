@@ -267,6 +267,9 @@ tags:
 - name: Predefined Items
   description: >-
     Template deal items may use frequently during creating deal items.
+- name: Predefined Item Groups
+  description: >-
+    Predefined Items may be organized to groups.
 - name: Custom Fields
   description: >-
     Extra user-configurable data fields for Contacts. Only editable by admins.
@@ -1796,6 +1799,83 @@ paths:
                     properties:
                       predefined_item:
                         $ref: '#/components/schemas/Predefined_item'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
+  /predefined_item_groups:
+    get:
+      summary: Get the list of predefined item groups (for the logged API user's account)
+      description:
+      tags:
+      - Predefined Item Groups
+      parameters: []
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    $ref: '#/components/schemas/Success/properties/status'
+                  message:
+                    $ref: '#/components/schemas/Success/properties/message'
+                  timestamp:
+                    $ref: '#/components/schemas/Success/properties/timestamp'
+                  data:
+                    properties:
+                      predefined_item_groups:
+                        type: array
+                        items:
+                          properties:
+                            predefined_item_group:
+                              $ref: '#/components/schemas/Predefined_item_group'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
+  /predefined_item_groups/{predefined_item_group_id}:
+    get:
+      summary: Get a specific predefined item group
+      description:
+      tags:
+      - Predefined Item Groups
+      parameters:
+      - $ref: '#/components/parameters/path_predefined_item_group_id'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    $ref: '#/components/schemas/Success/properties/status'
+                  message:
+                    $ref: '#/components/schemas/Success/properties/message'
+                  timestamp:
+                    $ref: '#/components/schemas/Success/properties/timestamp'
+                  data:
+                    properties:
+                      predefined_item_group:
+                        $ref: '#/components/schemas/Predefined_item_group'
         400:
           $ref: '#/components/responses/400'
         401:
@@ -8168,7 +8248,7 @@ components:
         id:
           type: string
           format: bson-id
-          description: ID of the predefined action
+          description: ID of the predefined item
           readOnly: true
           example: 5c79510e9007ba3f7519e819
         name:
@@ -8200,6 +8280,40 @@ components:
           description: ID of the predefined item group. Can be empty if the item is not in a group.
           readOnly: true
           example: 5c9a53599007ba58f13c8119
+    Predefined_item_group:
+      description: >-
+        Predefined items can be grouped.
+      properties:
+        id:
+          type: string
+          format: bson-id
+          description: ID of the group
+          readOnly: true
+          example: 5c79510e9007ba3f7519e819
+        name:
+          type: string
+          description: Name of the group
+          example: "Software"
+        position:
+          type: integer
+          format: int32
+          description: Position of the group in the deal items list
+          example: 1
+        count:
+          type: integer
+          format: int32
+          description: Count of included predefined items
+          example: 2
+        item_ids:
+          type: array
+          description: Included predefined items ID list
+          readOnly: true
+          items:
+            type: string
+            format: bson-id
+          example:
+          - 5c79510e9007ba3f7519e819
+          - 5c9a53349007ba58f13c8118
     Custom_field:
       description: Extra user-configurable data fields for Contacts. Only editable by admins.
       required:
@@ -8907,6 +9021,14 @@ components:
       in: path
       required: true
       description: Predefined Item ID
+      schema:
+        type: string
+        minimum: 1
+    path_predefined_item_group_id:
+      name: predefined_item_group_id
+      in: path
+      required: true
+      description: Predefined Item Group ID
       schema:
         type: string
         minimum: 1
