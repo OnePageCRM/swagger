@@ -2733,6 +2733,36 @@ paths:
                         type: string
                         description: Value for the deal field
                         example: Large
+                has_deal_items:
+                  type: boolean
+                  description: Must to be true to create and keep deal items. When it's false, deal items will be removed.
+                  default: false
+                  example: true
+                deal_items:
+                  type: array
+                  description: Deal items list
+                  items:
+                    type: object
+                    required:
+                    - name
+                    - description
+                    - cost
+                    - price
+                    - qty
+                    properties:
+                      name:
+                        $ref: '#/components/schemas/Deal_item/properties/name'
+                      description:
+                        $ref: '#/components/schemas/Deal_item/properties/description'
+                      cost:
+                        $ref: '#/components/schemas/Deal_item/properties/cost'
+                      price:
+                        $ref: '#/components/schemas/Deal_item/properties/price'
+                      qty:
+                        $ref: '#/components/schemas/Deal_item/properties/qty'
+                      predefined_item_id:
+                        $ref: '#/components/schemas/Deal_item/properties/predefined_item_id'
+
       responses:
         201:
           description: Created
@@ -8293,10 +8323,17 @@ components:
     Deal_item:
       description: >-
         Deal can include some deal items.
+      required:
+      - name
+      - description
+      - cost
+      - price
+      - qty
       properties:
         id:
           type: string
           format: bson-id
+          readOnly: true
           description: ID of the deal item
           example: 5c7973019007ba3f7519e86a
         name:
@@ -8320,6 +8357,7 @@ components:
         amount:
           type: number
           format: float
+          readOnly: true
           description: Amount of the deal items
           example: 1600
         qty:
@@ -8330,6 +8368,7 @@ components:
         deal_id:
           type: string
           format: bson-id
+          readOnly: true
           description: ID of the parent deal
           example: 5aaa9b059007ba08c9ebaf58
         predefined_item_id:
@@ -8340,16 +8379,19 @@ components:
         position:
           type: integer
           format: int32
+          readOnly: true
           description: Position of the predefined item in the items list
           example: 1
         created_at:
           type: string
           format: date-time
+          readOnly: true
           description: Creation time of the deal item
           example: '2019-03-01T17:59:29Z'
         modified_at:
           type: string
           format: date-time
+          readOnly: true
           description: Last modification time of the deal item
           example: '2019-03-01T17:59:29Z'
     Predefined_item_group:
