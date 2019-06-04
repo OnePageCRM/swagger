@@ -7689,6 +7689,16 @@ components:
           description: The time the attachment URL expires
           readOnly: true
           example: '2018-05-16T13:06:53Z'
+        thumbnail:
+          type: object
+          description: >-
+            Contains thumbnail data if such exists
+          properties:
+            url:
+              readOnly: true
+              type: string
+              description: Thumbnail url
+              example: 'https://test-id.execute-api.us-east-1.amazonaws.com/dev?key=92x72%2F5c8681c6007d496a1'
     Email_message:
       description: Email correspondance exchanged with a contact, captured by OnePageCRM.
       properties:
