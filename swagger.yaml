@@ -280,6 +280,9 @@ tags:
   description: >-
     A simple, effective way to be notified when things happen in OnePageCRM. For more information, go to the
     'WebHooks & More' tab at the top of the page.
+- name: Pipelines
+  description: >-
+    Exposes pipelines that exist in an account
 paths:
   /bootstrap:
     get:
@@ -2471,6 +2474,7 @@ paths:
       - $ref: '#/components/parameters/query_order'
       - $ref: '#/components/parameters/query_page'
       - $ref: '#/components/parameters/query_per_page'
+      - $ref: '#/components/parameters/query_pipeline_id'
       responses:
         200:
           description: OK
@@ -2528,6 +2532,8 @@ paths:
                   $ref: '#/components/schemas/Deal/properties/contact_id'
                 owner_id:
                   $ref: '#/components/schemas/Deal/properties/owner_id'
+                pipeline_id:
+                  $ref: '#/components/schemas/Deal/properties/pipeline_id'
                 name:
                   $ref: '#/components/schemas/Deal/properties/name'
                 text:
@@ -2656,6 +2662,8 @@ paths:
                   $ref: '#/components/schemas/Deal/properties/contact_id'
                 owner_id:
                   $ref: '#/components/schemas/Deal/properties/owner_id'
+                pipeline_id:
+                  $ref: '#/components/schemas/Deal/properties/pipeline_id'
                 name:
                   $ref: '#/components/schemas/Deal/properties/name'
                 text:
@@ -6623,6 +6631,91 @@ paths:
           $ref: '#/components/responses/409'
         500:
           $ref: '#/components/responses/500'
+  /pipelines:
+    get:
+      summary: Get all pipelines (associated with the logged API user's account)
+      description:
+      tags:
+        - Pipelines
+      parameters: []
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    $ref: '#/components/schemas/Success/properties/status'
+                  message:
+                    $ref: '#/components/schemas/Success/properties/message'
+                  timestamp:
+                    $ref: '#/components/schemas/Success/properties/timestamp'
+                  data:
+                    properties:
+                      pipelines:
+                        type: array
+                        items:
+                          properties:
+                            pipeline:
+                              $ref: '#/components/schemas/Pipeline'
+                      total_count:
+                        $ref: '#/components/schemas/Page_data/properties/total_count'
+                      page:
+                        $ref: '#/components/schemas/Page_data/properties/page'
+                      per_page:
+                        $ref: '#/components/schemas/Page_data/properties/per_page'
+                      max_page:
+                        $ref: '#/components/schemas/Page_data/properties/max_page'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
+  /pipelines/{id}:
+    get:
+      summary: Get a specific pipeline
+      description:
+      tags:
+        - Pipelines
+      parameters:
+        - $ref: '#/components/parameters/path_pipeline_id'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    $ref: '#/components/schemas/Success/properties/status'
+                  message:
+                    $ref: '#/components/schemas/Success/properties/message'
+                  timestamp:
+                    $ref: '#/components/schemas/Success/properties/timestamp'
+                  data:
+                    properties:
+                      pipeline:
+                        $ref: '#/components/schemas/Pipeline'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
 components:
   schemas:
     Bootstrap:
@@ -7301,6 +7394,11 @@ components:
           description: ID of the user, to whom the deal belongs
           example: 5aba31e99007ba0f570c12f7
           default: Logged API users ID
+        pipeline_id:
+          type: string
+          format: bson-id
+          description: ID of a pipeline the deal belongs to
+          example: 5cfa87a4849d7873db082f98
         name:
           type: string
           description: Name of the deal
@@ -7829,7 +7927,15 @@ components:
           - AU
           - DE
         deal_stages:
-          $ref: '#/components/schemas/Deal_stage'
+          type: array
+          items:
+            $ref: '#/components/schemas/Deal_stage'
+        pipelines:
+          type: array
+          items:
+            properties:
+              pipeline:
+                $ref: '#/components/schemas/Pipeline'
         default_contact_type:
           type: string
           description: Denotes whether the logged API user, thinks of sales as people or organizations
@@ -8652,6 +8758,37 @@ components:
           type: string
           description: Secret key of the webhook
           example: ''
+    Pipeline:
+      description: >-
+        Exposes pipelines that exist in an account
+      properties:
+        id:
+          type: string
+          format: bson-id
+          description: ID of the pipeline
+          readOnly: true
+          example: 5c96306b849d78b896b6f8ca
+        name:
+          type: string
+          description: Name of the pipeline
+          example: Default pipeine
+        default:
+          type: boolean
+          description: Specifies if the pipeline is a default pipeline in the account
+          example: true
+        won_column_enabled:
+          type: boolean
+          description: Specifies if WON column is enabled in the pipeline
+          example: false
+        won_column_name:
+          type: string
+          description: Name of WON column in the pipeline
+          example: 'Payment'
+        stages:
+          type: array
+          description: Deal stages defined in the pipeline
+          items:
+            $ref: '#/components/schemas/Deal_stage'
     Reminder:
       description: Details about the sales action reminder email.
       properties:
@@ -8860,6 +8997,14 @@ components:
       in: path
       required: true
       description: Webhook ID
+      schema:
+        type: string
+        minimum: 1
+    path_pipeline_id:
+      name: id
+      in: path
+      required: true
+      description: Pipeline ID
       schema:
         type: string
         minimum: 1
@@ -9501,6 +9646,14 @@ components:
       schema:
         type: string
         minimum: 1
+    query_pipeline_id:
+      name: pipeline_id
+      in: query
+      required: false
+      description: If specified then query returns deals from the requsted pipeline only
+      schema:
+        type: string
+        example: 5cfa87a4849d7873db082f98
   responses:
     200:
       description: OK
