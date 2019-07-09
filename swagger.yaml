@@ -6916,10 +6916,12 @@ components:
                 description: The email address associated with the contact
                 example: joe.bloggs@{foo.bar}
         address_list:
+          description: An array of contact addresses. <br>
+                       In order to clear all addresses the full array has to be sent.
           type: array
-          maxItems: 1 address
+          maxItems: 2 addresses
           items:
-            $ref: '#/components/schemas/Address'
+            $ref: '#/components/schemas/Typed_address'
         status:
           type: string
           description: Status of the contact
@@ -7645,6 +7647,30 @@ components:
           type: string
           description: ISO-3166 country code
           example: IE
+    Typed_address:
+      description: The physical address of a contact or company.
+      properties:
+        address:
+          $ref: '#/components/schemas/Address/properties/address'
+        city:
+          $ref: '#/components/schemas/Address/properties/city'
+        state:
+          $ref: '#/components/schemas/Address/properties/state'
+        zip_code:
+          $ref: '#/components/schemas/Address/properties/zip_code'
+        country_code:
+          $ref: '#/components/schemas/Address/properties/country_code'
+        type:
+          type: string
+          description: Type of the address
+          default: work
+          enum:
+            - work
+            - home
+            - billing
+            - delivery
+            - other
+          example: delivery
     Attachment:
       description: >-
         Additional files associated with Deals, Notes or Calls. They can be uploaded and stored in S3,
