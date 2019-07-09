@@ -248,6 +248,10 @@ tags:
   description: >-
     Additional files associated with Deals, Notes or Calls. They can be uploaded and stored in S3, or stored in
     external providers i.e. Google Drive, Dropbox, Evernote.
+- name: Pipelines
+  description: >-
+    Exposes pipelines that exist in an account. A Pipeline is a "container" for deals, it has its own number of stages
+    which may help to lead a deal through different types of sales processes
 - name: Statuses
   description: >-
     Values which help qualify where contacts are in the sales pipeline. The list of Statuses is
@@ -280,9 +284,6 @@ tags:
   description: >-
     A simple, effective way to be notified when things happen in OnePageCRM. For more information, go to the
     'WebHooks & More' tab at the top of the page.
-- name: Pipelines
-  description: >-
-    Exposes pipelines that exist in an account
 paths:
   /bootstrap:
     get:
