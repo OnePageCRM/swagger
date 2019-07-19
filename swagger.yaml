@@ -266,10 +266,10 @@ tags:
     application.
 - name: Predefined Items
   description: >-
-    Template deal items may use frequently during creating deal items.
+    A user-configured list of items representing products or services, which can be used to standardize deal creation.
 - name: Predefined Item Groups
   description: >-
-    Predefined Items may be organized to groups.
+    A grouping of predefined/deal items. Useful if items can be sold as part of a package or compliment one another.
 - name: Custom Fields
   description: >-
     Extra user-configurable data fields for Contacts. Only editable by admins.
