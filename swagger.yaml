@@ -8797,7 +8797,7 @@ components:
           example: ''
     Pipeline:
       description: >-
-        Exposes pipelines that exist in an account
+        Information about the sales process of products or services, including deal stages.
       properties:
         id:
           type: string
@@ -8811,19 +8811,19 @@ components:
           example: Default pipeine
         default:
           type: boolean
-          description: Specifies if the pipeline is a default pipeline in the account
+          description: Is this pipeline the default pipeline in the account?
           example: true
         won_column_enabled:
           type: boolean
-          description: Specifies if WON column is enabled in the pipeline
+          description: Specifies if the `WON` column is enabled for the pipeline
           example: false
         won_column_name:
           type: string
-          description: Name of WON column in the pipeline
+          description: Name of the `WON` column for the pipeline
           example: 'Payment'
         stages:
           type: array
-          description: Deal stages defined in the pipeline
+          description: Deal stages defined for the pipeline
           items:
             $ref: '#/components/schemas/Deal_stage'
     Reminder:
