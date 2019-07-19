@@ -7715,6 +7715,16 @@ components:
           description: The time the attachment URL expires
           readOnly: true
           example: '2018-05-16T13:06:53Z'
+        thumbnail:
+          type: object
+          description: >-
+            An image preview of the attachment file (if one exists)
+          properties:
+            url:
+              readOnly: true
+              type: string
+              description: External URL of the attachment's thumbnail
+              example: https://{foo.bar}/mario-thumbnail.jpg
     Email_message:
       description: Email correspondance exchanged with a contact, captured by OnePageCRM.
       properties:
