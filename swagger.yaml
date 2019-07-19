@@ -250,8 +250,8 @@ tags:
     external providers i.e. Google Drive, Dropbox, Evernote.
 - name: Pipelines
   description: >-
-    Exposes Pipeline which includes deal stages. It helps you to have a view of all your deals through your
-    sale process and in different time frames.
+    Information about the sales process of products or services, including deal stages.
+    Each product/service/group may have a different pipeline.
 - name: Statuses
   description: >-
     Values which help qualify where contacts are in the sales pipeline. The list of Statuses is
