@@ -8354,7 +8354,7 @@ components:
           example: 4
     Predefined_item:
       description: >-
-        Template deal items may use frequently during deal items creation.
+        A user-configured item which can aid in the creation of deal items
       properties:
         id:
           type: string
@@ -8365,21 +8365,21 @@ components:
         name:
           type: string
           description: Name of the predefined item
-          example: "Video Production"
+          example: Solar panels
         description:
           type: string
           description: Description text of the predefined item
-          example: "Script and video editing"
+          example: Photovoltaic solar panels (2019 model)
         cost:
           type: number
           format: float
           description: Cost of the predefined item
-          example: 500
+          example: 95.00
         price:
           type: number
           format: float
           description: Price of the predefined item
-          example: 800
+          example: 149.99
         position:
           type: integer
           format: int32
@@ -8388,18 +8388,18 @@ components:
         item_group_id:
           type: string
           format: bson-id
-          description: ID of the predefined item group. Can be empty if the item is not in a group.
+          description: ID of the predefined item group (or empty if the item is not in a group)
           readOnly: true
           example: 5c9a53599007ba58f13c8119
     Deal_item:
       description: >-
-        Deal can include some deal items.
+        A user-configured item representing a product or service, which can be used to standardize deal creation
       required:
-      - name
-      - description
-      - cost
-      - price
-      - qty
+        - name
+        - description
+        - cost
+        - price
+        - qty
       properties:
         id:
           type: string
@@ -8410,27 +8410,27 @@ components:
         name:
           type: string
           description: Name of the deal item
-          example: "Video Production"
+          example: Solar panels
         description:
           type: string
           description: Description text of the deal item
-          example: "Script and video editing"
+          example: Photovoltaic solar panels (2019 model)
         cost:
           type: number
           format: float
           description: Cost of the deal item
-          example: 500
+          example: 95.00
         price:
           type: number
           format: float
           description: Price of the deal item
-          example: 800
+          example: 149.99
         amount:
           type: number
           format: float
           readOnly: true
           description: Amount of the deal items
-          example: 1600
+          example: 299.98
         qty:
           type: integer
           format: int32
@@ -8445,7 +8445,7 @@ components:
         predefined_item_id:
           type: string
           format: bson-id
-          description: ID of the predefined item used for deal item creation. Can be empty.
+          description: ID of the predefined item used for deal item creation (can be empty)
           example: 5c6abf565481dd28ff1bc6a8
         position:
           type: integer
