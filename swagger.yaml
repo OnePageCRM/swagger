@@ -8467,31 +8467,31 @@ components:
           example: '2019-03-01T17:59:29Z'
     Predefined_item_group:
       description: >-
-        Predefined items can be grouped.
+        A grouping of predefined/deal items. Useful if items can be sold as part of a package or compliment one another
       properties:
         id:
           type: string
           format: bson-id
-          description: ID of the group
+          description: ID of the predefined item group
           readOnly: true
           example: 5c79510e9007ba3f7519e819
         name:
           type: string
-          description: Name of the group
-          example: "Software"
+          description: Name of the predefined item group
+          example: Electronics
         position:
           type: integer
           format: int32
-          description: Position of the group in the deal items list
+          description: Position of the group in the list of predefined item groups
           example: 1
         count:
           type: integer
           format: int32
-          description: Count of included predefined items
+          description: Number of predefined items in the predefined item group
           example: 2
         item_ids:
           type: array
-          description: Included predefined items ID list
+          description: List of IDs of the predefined/deal items in the predefined item group
           readOnly: true
           items:
             type: string
