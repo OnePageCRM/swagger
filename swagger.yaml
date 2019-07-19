@@ -7718,13 +7718,13 @@ components:
         thumbnail:
           type: object
           description: >-
-            Contains thumbnail data if such exists
+            An image preview of the attachment file (if one exists)
           properties:
             url:
               readOnly: true
               type: string
-              description: Thumbnail url
-              example: 'https://test-id.execute-api.us-east-1.amazonaws.com/dev?key=92x72%2F5c8681c6007d496a1'
+              description: External URL of the attachment's thumbnail
+              example: https://{foo.bar}/mario-thumbnail.jpg
     Email_message:
       description: Email correspondance exchanged with a contact, captured by OnePageCRM.
       properties:
