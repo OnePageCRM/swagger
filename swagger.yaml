@@ -8820,7 +8820,7 @@ components:
         won_column_name:
           type: string
           description: Name of the `WON` column for the pipeline
-          example: 'Payment'
+          example: Payment
         stages:
           type: array
           description: Deal stages defined for the pipeline
