@@ -7181,7 +7181,7 @@ components:
           format: bson-id
           description: ID of the user, to whom the contact belongs
           example: 5aba31e99007ba0f570c92a5
-          default: Logged API users ID
+          default: Logged API user's ID
         custom_fields:
           type: array
           items:
@@ -7438,7 +7438,7 @@ components:
           format: bson-id
           description: ID of the user, to whom the action is assigned
           example: 5aaa9b009007ba08c9ebaef7
-          default: Logged API users ID
+          default: Logged API user's ID
         contact_id:
           type: string
           format: bson-id
@@ -7527,7 +7527,7 @@ components:
           format: bson-id
           description: ID of the user, to whom the deal belongs
           example: 5aba31e99007ba0f570c12f7
-          default: Logged API users ID
+          default: Logged API user's ID
         name:
           type: string
           description: Name of the deal
