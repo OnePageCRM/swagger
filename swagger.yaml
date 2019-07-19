@@ -6680,7 +6680,7 @@ paths:
           $ref: '#/components/responses/409'
         500:
           $ref: '#/components/responses/500'
-  /pipelines/{id}:
+  /pipelines/{pipeline_id}:
     get:
       summary: Get a specific pipeline
       description:
@@ -9038,7 +9038,7 @@ components:
         type: string
         minimum: 1
     path_pipeline_id:
-      name: id
+      name: pipeline_id
       in: path
       required: true
       description: Pipeline ID
