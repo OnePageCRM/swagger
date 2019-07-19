@@ -7643,11 +7643,10 @@ components:
         has_deal_items:
           type: boolean
           description: Does the deal have deal items?
-          readOnly: true
+          deafult: false
           example: true
         deal_items:
           type: array
-          readOnly: true
           items:
             $ref: '#/components/schemas/Deal_item'
         author:
