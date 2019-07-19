@@ -2461,6 +2461,7 @@ paths:
       - $ref: '#/components/parameters/query_deals_search'
       - $ref: '#/components/parameters/query_deals_status'
       - $ref: '#/components/parameters/query_stage'
+      - $ref: '#/components/parameters/query_pipeline_id'
       - $ref: '#/components/parameters/query_deals_owner_id'
       - $ref: '#/components/parameters/query_deals_contact_id'
       - $ref: '#/components/parameters/query_deals_company_id'
@@ -2475,7 +2476,6 @@ paths:
       - $ref: '#/components/parameters/query_order'
       - $ref: '#/components/parameters/query_page'
       - $ref: '#/components/parameters/query_per_page'
-      - $ref: '#/components/parameters/query_pipeline_id'
       responses:
         200:
           description: OK
@@ -9065,7 +9065,7 @@ components:
       name: name
       in: query
       required: false
-      description: Search deals by name
+      description: Search deals by deal name
       schema:
         type: string
         example: Solar panels
@@ -9687,7 +9687,7 @@ components:
       name: pipeline_id
       in: query
       required: false
-      description: If specified then query returns deals from the requsted pipeline only
+      description: Return deals from the specified pipeline only
       schema:
         type: string
         example: 5cfa87a4849d7873db082f98
