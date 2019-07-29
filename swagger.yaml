@@ -273,6 +273,9 @@ tags:
 - name: Deal Fields
   description: >-
     Extra user-configurable data fields for Deals. Only editable by admins.
+- name: Notifications
+  description: >-
+    Allows you to fetch notifications that logged in user has, except email and link notifications.
 - name: Countries
   description: >-
     A list of all compatible countries and their ISO-3166 codes.
@@ -6520,6 +6523,166 @@ paths:
           $ref: '#/components/responses/409'
         500:
           $ref: '#/components/responses/500'
+  /notifications:
+    get:
+      summary: Get a list of notifications that user has
+      description: >-
+        Returns all notifications (except emails and links) for the given user
+      tags:
+        - Notifications
+      parameters:
+        # Pagination
+        - $ref: '#/components/parameters/query_page'
+        - $ref: '#/components/parameters/query_per_page'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    $ref: '#/components/schemas/Success/properties/status'
+                  message:
+                    $ref: '#/components/schemas/Success/properties/message'
+                  timestamp:
+                    $ref: '#/components/schemas/Success/properties/timestamp'
+                  data:
+                    properties:
+                      notifications:
+                        type: array
+                        items:
+                          properties:
+                            notification:
+                              $ref: '#/components/schemas/Notification'
+                      total_count:
+                        $ref: '#/components/schemas/Page_data/properties/total_count'
+                      page:
+                        $ref: '#/components/schemas/Page_data/properties/page'
+                      per_page:
+                        $ref: '#/components/schemas/Page_data/properties/per_page'
+                      max_page:
+                        $ref: '#/components/schemas/Page_data/properties/max_page'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
+  /notifications/{notification_id}:
+    get:
+      summary: Get serialised notification by ID
+      description:
+      tags:
+        - Notifications
+      parameters:
+        - $ref: '#/components/parameters/path_notification_id'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    $ref: '#/components/schemas/Success/properties/status'
+                  message:
+                    $ref: '#/components/schemas/Success/properties/message'
+                  timestamp:
+                    $ref: '#/components/schemas/Success/properties/timestamp'
+                  data:
+                    properties:
+                      notification:
+                        $ref: '#/components/schemas/Notification'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
+  /notifications/{notification_id}/mark_as_read:
+    post:
+      summary: Marks given notification as read
+      description: Marks given notification as read
+      tags:
+        - Notifications
+      parameters:
+        - $ref: '#/components/parameters/path_notification_id'
+      responses:
+        201:
+          description: Created
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    $ref: '#/components/schemas/Success/properties/status'
+                  message:
+                    $ref: '#/components/schemas/Success/properties/message'
+                  timestamp:
+                    $ref: '#/components/schemas/Success/properties/timestamp'
+                  data:
+                    properties:
+                      notification:
+                        $ref: '#/components/schemas/Notification'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
+  /notifications/mark_all_as_read:
+    post:
+      summary: Marks all users' notifications as read
+      description: Marks all users' notifications as read
+      tags:
+        - Notifications
+      parameters:
+      responses:
+        201:
+          description: Created
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    $ref: '#/components/schemas/Success/properties/status'
+                  message:
+                    $ref: '#/components/schemas/Success/properties/message'
+                  timestamp:
+                    $ref: '#/components/schemas/Success/properties/timestamp'
+                  data:
+                    type: object
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
   /webhooks:
     get:
       summary: Get all webhooks (associated with the logged API user's account)
@@ -7803,6 +7966,81 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Attachment'
+    Notification:
+      description: A serialised notification. There are different types of notifications, each can have its own properties
+      properties:
+        id:
+          type: string
+          format: bson-id
+          description: ID of the status
+          readOnly: true
+          example: 5aead4809007ba56ffca942e
+        type:
+          type: string
+          description: Type of the notification
+          enum:
+            - assigned_action
+            - action_with_time
+            - contact_assigned
+            - call
+            - email
+            - link
+            - note
+          readOnly: true
+          example: assigned_action
+        by:
+          type: string
+          description: User name that caused the notification
+          readOnly: true
+          example: Vlad K.
+        read:
+          type: boolean
+          description: Tells if notification was marked as read
+          example: true
+        user_id:
+          type: string
+          format: bson-id
+          description: The ID of affected user, ID of assignee user
+          readOnly: true
+          example: 5aead4809007ba56ffca942e
+        contact_id:
+          type: string
+          format: bson-id
+          description: The ID of a contact related to which the notification has been created
+          readOnly: true
+          example: 5aead4809007ba56ffca942e
+        created_at:
+          type: string
+          #format: iso8601
+          description: Date which tells when the notification was created
+          readOnly: true
+          example: '2019-06-21T16:53:12Z'
+        modified_at:
+          type: string
+          #format: iso8601
+          description: Date which tells when the notification was last updated
+          readOnly: true
+          example: '2019-06-21T16:53:12Z'
+        mobile_data:
+          type: object
+          description: Data created for the purpose of push notifications for mobile apps
+          readOnly: true
+          properties:
+            title:
+              type: string
+              description: Title of push notification
+              readOnly: true
+              example: 'Action assigned to you (by User N.)'
+            body:
+              type: string
+              description: Body of push notification
+              readOnly: true
+              example: '17:13: in bulk'
+            action_type:
+              type: string
+              description: Type of action
+              readOnly: true
+              example: 'action_with_time'
     Settings:
       description: Application settings for the logged API user e.g. localization and for the account e.g. deal stages.
       properties:
@@ -8904,6 +9142,14 @@ components:
       in: path
       required: true
       description: Filter ID
+      schema:
+        type: string
+        minimum: 1
+    path_notification_id:
+      name: notification_id
+      in: path
+      required: true
+      description: Notification ID
       schema:
         type: string
         minimum: 1
