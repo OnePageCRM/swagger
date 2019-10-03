@@ -6925,6 +6925,7 @@ components:
         status:
           type: string
           description: Status of the contact
+          readOnly: true
           example: Prospect
         status_id:
           type: string
