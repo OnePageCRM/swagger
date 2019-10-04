@@ -7306,6 +7306,7 @@ components:
         status:
           type: string
           description: Status of the contact
+          readOnly: true
           example: Prospect
         status_id:
           type: string
@@ -7724,8 +7725,7 @@ components:
         date:
           type: string
           format: date
-          description: Expected close date (for `pending` deals), close date (for deals of status `won` or `lost`)
-          readOnly: true
+          description: Creation date of the deal
           example: '2018-04-15'
           default: Today's date
         amount:
