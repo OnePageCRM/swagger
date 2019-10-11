@@ -248,6 +248,10 @@ tags:
   description: >-
     Additional files associated with Deals, Notes or Calls. They can be uploaded and stored in S3, or stored in
     external providers i.e. Google Drive, Dropbox, Evernote.
+- name: Pipelines
+  description: >-
+    Information about the sales process of products or services, including deal stages.
+    Each product/service/group may have a different pipeline.
 - name: Statuses
   description: >-
     Values which help qualify where contacts are in the sales pipeline. The list of Statuses is
@@ -2620,6 +2624,7 @@ paths:
       - $ref: '#/components/parameters/query_deals_search'
       - $ref: '#/components/parameters/query_deals_status'
       - $ref: '#/components/parameters/query_stage'
+      - $ref: '#/components/parameters/query_pipeline_id'
       - $ref: '#/components/parameters/query_deals_owner_id'
       - $ref: '#/components/parameters/query_deals_contact_id'
       - $ref: '#/components/parameters/query_deals_company_id'
@@ -2691,6 +2696,8 @@ paths:
                   $ref: '#/components/schemas/Deal/properties/contact_id'
                 owner_id:
                   $ref: '#/components/schemas/Deal/properties/owner_id'
+                pipeline_id:
+                  $ref: '#/components/schemas/Deal/properties/pipeline_id'
                 name:
                   $ref: '#/components/schemas/Deal/properties/name'
                 text:
@@ -2848,6 +2855,8 @@ paths:
                   $ref: '#/components/schemas/Deal/properties/contact_id'
                 owner_id:
                   $ref: '#/components/schemas/Deal/properties/owner_id'
+                pipeline_id:
+                  $ref: '#/components/schemas/Deal/properties/pipeline_id'
                 name:
                   $ref: '#/components/schemas/Deal/properties/name'
                 text:
@@ -7004,6 +7013,91 @@ paths:
           $ref: '#/components/responses/409'
         500:
           $ref: '#/components/responses/500'
+  /pipelines:
+    get:
+      summary: Get all pipelines (associated with the logged API user's account)
+      description:
+      tags:
+        - Pipelines
+      parameters: []
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    $ref: '#/components/schemas/Success/properties/status'
+                  message:
+                    $ref: '#/components/schemas/Success/properties/message'
+                  timestamp:
+                    $ref: '#/components/schemas/Success/properties/timestamp'
+                  data:
+                    properties:
+                      pipelines:
+                        type: array
+                        items:
+                          properties:
+                            pipeline:
+                              $ref: '#/components/schemas/Pipeline'
+                      total_count:
+                        $ref: '#/components/schemas/Page_data/properties/total_count'
+                      page:
+                        $ref: '#/components/schemas/Page_data/properties/page'
+                      per_page:
+                        $ref: '#/components/schemas/Page_data/properties/per_page'
+                      max_page:
+                        $ref: '#/components/schemas/Page_data/properties/max_page'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
+  /pipelines/{pipeline_id}:
+    get:
+      summary: Get a specific pipeline
+      description:
+      tags:
+        - Pipelines
+      parameters:
+        - $ref: '#/components/parameters/path_pipeline_id'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    $ref: '#/components/schemas/Success/properties/status'
+                  message:
+                    $ref: '#/components/schemas/Success/properties/message'
+                  timestamp:
+                    $ref: '#/components/schemas/Success/properties/timestamp'
+                  data:
+                    properties:
+                      pipeline:
+                        $ref: '#/components/schemas/Pipeline'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
 components:
   schemas:
     Bootstrap:
@@ -7685,6 +7779,11 @@ components:
           description: ID of the user, to whom the deal belongs
           example: 5aba31e99007ba0f570c12f7
           default: Logged API user's ID
+        pipeline_id:
+          type: string
+          format: bson-id
+          description: ID of a pipeline the deal belongs to
+          example: 5cfa87a4849d7873db082f98
         name:
           type: string
           description: Name of the deal
@@ -8330,7 +8429,15 @@ components:
           - AU
           - DE
         deal_stages:
-          $ref: '#/components/schemas/Deal_stage'
+          type: array
+          items:
+            $ref: '#/components/schemas/Deal_stage'
+        pipelines:
+          type: array
+          items:
+            properties:
+              pipeline:
+                $ref: '#/components/schemas/Pipeline'
         default_contact_type:
           type: string
           description: Denotes whether the logged API user, thinks of sales as people or organizations
@@ -9300,6 +9407,37 @@ components:
           type: string
           description: Secret key of the webhook
           example: ''
+    Pipeline:
+      description: >-
+        Information about the sales process of products or services, including deal stages.
+      properties:
+        id:
+          type: string
+          format: bson-id
+          description: ID of the pipeline
+          readOnly: true
+          example: 5c96306b849d78b896b6f8ca
+        name:
+          type: string
+          description: Name of the pipeline
+          example: Default pipeine
+        default:
+          type: boolean
+          description: Is this pipeline the default pipeline in the account?
+          example: true
+        won_column_enabled:
+          type: boolean
+          description: Specifies if the `WON` column is enabled for the pipeline
+          example: false
+        won_column_name:
+          type: string
+          description: Name of the `WON` column for the pipeline
+          example: Payment
+        stages:
+          type: array
+          description: Deal stages defined for the pipeline
+          items:
+            $ref: '#/components/schemas/Deal_stage'
     Reminder:
       description: Details about the sales action reminder email.
       properties:
@@ -9524,6 +9662,14 @@ components:
       in: path
       required: true
       description: Webhook ID
+      schema:
+        type: string
+        minimum: 1
+    path_pipeline_id:
+      name: pipeline_id
+      in: path
+      required: true
+      description: Pipeline ID
       schema:
         type: string
         minimum: 1
@@ -10173,6 +10319,14 @@ components:
       schema:
         type: string
         minimum: 1
+    query_pipeline_id:
+      name: pipeline_id
+      in: query
+      required: false
+      description: Return deals from the specified pipeline only
+      schema:
+        type: string
+        example: 5cfa87a4849d7873db082f98
   responses:
     200:
       description: OK
