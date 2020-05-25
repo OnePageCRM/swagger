@@ -6546,6 +6546,155 @@ paths:
           $ref: '#/components/responses/409'
         500:
           $ref: '#/components/responses/500'
+  /contacts/cascade:
+    get:
+      summary: Get contacts past the 10,000 contact in the account.
+      description: >-
+        Defaults to contacts owned by the logged user, alpha sorted.
+        This endpoint can get contacts above the 10,000 contact. Results returned in batches of 100.
+        Pass the last `contact_id` of the last request into the next request to get the next batch of 100 contacts.
+      tags:
+        - Contacts
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    $ref: '#/components/schemas/Success/properties/status'
+                  message:
+                    $ref: '#/components/schemas/Success/properties/message'
+                  timestamp:
+                    $ref: '#/components/schemas/Success/properties/timestamp'
+                  data:
+                    properties:
+                      contacts:
+                        type: array
+                        items:
+                          properties:
+                            contact:
+                              $ref: '#/components/schemas/Contact'
+                            next_actions:
+                              type: array
+                              items:
+                                $ref: '#/components/schemas/Action'
+                            next_action:
+                              $ref: '#/components/schemas/Action'
+                            queued_actions:
+                              type: array
+                              items:
+                                $ref: '#/components/schemas/Action'
+                            next_action_conflicts:
+                              type: array
+                              items: {}
+                              example: []
+                            company:
+                              $ref: '#/components/schemas/Company'
+                      items_left:
+                        type: integer
+                        format: int32
+                        description: Total number of items left
+                        readOnly: true
+                        example: 32500
+                      next_set_url:
+                        type: string
+                        description: The URL to use to get the next batch of contacts
+                        readOnly: true
+                        example: https://app.onepagecrm.com/api/v3/contacts/cascade/5d2c8ca59b79b2ead94aa425
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
+
+  /contacts/cascade/{last_id}:
+    get:
+      summary: Get contacts past the 10,000 contact in the account.
+      description: >-
+        Defaults to contacts owned by the logged user, alpha sorted.
+        This endpoint can get contacts above the 10,000 contact. Results returned in batches of 100.
+        Pass the last `contact_id` of the last request into the next request to get the next batch of 100 contacts.
+      tags:
+        - Contacts
+      parameters:
+        name: contact_id
+        in: path
+        required: true
+        description: Contact ID
+        schema:
+          type: string
+          minimum: 1
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    $ref: '#/components/schemas/Success/properties/status'
+                  message:
+                    $ref: '#/components/schemas/Success/properties/message'
+                  timestamp:
+                    $ref: '#/components/schemas/Success/properties/timestamp'
+                  data:
+                    properties:
+                      contacts:
+                        type: array
+                        items:
+                          properties:
+                            contact:
+                              $ref: '#/components/schemas/Contact'
+                            next_actions:
+                              type: array
+                              items:
+                                $ref: '#/components/schemas/Action'
+                            next_action:
+                              $ref: '#/components/schemas/Action'
+                            queued_actions:
+                              type: array
+                              items:
+                                $ref: '#/components/schemas/Action'
+                            next_action_conflicts:
+                              type: array
+                              items: {}
+                              example: []
+                            company:
+                              $ref: '#/components/schemas/Company'
+                      items_left:
+                        type: integer
+                        format: int32
+                        description: Total number of items left
+                        readOnly: true
+                        example: 32500
+                      next_set_url:
+                        type: string
+                        description: The URL to use to get the next batch of contacts
+                        readOnly: true
+                        example: https://app.onepagecrm.com/api/v3/contacts/cascade/5d2c8ca59b79b2ead94aa425
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
+
+  #/contacts/cascade/{last_id}
   /action_stream:
     get:
       summary: Get a list of contacts prioritized by their next action
