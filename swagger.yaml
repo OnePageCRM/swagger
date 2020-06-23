@@ -1062,6 +1062,7 @@ paths:
         The cost field can be used for margin-based deals. <br>
         We subtract the deal cost from the deal amount to display the margin. <br>
         You can also calculate commission based on margin instead of amount. <br>
+        Please note that commission_percentage is user-based parameter, while other parameters (cost_enabled, cost_required and commission_base) are account-based. <br>
       tags:
       - Deal Fields
       parameters: []
@@ -1097,6 +1098,8 @@ paths:
     put:
       summary: Update the cost field for deals
       description:
+        Please note that commission_percentage is user-based parameter, while other parameters (cost_enabled, cost_required and commission_base) are account-based. <br>
+        During the update, commission_percentage parameter is not required. <br>
       tags:
       - Deal Fields
       parameters: []
