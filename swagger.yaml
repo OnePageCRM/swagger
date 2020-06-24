@@ -8976,11 +8976,13 @@ components:
           type: boolean
           description: Is the cost field enabled for deals?
           example: true
+          readOnly: true
         cost_required:
           type: boolean
           description: Is the cost field required when saving a deal?
           deprecated: true
           example: false
+          readOnly: true
         commission_base:
           type: string
           description: The base by which commission is to be calculated for deals
