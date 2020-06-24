@@ -8970,15 +8970,12 @@ components:
     Cost_setup:
       description: Settings related to deals e.g. cost, commission. Disabled by default.
       required:
-      - cost_enabled
-      - cost_required
       - commission_base
-      - commission_percentage
       properties:
         cost_enabled:
           type: boolean
           description: Is the cost field enabled for deals?
-          example: false
+          example: true
         cost_required:
           type: boolean
           description: Is the cost field required when saving a deal?
@@ -8993,8 +8990,10 @@ components:
           example: amount
         commission_percentage:
           type: number
-          description: The default percentage commission is to be calculated at
-          example: 10.0
+          format: float
+          description: The default percentage commission is to be calculated at. Decimal in the range 1 to 99
+          example: 12.5
+          default: 10.0
     Deal_stage:
       description: The various stages that a deal goes through in the sales pipeline.
       properties:
