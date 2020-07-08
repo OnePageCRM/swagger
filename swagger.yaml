@@ -8993,7 +8993,7 @@ components:
         commission_percentage:
           type: number
           format: float
-          description: The default percentage commission is to be calculated at. Decimal in the range 1 to 99
+          description: The default percentage commission is to be calculated at. Decimal number greater than 0 and less than 100.
           example: 12.5
           default: 10.0
     Deal_stage:
