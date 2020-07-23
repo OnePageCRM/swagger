@@ -1062,7 +1062,8 @@ paths:
         The cost field can be used for margin-based deals. <br>
         We subtract the deal cost from the deal amount to display the margin. <br>
         You can also calculate commission based on margin instead of amount. <br>
-        Please note that commission_percentage is user-based parameter, while other parameters (cost_enabled, cost_required and commission_base) are account-based. <br>
+        <br>
+        Note: `commission_percentage` is individual to each user, while other params (`cost_enabled`, `cost_required`, and `commission_base`) are the same for all users in an account. <br>
       tags:
       - Deal Fields
       parameters: []
@@ -1097,9 +1098,10 @@ paths:
           $ref: '#/components/responses/500'
     put:
       summary: Update the cost field for deals
-      description:
-        Please note that commission_percentage is user-based parameter, while other parameters (cost_enabled, cost_required and commission_base) are account-based. <br>
-        During the update, commission_percentage parameter is not required. <br>
+      description: >-
+        Notes: <br>
+        -> `commission_percentage` is individual to each user, while other params (`cost_enabled`, `cost_required`, and `commission_base`) are the same for all users in an account. <br>
+        -> during an update, the `commission_percentage` param is not required. <br>
       tags:
       - Deal Fields
       parameters: []
@@ -8993,7 +8995,7 @@ components:
         commission_percentage:
           type: number
           format: float
-          description: The default percentage commission is to be calculated at. Decimal number greater than 0 and less than 100.
+          description: The default percentage by which the commission is to be calculated for deals (in the range 0.0 < commission_percentage < 100.0)
           example: 12.5
           default: 10.0
     Deal_stage:
