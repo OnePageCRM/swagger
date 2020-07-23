@@ -1062,6 +1062,8 @@ paths:
         The cost field can be used for margin-based deals. <br>
         We subtract the deal cost from the deal amount to display the margin. <br>
         You can also calculate commission based on margin instead of amount. <br>
+        <br>
+        Note: `commission_percentage` is individual to each user, while other params (`cost_enabled`, `cost_required`, and `commission_base`) are the same for all users in an account. <br>
       tags:
       - Deal Fields
       parameters: []
@@ -1096,7 +1098,10 @@ paths:
           $ref: '#/components/responses/500'
     put:
       summary: Update the cost field for deals
-      description:
+      description: >-
+        Notes: <br>
+        -> `commission_percentage` is individual to each user, while other params (`cost_enabled`, `cost_required`, and `commission_base`) are the same for all users in an account. <br>
+        -> during an update, the `commission_percentage` param is not required. <br>
       tags:
       - Deal Fields
       parameters: []
@@ -8967,20 +8972,19 @@ components:
     Cost_setup:
       description: Settings related to deals e.g. cost, commission. Disabled by default.
       required:
-      - cost_enabled
-      - cost_required
       - commission_base
-      - commission_percentage
       properties:
         cost_enabled:
           type: boolean
           description: Is the cost field enabled for deals?
-          example: false
+          example: true
+          readOnly: true
         cost_required:
           type: boolean
           description: Is the cost field required when saving a deal?
           deprecated: true
           example: false
+          readOnly: true
         commission_base:
           type: string
           description: The base by which commission is to be calculated for deals
@@ -8990,8 +8994,10 @@ components:
           example: amount
         commission_percentage:
           type: number
-          description: The default percentage commission is to be calculated at
-          example: 10.0
+          format: float
+          description: The default percentage by which the commission is to be calculated for deals (in the range 0.0 < commission_percentage < 100.0)
+          example: 12.5
+          default: 10.0
     Deal_stage:
       description: The various stages that a deal goes through in the sales pipeline.
       properties:
