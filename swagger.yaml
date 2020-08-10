@@ -8228,11 +8228,13 @@ components:
           description: ID of the email message
           readOnly: true
           example: 5b07c04a9007ba0231f4dcf2
-        contact_id:
-          type: string
-          format: bson-id
-          description: ID of the contact, with whom the email messaged was exchanged
-          example: 5aba338b9007ba0f570c9392
+        contact_ids:
+          type: array
+          items:
+            type: string
+            format: bson-id
+            description: ID of the contact, with whom the email messaged was exchanged
+            example: 5aba338b9007ba0f570c9392
         send_time:
           type: string
           format: date-time
@@ -8267,6 +8269,18 @@ components:
                 type: string
                 description: bcc
                 example: '{janes.boss}@{foo.bar}'
+        from:
+          $ref: '#/components/schemas/Email_address'
+        to:
+          description: An array of email addresses email send to.
+          type: array
+          items:
+            $ref: '#/components/schemas/Email_address'
+        cc:
+          description: An array of email addresses email send to as carbon copy.
+          type: array
+          items:
+            $ref: '#/components/schemas/Email_address'
         url:
           type: string
           description: The URL where more details of the email are stored (otherwise empty)
@@ -8278,17 +8292,31 @@ components:
           example: Important Sales Subject
         plain_content:
           type: string
-          description: The body of the email message
+          description: The snippet of the email message body
           example: Important Sales Message
         status:
           type: string
-          description: The status of the email message
+          description: The status of the email message. ok means send or received
           readOnly: true
           enum:
-          - waiting
-          - sent
+          - draft
+          - queued
+          - processing
+          - ok
           - failed
-          example: sent
+          example: failed
+        source:
+          type: string
+          description: Source of email messages, dropbox is bcc capture
+          readOnly: true
+          enum:
+            - dropbox
+            - gmail_send
+            - gmail_sync
+            - outlook_send
+            - outlook_sync
+            - nylas
+          example: gmail_send
         incoming_email:
           type: boolean
           description: Are there emails incoming for this email address?
@@ -8297,6 +8325,18 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Attachment'
+    Email_address:
+      description: Email address with name to represent email header
+      properties:
+        address:
+          type: string
+          description: Type of the notification
+          example: '{joes.boss}@{bar.foo}'
+        name:
+          type: string
+          nullable: true
+          description: Type of the notification
+          example: 'Joes Boss'
     Notification:
       description: A serialised notification. There are different types of notifications, each can have its own properties
       properties:
