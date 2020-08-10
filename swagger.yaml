@@ -8247,9 +8247,11 @@ components:
         sender:
           type: string
           description: Email address of the sender
+          deprecated: true
           example: jane.doe@{foo.bar}
         recipients:
           description: The email addresses of the recipients of the email message
+          deprecated: true
           properties:
             to:
               type: array
