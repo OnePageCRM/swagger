@@ -8524,6 +8524,10 @@ components:
           type: boolean
           description: Has the user enabled the clipper beta feature?
           example: false
+        bcc_email_enabled:
+          type: boolean
+          description: Has the user enabled the Bcc Capture address?
+          example: true
     Status:
       description: >-
         Values which help qualify where contacts are in the sales pipeline. The list of Statuses is
