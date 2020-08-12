@@ -8248,7 +8248,7 @@ components:
           type: string
           description: Email address of the sender
           deprecated: true
-          example: jane.doe@{foo.bar}
+          example: jane.doe@foo.bar
         recipients:
           description: The email addresses of the recipients of the email message
           deprecated: true
@@ -8258,19 +8258,19 @@ components:
               items:
                 type: string
                 description: to
-                example: joe.bloggs@{bar.foo}
+                example: joe.bloggs@bar.foo
             cc:
               type: array
               items:
                 type: string
                 description: cc
-                example: '{joes.boss}@{bar.foo}'
+                example: 'joes.boss@bar.foo'
             bcc:
               type: array
               items:
                 type: string
                 description: bcc
-                example: '{janes.boss}@{foo.bar}'
+                example: 'janes.boss@foo.bar'
         from:
           $ref: '#/components/schemas/Email_address'
         to:
@@ -8333,7 +8333,7 @@ components:
         address:
           type: string
           description: Type of the notification
-          example: '{joes.boss}@{bar.foo}'
+          example: 'joes.boss@bar.foo'
         name:
           type: string
           nullable: true
