@@ -7527,6 +7527,9 @@ components:
               description: Time the contact was saved to google
               readOnly: true
               example: 1522840153
+        email_synchronization_enabled:
+          type: boolean
+          description: Email Sync status
         created_at:
           type: string
           format: date-time
