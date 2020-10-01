@@ -7233,6 +7233,12 @@ components:
           - Mr
           - Mrs
           - Ms
+        virtual_groups:
+          type: array
+          description: Collection of virtual groups connected with current account (only available if virtual_groups_enabled for account)
+          readOnly: true
+          items:
+            $ref: '#/components/schemas/VirtualGroup'
     User:
       description: >-
         Useful information about the logged user and other members of the team. Each can update their own info.
@@ -7302,6 +7308,35 @@ components:
           description: Google Contacts email address of the user (you only see your own)
           readOnly: true
           example: jane.doe@{googles.mail.service}
+        virtual_group_id:
+          type: string
+          format: bson-id
+          description: ID of the virtual_group to wich the user belongs (only available if virtual_group_enabled for account)
+          readOnly: true
+          example: 5aba31e99007ba0f570c92a5
+          default: user's account default_virtual_group's ID
+    VirtualGroup:
+      description: >-
+        Useful information about the virtual groups (user groups) which belongs to the current account.
+        Virtual groups are used for the purpose of grouping users on any useful basis.
+      properties:
+        id:
+          type: string
+          format: bson-id
+          description: ID of the virtual group
+          readOnly: true
+          example: 5aba31e99007ba0f570c12f7
+        name:
+          type: string
+          description: Name of the group
+          readOnly: true
+          example: Heavy Machines Team
+        default:
+          type: boolean
+          description: is this group a default one for the current account?
+          readOnly: true
+          example: true
+          default: false
     Contact:
       description: >-
         Information about the people you are actively trying to sell to, and related sub-resources like
@@ -8482,6 +8517,12 @@ components:
           type: boolean
           description: Has the user enabled the clipper beta feature?
           example: false
+        virtual_groups_enabled:
+          type: boolean
+          description: User Groups (UG) functionality enabled for account?
+          readOnly: true
+          example: true
+          default: false
     Status:
       description: >-
         Values which help qualify where contacts are in the sales pipeline. The list of Statuses is
