@@ -5928,6 +5928,113 @@ paths:
           $ref: '#/components/responses/409'
         500:
           $ref: '#/components/responses/500'
+  contacts/{contact_id}/email_messages/mark_all_as_read:
+    post:
+      summary: Mark all contact email messages as read
+      description:
+      tags:
+      - Contacts
+      parameters:
+      - $ref: '#/components/parameters/path_contact_id'
+      responses:
+        201:
+          description: Created
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    $ref: '#/components/schemas/Success/properties/status'
+                  message:
+                    $ref: '#/components/schemas/Success/properties/message'
+                  timestamp:
+                    $ref: '#/components/schemas/Success/properties/timestamp'
+                  data:
+                    type: object
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
+  contacts/{contact_id}/email_messages/{email_message_id}:
+    delete:
+      summary: Delete an email message
+      description:
+      tags:
+      - Contacts
+      parameters:
+      - $ref: '#/components/parameters/path_contact_id'
+      - $ref: '#/components/parameters/path_email_message_id'
+      responses:
+        200:
+          description: Deleted
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    $ref: '#/components/schemas/Success/properties/status'
+                  message:
+                    $ref: '#/components/schemas/Success/properties/message'
+                  timestamp:
+                    $ref: '#/components/schemas/Success/properties/timestamp'
+                  data:
+                    type: object
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
+    get:
+      summary: Show an email message
+      description:
+      tags:
+      - Contacts
+      parameters:
+      - $ref: '#/components/parameters/path_contact_id'
+      - $ref: '#/components/parameters/path_email_message_id'
+      responses:
+        200:
+          description:
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    $ref: '#/components/schemas/Success/properties/status'
+                  message:
+                    $ref: '#/components/schemas/Success/properties/message'
+                  timestamp:
+                    $ref: '#/components/schemas/Success/properties/timestamp'
+                  data:
+                    $ref: '#/components/schemas/Email_message'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
+
   /contacts/{contact_id}/assign_tag/{tag_name}:
     put:
       summary: Assign a tag to a specific contact
@@ -9565,6 +9672,14 @@ components:
           readOnly: true
           example: 1
   parameters:
+    path_email_message_id:
+      name: email_message_id
+      in: path
+      required: true
+      description: Email Message Id
+      schema:
+        type: string
+        minimum: 1
     path_user_id:
       name: user_id
       in: path
