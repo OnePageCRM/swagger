@@ -7517,8 +7517,8 @@ components:
         status_id:
           type: string
           format: bson-id
-          description: ID of the status of the contact
-          example: prospect
+          description: ID of the status of the contact (can be found in account)
+          example: 5e31e030849d781e837b6ba1
         tags:
           type: array
           items:
