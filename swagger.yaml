@@ -8152,6 +8152,12 @@ components:
           description: Commission percentage for the deal
           example: 0.0
           default: 0.0
+        reason_lost_id:
+          type: string
+          format: bson-id
+          description: ID of the reason lost
+          readOnly: true
+          example: 5aaa9b059007ba08c9ebaf58
         deal_fields:
           type: array
           items:
