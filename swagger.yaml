@@ -4869,6 +4869,8 @@ paths:
                               example: []
                             company:
                               $ref: '#/components/schemas/Company'
+                            relationships:
+                              $ref: '#/components/schemas/Relationship'
                       total_count:
                         $ref: '#/components/schemas/Page_data/properties/total_count'
                       page:
@@ -5086,6 +5088,8 @@ paths:
                         example: []
                       company:
                         $ref: '#/components/schemas/Company'
+                      relationships:
+                        $ref: '#/components/schemas/Relationship'
         400:
           $ref: '#/components/responses/400'
         401:
@@ -8745,6 +8749,64 @@ components:
                 type: string
                 description: The relationship varient name
                 example: Partner
+        created_at:
+          type: string
+          format: date-time
+          description: Creation time of the deal
+          readOnly: true
+          example: '2018-03-15T16:10:45Z'
+        modified_at:
+          type: string
+          format: date-time
+          description: Last modification time of the deal
+          readOnly: true
+          example: '2018-03-15T16:10:45Z'
+    Relationship:
+      description: >-
+        The relationship mapping between contacts
+      required:
+      - relationship_mapping
+      - relationship_type
+      properties:
+        id:
+          type: string
+          format: bson-id
+          description: ID of the deal
+          readOnly: true
+          example: 5aaa9b059007ba08c9ebaf58
+        relationship_type:
+          $ref: '#/components/schemas/Relationship_Type'
+        contacts_relationship_mapping:
+          type: array
+          description: The mapping between the contacts and the relation varients.
+          items:
+            type: object
+            properties:
+              contact_id:
+                type: string
+                format: bson-id
+                description: ID of the contact
+                example: 5aba31ea9007ba0f570c92d4
+              variant_id:
+                type: string
+                format: bson-id
+                description: ID of the relationship varient
+                example: 5aaa9b059007ba08c9ebaf59
+          example:
+            - contact_id: 5aba31ea9007ba0f570c92d4
+              variant_id: 5aaa9b059007ba08c9ebaf59
+            - contact_id: 5aba31ea9007ba0f570c92d5
+              variant_id: 5aaa9b059007ba08c9ebaf59
+        contact_ids:
+          type: array
+          items:
+            type: string
+            format: bson-id
+            description: ID of the contact whom participating in the relationship.
+            example: 5aba338b9007ba0f570c9392
+          example:
+            - 5aba31ea9007ba0f570c92d4
+            - 5aba31ea9007ba0f570c92d5
         created_at:
           type: string
           format: date-time
