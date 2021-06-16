@@ -248,6 +248,9 @@ tags:
   description: >-
     Additional files associated with Deals, Notes or Calls. They can be uploaded and stored in S3, or stored in
     external providers i.e. Google Drive, Dropbox, Evernote.
+- name: Relationship Types
+  description: >-
+    Information about the relationship types that's used to identify the relationships between the contacts.
 - name: Pipelines
   description: >-
     Information about the sales process of products or services, including deal stages.
@@ -3245,6 +3248,236 @@ paths:
       - Attachments
       parameters:
       - $ref: '#/components/parameters/path_attachment_id'
+      responses:
+        200:
+          $ref: '#/components/responses/200'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
+  /relationship_types:
+    get:
+      summary: Get a list of relationship types
+      description:
+      tags:
+      - Relationship Types
+      parameters:
+      - $ref: '#/components/parameters/query_relationship_variants'
+      - $ref: '#/components/parameters/query_relationship_symmetrical'
+      - $ref: '#/components/parameters/query_date_filter'
+      - $ref: '#/components/parameters/query_since'
+      - $ref: '#/components/parameters/query_until'
+      - $ref: '#/components/parameters/query_modified_since'
+      - $ref: '#/components/parameters/query_unmodified_since'
+      - $ref: '#/components/parameters/query__sort_by'
+      - $ref: '#/components/parameters/query_order'
+      - $ref: '#/components/parameters/query_page'
+      - $ref: '#/components/parameters/query_per_page'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    $ref: '#/components/schemas/Success/properties/status'
+                  message:
+                    $ref: '#/components/schemas/Success/properties/message'
+                  timestamp:
+                    $ref: '#/components/schemas/Success/properties/timestamp'
+                  data:
+                    properties:
+                      relationship_types:
+                        type: array
+                        items:
+                          properties:
+                            relationship_type:
+                              $ref: '#/components/schemas/Relationship_Type'
+                      total_count:
+                        $ref: '#/components/schemas/Page_data/properties/total_count'
+                      page:
+                        $ref: '#/components/schemas/Page_data/properties/page'
+                      per_page:
+                        $ref: '#/components/schemas/Page_data/properties/per_page'
+                      max_page:
+                        $ref: '#/components/schemas/Page_data/properties/max_page'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
+    post:
+      summary: Create a new relationship type
+      description:
+      tags:
+      - Relationship Types
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                variants:
+                  type: array
+                  description: The relationship varients.
+                  items:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        description: The relationship varient name.
+                        example: Partner
+      responses:
+        201:
+          description: Created
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    $ref: '#/components/schemas/Success/properties/status'
+                  message:
+                    $ref: '#/components/schemas/Success/properties/message'
+                  timestamp:
+                    $ref: '#/components/schemas/Success/properties/timestamp'
+                  data:
+                    properties:
+                      relationship_types:
+                        type: array
+                        items:
+                          properties:
+                            relationship_type:
+                              $ref: '#/components/schemas/Relationship_Type'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
+  /relationship_types/{relationship_type_id}:
+    get:
+      summary: Get a specific relationship type.
+      description:
+      tags:
+      - Relationship Types
+      parameters:
+      - $ref: '#/components/parameters/path_relationship_type_id'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    $ref: '#/components/schemas/Success/properties/status'
+                  message:
+                    $ref: '#/components/schemas/Success/properties/message'
+                  timestamp:
+                    $ref: '#/components/schemas/Success/properties/timestamp'
+                  data:
+                    properties:
+                      deal:
+                        $ref: '#/components/schemas/Relationship_Type'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
+    put:
+      summary: Update a specific relationship type
+      description:
+      tags:
+      - Relationship Types
+      parameters:
+      - $ref: '#/components/parameters/path_relationship_type_id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                variants:
+                  type: array
+                  description: The relationship varients.
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        format: bson-id
+                        description: ID of the relationship varient
+                        example: 5aaa9b059007ba08c9ebaf59
+                      name:
+                        type: string
+                        description: The relationship varient name.
+                        example: Partner
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    $ref: '#/components/schemas/Success/properties/status'
+                  message:
+                    $ref: '#/components/schemas/Success/properties/message'
+                  timestamp:
+                    $ref: '#/components/schemas/Success/properties/timestamp'
+                  data:
+                    properties:
+                      deal:
+                        $ref: '#/components/schemas/Relationship_Type'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
+    delete:
+      summary: Delete a relationship type
+      description:
+      tags:
+      - Relationship Types
+      parameters:
+      - $ref: '#/components/parameters/path_relationship_type_id'
       responses:
         200:
           $ref: '#/components/responses/200'
@@ -8481,6 +8714,49 @@ components:
               type: string
               description: External URL of the attachment's thumbnail
               example: https://{foo.bar}/mario-thumbnail.jpg
+    Relationship_Type:
+      description: >-
+        The relationship types that identifies the relationships between the contacts.
+      required:
+      - relationship_variants
+      properties:
+        id:
+          type: string
+          format: bson-id
+          description: ID of the deal
+          readOnly: true
+          example: 5aaa9b059007ba08c9ebaf58
+        symmetrical:
+          type: boolean
+          description: Is the relationship symmetrical?
+          example: true
+        relationship_variants:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                format: bson-id
+                description: ID of the relationship type
+                readOnly: true
+                example: 5aaa9b059007ba08c9ebaf59
+              name:
+                type: string
+                description: The relationship varient name
+                example: Partner
+        created_at:
+          type: string
+          format: date-time
+          description: Creation time of the deal
+          readOnly: true
+          example: '2018-03-15T16:10:45Z'
+        modified_at:
+          type: string
+          format: date-time
+          description: Last modification time of the deal
+          readOnly: true
+          example: '2018-03-15T16:10:45Z'
     Email_message:
       description: Email correspondance exchanged with a contact, captured by OnePageCRM.
       properties:
@@ -9947,6 +10223,14 @@ components:
       schema:
         type: string
         minimum: 1
+    path_relationship_type_id:
+      name: relationship_type_id
+      in: path
+      required: true
+      description: Relationship type ID
+      schema:
+        type: string
+        minimum: 1
     path_company_id:
       name: company_id
       in: path
@@ -10649,6 +10933,22 @@ components:
       schema:
         type: string
         example: 5cfa87a4849d7873db082f98
+    query_relationship_variants:
+      name: variant
+      in: query
+      required: false
+      description: Search relationship types by relationship variants
+      schema:
+        type: string
+        example: Partner
+    query_relationship_symmetrical:
+      name: symmetrical
+      in: query
+      required: false
+      description: Filter only symmetrical/non-symmetrical relationship types
+      schema:
+        type: boolean
+        example: false
   responses:
     200:
       description: OK
