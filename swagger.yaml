@@ -3277,7 +3277,7 @@ paths:
       - $ref: '#/components/parameters/query_until'
       - $ref: '#/components/parameters/query_modified_since'
       - $ref: '#/components/parameters/query_unmodified_since'
-      - $ref: '#/components/parameters/query__sort_by'
+      - $ref: '#/components/parameters/query_sort_by'
       - $ref: '#/components/parameters/query_order'
       - $ref: '#/components/parameters/query_page'
       - $ref: '#/components/parameters/query_per_page'
@@ -6114,6 +6114,281 @@ paths:
           $ref: '#/components/responses/409'
         500:
           $ref: '#/components/responses/500'
+  /contacts/{contact_id}/relationships:
+    get:
+      summary: Get all relationships for a specific contact
+      description:
+      tags:
+      - Contacts
+      parameters:
+      - $ref: '#/components/parameters/path_contact_id'
+      - $ref: '#/components/parameters/query_relationships_type_id'
+      - $ref: '#/components/parameters/query_relationships_contact_ids'
+      - $ref: '#/components/parameters/query_relationships_varient_ids'
+      - $ref: '#/components/parameters/query_relationships_mapping_0'
+      - $ref: '#/components/parameters/query_relationships_mapping_1'
+      - $ref: '#/components/parameters/query_relationships_search'
+      - $ref: '#/components/parameters/query_relationship_symmetrical'
+      - $ref: '#/components/parameters/query_date_filter'
+      - $ref: '#/components/parameters/query_since'
+      - $ref: '#/components/parameters/query_until'
+      - $ref: '#/components/parameters/query_modified_since'
+      - $ref: '#/components/parameters/query_unmodified_since'
+      - $ref: '#/components/parameters/query_sort_by'
+      - $ref: '#/components/parameters/query_order'
+      - $ref: '#/components/parameters/query_page'
+      - $ref: '#/components/parameters/query_per_page'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    $ref: '#/components/schemas/Success/properties/status'
+                  message:
+                    $ref: '#/components/schemas/Success/properties/message'
+                  timestamp:
+                    $ref: '#/components/schemas/Success/properties/timestamp'
+                  data:
+                    properties:
+                      calls:
+                        type: array
+                        items:
+                          properties:
+                            call:
+                              $ref: '#/components/schemas/Relationship'
+                      total_count:
+                        $ref: '#/components/schemas/Page_data/properties/total_count'
+                      page:
+                        $ref: '#/components/schemas/Page_data/properties/page'
+                      per_page:
+                        $ref: '#/components/schemas/Page_data/properties/per_page'
+                      max_page:
+                        $ref: '#/components/schemas/Page_data/properties/max_page'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
+    post:
+      summary: Create a relationships for a specific contact
+      description:
+      tags:
+      - Contacts
+      parameters:
+      - $ref: '#/components/parameters/path_contact_id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                relationship_type_id:
+                  type: string
+                  format: bson-id
+                  description: ID of the contact
+                  example: 5aaa9b059007ba08c9ebaf58
+                contacts_relationship_mapping:
+                  type: array
+                  description: The mapping between the contacts and the relation varients.
+                  items:
+                    type: object
+                    properties:
+                      contact_id:
+                        type: string
+                        format: bson-id
+                        description: ID of the contact
+                        example: 5aba31ea9007ba0f570c92d4
+                      variant_id:
+                        type: string
+                        format: bson-id
+                        description: ID of the relationship varient
+                        example: 5aaa9b059007ba08c9ebaf59
+                  example:
+                    - contact_id: 5aba31ea9007ba0f570c92d4
+                      variant_id: 5aaa9b059007ba08c9ebaf59
+                    - contact_id: 5aba31ea9007ba0f570c92d5
+                      variant_id: 5aaa9b059007ba08c9ebaf59
+      responses:
+        201:
+          description: Created
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    $ref: '#/components/schemas/Success/properties/status'
+                  message:
+                    $ref: '#/components/schemas/Success/properties/message'
+                  timestamp:
+                    $ref: '#/components/schemas/Success/properties/timestamp'
+                  data:
+                    properties:
+                      call:
+                        $ref: '#/components/schemas/Relationship'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
+  /contacts/{contact_id}/relationships/{relationship_id}:
+    get:
+      summary: Get a specific relationship.
+      description:
+      tags:
+      - Contacts
+      parameters:
+      - $ref: '#/components/parameters/path_contact_id'
+      - $ref: '#/components/parameters/path_relationship_id'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    $ref: '#/components/schemas/Success/properties/status'
+                  message:
+                    $ref: '#/components/schemas/Success/properties/message'
+                  timestamp:
+                    $ref: '#/components/schemas/Success/properties/timestamp'
+                  data:
+                    properties:
+                      deal:
+                        $ref: '#/components/schemas/Relationship'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
+    put:
+      summary: Update a specific relationship.
+      description:
+      tags:
+      - Contacts
+      parameters:
+      - $ref: '#/components/parameters/path_contact_id'
+      - $ref: '#/components/parameters/path_relationship_id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                relationship_id:
+                  type: string
+                  format: bson-id
+                  description: ID of the contact
+                  example: 5aaa9b059007ba08c9ebaf58
+                relationship_type_id:
+                  type: string
+                  format: bson-id
+                  description: ID of the contact
+                  example: 5aaa9b059007ba08c9ebaf57
+                contacts_relationship_mapping:
+                  type: array
+                  description: The mapping between the contacts and the relation varients.
+                  items:
+                    type: object
+                    properties:
+                      contact_id:
+                        type: string
+                        format: bson-id
+                        description: ID of the contact
+                        example: 5aba31ea9007ba0f570c92d4
+                      variant_id:
+                        type: string
+                        format: bson-id
+                        description: ID of the relationship varient
+                        example: 5aaa9b059007ba08c9ebaf59
+                  example:
+                    - contact_id: 5aba31ea9007ba0f570c92d4
+                      variant_id: 5aaa9b059007ba08c9ebaf59
+                    - contact_id: 5aba31ea9007ba0f570c92d5
+                      variant_id: 5aaa9b059007ba08c9ebaf59
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    $ref: '#/components/schemas/Success/properties/status'
+                  message:
+                    $ref: '#/components/schemas/Success/properties/message'
+                  timestamp:
+                    $ref: '#/components/schemas/Success/properties/timestamp'
+                  data:
+                    properties:
+                      deal:
+                        $ref: '#/components/schemas/Relationship'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
+    delete:
+      summary: Delete a relationship.
+      description:
+      tags:
+      - Contacts
+      parameters:
+      - $ref: '#/components/parameters/path_contact_id'
+      - $ref: '#/components/parameters/path_relationship_id'
+      - in: query
+        name: undo
+        description: Undo relationship deletion
+        schema:
+          type: boolean
+          format: boolean
+          example: true
+      responses:
+        200:
+          $ref: '#/components/responses/200'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
   /contacts/{contact_id}/email_messages:
     get:
       summary: Get all email messages for a specific contact
@@ -8773,7 +9048,7 @@ components:
           format: bson-id
           description: ID of the deal
           readOnly: true
-          example: 5aaa9b059007ba08c9ebaf58
+          example: 5aaa9b059007ba08c9ebaf57
         relationship_type:
           $ref: '#/components/schemas/Relationship_Type'
         contacts_relationship_mapping:
@@ -10293,6 +10568,14 @@ components:
       schema:
         type: string
         minimum: 1
+    path_relationship_id:
+      name: relationship_id
+      in: path
+      required: true
+      description: Relationship ID
+      schema:
+        type: string
+        minimum: 1
     path_company_id:
       name: company_id
       in: path
@@ -10482,6 +10765,14 @@ components:
       schema:
         type: string
         example: Solar panels
+    query_relationships_search:
+      name: search
+      in: query
+      required: false
+      description: Search relationships by contact name or relationship-varient name
+      schema:
+        type: string
+        example: Jack Aranda
     query_contacts_owner_id:
       name: owner_id
       in: query
@@ -11011,6 +11302,75 @@ components:
       schema:
         type: boolean
         example: false
+    query_relationships_type_id:
+      name: relationship_type_id
+      in: query
+      required: false
+      description: >-
+        Return relationships of a specific type
+      schema:
+        type: string
+        example: 5aaa9b059007ba08c9ebaf58
+    query_relationships_contact_ids:
+      name: contact_ids
+      in: query
+      required: false
+      description: >-
+        Return relationships in which the provided contacts participate.
+      schema:
+        type: array
+        items:
+          type: string
+        example:
+          - 5aaa9b059007ba08c9ebaf58
+          - 5aaa9b059007ba08c9ebaf59
+    query_relationships_varient_ids:
+      name: varient_ids
+      in: query
+      required: false
+      description: >-
+        Return relationships of the provided varients.
+      schema:
+        type: array
+        items:
+          type: string
+        example:
+          - 5aaa9b059007ba08c9ebaf58
+          - 5aaa9b059007ba08c9ebaf59
+    query_relationships_mapping_0:
+      name: mapping[0]
+      in: query
+      required: false
+      description: >-
+        Return relationships of the provided mapping between contact_ids and varient_ids.
+      schema:
+        type: object
+        properties:
+          contact_id:
+            type: string
+            example: 5aba31ea9007ba0f570c92d4
+          varient_id:
+            type: string
+            example: 5aaa9b059007ba08c9ebaf59
+      style: deepObject
+      explode: true
+    query_relationships_mapping_1:
+      name: mapping[1]
+      in: query
+      required: false
+      description: >-
+        Return relationships of the provided mapping between contact_ids and varient_ids.
+      schema:
+        type: object
+        properties:
+          contact_id:
+            type: string
+            example: 5aba31ea9007ba0f570c92d4
+          varient_id:
+            type: string
+            example: 5aaa9b059007ba08c9ebaf59
+      style: deepObject
+      explode: true
   responses:
     200:
       description: OK
