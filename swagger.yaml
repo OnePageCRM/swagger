@@ -9007,7 +9007,8 @@ components:
           example: 5aaa9b059007ba08c9ebaf58
         symmetrical:
           type: boolean
-          description: Is the relationship symmetrical?
+          description: Is the relationship symmetrical? (read only).
+          readOnly: true
           example: true
         relationship_variants:
           type: array
