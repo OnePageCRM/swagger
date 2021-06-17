@@ -4870,7 +4870,11 @@ paths:
                             company:
                               $ref: '#/components/schemas/Company'
                             relationships:
-                              $ref: '#/components/schemas/Relationship'
+                              type: array
+                              items:
+                                properties:
+                                  relationship:
+                                    $ref: '#/components/schemas/Relationship'
                       total_count:
                         $ref: '#/components/schemas/Page_data/properties/total_count'
                       page:
@@ -5089,7 +5093,11 @@ paths:
                       company:
                         $ref: '#/components/schemas/Company'
                       relationships:
-                        $ref: '#/components/schemas/Relationship'
+                        type: array
+                        items:
+                          properties:
+                            relationship:
+                              $ref: '#/components/schemas/Relationship'
         400:
           $ref: '#/components/responses/400'
         401:
