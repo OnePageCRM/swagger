@@ -3270,7 +3270,7 @@ paths:
       tags:
       - Relationship Types
       parameters:
-      - $ref: '#/components/parameters/query_relationship_variants'
+      - $ref: '#/components/parameters/query_relationship_types_search'
       - $ref: '#/components/parameters/query_relationship_symmetrical'
       - $ref: '#/components/parameters/query_date_filter'
       - $ref: '#/components/parameters/query_since'
@@ -10819,6 +10819,14 @@ components:
       schema:
         type: string
         example: Solar panels
+    query_relationship_types_search:
+      name: search
+      in: query
+      required: false
+      description: Search relationship types by relationship variants
+      schema:
+        type: string
+        example: Partner
     query_relationships_search:
       name: search
       in: query
@@ -11340,14 +11348,6 @@ components:
       schema:
         type: string
         example: 5cfa87a4849d7873db082f98
-    query_relationship_variants:
-      name: variant
-      in: query
-      required: false
-      description: Search relationship types by relationship variants
-      schema:
-        type: string
-        example: Partner
     query_relationship_symmetrical:
       name: symmetrical
       in: query
