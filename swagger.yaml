@@ -3336,13 +3336,13 @@ paths:
               properties:
                 variants:
                   type: array
-                  description: The relationship varients.
+                  description: The relationship variants.
                   items:
                     type: object
                     properties:
                       name:
                         type: string
-                        description: The relationship varient name.
+                        description: The relationship variant name.
                         example: Partner
       responses:
         201:
@@ -3429,18 +3429,18 @@ paths:
               properties:
                 variants:
                   type: array
-                  description: The relationship varients.
+                  description: The relationship variants.
                   items:
                     type: object
                     properties:
                       id:
                         type: string
                         format: bson-id
-                        description: ID of the relationship varient
+                        description: ID of the relationship variant
                         example: 5aaa9b059007ba08c9ebaf59
                       name:
                         type: string
-                        description: The relationship varient name.
+                        description: The relationship variant name.
                         example: Partner
       responses:
         200:
@@ -6132,7 +6132,7 @@ paths:
       - $ref: '#/components/parameters/path_contact_id'
       - $ref: '#/components/parameters/query_relationships_type_id'
       - $ref: '#/components/parameters/query_relationships_contact_ids'
-      - $ref: '#/components/parameters/query_relationships_varient_ids'
+      - $ref: '#/components/parameters/query_relationships_variant_ids'
       - $ref: '#/components/parameters/query_relationships_mapping_0'
       - $ref: '#/components/parameters/query_relationships_mapping_1'
       - $ref: '#/components/parameters/query_relationships_search'
@@ -6207,7 +6207,7 @@ paths:
                   example: 5aaa9b059007ba08c9ebaf58
                 contacts_relationship_mapping:
                   type: array
-                  description: The mapping between the contacts and the relation varients.
+                  description: The mapping between the contacts and the relation variants.
                   items:
                     type: object
                     properties:
@@ -6219,7 +6219,7 @@ paths:
                       variant_id:
                         type: string
                         format: bson-id
-                        description: ID of the relationship varient
+                        description: ID of the relationship variant
                         example: 5aaa9b059007ba08c9ebaf59
                   example:
                     - contact_id: 5aba31ea9007ba0f570c92d4
@@ -6319,7 +6319,7 @@ paths:
                   example: 5aaa9b059007ba08c9ebaf57
                 contacts_relationship_mapping:
                   type: array
-                  description: The mapping between the contacts and the relation varients.
+                  description: The mapping between the contacts and the relation variants.
                   items:
                     type: object
                     properties:
@@ -6331,7 +6331,7 @@ paths:
                       variant_id:
                         type: string
                         format: bson-id
-                        description: ID of the relationship varient
+                        description: ID of the relationship variant
                         example: 5aaa9b059007ba08c9ebaf59
                   example:
                     - contact_id: 5aba31ea9007ba0f570c92d4
@@ -9031,7 +9031,7 @@ components:
                 example: 5aaa9b059007ba08c9ebaf59
               name:
                 type: string
-                description: The relationship varient name
+                description: The relationship variant name
                 example: Partner
         created_at:
           type: string
@@ -9054,11 +9054,11 @@ components:
           variant_id:
             type: string
             format: bson-id
-            description: ID of the relationship varient
+            description: ID of the relationship variant
             example: 5aaa9b059007ba08c9ebaf59
           variant_name:
             type: string
-            description: The name of the varient
+            description: The name of the variant
             maxLength: 25 chars
             example: Partner
           contact_id:
@@ -9068,12 +9068,12 @@ components:
             example: 5aba31ea9007ba0f570c92d4
           first_name:
             type: string
-            description: The name of the varient
+            description: The first name of the contact
             maxLength: 25 chars
             example: Joe
           last_name:
             type: string
-            description: The name of the varient
+            description: The last name of the contact
             maxLength: 25 chars
             example: Bloggs
           photo_url:
@@ -10823,7 +10823,7 @@ components:
       name: search
       in: query
       required: false
-      description: Search relationships by contact name or relationship-varient name
+      description: Search relationships by contact name or relationship-variant name
       schema:
         type: string
         example: Jack Aranda
@@ -11378,12 +11378,12 @@ components:
         example:
           - 5aaa9b059007ba08c9ebaf58
           - 5aaa9b059007ba08c9ebaf59
-    query_relationships_varient_ids:
-      name: varient_ids
+    query_relationships_variant_ids:
+      name: variant_ids
       in: query
       required: false
       description: >-
-        Return relationships of the provided varients.
+        Return relationships of the provided variants.
       schema:
         type: array
         items:
@@ -11396,14 +11396,14 @@ components:
       in: query
       required: false
       description: >-
-        Return relationships of the provided mapping between contact_ids and varient_ids.
+        Return relationships of the provided mapping between contact_ids and variant_ids.
       schema:
         type: object
         properties:
           contact_id:
             type: string
             example: 5aba31ea9007ba0f570c92d4
-          varient_id:
+          variant_id:
             type: string
             example: 5aaa9b059007ba08c9ebaf59
       style: deepObject
@@ -11413,14 +11413,14 @@ components:
       in: query
       required: false
       description: >-
-        Return relationships of the provided mapping between contact_ids and varient_ids.
+        Return relationships of the provided mapping between contact_ids and variant_ids.
       schema:
         type: object
         properties:
           contact_id:
             type: string
             example: 5aba31ea9007ba0f570c92d4
-          varient_id:
+          variant_id:
             type: string
             example: 5aaa9b059007ba08c9ebaf59
       style: deepObject
