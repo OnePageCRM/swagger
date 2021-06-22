@@ -3379,7 +3379,7 @@ paths:
           $ref: '#/components/responses/500'
   /relationship_types/{relationship_type_id}:
     get:
-      summary: Get a specific relationship type.
+      summary: Get a specific relationship type
       description:
       tags:
       - Relationship Types
@@ -4869,12 +4869,6 @@ paths:
                               example: []
                             company:
                               $ref: '#/components/schemas/Company'
-                            relationships:
-                              type: array
-                              items:
-                                properties:
-                                  relationship:
-                                    $ref: '#/components/schemas/Relationship'
                       total_count:
                         $ref: '#/components/schemas/Page_data/properties/total_count'
                       page:
@@ -5092,12 +5086,6 @@ paths:
                         example: []
                       company:
                         $ref: '#/components/schemas/Company'
-                      relationships:
-                        type: array
-                        items:
-                          properties:
-                            relationship:
-                              $ref: '#/components/schemas/Relationship'
         400:
           $ref: '#/components/responses/400'
         401:
@@ -6131,10 +6119,8 @@ paths:
       parameters:
       - $ref: '#/components/parameters/path_contact_id'
       - $ref: '#/components/parameters/query_relationships_type_id'
-      - $ref: '#/components/parameters/query_relationships_contact_ids'
-      - $ref: '#/components/parameters/query_relationships_variant_ids'
-      - $ref: '#/components/parameters/query_relationships_mapping_0'
-      - $ref: '#/components/parameters/query_relationships_mapping_1'
+      - $ref: '#/components/parameters/query_relationships_contact_id'
+      - $ref: '#/components/parameters/query_relationships_variant_id'
       - $ref: '#/components/parameters/query_relationships_search'
       - $ref: '#/components/parameters/query_relationship_symmetrical'
       - $ref: '#/components/parameters/query_date_filter'
@@ -6205,9 +6191,11 @@ paths:
                   format: bson-id
                   description: ID of the contact
                   example: 5aaa9b059007ba08c9ebaf58
-                contacts_relationship_mapping:
+                related_contacts:
+                  minItems: 2
+                  maxItems: 2
                   type: array
-                  description: The mapping between the contacts and the relation variants.
+                  description: Related contacts with relationship variant names
                   items:
                     type: object
                     properties:
@@ -6257,7 +6245,7 @@ paths:
           $ref: '#/components/responses/500'
   /contacts/{contact_id}/relationships/{relationship_id}:
     get:
-      summary: Get a specific relationship.
+      summary: Get a specific relationship
       description:
       tags:
       - Contacts
@@ -6294,7 +6282,7 @@ paths:
         500:
           $ref: '#/components/responses/500'
     put:
-      summary: Update a specific relationship.
+      summary: Update a specific relationship
       description:
       tags:
       - Contacts
@@ -6307,19 +6295,16 @@ paths:
           application/json:
             schema:
               properties:
-                relationship_id:
-                  type: string
-                  format: bson-id
-                  description: ID of the contact
-                  example: 5aaa9b059007ba08c9ebaf58
                 relationship_type_id:
                   type: string
                   format: bson-id
-                  description: ID of the contact
+                  description: ID of the relationship type
                   example: 5aaa9b059007ba08c9ebaf57
-                contacts_relationship_mapping:
+                related_contacts:
+                  minItems: 2
+                  maxItems: 2
                   type: array
-                  description: The mapping between the contacts and the relation variants.
+                  description: Related contacts with relationship variant names
                   items:
                     type: object
                     properties:
@@ -6368,7 +6353,7 @@ paths:
         500:
           $ref: '#/components/responses/500'
     delete:
-      summary: Delete a relationship.
+      summary: Delete a relationship
       description:
       tags:
       - Contacts
@@ -9046,8 +9031,10 @@ components:
           readOnly: true
           example: '2018-03-15T16:10:45Z'
     Related_contact:
+      minItems: 2
+      maxItems: 2
       type: array
-      description: The contacts participating in the relationship along with their associated variants.
+      description: The contacts participating in the relationship along with their associated variant names
       items:
         type: object
         properties:
@@ -9059,7 +9046,8 @@ components:
           variant_name:
             type: string
             description: The name of the variant
-            maxLength: 25 chars
+            maxLength: 35 chars
+            readOnly: true
             example: Partner
           contact_id:
             type: string
@@ -9069,12 +9057,14 @@ components:
           first_name:
             type: string
             description: The first name of the contact
-            maxLength: 25 chars
+            maxLength: 35 chars
+            readOnly: true
             example: Joe
           last_name:
             type: string
             description: The last name of the contact
-            maxLength: 25 chars
+            maxLength: 35 chars
+            readOnly: true
             example: Bloggs
           photo_url:
             type: string
@@ -9085,18 +9075,20 @@ components:
             type: string
             format: bson-id
             description: ID of the company, to which the contact belongs
+            readOnly: true
             example: 5aba31ea9007ba0f570c92d5
           company_name:
             type: string
             description: Name of the company, to whom the contact belongs
             maxLength: 55 chars
+            readOnly: true
             example: Morgan's Forensic Lab
           owner_id:
             type: string
             format: bson-id
             description: ID of the user, to whom the contact belongs
+            readOnly: true
             example: 5aba31e99007ba0f570c92a5
-            default: Logged API user's ID
       example:
         - variant_id: 5aaa9b059007ba08c9ebaf59,
           variant_name: Partner,
@@ -11365,66 +11357,24 @@ components:
       schema:
         type: string
         example: 5aaa9b059007ba08c9ebaf58
-    query_relationships_contact_ids:
-      name: contact_ids
+    query_relationships_contact_id:
+      name: contact_id
       in: query
       required: false
       description: >-
-        Return relationships in which the provided contacts participate.
+        Return relationships in which the provided contact participate
       schema:
-        type: array
-        items:
-          type: string
-        example:
-          - 5aaa9b059007ba08c9ebaf58
-          - 5aaa9b059007ba08c9ebaf59
-    query_relationships_variant_ids:
-      name: variant_ids
+        type: string
+        example: 5aaa9b059007ba08c9ebaf58
+    query_relationships_variant_id:
+      name: variant_id
       in: query
       required: false
       description: >-
-        Return relationships of the provided variants.
+        Return relationships in which the provided variant participate
       schema:
-        type: array
-        items:
-          type: string
-        example:
-          - 5aaa9b059007ba08c9ebaf58
-          - 5aaa9b059007ba08c9ebaf59
-    query_relationships_mapping_0:
-      name: mapping[0]
-      in: query
-      required: false
-      description: >-
-        Return relationships of the provided mapping between contact_ids and variant_ids.
-      schema:
-        type: object
-        properties:
-          contact_id:
-            type: string
-            example: 5aba31ea9007ba0f570c92d4
-          variant_id:
-            type: string
-            example: 5aaa9b059007ba08c9ebaf59
-      style: deepObject
-      explode: true
-    query_relationships_mapping_1:
-      name: mapping[1]
-      in: query
-      required: false
-      description: >-
-        Return relationships of the provided mapping between contact_ids and variant_ids.
-      schema:
-        type: object
-        properties:
-          contact_id:
-            type: string
-            example: 5aba31ea9007ba0f570c92d4
-          variant_id:
-            type: string
-            example: 5aaa9b059007ba08c9ebaf59
-      style: deepObject
-      explode: true
+        type: string
+        example: 5aaa9b059007ba08c9ebaf58
   responses:
     200:
       description: OK
