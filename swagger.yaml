@@ -3336,13 +3336,16 @@ paths:
               properties:
                 variants:
                   type: array
-                  description: The relationship variants.
+                  minItems: 1
+                  maxItems: 2
+                  description: The relationship variants
                   items:
                     type: object
                     properties:
                       name:
                         type: string
-                        description: The relationship variant name.
+                        maxLength: 35 chars
+                        description: The relationship variant name
                         example: Partner
       responses:
         201:
@@ -3379,7 +3382,7 @@ paths:
           $ref: '#/components/responses/500'
   /relationship_types/{relationship_type_id}:
     get:
-      summary: Get a specific relationship type.
+      summary: Get a specific relationship type
       description:
       tags:
       - Relationship Types
@@ -3429,7 +3432,9 @@ paths:
               properties:
                 variants:
                   type: array
-                  description: The relationship variants.
+                  minItems: 1
+                  maxItems: 2
+                  description: The relationship variants
                   items:
                     type: object
                     properties:
@@ -3440,7 +3445,8 @@ paths:
                         example: 5aaa9b059007ba08c9ebaf59
                       name:
                         type: string
-                        description: The relationship variant name.
+                        maxLength: 35 chars
+                        description: The relationship variant name
                         example: Partner
       responses:
         200:
@@ -8728,11 +8734,13 @@ components:
           example: 5aaa9b059007ba08c9ebaf58
         symmetrical:
           type: boolean
-          description: Is the relationship symmetrical? (read only).
+          description: Is the relationship symmetrical? (read only)
           readOnly: true
           example: true
         relationship_variants:
           type: array
+          minItems: 1
+          maxItems: 2
           items:
             type: object
             properties:
@@ -8744,6 +8752,7 @@ components:
                 example: 5aaa9b059007ba08c9ebaf59
               name:
                 type: string
+                maxLength: 35 chars
                 description: The relationship variant name
                 example: Partner
         created_at:
@@ -10425,7 +10434,7 @@ components:
       name: search
       in: query
       required: false
-      description: Search relationship types by relationship variants
+      description: Search relationship types by relationship variant name
       schema:
         type: string
         example: Partner
