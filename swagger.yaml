@@ -6119,8 +6119,8 @@ paths:
       parameters:
       - $ref: '#/components/parameters/path_contact_id'
       - $ref: '#/components/parameters/query_relationships_type_id'
-      - $ref: '#/components/parameters/query_relationships_contact_id'
-      - $ref: '#/components/parameters/query_relationships_variant_id'
+      - $ref: '#/components/parameters/query_relationships_contact_id_filter'
+      - $ref: '#/components/parameters/query_relationships_variant_id_filter'
       - $ref: '#/components/parameters/query_relationships_search'
       - $ref: '#/components/parameters/query_relationship_symmetrical'
       - $ref: '#/components/parameters/query_date_filter'
@@ -11357,8 +11357,8 @@ components:
       schema:
         type: string
         example: 5aaa9b059007ba08c9ebaf58
-    query_relationships_contact_id:
-      name: contact_id
+    query_relationships_contact_id_filter:
+      name: contact_id_filter
       in: query
       required: false
       description: >-
@@ -11366,8 +11366,8 @@ components:
       schema:
         type: string
         example: 5aaa9b059007ba08c9ebaf58
-    query_relationships_variant_id:
-      name: variant_id
+    query_relationships_variant_id_filter:
+      name: variant_id_filter
       in: query
       required: false
       description: >-
