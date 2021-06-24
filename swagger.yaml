@@ -3362,12 +3362,8 @@ paths:
                     $ref: '#/components/schemas/Success/properties/timestamp'
                   data:
                     properties:
-                      relationship_types:
-                        type: array
-                        items:
-                          properties:
-                            relationship_type:
-                              $ref: '#/components/schemas/Relationship_Type'
+                      relationship_type:
+                        $ref: '#/components/schemas/Relationship_Type'
         400:
           $ref: '#/components/responses/400'
         401:
@@ -3403,7 +3399,7 @@ paths:
                     $ref: '#/components/schemas/Success/properties/timestamp'
                   data:
                     properties:
-                      deal:
+                      relationship_type:
                         $ref: '#/components/schemas/Relationship_Type'
         400:
           $ref: '#/components/responses/400'
@@ -3463,7 +3459,7 @@ paths:
                     $ref: '#/components/schemas/Success/properties/timestamp'
                   data:
                     properties:
-                      deal:
+                      relationship_type:
                         $ref: '#/components/schemas/Relationship_Type'
         400:
           $ref: '#/components/responses/400'
