@@ -3334,7 +3334,7 @@ paths:
           application/json:
             schema:
               properties:
-                relationship_variants:
+                variants:
                   type: array
                   minItems: 1
                   maxItems: 2
@@ -3426,7 +3426,7 @@ paths:
           application/json:
             schema:
               properties:
-                relationship_variants:
+                variants:
                   type: array
                   minItems: 1
                   maxItems: 2
@@ -8992,7 +8992,7 @@ components:
       description: >-
         The relationship types that identifies the relationships between the contacts.
       required:
-      - relationship_variants
+      - variants
       properties:
         id:
           type: string
@@ -9005,7 +9005,7 @@ components:
           description: Is the relationship symmetrical? (read only)
           readOnly: true
           example: true
-        relationship_variants:
+        variants:
           type: array
           minItems: 1
           maxItems: 2
