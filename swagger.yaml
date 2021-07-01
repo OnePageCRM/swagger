@@ -244,6 +244,10 @@ tags:
   description: >-
     Allow you to keep track of phone calls made to your contacts. Calls include information like the phone
     number dialled and the call result. Calls support file attachments.
+- name: Emails
+  description: >-
+    Allow you to keep track of emails of your contacts. Emails include information like the subject, the plain content
+    and the sending time.
 - name: Attachments
   description: >-
     Additional files associated with Deals, Notes or Calls. They can be uploaded and stored in S3, or stored in
@@ -3069,6 +3073,58 @@ paths:
           $ref: '#/components/responses/409'
         500:
           $ref: '#/components/responses/500'
+  /email_messages:
+    get:
+      summary: Get a list of email messages
+      description:
+      tags:
+      - Emails
+      parameters:
+      - $ref: '#/components/parameters/query_emails_contact_id'
+      - $ref: '#/components/parameters/query_emails_company_id'
+      - $ref: '#/components/parameters/query_page'
+      - $ref: '#/components/parameters/query_per_page'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    $ref: '#/components/schemas/Success/properties/status'
+                  message:
+                    $ref: '#/components/schemas/Success/properties/message'
+                  timestamp:
+                    $ref: '#/components/schemas/Success/properties/timestamp'
+                  data:
+                    properties:
+                      email_messages:
+                        type: array
+                        items:
+                          properties:
+                            email_message:
+                              $ref: '#/components/schemas/Email_message'
+                      total_count:
+                        $ref: '#/components/schemas/Page_data/properties/total_count'
+                      page:
+                        $ref: '#/components/schemas/Page_data/properties/page'
+                      per_page:
+                        $ref: '#/components/schemas/Page_data/properties/per_page'
+                      max_page:
+                        $ref: '#/components/schemas/Page_data/properties/max_page'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
   /attachments/s3_form:
     get:
       summary: >-
@@ -4265,6 +4321,57 @@ paths:
                           properties:
                             call:
                               $ref: '#/components/schemas/Call'
+                      total_count:
+                        $ref: '#/components/schemas/Page_data/properties/total_count'
+                      page:
+                        $ref: '#/components/schemas/Page_data/properties/page'
+                      per_page:
+                        $ref: '#/components/schemas/Page_data/properties/per_page'
+                      max_page:
+                        $ref: '#/components/schemas/Page_data/properties/max_page'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
+  /companies/{company_id}/email_messages:
+    get:
+      summary: Get emmails associated with a specific company
+      description:
+      tags:
+      - Companies
+      parameters:
+      - $ref: '#/components/parameters/path_company_id'
+      - $ref: '#/components/parameters/query_page'
+      - $ref: '#/components/parameters/query_per_page'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    $ref: '#/components/schemas/Success/properties/status'
+                  message:
+                    $ref: '#/components/schemas/Success/properties/message'
+                  timestamp:
+                    $ref: '#/components/schemas/Success/properties/timestamp'
+                  data:
+                    properties:
+                      email_messages:
+                        type: array
+                        items:
+                          properties:
+                            email_message:
+                              $ref: '#/components/schemas/Email_message'
                       total_count:
                         $ref: '#/components/schemas/Page_data/properties/total_count'
                       page:
@@ -6021,7 +6128,9 @@ paths:
                   timestamp:
                     $ref: '#/components/schemas/Success/properties/timestamp'
                   data:
-                    $ref: '#/components/schemas/Email_message'
+                    properties:
+                      email_message:
+                        $ref: '#/components/schemas/Email_message'
         400:
           $ref: '#/components/responses/400'
         401:
@@ -10338,6 +10447,15 @@ components:
       schema:
         type: string
         example: 5ae06ef9d55673108fe8877b
+    query_emails_contact_id:
+      name: contact_id
+      in: query
+      description: >-
+        Return emails for a specific contact (only use one of `contact_id` or `company_id` at a time)
+      required: false
+      schema:
+        type: string
+        example: 5ae06ef9d55673108fe8877b
     query_contacts_company_id:
       name: company_id
       in: query
@@ -10379,6 +10497,15 @@ components:
       in: query
       description: >-
         Return calls for a specific company (only use one of `contact_id` or `company_id` at a time)
+      required: false
+      schema:
+        type: string
+        example: 6se06df9d55673108re84745
+    query_emails_company_id:
+      name: company_id
+      in: query
+      description: >-
+        Return emails for a specific company (only use one of `contact_id` or `company_id` at a time)
       required: false
       schema:
         type: string
