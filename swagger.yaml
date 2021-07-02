@@ -3184,7 +3184,7 @@ paths:
           $ref: '#/components/responses/409'
         500:
           $ref: '#/components/responses/500'
-  email_messages/mark_all_as_read:
+  /email_messages/mark_all_as_read:
     post:
       summary: Mark all email messages as read
       description:
@@ -4485,7 +4485,7 @@ paths:
           $ref: '#/components/responses/409'
         500:
           $ref: '#/components/responses/500'
-  companies/{company_id}/email_messages/mark_all_as_read:
+  /companies/{company_id}/email_messages/mark_all_as_read:
     post:
       summary: Mark all company email messages as read
       description:
@@ -4520,7 +4520,7 @@ paths:
           $ref: '#/components/responses/409'
         500:
           $ref: '#/components/responses/500'
-  companies/{company_id}/email_messages/{email_message_id}:
+  /companies/{company_id}/email_messages/{email_message_id}:
     delete:
       summary: Delete an email message
       description:
@@ -6236,7 +6236,7 @@ paths:
           $ref: '#/components/responses/409'
         500:
           $ref: '#/components/responses/500'
-  contacts/{contact_id}/email_messages/mark_all_as_read:
+  /contacts/{contact_id}/email_messages/mark_all_as_read:
     post:
       summary: Mark all contact email messages as read
       description:
@@ -6271,7 +6271,7 @@ paths:
           $ref: '#/components/responses/409'
         500:
           $ref: '#/components/responses/500'
-  contacts/{contact_id}/email_messages/{email_message_id}:
+  /contacts/{contact_id}/email_messages/{email_message_id}:
     delete:
       summary: Delete an email message
       description:
