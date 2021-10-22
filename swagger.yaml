@@ -244,10 +244,6 @@ tags:
   description: >-
     Allow you to keep track of phone calls made to your contacts. Calls include information like the phone
     number dialled and the call result. Calls support file attachments.
-- name: Emails
-  description: >-
-    Allow you to keep track of emails of your contacts. Emails include information like the subject, the plain content
-    and the sending time.
 - name: Attachments
   description: >-
     Additional files associated with Deals, Notes or Calls. They can be uploaded and stored in S3, or stored in
