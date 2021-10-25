@@ -248,6 +248,9 @@ tags:
   description: >-
     Additional files associated with Deals, Notes or Calls. They can be uploaded and stored in S3, or stored in
     external providers i.e. Google Drive, Dropbox, Evernote.
+- name: Relationship Types
+  description: >-
+    Information about the relationship types that's used to identify the relationships between the contacts.
 - name: Pipelines
   description: >-
     Information about the sales process of products or services, including deal stages.
@@ -1062,6 +1065,8 @@ paths:
         The cost field can be used for margin-based deals. <br>
         We subtract the deal cost from the deal amount to display the margin. <br>
         You can also calculate commission based on margin instead of amount. <br>
+        <br>
+        Note: `commission_percentage` is individual to each user, while other params (`cost_enabled`, `cost_required`, and `commission_base`) are the same for all users in an account. <br>
       tags:
       - Deal Fields
       parameters: []
@@ -1096,7 +1101,10 @@ paths:
           $ref: '#/components/responses/500'
     put:
       summary: Update the cost field for deals
-      description:
+      description: >-
+        Notes: <br>
+        -> `commission_percentage` is individual to each user, while other params (`cost_enabled`, `cost_required`, and `commission_base`) are the same for all users in an account. <br>
+        -> during an update, the `commission_percentage` param is not required. <br>
       tags:
       - Deal Fields
       parameters: []
@@ -3242,6 +3250,236 @@ paths:
       - Attachments
       parameters:
       - $ref: '#/components/parameters/path_attachment_id'
+      responses:
+        200:
+          $ref: '#/components/responses/200'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
+  /relationship_types:
+    get:
+      summary: Get a list of relationship types
+      description:
+      tags:
+      - Relationship Types
+      parameters:
+      - $ref: '#/components/parameters/query_relationship_types_search'
+      - $ref: '#/components/parameters/query_relationship_symmetrical'
+      - $ref: '#/components/parameters/query_date_filter'
+      - $ref: '#/components/parameters/query_since'
+      - $ref: '#/components/parameters/query_until'
+      - $ref: '#/components/parameters/query_modified_since'
+      - $ref: '#/components/parameters/query_unmodified_since'
+      - $ref: '#/components/parameters/query_sort_by'
+      - $ref: '#/components/parameters/query_order'
+      - $ref: '#/components/parameters/query_page'
+      - $ref: '#/components/parameters/query_per_page'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    $ref: '#/components/schemas/Success/properties/status'
+                  message:
+                    $ref: '#/components/schemas/Success/properties/message'
+                  timestamp:
+                    $ref: '#/components/schemas/Success/properties/timestamp'
+                  data:
+                    properties:
+                      relationship_types:
+                        type: array
+                        items:
+                          properties:
+                            relationship_type:
+                              $ref: '#/components/schemas/Relationship_Type'
+                      total_count:
+                        $ref: '#/components/schemas/Page_data/properties/total_count'
+                      page:
+                        $ref: '#/components/schemas/Page_data/properties/page'
+                      per_page:
+                        $ref: '#/components/schemas/Page_data/properties/per_page'
+                      max_page:
+                        $ref: '#/components/schemas/Page_data/properties/max_page'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
+    post:
+      summary: Create a new relationship type
+      description:
+      tags:
+      - Relationship Types
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                variants:
+                  type: array
+                  description: The relationship variants.
+                  items:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        description: The relationship variant name.
+                        example: Partner
+      responses:
+        201:
+          description: Created
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    $ref: '#/components/schemas/Success/properties/status'
+                  message:
+                    $ref: '#/components/schemas/Success/properties/message'
+                  timestamp:
+                    $ref: '#/components/schemas/Success/properties/timestamp'
+                  data:
+                    properties:
+                      relationship_types:
+                        type: array
+                        items:
+                          properties:
+                            relationship_type:
+                              $ref: '#/components/schemas/Relationship_Type'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
+  /relationship_types/{relationship_type_id}:
+    get:
+      summary: Get a specific relationship type
+      description:
+      tags:
+      - Relationship Types
+      parameters:
+      - $ref: '#/components/parameters/path_relationship_type_id'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    $ref: '#/components/schemas/Success/properties/status'
+                  message:
+                    $ref: '#/components/schemas/Success/properties/message'
+                  timestamp:
+                    $ref: '#/components/schemas/Success/properties/timestamp'
+                  data:
+                    properties:
+                      deal:
+                        $ref: '#/components/schemas/Relationship_Type'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
+    put:
+      summary: Update a specific relationship type
+      description:
+      tags:
+      - Relationship Types
+      parameters:
+      - $ref: '#/components/parameters/path_relationship_type_id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                variants:
+                  type: array
+                  description: The relationship variants.
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        format: bson-id
+                        description: ID of the relationship variant
+                        example: 5aaa9b059007ba08c9ebaf59
+                      name:
+                        type: string
+                        description: The relationship variant name.
+                        example: Partner
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    $ref: '#/components/schemas/Success/properties/status'
+                  message:
+                    $ref: '#/components/schemas/Success/properties/message'
+                  timestamp:
+                    $ref: '#/components/schemas/Success/properties/timestamp'
+                  data:
+                    properties:
+                      deal:
+                        $ref: '#/components/schemas/Relationship_Type'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
+    delete:
+      summary: Delete a relationship type
+      description:
+      tags:
+      - Relationship Types
+      parameters:
+      - $ref: '#/components/parameters/path_relationship_type_id'
       responses:
         200:
           $ref: '#/components/responses/200'
@@ -5874,14 +6112,26 @@ paths:
           $ref: '#/components/responses/409'
         500:
           $ref: '#/components/responses/500'
-  /contacts/{contact_id}/email_messages:
+  /contacts/{contact_id}/relationships:
     get:
-      summary: Get all email messages for a specific contact
+      summary: Get all relationships for a specific contact
       description:
       tags:
       - Contacts
       parameters:
       - $ref: '#/components/parameters/path_contact_id'
+      - $ref: '#/components/parameters/query_relationships_type_id'
+      - $ref: '#/components/parameters/query_relationships_contact_id_filter'
+      - $ref: '#/components/parameters/query_relationships_variant_id_filter'
+      - $ref: '#/components/parameters/query_relationships_search'
+      - $ref: '#/components/parameters/query_relationship_symmetrical'
+      - $ref: '#/components/parameters/query_date_filter'
+      - $ref: '#/components/parameters/query_since'
+      - $ref: '#/components/parameters/query_until'
+      - $ref: '#/components/parameters/query_modified_since'
+      - $ref: '#/components/parameters/query_unmodified_since'
+      - $ref: '#/components/parameters/query_sort_by'
+      - $ref: '#/components/parameters/query_order'
       - $ref: '#/components/parameters/query_page'
       - $ref: '#/components/parameters/query_per_page'
       responses:
@@ -5899,12 +6149,12 @@ paths:
                     $ref: '#/components/schemas/Success/properties/timestamp'
                   data:
                     properties:
-                      email_messages:
+                      relationships:
                         type: array
                         items:
                           properties:
-                            email_message:
-                              $ref: '#/components/schemas/Email_message'
+                            relationship:
+                              $ref: '#/components/schemas/Relationship'
                       total_count:
                         $ref: '#/components/schemas/Page_data/properties/total_count'
                       page:
@@ -5925,6 +6175,216 @@ paths:
           $ref: '#/components/responses/409'
         500:
           $ref: '#/components/responses/500'
+    post:
+      summary: Create a relationships for a specific contact
+      description:
+      tags:
+      - Contacts
+      parameters:
+      - $ref: '#/components/parameters/path_contact_id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                relationship_type_id:
+                  type: string
+                  format: bson-id
+                  description: ID of the contact
+                  example: 5aaa9b059007ba08c9ebaf58
+                related_contacts:
+                  minItems: 2
+                  maxItems: 2
+                  type: array
+                  description: Related contacts with relationship variant names
+                  items:
+                    type: object
+                    properties:
+                      contact_id:
+                        type: string
+                        format: bson-id
+                        description: ID of the contact
+                        example: 5aba31ea9007ba0f570c92d4
+                      variant_id:
+                        type: string
+                        format: bson-id
+                        description: ID of the relationship variant
+                        example: 5aaa9b059007ba08c9ebaf59
+                  example:
+                    - contact_id: 5aba31ea9007ba0f570c92d4
+                      variant_id: 5aaa9b059007ba08c9ebaf59
+                    - contact_id: 5aba31ea9007ba0f570c92d5
+                      variant_id: 5aaa9b059007ba08c9ebaf59
+      responses:
+        201:
+          description: Created
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    $ref: '#/components/schemas/Success/properties/status'
+                  message:
+                    $ref: '#/components/schemas/Success/properties/message'
+                  timestamp:
+                    $ref: '#/components/schemas/Success/properties/timestamp'
+                  data:
+                    properties:
+                      relationship:
+                        $ref: '#/components/schemas/Relationship'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
+  /contacts/{contact_id}/relationships/{relationship_id}:
+    get:
+      summary: Get a specific relationship
+      description:
+      tags:
+      - Contacts
+      parameters:
+      - $ref: '#/components/parameters/path_contact_id'
+      - $ref: '#/components/parameters/path_relationship_id'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    $ref: '#/components/schemas/Success/properties/status'
+                  message:
+                    $ref: '#/components/schemas/Success/properties/message'
+                  timestamp:
+                    $ref: '#/components/schemas/Success/properties/timestamp'
+                  data:
+                    properties:
+                      relationship:
+                        $ref: '#/components/schemas/Relationship'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
+    put:
+      summary: Update a specific relationship
+      description:
+      tags:
+      - Contacts
+      parameters:
+      - $ref: '#/components/parameters/path_contact_id'
+      - $ref: '#/components/parameters/path_relationship_id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                relationship_type_id:
+                  type: string
+                  format: bson-id
+                  description: ID of the relationship type
+                  example: 5aaa9b059007ba08c9ebaf57
+                related_contacts:
+                  minItems: 2
+                  maxItems: 2
+                  type: array
+                  description: Related contacts with relationship variant names
+                  items:
+                    type: object
+                    properties:
+                      contact_id:
+                        type: string
+                        format: bson-id
+                        description: ID of the contact
+                        example: 5aba31ea9007ba0f570c92d4
+                      variant_id:
+                        type: string
+                        format: bson-id
+                        description: ID of the relationship variant
+                        example: 5aaa9b059007ba08c9ebaf59
+                  example:
+                    - contact_id: 5aba31ea9007ba0f570c92d4
+                      variant_id: 5aaa9b059007ba08c9ebaf59
+                    - contact_id: 5aba31ea9007ba0f570c92d5
+                      variant_id: 5aaa9b059007ba08c9ebaf59
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    $ref: '#/components/schemas/Success/properties/status'
+                  message:
+                    $ref: '#/components/schemas/Success/properties/message'
+                  timestamp:
+                    $ref: '#/components/schemas/Success/properties/timestamp'
+                  data:
+                    properties:
+                      relationship:
+                        $ref: '#/components/schemas/Relationship'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
+    delete:
+      summary: Delete a relationship
+      description:
+      tags:
+      - Contacts
+      parameters:
+      - $ref: '#/components/parameters/path_contact_id'
+      - $ref: '#/components/parameters/path_relationship_id'
+      - in: query
+        name: undo
+        description: Undo relationship deletion
+        schema:
+          type: boolean
+          format: boolean
+          example: true
+      responses:
+        200:
+          $ref: '#/components/responses/200'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
+
   /contacts/{contact_id}/assign_tag/{tag_name}:
     put:
       summary: Assign a tag to a specific contact
@@ -6548,6 +7008,155 @@ paths:
           $ref: '#/components/responses/409'
         500:
           $ref: '#/components/responses/500'
+  /contacts/cascade:
+    get:
+      summary: Get contacts past the 10,000 contact in the account.
+      description: >-
+        Defaults to contacts owned by the logged user, alpha sorted.
+        This endpoint can get contacts above the 10,000 contact. Results returned in batches of 100.
+        Pass the last `contact_id` of the last request into the next request to get the next batch of 100 contacts.
+      tags:
+        - Contacts
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    $ref: '#/components/schemas/Success/properties/status'
+                  message:
+                    $ref: '#/components/schemas/Success/properties/message'
+                  timestamp:
+                    $ref: '#/components/schemas/Success/properties/timestamp'
+                  data:
+                    properties:
+                      contacts:
+                        type: array
+                        items:
+                          properties:
+                            contact:
+                              $ref: '#/components/schemas/Contact'
+                            next_actions:
+                              type: array
+                              items:
+                                $ref: '#/components/schemas/Action'
+                            next_action:
+                              $ref: '#/components/schemas/Action'
+                            queued_actions:
+                              type: array
+                              items:
+                                $ref: '#/components/schemas/Action'
+                            next_action_conflicts:
+                              type: array
+                              items: {}
+                              example: []
+                            company:
+                              $ref: '#/components/schemas/Company'
+                      items_left:
+                        type: integer
+                        format: int32
+                        description: Total number of items left
+                        readOnly: true
+                        example: 32500
+                      next_set_url:
+                        type: string
+                        description: The URL to use to get the next batch of contacts
+                        readOnly: true
+                        example: https://app.onepagecrm.com/api/v3/contacts/cascade/5d2c8ca59b79b2ead94aa425
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
+
+  /contacts/cascade/{last_id}:
+    get:
+      summary: Get contacts past the 10,000 contact in the account.
+      description: >-
+        Defaults to contacts owned by the logged user, alpha sorted.
+        This endpoint can get contacts above the 10,000 contact. Results returned in batches of 100.
+        Pass the last `contact_id` of the last request into the next request to get the next batch of 100 contacts.
+      tags:
+        - Contacts
+      parameters:
+        name: contact_id
+        in: path
+        required: true
+        description: Contact ID
+        schema:
+          type: string
+          minimum: 1
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    $ref: '#/components/schemas/Success/properties/status'
+                  message:
+                    $ref: '#/components/schemas/Success/properties/message'
+                  timestamp:
+                    $ref: '#/components/schemas/Success/properties/timestamp'
+                  data:
+                    properties:
+                      contacts:
+                        type: array
+                        items:
+                          properties:
+                            contact:
+                              $ref: '#/components/schemas/Contact'
+                            next_actions:
+                              type: array
+                              items:
+                                $ref: '#/components/schemas/Action'
+                            next_action:
+                              $ref: '#/components/schemas/Action'
+                            queued_actions:
+                              type: array
+                              items:
+                                $ref: '#/components/schemas/Action'
+                            next_action_conflicts:
+                              type: array
+                              items: {}
+                              example: []
+                            company:
+                              $ref: '#/components/schemas/Company'
+                      items_left:
+                        type: integer
+                        format: int32
+                        description: Total number of items left
+                        readOnly: true
+                        example: 32500
+                      next_set_url:
+                        type: string
+                        description: The URL to use to get the next batch of contacts
+                        readOnly: true
+                        example: https://app.onepagecrm.com/api/v3/contacts/cascade/5d2c8ca59b79b2ead94aa425
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
+
+  #/contacts/cascade/{last_id}
   /action_stream:
     get:
       summary: Get a list of contacts prioritized by their next action
@@ -7408,7 +8017,7 @@ components:
           type: string
           format: bson-id
           description: ID of the status of the contact
-          example: prospect
+          example: 5e31e030849d781e837b6ba1
         tags:
           type: array
           items:
@@ -7893,6 +8502,12 @@ components:
           description: Commission percentage for the deal
           example: 0.0
           default: 0.0
+        reason_lost_id:
+          type: string
+          format: bson-id
+          description: ID of the reason lost
+          readOnly: true
+          example: 5aaa9b059007ba08c9ebaf58
         deal_fields:
           type: array
           items:
@@ -8224,84 +8839,172 @@ components:
               type: string
               description: External URL of the attachment's thumbnail
               example: https://{foo.bar}/mario-thumbnail.jpg
-    Email_message:
-      description: Email correspondance exchanged with a contact, captured by OnePageCRM.
+    Relationship_Type:
+      description: >-
+        The relationship types that identifies the relationships between the contacts.
+      required:
+      - relationship_variants
       properties:
         id:
           type: string
           format: bson-id
-          description: ID of the email message
+          description: ID of the deal
           readOnly: true
-          example: 5b07c04a9007ba0231f4dcf2
-        contact_id:
-          type: string
-          format: bson-id
-          description: ID of the contact, with whom the email messaged was exchanged
-          example: 5aba338b9007ba0f570c9392
-        send_time:
-          type: string
-          format: date-time
-          description: The time the email message was sent
-          example: '2018-05-25T07:47:28Z'
-        message_id:
-          type: string
-          description: ID of the email message
-          example: CBNlTUjddeY9vF8cArqStad7QVjpeU_dqp+oJNaWX-SPVd2+_Dg@mail.gmail.com
-        sender:
-          type: string
-          description: Email address of the sender
-          example: jane.doe@{foo.bar}
-        recipients:
-          description: The email addresses of the recipients of the email message
-          properties:
-            to:
-              type: array
-              items:
-                type: string
-                description: to
-                example: joe.bloggs@{bar.foo}
-            cc:
-              type: array
-              items:
-                type: string
-                description: cc
-                example: '{joes.boss}@{bar.foo}'
-            bcc:
-              type: array
-              items:
-                type: string
-                description: bcc
-                example: '{janes.boss}@{foo.bar}'
-        url:
-          type: string
-          description: The URL where more details of the email are stored (otherwise empty)
-          readOnly: true
-          example: '{foo.bar}/emails/{email_id}'
-        subject:
-          type: string
-          description: The subject of the email message
-          example: Important Sales Subject
-        plain_content:
-          type: string
-          description: The body of the email message
-          example: Important Sales Message
-        status:
-          type: string
-          description: The status of the email message
-          readOnly: true
-          enum:
-          - waiting
-          - sent
-          - failed
-          example: sent
-        incoming_email:
+          example: 5aaa9b059007ba08c9ebaf58
+        symmetrical:
           type: boolean
-          description: Are there emails incoming for this email address?
-          example: false
-        attachments:
+          description: Is the relationship symmetrical? (read only).
+          readOnly: true
+          example: true
+        relationship_variants:
           type: array
           items:
-            $ref: '#/components/schemas/Attachment'
+            type: object
+            properties:
+              id:
+                type: string
+                format: bson-id
+                description: ID of the relationship type
+                readOnly: true
+                example: 5aaa9b059007ba08c9ebaf59
+              name:
+                type: string
+                description: The relationship variant name
+                example: Partner
+        created_at:
+          type: string
+          format: date-time
+          description: Creation time of the deal
+          readOnly: true
+          example: '2018-03-15T16:10:45Z'
+        modified_at:
+          type: string
+          format: date-time
+          description: Last modification time of the deal
+          readOnly: true
+          example: '2018-03-15T16:10:45Z'
+    Related_contact:
+      minItems: 2
+      maxItems: 2
+      type: array
+      description: The contacts participating in the relationship along with their associated variant names
+      items:
+        type: object
+        properties:
+          variant_id:
+            type: string
+            format: bson-id
+            description: ID of the relationship variant
+            example: 5aaa9b059007ba08c9ebaf59
+          variant_name:
+            type: string
+            description: The name of the variant
+            maxLength: 35 chars
+            readOnly: true
+            example: Partner
+          contact_id:
+            type: string
+            format: bson-id
+            description: ID of the contact
+            example: 5aba31ea9007ba0f570c92d4
+          first_name:
+            type: string
+            description: The first name of the contact
+            maxLength: 35 chars
+            readOnly: true
+            example: Joe
+          last_name:
+            type: string
+            description: The last name of the contact
+            maxLength: 35 chars
+            readOnly: true
+            example: Bloggs
+          photo_url:
+            type: string
+            description: URL of the user’s profile picture
+            readOnly: true
+            example: "https://{foo.bar}/joe-bloggs.jpg"
+          company_id:
+            type: string
+            format: bson-id
+            description: ID of the company, to which the contact belongs
+            readOnly: true
+            example: 5aba31ea9007ba0f570c92d5
+          company_name:
+            type: string
+            description: Name of the company, to whom the contact belongs
+            maxLength: 55 chars
+            readOnly: true
+            example: Morgan's Forensic Lab
+          owner_id:
+            type: string
+            format: bson-id
+            description: ID of the user, to whom the contact belongs
+            readOnly: true
+            example: 5aba31e99007ba0f570c92a5
+      example:
+        - variant_id: 5aaa9b059007ba08c9ebaf59,
+          variant_name: Partner,
+          contact_id: 5aba31ea9007ba0f570c92d4,
+          first_name: Joe,
+          last_name: Bloggs,
+          company_id: 5aba31ea9007ba0f570c92f1,
+          company_name: Morgan's Forensic Lab,
+          photo_url: https://{foo.bar}/joe-bloggs.jpg,
+          owner_id: 5aba31ea9007ba0f570c92c3
+        - variant_id: 5aaa9b059007ba08c9ebaf59,
+          variant_name: Partner,
+          contact_id: 5aba31ea9007ba0f570c92d5,
+          first_name: Jane,
+          last_name: Doe,
+          company_id: 5aba31ea9007ba0f570c92f3,
+          company_name: Acme Inc,
+          photo_url: https://{foo.bar}/jane-doe.jpg,
+          owner_id: 5aba31ea9007ba0f570c92c3
+    Relationship:
+      description: >-
+        The relationship mapping between contacts
+      required:
+      - relationship_mapping
+      - relationship_type
+      properties:
+        id:
+          type: string
+          format: bson-id
+          description: ID of the deal
+          readOnly: true
+          example: 5aaa9b059007ba08c9ebaf57
+        relationship_type_id:
+          type: string
+          format: bson-id
+          description: ID of the contact
+          example: 5aaa9b059007ba08c9ebaf58
+        related_contacts:
+          $ref: '#/components/schemas/Related_contact'
+        created_at:
+          type: string
+          format: date-time
+          description: Creation time of the deal
+          readOnly: true
+          example: '2018-03-15T16:10:45Z'
+        modified_at:
+          type: string
+          format: date-time
+          description: Last modification time of the deal
+          readOnly: true
+          example: '2018-03-15T16:10:45Z'
+    Email_address:
+      description: Email address with name to represent email header
+      properties:
+        address:
+          type: string
+          description: Type of the notification
+          example: 'joes.boss@bar.foo'
+        name:
+          type: string
+          nullable: true
+          description: Type of the notification
+          example: 'Joes Boss'
     Notification:
       description: A serialised notification. There are different types of notifications, each can have its own properties
       properties:
@@ -8487,6 +9190,10 @@ components:
           type: boolean
           description: Has the user enabled the clipper beta feature?
           example: false
+        bcc_email_enabled:
+          type: boolean
+          description: Has the user enabled the Bcc Capture address?
+          example: true
     Status:
       description: >-
         Values which help qualify where contacts are in the sales pipeline. The list of Statuses is
@@ -8977,20 +9684,19 @@ components:
     Cost_setup:
       description: Settings related to deals e.g. cost, commission. Disabled by default.
       required:
-      - cost_enabled
-      - cost_required
       - commission_base
-      - commission_percentage
       properties:
         cost_enabled:
           type: boolean
           description: Is the cost field enabled for deals?
-          example: false
+          example: true
+          readOnly: true
         cost_required:
           type: boolean
           description: Is the cost field required when saving a deal?
           deprecated: true
           example: false
+          readOnly: true
         commission_base:
           type: string
           description: The base by which commission is to be calculated for deals
@@ -9000,8 +9706,10 @@ components:
           example: amount
         commission_percentage:
           type: number
-          description: The default percentage commission is to be calculated at
-          example: 10.0
+          format: float
+          description: The default percentage by which the commission is to be calculated for deals (in the range 0.0 < commission_percentage < 100.0)
+          example: 12.5
+          default: 10.0
     Deal_stage:
       description: The various stages that a deal goes through in the sales pipeline.
       properties:
@@ -9635,6 +10343,22 @@ components:
       schema:
         type: string
         minimum: 1
+    path_relationship_type_id:
+      name: relationship_type_id
+      in: path
+      required: true
+      description: Relationship type ID
+      schema:
+        type: string
+        minimum: 1
+    path_relationship_id:
+      name: relationship_id
+      in: path
+      required: true
+      description: Relationship ID
+      schema:
+        type: string
+        minimum: 1
     path_company_id:
       name: company_id
       in: path
@@ -9824,6 +10548,22 @@ components:
       schema:
         type: string
         example: Solar panels
+    query_relationship_types_search:
+      name: search
+      in: query
+      required: false
+      description: Search relationship types by relationship variants
+      schema:
+        type: string
+        example: Partner
+    query_relationships_search:
+      name: search
+      in: query
+      required: false
+      description: Search relationships by contact name or relationship-variant name
+      schema:
+        type: string
+        example: Jack Aranda
     query_contacts_owner_id:
       name: owner_id
       in: query
@@ -10026,6 +10766,15 @@ components:
       schema:
         type: string
         example: 5ae06ef9d55673108fe8877b
+    query_emails_contact_id:
+      name: contact_id
+      in: query
+      description: >-
+        Return emails for a specific contact (only use one of `contact_id` or `company_id` at a time)
+      required: false
+      schema:
+        type: string
+        example: 5ae06ef9d55673108fe8877b
     query_contacts_company_id:
       name: company_id
       in: query
@@ -10067,6 +10816,15 @@ components:
       in: query
       description: >-
         Return calls for a specific company (only use one of `contact_id` or `company_id` at a time)
+      required: false
+      schema:
+        type: string
+        example: 6se06df9d55673108re84745
+    query_emails_company_id:
+      name: company_id
+      in: query
+      description: >-
+        Return emails for a specific company (only use one of `contact_id` or `company_id` at a time)
       required: false
       schema:
         type: string
@@ -10348,6 +11106,41 @@ components:
       schema:
         type: boolean
         example: true
+    query_relationship_symmetrical:
+      name: symmetrical
+      in: query
+      required: false
+      description: Filter only symmetrical/non-symmetrical relationship types
+      schema:
+        type: boolean
+        example: false
+    query_relationships_type_id:
+      name: relationship_type_id
+      in: query
+      required: false
+      description: >-
+        Return relationships of a specific type
+      schema:
+        type: string
+        example: 5aaa9b059007ba08c9ebaf58
+    query_relationships_contact_id_filter:
+      name: contact_id_filter
+      in: query
+      required: false
+      description: >-
+        Return relationships in which the provided contact participate
+      schema:
+        type: string
+        example: 5aaa9b059007ba08c9ebaf58
+    query_relationships_variant_id_filter:
+      name: variant_id_filter
+      in: query
+      required: false
+      description: >-
+        Return relationships in which the provided variant participate
+      schema:
+        type: string
+        example: 5aaa9b059007ba08c9ebaf58
   responses:
     200:
       description: OK
