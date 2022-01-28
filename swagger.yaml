@@ -1789,6 +1789,65 @@ paths:
           $ref: '#/components/responses/409'
         500:
           $ref: '#/components/responses/500'
+    post:
+      summary: Create a new predefined item
+      description:
+      tags:
+      - Predefined Items
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                name:
+                  type: string
+                  description: Name of the predefined item
+                  example: Solar panels
+                description:
+                  type: string
+                  description: Description text of the predefined item
+                  example: Photovoltaic solar panels (2019 model)
+                cost:
+                  type: number
+                  format: float
+                  description: Cost of the predefined item (if deals costs are enabled)
+                  example: 95.00
+                price:
+                  type: number
+                  format: float
+                  description: Price of the predefined item
+                  example: 149.99
+      responses:
+        201:
+          description: Created
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    $ref: '#/components/schemas/Success/properties/status'
+                  message:
+                    $ref: '#/components/schemas/Success/properties/message'
+                  timestamp:
+                    $ref: '#/components/schemas/Success/properties/timestamp'
+                  data:
+                    properties:
+                      predefined_item:
+                        $ref: '#/components/schemas/Predefined_item'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
   /predefined_items/{predefined_item_id}:
     get:
       summary: Get a specific predefined item
@@ -1814,6 +1873,88 @@ paths:
                     properties:
                       predefined_item:
                         $ref: '#/components/schemas/Predefined_item'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
+    put:
+      summary: Update a specific predefined item
+      description:
+      tags:
+      - Predefined Items
+      parameters:
+      - $ref: '#/components/parameters/path_predefined_item_id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                name:
+                  type: string
+                  description: Name of the predefined item
+                  example: Solar panels
+                description:
+                  type: string
+                  description: Description text of the predefined item
+                  example: Photovoltaic solar panels (2019 model)
+                cost:
+                  type: number
+                  format: float
+                  description: Cost of the predefined item (if deals costs are enabled)
+                  example: 95.00
+                price:
+                  type: number
+                  format: float
+                  description: Price of the predefined item
+                  example: 149.99
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    $ref: '#/components/schemas/Success/properties/status'
+                  message:
+                    $ref: '#/components/schemas/Success/properties/message'
+                  timestamp:
+                    $ref: '#/components/schemas/Success/properties/timestamp'
+                  data:
+                    properties:
+                      predefined_action:
+                        $ref: '#/components/schemas/Predefined_action'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
+    delete:
+      summary: Delete a specific predefined item
+      description:
+      tags:
+      - Predefined Items
+      parameters:
+      - $ref: '#/components/parameters/path_predefined_item_id'
+      responses:
+        200:
+          $ref: '#/components/responses/200'
         400:
           $ref: '#/components/responses/400'
         401:
@@ -1866,6 +2007,60 @@ paths:
           $ref: '#/components/responses/409'
         500:
           $ref: '#/components/responses/500'
+    post:
+      summary: Create a new predefined item group
+      description:
+      tags:
+      - Predefined Item Groups
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                name:
+                  type: string
+                  description: Name of the predefined item group
+                  example: Electronics
+                deal_items:
+                  type: array
+                  description: List of IDs of the predefined/deal items in the predefined item group
+                  items:
+                    type: string
+                    format: bson-id
+                  example:
+                  - 5c79510e9007ba3f7519e819
+                  - 5c9a53349007ba58f13c8118
+      responses:
+        201:
+          description: Created
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    $ref: '#/components/schemas/Success/properties/status'
+                  message:
+                    $ref: '#/components/schemas/Success/properties/message'
+                  timestamp:
+                    $ref: '#/components/schemas/Success/properties/timestamp'
+                  data:
+                    properties:
+                      predefined_item:
+                        $ref: '#/components/schemas/Predefined_item_group'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
   /predefined_item_groups/{predefined_item_group_id}:
     get:
       summary: Get a specific predefined item group
@@ -1891,6 +2086,28 @@ paths:
                     properties:
                       predefined_item_group:
                         $ref: '#/components/schemas/Predefined_item_group'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
+    delete:
+      summary: Delete a specific predefined item group
+      description:
+      tags:
+      - Predefined Item Groups
+      parameters:
+      - $ref: '#/components/parameters/path_predefined_item_group_id'
+      responses:
+        200:
+          $ref: '#/components/responses/200'
         400:
           $ref: '#/components/responses/400'
         401:
@@ -9438,6 +9655,7 @@ components:
           type: integer
           format: int32
           description: Position of the predefined item in the items list
+          readOnly: true
           example: 1
         item_group_id:
           type: string
@@ -9537,11 +9755,13 @@ components:
           type: integer
           format: int32
           description: Position of the group in the list of predefined item groups
+          readOnly: true
           example: 1
         count:
           type: integer
           format: int32
           description: Number of predefined items in the predefined item group
+          readOnly: true
           example: 2
         item_ids:
           type: array
