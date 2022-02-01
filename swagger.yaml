@@ -3243,6 +3243,52 @@ paths:
         500:
           $ref: '#/components/responses/500'
   /attachments/{attachment_id}:
+    patch:
+      summary: Sets/updates attachment custom file name
+      description: Once the custom file name is set it cannot be unset to nil/empty string
+      tags:
+        - Attachments
+      parameters:
+        - $ref: '#/components/parameters/path_attachment_id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              required:
+                - custom_filename
+              properties:
+                attachment:
+                  properties:
+                    custom_filename:
+                      $ref: '#/components/schemas/Attachment/properties/custom_filename'
+      responses:
+        200:
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    $ref: '#/components/schemas/Success/properties/status'
+                  message:
+                    $ref: '#/components/schemas/Success/properties/message'
+                  timestamp:
+                    $ref: '#/components/schemas/Success/properties/timestamp'
+                  data:
+                    $ref: '#/components/schemas/Attachment'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
     delete:
       summary: Delete a specific attachment
       description:
@@ -3253,6 +3299,76 @@ paths:
       responses:
         200:
           $ref: '#/components/responses/200'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
+  /attachments/{attachment_id}/pin:
+    patch:
+      summary: Pin attachment to its owner contact through its note/call/deal
+      description:
+      tags:
+        - Attachments
+      parameters:
+        - $ref: '#/components/parameters/path_attachment_id'
+      responses:
+        200:
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    $ref: '#/components/schemas/Success/properties/status'
+                  message:
+                    $ref: '#/components/schemas/Success/properties/message'
+                  timestamp:
+                    $ref: '#/components/schemas/Success/properties/timestamp'
+                  data:
+                    $ref: '#/components/schemas/Attachment'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
+  /attachments/{attachment_id}/unpin:
+    patch:
+      summary: Unpin attachment from its owner contact through its note/call/deal
+      description:
+      tags:
+        - Attachments
+      parameters:
+        - $ref: '#/components/parameters/path_attachment_id'
+      responses:
+        200:
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    $ref: '#/components/schemas/Success/properties/status'
+                  message:
+                    $ref: '#/components/schemas/Success/properties/message'
+                  timestamp:
+                    $ref: '#/components/schemas/Success/properties/timestamp'
+                  data:
+                    $ref: '#/components/schemas/Attachment'
         400:
           $ref: '#/components/responses/400'
         401:
@@ -4777,6 +4893,55 @@ paths:
                     properties:
                       company:
                         $ref: '#/components/schemas/Company'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
+  /companies/{company_id}/pinned_attachments:
+    get:
+      summary: Gets the list of attachments pinned to this company.
+      description:
+        The list of attachments is collected from the attachments pinned to all the contacts in this company.
+        The list of attachments is sorted based on "pinned_at" field, i.e. most recent attachments come first, the list of attachments is paginated.
+      tags:
+        - Companies
+      parameters:
+        - $ref: '#/components/parameters/path_company_id'
+      responses:
+        200:
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    $ref: '#/components/schemas/Success/properties/status'
+                  message:
+                    $ref: '#/components/schemas/Success/properties/message'
+                  timestamp:
+                    $ref: '#/components/schemas/Success/properties/timestamp'
+                  data:
+                    properties:
+                      pinned_attachments:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Attachment'
+                  total_count:
+                    $ref: '#/components/schemas/Page_data/properties/total_count'
+                  page:
+                    $ref: '#/components/schemas/Page_data/properties/page'
+                  per_page:
+                    $ref: '#/components/schemas/Page_data/properties/per_page'
+                  max_page:
+                    $ref: '#/components/schemas/Page_data/properties/max_page'
         400:
           $ref: '#/components/responses/400'
         401:
@@ -7008,6 +7173,54 @@ paths:
           $ref: '#/components/responses/409'
         500:
           $ref: '#/components/responses/500'
+  /contacts/{contact_id}/pinned_attachments:
+    get:
+      summary: Gets a list of attachments pinned to this contact
+      description:
+        The list of pinned attachments is sorted based on "pinned_at" field, i.e. most recent attachments come first, the list of attachments is paginated.
+      tags:
+        - Contacts
+      parameters:
+        - $ref: '#/components/parameters/path_contact_id'
+      responses:
+        200:
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    $ref: '#/components/schemas/Success/properties/status'
+                  message:
+                    $ref: '#/components/schemas/Success/properties/message'
+                  timestamp:
+                    $ref: '#/components/schemas/Success/properties/timestamp'
+                  data:
+                    properties:
+                      pinned_attachments:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Attachment'
+                  total_count:
+                    $ref: '#/components/schemas/Page_data/properties/total_count'
+                  page:
+                    $ref: '#/components/schemas/Page_data/properties/page'
+                  per_page:
+                    $ref: '#/components/schemas/Page_data/properties/per_page'
+                  max_page:
+                    $ref: '#/components/schemas/Page_data/properties/max_page'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
   /contacts/cascade:
     get:
       summary: Get contacts past the 10,000 contact in the account.
@@ -8803,6 +9016,18 @@ components:
           type: string
           description: Name of the attachment file
           example: mario.jpg
+        custom_filename:
+          type: string
+          description: Custom name of the attachment file
+          example: another_mario.jpg
+        pinned:
+          type: boolean
+          description: Show if the attachment is pinned to its owner contact
+          example: true
+        pinned_at:
+          type: string
+          description: Shows pinned at timestamp. Is null if pinned == false
+          example: '2022-01-24T10:42:39Z'
         size:
           type: integer
           format: int32
