@@ -9660,9 +9660,20 @@ components:
         item_group_id:
           type: string
           format: bson-id
-          description: ID of the predefined item group (or empty if the item is not in a group)
+          deprecated: true
+          description: ID of the first predefined item group in which the current item is included (or empty if the item is not in a group)
           readOnly: true
           example: 5c9a53599007ba58f13c8119
+        item_group_ids:
+          type: array
+          description: List of IDs of the predefined item groups in which the current item is included
+          readOnly: true
+          items:
+            type: string
+            format: bson-id
+          example:
+          - 5c79510e9007ba3f7519e819
+          - 5c9a53349007ba58f13c8118
     Deal_item:
       description: >-
         A user-configured item representing a product or service, which can be used to standardize deal creation
