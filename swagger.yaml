@@ -1755,7 +1755,17 @@ paths:
       description:
       tags:
       - Predefined Items
-      parameters: []
+      parameters:
+      - $ref: '#/components/parameters/query_predefined_items_search'
+      - $ref: '#/components/parameters/query_date_filter'
+      - $ref: '#/components/parameters/query_since'
+      - $ref: '#/components/parameters/query_until'
+      - $ref: '#/components/parameters/query_modified_since'
+      - $ref: '#/components/parameters/query_unmodified_since'
+      - $ref: '#/components/parameters/query_sort_by'
+      - $ref: '#/components/parameters/query_order'
+      - $ref: '#/components/parameters/query_page'
+      - $ref: '#/components/parameters/query_per_page'
       responses:
         200:
           description: OK
@@ -1973,7 +1983,17 @@ paths:
       description:
       tags:
       - Predefined Item Groups
-      parameters: []
+      parameters:
+      - $ref: '#/components/parameters/query_predefined_items_search'
+      - $ref: '#/components/parameters/query_date_filter'
+      - $ref: '#/components/parameters/query_since'
+      - $ref: '#/components/parameters/query_until'
+      - $ref: '#/components/parameters/query_modified_since'
+      - $ref: '#/components/parameters/query_unmodified_since'
+      - $ref: '#/components/parameters/query_sort_by'
+      - $ref: '#/components/parameters/query_order'
+      - $ref: '#/components/parameters/query_page'
+      - $ref: '#/components/parameters/query_per_page'
       responses:
         200:
           description: OK
@@ -2023,6 +2043,10 @@ paths:
                   type: string
                   description: Name of the predefined item group
                   example: Electronics
+                description:
+                  type: string
+                  description: Description of the predefined item group
+                  example: Electronics devices
                 deal_items:
                   type: array
                   description: List of IDs of the predefined/deal items in the predefined item group
@@ -10795,6 +10819,14 @@ components:
       schema:
         type: string
         example: Jack Aranda
+    query_predefined_items_search:
+      name: search
+      in: query
+      required: false
+      description: Search by name
+      schema:
+        type: string
+        example: Partner
     query_contacts_owner_id:
       name: owner_id
       in: query
