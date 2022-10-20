@@ -3981,8 +3981,6 @@ paths:
           $ref: '#/components/responses/500'
     delete:
       summary: Delete a specific action
-      description: >-
-        Note: you can only delete actions which are queued, or have been marked as done.
       tags:
       - Actions
       parameters:
