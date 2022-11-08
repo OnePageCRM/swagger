@@ -1799,6 +1799,57 @@ paths:
           $ref: '#/components/responses/409'
         500:
           $ref: '#/components/responses/500'
+  /predefined_items/with_groups:
+    get:
+      summary: Get the list of predefined groups and items (for the logged API user's account)
+      description: ''
+      tags:
+      - Predefined Items
+      parameters:
+      - $ref: '#/components/parameters/query_predefined_item_groups_include_items'
+      - $ref: '#/components/parameters/query_predefined_items_search'
+      - $ref: '#/components/parameters/query_date_filter'
+      - $ref: '#/components/parameters/query_since'
+      - $ref: '#/components/parameters/query_until'
+      - $ref: '#/components/parameters/query_modified_since'
+      - $ref: '#/components/parameters/query_unmodified_since'
+      - $ref: '#/components/parameters/query_sort_by'
+      - $ref: '#/components/parameters/query_order'
+      - $ref: '#/components/parameters/query_page'
+      - $ref: '#/components/parameters/query_per_page'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    $ref: '#/components/schemas/Success/properties/status'
+                  message:
+                    $ref: '#/components/schemas/Success/properties/message'
+                  timestamp:
+                    $ref: '#/components/schemas/Success/properties/timestamp'
+                  data:
+                    properties:
+                      predefined_items_with_groups:
+                        type: array
+                        items:
+                          properties:
+                            predefined_item_group:
+                              $ref: '#/components/schemas/Predefined_item_group'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
     post:
       summary: Create a new predefined item
       description:
@@ -1980,10 +2031,11 @@ paths:
   /predefined_item_groups:
     get:
       summary: Get the list of predefined item groups (for the logged API user's account)
-      description:
+      description: ''
       tags:
       - Predefined Item Groups
       parameters:
+      - $ref: '#/components/parameters/query_predefined_item_groups_include_items'
       - $ref: '#/components/parameters/query_predefined_items_search'
       - $ref: '#/components/parameters/query_date_filter'
       - $ref: '#/components/parameters/query_since'
@@ -2029,7 +2081,7 @@ paths:
           $ref: '#/components/responses/500'
     post:
       summary: Create a new predefined item group
-      description:
+      description: ''
       tags:
       - Predefined Item Groups
       parameters: []
@@ -2047,9 +2099,19 @@ paths:
                   type: string
                   description: Description of the predefined item group
                   example: Electronics devices
+                items_ids:
+                  type: array
+                  description: List of IDs of the predefined/deal items in the predefined item group
+                  items:
+                    type: string
+                    format: bson-id
+                  example:
+                  - 5c79510e9007ba3f7519e819
+                  - 5c9a53349007ba58f13c8118
                 deal_items:
                   type: array
                   description: List of IDs of the predefined/deal items in the predefined item group
+                  deprecated: true
                   items:
                     type: string
                     format: bson-id
@@ -2122,6 +2184,36 @@ paths:
           $ref: '#/components/responses/409'
         500:
           $ref: '#/components/responses/500'
+    put:
+      summary: Update a specific predefined item group
+      description:
+      tags:
+      - Predefined Item Groups
+      parameters:
+      - $ref: '#/components/parameters/path_predefined_item_group_id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                name:
+                  type: string
+                  description: Name of the predefined item
+                  example: Solar panels
+                description:
+                  type: string
+                  description: Description text of the predefined item
+                  example: Photovoltaic solar panels (2019 model)
+                items_ids:
+                  type: array
+                  description: List of IDs of the predefined/deal items in the predefined item group
+                  items:
+                    type: string
+                    format: bson-id
+                  example:
+                  - 5c79510e9007ba3f7519e819
+                  - 5c9a53349007ba58f13c8118
     delete:
       summary: Delete a specific predefined item group
       description:
@@ -9678,6 +9770,7 @@ components:
         position:
           type: integer
           format: int32
+          deprecated: true
           description: Position of the predefined item in the items list
           readOnly: true
           example: 1
@@ -9688,16 +9781,6 @@ components:
           description: ID of the first predefined item group in which the current item is included (or empty if the item is not in a group)
           readOnly: true
           example: 5c9a53599007ba58f13c8119
-        item_group_ids:
-          type: array
-          description: List of IDs of the predefined item groups in which the current item is included
-          readOnly: true
-          items:
-            type: string
-            format: bson-id
-          example:
-          - 5c79510e9007ba3f7519e819
-          - 5c9a53349007ba58f13c8118
     Deal_item:
       description: >-
         A user-configured item representing a product or service, which can be used to standardize deal creation
@@ -9786,21 +9869,46 @@ components:
           type: string
           description: Name of the predefined item group
           example: Electronics
+        description:
+          type: string
+          description: Description text of the deal item
+          example: Photovoltaic solar panels (2019 model)
         position:
           type: integer
           format: int32
+          deprecated: true
           description: Position of the group in the list of predefined item groups
           readOnly: true
           example: 1
         count:
           type: integer
           format: int32
+          deprecated: true
           description: Number of predefined items in the predefined item group
           readOnly: true
           example: 2
+        subcount:
+          type: integer
+          format: int32
+          description: Number of predefined items in the predefined item group
+          readOnly: true
+          example: 2
+        cost:
+          type: number
+          format: float
+          readOnly: true
+          description: Cost of the predefined item
+          example: 95.00
+        price:
+          type: number
+          format: float
+          readOnly: true
+          description: Price of the predefined item
+          example: 149.99
         item_ids:
           type: array
           description: List of IDs of the predefined/deal items in the predefined item group
+          deprecated: true
           readOnly: true
           items:
             type: string
@@ -10827,6 +10935,14 @@ components:
       schema:
         type: string
         example: Partner
+    query_predefined_item_groups_include_items:
+      name: include_items
+      in: query
+      required: false
+      description: Determine whether to include the group items in the response or not
+      schema:
+        type: boolean
+        example: false
     query_contacts_owner_id:
       name: owner_id
       in: query
