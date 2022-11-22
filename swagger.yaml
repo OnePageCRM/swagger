@@ -1784,60 +1784,7 @@ paths:
                       predefined_items:
                         type: array
                         items:
-                          properties:
-                            predefined_item:
-                              $ref: '#/components/schemas/Predefined_item'
-        400:
-          $ref: '#/components/responses/400'
-        401:
-          $ref: '#/components/responses/401'
-        403:
-          $ref: '#/components/responses/403'
-        404:
-          $ref: '#/components/responses/404'
-        409:
-          $ref: '#/components/responses/409'
-        500:
-          $ref: '#/components/responses/500'
-  /predefined_items/with_groups:
-    get:
-      summary: Get the list of predefined groups and items (for the logged API user's account)
-      description: ''
-      tags:
-      - Predefined Items
-      parameters:
-      - $ref: '#/components/parameters/query_predefined_item_groups_include_items'
-      - $ref: '#/components/parameters/query_predefined_items_search'
-      - $ref: '#/components/parameters/query_date_filter'
-      - $ref: '#/components/parameters/query_since'
-      - $ref: '#/components/parameters/query_until'
-      - $ref: '#/components/parameters/query_modified_since'
-      - $ref: '#/components/parameters/query_unmodified_since'
-      - $ref: '#/components/parameters/query_sort_by'
-      - $ref: '#/components/parameters/query_order'
-      - $ref: '#/components/parameters/query_page'
-      - $ref: '#/components/parameters/query_per_page'
-      responses:
-        200:
-          description: OK
-          content:
-            application/json:
-              schema:
-                properties:
-                  status:
-                    $ref: '#/components/schemas/Success/properties/status'
-                  message:
-                    $ref: '#/components/schemas/Success/properties/message'
-                  timestamp:
-                    $ref: '#/components/schemas/Success/properties/timestamp'
-                  data:
-                    properties:
-                      predefined_items_with_groups:
-                        type: array
-                        items:
-                          properties:
-                            predefined_item_group:
-                              $ref: '#/components/schemas/Predefined_item_group'
+                          $ref: '#/components/schemas/Predefined_item'
         400:
           $ref: '#/components/responses/400'
         401:
@@ -1897,6 +1844,55 @@ paths:
                     properties:
                       predefined_item:
                         $ref: '#/components/schemas/Predefined_item'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
+  /predefined_items/with_groups:
+    get:
+      summary: Get the list of predefined groups and items (for the logged API user's account)
+      description: ''
+      tags:
+      - Predefined Items
+      parameters:
+      - $ref: '#/components/parameters/query_predefined_item_groups_include_items'
+      - $ref: '#/components/parameters/query_predefined_items_search'
+      - $ref: '#/components/parameters/query_date_filter'
+      - $ref: '#/components/parameters/query_since'
+      - $ref: '#/components/parameters/query_until'
+      - $ref: '#/components/parameters/query_modified_since'
+      - $ref: '#/components/parameters/query_unmodified_since'
+      - $ref: '#/components/parameters/query_sort_by'
+      - $ref: '#/components/parameters/query_order'
+      - $ref: '#/components/parameters/query_page'
+      - $ref: '#/components/parameters/query_per_page'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    $ref: '#/components/schemas/Success/properties/status'
+                  message:
+                    $ref: '#/components/schemas/Success/properties/message'
+                  timestamp:
+                    $ref: '#/components/schemas/Success/properties/timestamp'
+                  data:
+                    properties:
+                      predefined_items_with_groups:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Predefined_item_group'
         400:
           $ref: '#/components/responses/400'
         401:
@@ -1992,8 +1988,8 @@ paths:
                     $ref: '#/components/schemas/Success/properties/timestamp'
                   data:
                     properties:
-                      predefined_action:
-                        $ref: '#/components/schemas/Predefined_action'
+                      predefined_item:
+                        $ref: '#/components/schemas/Predefined_item'
         400:
           $ref: '#/components/responses/400'
         401:
@@ -2064,9 +2060,7 @@ paths:
                       predefined_item_groups:
                         type: array
                         items:
-                          properties:
-                            predefined_item_group:
-                              $ref: '#/components/schemas/Predefined_item_group'
+                          $ref: '#/components/schemas/Predefined_item_group'
         400:
           $ref: '#/components/responses/400'
         401:
@@ -2133,7 +2127,7 @@ paths:
                     $ref: '#/components/schemas/Success/properties/timestamp'
                   data:
                     properties:
-                      predefined_item:
+                      predefined_item_group:
                         $ref: '#/components/schemas/Predefined_item_group'
         400:
           $ref: '#/components/responses/400'
@@ -2214,6 +2208,23 @@ paths:
                   example:
                   - 5c79510e9007ba3f7519e819
                   - 5c9a53349007ba58f13c8118
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    $ref: '#/components/schemas/Success/properties/status'
+                  message:
+                    $ref: '#/components/schemas/Success/properties/message'
+                  timestamp:
+                    $ref: '#/components/schemas/Success/properties/timestamp'
+                  data:
+                    properties:
+                      predefined_item_group:
+                        $ref: '#/components/schemas/Predefined_item_group'
     delete:
       summary: Delete a specific predefined item group
       description:
@@ -9757,6 +9768,10 @@ components:
           type: string
           description: Description text of the predefined item
           example: Photovoltaic solar panels (2019 model)
+        type:
+          type: string
+          description: Type of the entry (item ot subitem)
+          example: item
         cost:
           type: number
           format: float
@@ -9873,6 +9888,10 @@ components:
           type: string
           description: Description text of the deal item
           example: Photovoltaic solar panels (2019 model)
+        type:
+          type: string
+          description: Type of the entry
+          example: group
         position:
           type: integer
           format: int32
