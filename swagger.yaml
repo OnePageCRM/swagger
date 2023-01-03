@@ -214,7 +214,7 @@ tags:
 - name: Contacts
   description: >-
     Information about the people you are actively trying to sell to, and related sub-resources like Actions,
-    Deals, Notes, and Calls.
+    Deals, Notes, Calls and Meetings.
 - name: Companies
   description: >-
     Referred to as 'organizations' in the web application. Companies are logical collections of Contacts and
@@ -244,9 +244,13 @@ tags:
   description: >-
     Allow you to keep track of phone calls made to your contacts. Calls include information like the phone
     number dialled and the call result. Calls support file attachments.
+- name: Meetings
+  description: >-
+    Allow you to keep track of phone meetings made to your contacts. Meetings include information like the phone
+    number dialled and the meeting result. Meetings support file attachments.
 - name: Attachments
   description: >-
-    Additional files associated with Deals, Notes or Calls. They can be uploaded and stored in S3, or stored in
+    Additional files associated with Deals, Notes, Calls or Meetings. They can be uploaded and stored in S3, or stored in
     external providers i.e. Google Drive, Dropbox, Evernote.
 - name: Relationship Types
   description: >-
@@ -2385,7 +2389,7 @@ paths:
                 reference_type:
                   type: string
                   description: Type of resource is associated with the attachment
-                  enum: [ deal, note, call ]
+                  enum: [ deal, note, call, meeting ]
                   example: note
                 contact_id:
                   $ref: '#/components/schemas/Note/properties/contact_id'
@@ -2838,6 +2842,330 @@ paths:
           $ref: '#/components/responses/409'
         500:
           $ref: '#/components/responses/500'
+  /meetings:
+    get:
+      summary: Get a list of meetings
+      description:
+      tags:
+      - Meetings
+      parameters:
+      - $ref: '#/components/parameters/query_meetings_contact_id'
+      - $ref: '#/components/parameters/query_meetings_company_id'
+      - $ref: '#/components/parameters/query_meetings_date_filter'
+      - $ref: '#/components/parameters/query_since'
+      - $ref: '#/components/parameters/query_until'
+      - $ref: '#/components/parameters/query_modified_since'
+      - $ref: '#/components/parameters/query_unmodified_since'
+      - $ref: '#/components/parameters/query_meetings_sort_by'
+      - $ref: '#/components/parameters/query_order'
+      - $ref: '#/components/parameters/query_page'
+      - $ref: '#/components/parameters/query_per_page'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    $ref: '#/components/schemas/Success/properties/status'
+                  message:
+                    $ref: '#/components/schemas/Success/properties/message'
+                  timestamp:
+                    $ref: '#/components/schemas/Success/properties/timestamp'
+                  data:
+                    properties:
+                      meetings:
+                        type: array
+                        items:
+                          properties:
+                            meeting:
+                              $ref: '#/components/schemas/Meeting'
+                      total_count:
+                        $ref: '#/components/schemas/Page_data/properties/total_count'
+                      page:
+                        $ref: '#/components/schemas/Page_data/properties/page'
+                      per_page:
+                        $ref: '#/components/schemas/Page_data/properties/per_page'
+                      max_page:
+                        $ref: '#/components/schemas/Page_data/properties/max_page'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
+    post:
+      summary: Create a meeting
+      description:
+      tags:
+      - Meetings
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                contact_id:
+                  $ref: '#/components/schemas/Meeting/properties/contact_id'
+                meeting_time_int:
+                  $ref: '#/components/schemas/Meeting/properties/meeting_time_int'
+                text:
+                  $ref: '#/components/schemas/Meeting/properties/text'
+                phone_number:
+                  $ref: '#/components/schemas/Meeting/properties/phone_number'
+                meeting_result:
+                  $ref: '#/components/schemas/Meeting/properties/meeting_result'
+                via:
+                  $ref: '#/components/schemas/Meeting/properties/via'
+                recording_link:
+                  $ref: '#/components/schemas/Meeting/properties/recording_link'
+                user_ids_to_notify:
+                  type: array
+                  description: A list of user IDs to notify
+                  items:
+                    type: string
+                    format: bson-id
+                    example: 5aba31e99007ba0f570c12f7
+      responses:
+        201:
+          description: Created
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    $ref: '#/components/schemas/Success/properties/status'
+                  message:
+                    $ref: '#/components/schemas/Success/properties/message'
+                  timestamp:
+                    $ref: '#/components/schemas/Success/properties/timestamp'
+                  data:
+                    properties:
+                      meeting:
+                        $ref: '#/components/schemas/Meeting'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
+  /meetings/{meeting_id}:
+    get:
+      summary: Get a specific meeting
+      description:
+      tags:
+      - Meetings
+      parameters:
+      - $ref: '#/components/parameters/path_meeting_id'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    $ref: '#/components/schemas/Success/properties/status'
+                  message:
+                    $ref: '#/components/schemas/Success/properties/message'
+                  timestamp:
+                    $ref: '#/components/schemas/Success/properties/timestamp'
+                  data:
+                    properties:
+                      meeting:
+                        $ref: '#/components/schemas/Meeting'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
+    put:
+      summary: Update a specific meeting
+      description:
+      tags:
+      - Meetings
+      parameters:
+      - $ref: '#/components/parameters/path_meeting_id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                contact_id:
+                  $ref: '#/components/schemas/Meeting/properties/contact_id'
+                meeting_time_int:
+                  $ref: '#/components/schemas/Meeting/properties/meeting_time_int'
+                text:
+                  $ref: '#/components/schemas/Meeting/properties/text'
+                phone_number:
+                  $ref: '#/components/schemas/Meeting/properties/phone_number'
+                meeting_result:
+                  $ref: '#/components/schemas/Meeting/properties/meeting_result'
+                via:
+                  $ref: '#/components/schemas/Meeting/properties/via'
+                recording_link:
+                  $ref: '#/components/schemas/Meeting/properties/recording_link'
+                user_ids_to_notify:
+                  type: array
+                  description: A list of user IDs to notify
+                  items:
+                    type: string
+                    format: bson-id
+                    example: 5aba31e99007ba0f570c12f7
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    $ref: '#/components/schemas/Success/properties/status'
+                  message:
+                    $ref: '#/components/schemas/Success/properties/message'
+                  timestamp:
+                    $ref: '#/components/schemas/Success/properties/timestamp'
+                  data:
+                    properties:
+                      meeting:
+                        $ref: '#/components/schemas/Meeting'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
+    delete:
+      summary: Delete a specific meeting
+      description:
+      tags:
+      - Meetings
+      parameters:
+      - $ref: '#/components/parameters/path_meeting_id'
+      responses:
+        200:
+          $ref: '#/components/responses/200'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
+  /meetings/{meeting_id}/attachments:
+    post:
+      summary: Create attachment and assign it to an existing meeting
+      description: >-
+        Before creating an attachment, the file should be uploaded to S3. <br> <br>
+        Make a request to `attachments/s3_form` for a pre-authorized upload form. <br>
+        Following successful upload to S3, files can be attached via this endpoint. <br>
+      tags:
+      - Meetings
+      parameters:
+      - $ref: '#/components/parameters/path_meeting_id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              required:
+              - reference_type
+              - key
+              properties:
+                reference_id:
+                  type: string
+                  format: bson-id
+                  description: ID of the meeting associated with the attachment
+                  example: 5afc1b69d556730b580596cb
+                reference_type:
+                  type: string
+                  description: Type of resource is associated with the attachment
+                  enum: [ deal, note, call, meeting ]
+                  example: meeting
+                contact_id:
+                  $ref: '#/components/schemas/Note/properties/contact_id'
+                name:
+                  $ref: '#/components/schemas/Attachment/properties/filename'
+                key:
+                  type: string
+                  description: >-
+                    The same key used in the `attachments/s3_form`, composed as `{contact_id}/{timestamp}/{filename}`
+                  example: 5ae06ef9d55673108fe8877f/1530520812224/mario.jpg
+                size:
+                  $ref: '#/components/schemas/Attachment/properties/size'
+                link_type:
+                  type: string
+                  description: Type of external link (for external `storage_provider`s)
+                  enum: [ dropbox, google_drive, evernote ]
+                  nullable: true
+                  example: ''
+                external_url:
+                  type: string
+                  description: URL for the file (for use with external `storage_provider`s)
+                  nullable: true
+                  example: ''
+      responses:
+        201:
+          description: Created
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    $ref: '#/components/schemas/Success/properties/status'
+                  message:
+                    $ref: '#/components/schemas/Success/properties/message'
+                  timestamp:
+                    $ref: '#/components/schemas/Success/properties/timestamp'
+                  data:
+                    properties:
+                      attachment:
+                        $ref: '#/components/schemas/Attachment'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
   /deals:
     get:
       summary: Get a list of deals
@@ -3238,7 +3566,7 @@ paths:
                 reference_type:
                   type: string
                   description: Type of resource is associated with the attachment
-                  enum: [ deal, note, call ]
+                  enum: [ deal, note, call, meeting ]
                   example: deal
                 contact_id:
                   $ref: '#/components/schemas/Note/properties/contact_id'
@@ -3296,7 +3624,7 @@ paths:
       summary: >-
         Get a pre-authorized S3 upload form (use to upload a file on the client side)
       description: >-
-        Files must be uploaded to S3 before they can be attached to Deals, Notes or Calls. <br>
+        Files must be uploaded to S3 before they can be attached to Deals, Notes, Calls or Meetings. <br>
         This request will return all the information needed to upload a file to S3. <br> <br>
 
         Steps to upload a file to S3: <br>
@@ -3308,7 +3636,7 @@ paths:
         -> `filename` field must be present (and the same as the `filename` specified at the end of the `key` field). <br>
         -> `file` is the file to upload. <br> <br>
 
-        Following successful upload to S3, files may now be attached to Deals, Notes or Calls. <br> <br>
+        Following successful upload to S3, files may now be attached to Deals, Notes, Calls or Meetings. <br> <br>
 
         Notes: <br>
         -> Maximum file size is 10 MB / 10485760 bytes. <br>
@@ -3385,7 +3713,7 @@ paths:
         Before creating an attachment, the file should be uploaded to S3. <br> <br>
         Make a request to `attachments/s3_form` for a pre-authorized upload form. <br>
         Following successful upload to S3, files can be attached via this endpoint. <br> <br>
-        Note: file attachments are supported by Deals, Notes and Calls. <br>
+        Note: file attachments are supported by Deals, Notes, Calls or Meetings. <br>
       tags:
       - Attachments
       parameters: []
@@ -3406,7 +3734,7 @@ paths:
                 reference_type:
                   type: string
                   description: Type of resource is associated with the attachment
-                  enum: [ deal, note, call ]
+                  enum: [ deal, note, call, meeting ]
                   example: note
                 contact_id:
                   $ref: '#/components/schemas/Note/properties/contact_id'
@@ -4715,6 +5043,64 @@ paths:
                           properties:
                             call:
                               $ref: '#/components/schemas/Call'
+                      total_count:
+                        $ref: '#/components/schemas/Page_data/properties/total_count'
+                      page:
+                        $ref: '#/components/schemas/Page_data/properties/page'
+                      per_page:
+                        $ref: '#/components/schemas/Page_data/properties/per_page'
+                      max_page:
+                        $ref: '#/components/schemas/Page_data/properties/max_page'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
+  /companies/{company_id}/meetings:
+    get:
+      summary: Get meetings associated with a specific company
+      description:
+      tags:
+      - Companies
+      parameters:
+      - $ref: '#/components/parameters/path_company_id'
+      - $ref: '#/components/parameters/query_meetings_date_filter'
+      - $ref: '#/components/parameters/query_since'
+      - $ref: '#/components/parameters/query_until'
+      - $ref: '#/components/parameters/query_modified_since'
+      - $ref: '#/components/parameters/query_unmodified_since'
+      - $ref: '#/components/parameters/query_meetings_sort_by'
+      - $ref: '#/components/parameters/query_order'
+      - $ref: '#/components/parameters/query_page'
+      - $ref: '#/components/parameters/query_per_page'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    $ref: '#/components/schemas/Success/properties/status'
+                  message:
+                    $ref: '#/components/schemas/Success/properties/message'
+                  timestamp:
+                    $ref: '#/components/schemas/Success/properties/timestamp'
+                  data:
+                    properties:
+                      meetings:
+                        type: array
+                        items:
+                          properties:
+                            meeting:
+                              $ref: '#/components/schemas/Meeting'
                       total_count:
                         $ref: '#/components/schemas/Page_data/properties/total_count'
                       page:
@@ -6315,6 +6701,125 @@ paths:
                     properties:
                       call:
                         $ref: '#/components/schemas/Call'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
+  /contacts/{contact_id}/meetings:
+    get:
+      summary: Get all meetings for a specific contact
+      description:
+      tags:
+      - Contacts
+      parameters:
+      - $ref: '#/components/parameters/path_contact_id'
+      - $ref: '#/components/parameters/query_meetings_date_filter'
+      - $ref: '#/components/parameters/query_since'
+      - $ref: '#/components/parameters/query_until'
+      - $ref: '#/components/parameters/query_modified_since'
+      - $ref: '#/components/parameters/query_unmodified_since'
+      - $ref: '#/components/parameters/query_meetings_sort_by'
+      - $ref: '#/components/parameters/query_order'
+      - $ref: '#/components/parameters/query_page'
+      - $ref: '#/components/parameters/query_per_page'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    $ref: '#/components/schemas/Success/properties/status'
+                  message:
+                    $ref: '#/components/schemas/Success/properties/message'
+                  timestamp:
+                    $ref: '#/components/schemas/Success/properties/timestamp'
+                  data:
+                    properties:
+                      meetings:
+                        type: array
+                        items:
+                          properties:
+                            meeting:
+                              $ref: '#/components/schemas/Meeting'
+                      total_count:
+                        $ref: '#/components/schemas/Page_data/properties/total_count'
+                      page:
+                        $ref: '#/components/schemas/Page_data/properties/page'
+                      per_page:
+                        $ref: '#/components/schemas/Page_data/properties/per_page'
+                      max_page:
+                        $ref: '#/components/schemas/Page_data/properties/max_page'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
+    post:
+      summary: Create a meeting for a specific contact
+      description:
+      tags:
+      - Contacts
+      parameters:
+      - $ref: '#/components/parameters/path_contact_id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                meeting_time_int:
+                  $ref: '#/components/schemas/Meeting/properties/meeting_time_int'
+                text:
+                  $ref: '#/components/schemas/Meeting/properties/text'
+                phone_number:
+                  $ref: '#/components/schemas/Meeting/properties/phone_number'
+                meeting_result:
+                  $ref: '#/components/schemas/Meeting/properties/meeting_result'
+                via:
+                  $ref: '#/components/schemas/Meeting/properties/via'
+                recording_link:
+                  $ref: '#/components/schemas/Meeting/properties/recording_link'
+                user_ids_to_notify:
+                  type: array
+                  description: A list of user IDs to notify
+                  items:
+                    type: string
+                    format: bson-id
+                    example: 5aba31e99007ba0f570c12f7
+      responses:
+        201:
+          description: Created
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    $ref: '#/components/schemas/Success/properties/status'
+                  message:
+                    $ref: '#/components/schemas/Success/properties/message'
+                  timestamp:
+                    $ref: '#/components/schemas/Success/properties/timestamp'
+                  data:
+                    properties:
+                      meeting:
+                        $ref: '#/components/schemas/Meeting'
         400:
           $ref: '#/components/responses/400'
         401:
@@ -8126,7 +8631,7 @@ components:
     Contact:
       description: >-
         Information about the people you are actively trying to sell to, and related sub-resources like
-        Actions, Deals, Notes, and Calls.
+        Actions, Deals, Notes, Calls and Meetings.
       properties:
         id:
           type: string
@@ -8953,6 +9458,74 @@ components:
           description: Index of the call (in the results set)
           readOnly: true
           example: 1
+    Meeting:
+      description: >-
+        Allow you to keep track of phone meetings made to your contacts. meetings include information like the place
+        and the meeting result. Meetings support file attachments.
+      required:
+      - contact_id
+      properties:
+        id:
+          type: string
+          format: bson-id
+          description: ID of the meeting
+          readOnly: true
+          example: 5afc1b69d556730b580596cb
+        contact_id:
+          type: string
+          format: bson-id
+          description: ID of the contact, to whom the meeting belongs
+          example: 5ae06ef9d55673108fe8877f
+        text:
+          type: string
+          description: Extra details related to the meeting (supports `[b]bold[/b]` and `[i]italic[/i]` formatting)
+          maxLength: 7168 chars
+          example: Mary is interested in coming into the office on Tuesday.
+        meeting_result:
+          type: string
+          format: bson-id
+          description: ID of the `meeting_result` which best describes the result of the meeting
+          example: interested
+        meeting_time_int:
+          type: integer
+          format: unix-timestamp
+          description: >-
+            Time the meeting occurred in UNIX Epoch time (defaults to current time, if left blank)
+          example: 1525273653
+          default: Current timestamp
+        place:
+          type: string
+          description: The place in which the meeting take place
+          example: Meeting room 1
+        author:
+          type: string
+          description: Shortened name of the creator of the meeting
+          example: Jane D.
+          readOnly: true
+          default: Logged API user
+        attachments:
+          type: array
+          readOnly: true
+          items:
+            $ref: '#/components/schemas/Attachment'
+        created_at:
+          type: string
+          format: date-time
+          description: Creation time of the meeting
+          readOnly: true
+          example: '2018-05-16T11:52:09Z'
+        modified_at:
+          type: string
+          format: date-time
+          description: Last modification time of the meeting
+          readOnly: true
+          example: '2018-05-16T11:52:09Z'
+        index:
+          type: integer
+          format: int32
+          description: Index of the meeting (in the results set)
+          readOnly: true
+          example: 1
     Address:
       description: The physical address of a contact or company.
       properties:
@@ -9002,7 +9575,7 @@ components:
           example: delivery
     Attachment:
       description: >-
-        Additional files associated with Deals, Notes or Calls. They can be uploaded and stored in S3,
+        Additional files associated with Deals, Notes, Calls or Meetings. They can be uploaded and stored in S3,
         or stored in external providers i.e. Google Drive, Dropbox, Evernote.
       required:
       - filename
@@ -9237,6 +9810,7 @@ components:
             - action_with_time
             - contact_assigned
             - call
+            - meeting
             - email
             - link
             - note
@@ -10545,6 +11119,14 @@ components:
       schema:
         type: string
         minimum: 1
+    path_meeting_id:
+      name: meeting_id
+      in: path
+      required: true
+      description: Meeting ID
+      schema:
+        type: string
+        minimum: 1
     path_attachment_id:
       name: attachment_id
       in: path
@@ -10894,6 +11476,20 @@ components:
         - modified_at
         - updated_at
         - call_time
+    query_meetings_date_filter:
+      name: date_filter
+      in: query
+      required: false
+      description: >-
+        Signals which date field to be used for only returning resources, added or edited, in a specified date range
+        (only to be used with `since` and/or `until`, not with `modified_since` or `unmodified_since`)
+      schema:
+        type: string
+        enum:
+        - created_at
+        - modified_at
+        - updated_at
+        - meeting_time
     query_date_filter:
       name: date_filter
       in: query
@@ -10984,6 +11580,15 @@ components:
       schema:
         type: string
         example: 5ae06ef9d55673108fe8877b
+    query_meetings_contact_id:
+      name: contact_id
+      in: query
+      description: >-
+        Return meetings for a specific contact (only use one of `contact_id` or `company_id` at a time)
+      required: false
+      schema:
+        type: string
+        example: 5ae06ef9d55673108fe8877b
     query_emails_contact_id:
       name: contact_id
       in: query
@@ -11034,6 +11639,15 @@ components:
       in: query
       description: >-
         Return calls for a specific company (only use one of `contact_id` or `company_id` at a time)
+      required: false
+      schema:
+        type: string
+        example: 6se06df9d55673108re84745
+    query_meetings_company_id:
+      name: company_id
+      in: query
+      description: >-
+        Return meetings for a specific company (only use one of `contact_id` or `company_id` at a time)
       required: false
       schema:
         type: string
@@ -11257,6 +11871,17 @@ components:
         - updated_at
         - date
     query_calls_sort_by:
+      name: sort_by
+      in: query
+      description: >-
+        Specify field by which to order the results (use in conjunction with `order`)
+      schema:
+        type: string
+        enum:
+        - created_at
+        - modified_at
+        - updated_at
+    query_meetings_sort_by:
       name: sort_by
       in: query
       description: >-
