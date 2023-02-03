@@ -2921,8 +2921,8 @@ paths:
                   $ref: '#/components/schemas/Meeting/properties/text'
                 phone_number:
                   $ref: '#/components/schemas/Meeting/properties/phone_number'
-                meeting_result:
-                  $ref: '#/components/schemas/Meeting/properties/meeting_result'
+                # meeting_result:
+                #   $ref: '#/components/schemas/Meeting/properties/meeting_result'
                 via:
                   $ref: '#/components/schemas/Meeting/properties/via'
                 recording_link:
@@ -3021,8 +3021,8 @@ paths:
                   $ref: '#/components/schemas/Meeting/properties/text'
                 phone_number:
                   $ref: '#/components/schemas/Meeting/properties/phone_number'
-                meeting_result:
-                  $ref: '#/components/schemas/Meeting/properties/meeting_result'
+                # meeting_result:
+                #   $ref: '#/components/schemas/Meeting/properties/meeting_result'
                 via:
                   $ref: '#/components/schemas/Meeting/properties/via'
                 recording_link:
@@ -6790,8 +6790,8 @@ paths:
                   $ref: '#/components/schemas/Meeting/properties/text'
                 phone_number:
                   $ref: '#/components/schemas/Meeting/properties/phone_number'
-                meeting_result:
-                  $ref: '#/components/schemas/Meeting/properties/meeting_result'
+                # meeting_result:
+                #   $ref: '#/components/schemas/Meeting/properties/meeting_result'
                 via:
                   $ref: '#/components/schemas/Meeting/properties/via'
                 recording_link:
@@ -9481,11 +9481,11 @@ components:
           description: Extra details related to the meeting (supports `[b]bold[/b]` and `[i]italic[/i]` formatting)
           maxLength: 7168 chars
           example: Mary is interested in coming into the office on Tuesday.
-        meeting_result:
-          type: string
-          format: bson-id
-          description: ID of the `meeting_result` which best describes the result of the meeting
-          example: interested
+        # meeting_result:
+        #   type: string
+        #   format: bson-id
+        #   description: ID of the `meeting_result` which best describes the result of the meeting
+        #   example: interested
         meeting_time_int:
           type: integer
           format: unix-timestamp
