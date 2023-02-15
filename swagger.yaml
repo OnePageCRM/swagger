@@ -2998,6 +2998,11 @@ paths:
                         $ref: '#/components/schemas/Deal_item/properties/qty'
                       predefined_item_id:
                         $ref: '#/components/schemas/Deal_item/properties/predefined_item_id'
+                cost_enabled:
+                  type: boolean
+                  description: whether the deal cost is enabled or not
+                  default: false
+                  example: true
       responses:
         201:
           description: Created
@@ -3158,6 +3163,11 @@ paths:
                         $ref: '#/components/schemas/Deal_item/properties/qty'
                       predefined_item_id:
                         $ref: '#/components/schemas/Deal_item/properties/predefined_item_id'
+                cost_enabled:
+                  type: boolean
+                  description: Must to be `true` to create or keep deal items (if `false`, deal items will be removed)
+                  default: false
+                  example: true
       responses:
         200:
           description: OK
@@ -8743,6 +8753,11 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Deal_item'
+        cost_enabled:
+          type: boolean
+          description: whether the deal cost is enabled or not
+          default: false
+          example: true
         author:
           type: string
           description: Shortened name of the creator of the deal
