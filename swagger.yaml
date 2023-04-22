@@ -8217,12 +8217,14 @@ components:
                 description: The email address associated with the contact
                 example: joe.bloggs@{foo.bar}
         address_list:
-          description: An array of contact addresses. <br>
-                       In order to clear all addresses the full array has to be sent.
+          description: An array of contact addresses.
           type: array
           maxItems: 2 addresses
           items:
             $ref: '#/components/schemas/Typed_address'
+          example: >-
+            "address_list": [] // to clear all addresses <br>
+            "address_list": [{"city": "NY"}, {}] // to keep first and clear second address
         status:
           type: string
           description: Status of the contact
