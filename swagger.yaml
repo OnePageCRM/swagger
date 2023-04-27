@@ -5318,7 +5318,10 @@ paths:
     put:
       summary: Update a specific contact
       description: >-
-        Note: when updating a custom field, either the `id` or `name` and the `value` must be present.
+        Note: when updating a custom field, either the `id` or `name` and the `value` must be present.<br/>
+        Please note the following when changing addresses:<br/>
+        `"address_list": [] // to clear all addresses` <br/>
+        `"address_list": [{"city": "NY"}, {}] // to keep/update first and clear second address`
       tags:
       - Contacts
       parameters:
@@ -8222,9 +8225,6 @@ components:
           maxItems: 2 addresses
           items:
             $ref: '#/components/schemas/Typed_address'
-          example: >-
-            "address_list": [] // to clear all addresses <br>
-            "address_list": [{"city": "NY"}, {}] // to keep first and clear second address
         status:
           type: string
           description: Status of the contact
