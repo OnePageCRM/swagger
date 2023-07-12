@@ -8551,7 +8551,7 @@ components:
         exact_time:
           type: integer
           format: unix-timestamp
-          description: The UNIX Epoch time the action is due (status must be `date_time`)
+          description: The UNIX Epoch time in seconds the action is due (status must be `date_time`)
           example: 1526472000
         position:
           type: integer
