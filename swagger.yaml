@@ -8240,8 +8240,11 @@ components:
           type: string
           format: bson-id
           description: ID of the lead source of the contact
-          example: advertisement
-          default: lead
+          example: email_web
+        lead_source:
+          type: string
+          description: Display name of the lead source of the contact
+          example: Email or Web
         background:
           type: string
           description: Background infomation about the contact
