@@ -9449,6 +9449,10 @@ components:
           description: ID the of the deal, to which the note is linked (`null` if no linked deal)
           nullable: true
           example: ''
+        linked_deal_name:
+          type: string
+          description: Name of the deal, to which the note is linked (`""` if no linked deal)
+          example: ''
         author:
           type: string
           description: Shortened name of the creator of the note
