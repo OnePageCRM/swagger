@@ -2,6 +2,9 @@ openapi: 3.0.0
 info:
   title: OnePageCRM API
   description: >-
+    <strong>NOTE:</strong> If you've built or are building an integration with OnePageCRM, we'd like to hear from you. Please fill out <a target="_blank" href="https://forms.onepagecrm.com/65d470e49e344574cb4b3e5b/"> this web form</a> and we'll get back to you.
+
+    <br>
     <i>OnePageCRM converts the complexity of a CRM system to a simple to-do list. For more information on OnePageCRM
     please visit our [website](https://www.onepagecrm.com).</i><br><br>
 
