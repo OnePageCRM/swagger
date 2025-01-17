@@ -11047,6 +11047,10 @@ components:
           type: string
           description: Name of the pipeline
           example: Default pipeine
+        type:
+          type: string
+          description: Type of the pipeline (sales or delivery)
+          example: sales
         default:
           type: boolean
           description: Is this pipeline the default pipeline in the account?
