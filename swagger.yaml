@@ -10480,7 +10480,14 @@ components:
           example: Favorite season
         type:
           type: string
-          description: Type of the custom field
+          description: >-
+            Type of the custom field. There are several types of custom fields that may store data in different formats.
+            External ID type is a special type introduced for referencing entities in the external systems. It's value
+            is <em>unique</em> amid the whole system. Secton divider type is introduced just for visual purpose: it
+            allows grouping custom fields. If custom fields in the section don't have values then they are hidden in
+            the 'view' UI (but always shown in 'edit' UI). This logic is applied in the API: if a contact doesn't have
+            values for all the custom fields in the section then this section divider custom field isn't exposed
+            in the API (along with other custom fields inside the section).
           enum:
           - anniversary
           - date
@@ -10489,6 +10496,8 @@ components:
           - number
           - select_box
           - single_line_text
+          - external_id
+          - section_divider
           example: select_box
         position:
           type: integer
@@ -10524,7 +10533,14 @@ components:
           example: Company size
         type:
           type: string
-          description: Type of the company field
+          description: >-
+            Type of the company field. There are several types of custom fields that may store data in different formats.
+            External ID type is a special type introduced for referencing entities in the external systems. It's value
+            is <em>unique</em> amid the whole system. Secton divider type is introduced just for visual purpose: it
+            allows grouping custom fields. If custom fields in the section don't have values then they are hidden in
+            the 'view' UI (but always shown in 'edit' UI). This logic is applied in the API: if a company doesn't have
+            values for all the custom fields in the section then this section divider custom field isn't exposed
+            in the API (along with other custom fields inside the section).
           enum:
           - date
           - multi_line_text
@@ -10532,6 +10548,8 @@ components:
           - number
           - select_box
           - single_line_text
+          - external_id
+          - section_divider
           example: select_box
         position:
           type: integer
@@ -10565,7 +10583,14 @@ components:
           maxItems: 60 chars
           example: Deal size
         type:
-          description: Type of the deal field
+          description: >-
+            Type of the deal field. There are several types of custom fields that may store data in different formats.
+            External ID type is a special type introduced for referencing entities in the external systems. It's value
+            is <em>unique</em> amid the whole system. Secton divider type is introduced just for visual purpose: it
+            allows grouping custom fields. If custom fields in the section don't have values then they are hidden in
+            the 'view' UI (but always shown in 'edit' UI). This logic is applied in the API: if a deal doesn't have
+            values for all the custom fields in the section then this section divider custom field isn't exposed
+            in the API (along with other custom fields inside the section).
           type: string
           enum:
           - date
@@ -10574,6 +10599,8 @@ components:
           - number
           - select_box
           - single_line_text
+          - external_id
+          - section_divider
           example: select_box
         position:
           type: integer
