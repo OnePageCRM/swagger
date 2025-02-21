@@ -2801,14 +2801,8 @@ paths:
                   $ref: '#/components/schemas/Meeting/properties/meeting_time_int'
                 text:
                   $ref: '#/components/schemas/Meeting/properties/text'
-                phone_number:
-                  $ref: '#/components/schemas/Meeting/properties/phone_number'
                 # meeting_result:
                 #   $ref: '#/components/schemas/Meeting/properties/meeting_result'
-                via:
-                  $ref: '#/components/schemas/Meeting/properties/via'
-                recording_link:
-                  $ref: '#/components/schemas/Meeting/properties/recording_link'
                 user_ids_to_notify:
                   type: array
                   description: A list of user IDs to notify
@@ -2901,14 +2895,8 @@ paths:
                   $ref: '#/components/schemas/Meeting/properties/meeting_time_int'
                 text:
                   $ref: '#/components/schemas/Meeting/properties/text'
-                phone_number:
-                  $ref: '#/components/schemas/Meeting/properties/phone_number'
                 # meeting_result:
                 #   $ref: '#/components/schemas/Meeting/properties/meeting_result'
-                via:
-                  $ref: '#/components/schemas/Meeting/properties/via'
-                recording_link:
-                  $ref: '#/components/schemas/Meeting/properties/recording_link'
                 user_ids_to_notify:
                   type: array
                   description: A list of user IDs to notify
@@ -6838,14 +6826,8 @@ paths:
                   $ref: '#/components/schemas/Meeting/properties/meeting_time_int'
                 text:
                   $ref: '#/components/schemas/Meeting/properties/text'
-                phone_number:
-                  $ref: '#/components/schemas/Meeting/properties/phone_number'
                 # meeting_result:
                 #   $ref: '#/components/schemas/Meeting/properties/meeting_result'
-                via:
-                  $ref: '#/components/schemas/Meeting/properties/via'
-                recording_link:
-                  $ref: '#/components/schemas/Meeting/properties/recording_link'
                 user_ids_to_notify:
                   type: array
                   description: A list of user IDs to notify
