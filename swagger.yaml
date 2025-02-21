@@ -9324,7 +9324,7 @@ components:
         has_deal_items:
           type: boolean
           description: Does the deal have deal items?
-          deafult: false
+          default: false
           example: true
         deal_items:
           type: array
