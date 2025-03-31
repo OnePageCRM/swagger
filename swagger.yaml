@@ -10653,7 +10653,7 @@ components:
           type: array
           items:
             properties:
-              1:
+              '1':
                 type: integer
                 format: int32
                 description: Contacts who's name begins with a non-alphabetic character
@@ -10825,7 +10825,7 @@ components:
           type: array
           items:
             properties:
-              1:
+              '1':
                 type: integer
                 format: int32
                 description: Contacts who's name begins with a non-alphabetic character
