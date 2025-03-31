@@ -2799,6 +2799,8 @@ paths:
                   $ref: '#/components/schemas/Meeting/properties/contact_id'
                 meeting_time_int:
                   $ref: '#/components/schemas/Meeting/properties/meeting_time_int'
+                place:
+                  $ref: '#/components/schemas/Meeting/properties/place'
                 text:
                   $ref: '#/components/schemas/Meeting/properties/text'
                 # meeting_result:
@@ -2893,6 +2895,8 @@ paths:
                   $ref: '#/components/schemas/Meeting/properties/contact_id'
                 meeting_time_int:
                   $ref: '#/components/schemas/Meeting/properties/meeting_time_int'
+                place:
+                  $ref: '#/components/schemas/Meeting/properties/place'
                 text:
                   $ref: '#/components/schemas/Meeting/properties/text'
                 # meeting_result:
@@ -6824,6 +6828,8 @@ paths:
               properties:
                 meeting_time_int:
                   $ref: '#/components/schemas/Meeting/properties/meeting_time_int'
+                place:
+                  $ref: '#/components/schemas/Meeting/properties/place'
                 text:
                   $ref: '#/components/schemas/Meeting/properties/text'
                 # meeting_result:
@@ -9582,6 +9588,7 @@ components:
         place:
           type: string
           description: The place in which the meeting take place
+          maxLength: 100
           example: Meeting room 1
         author:
           type: string
