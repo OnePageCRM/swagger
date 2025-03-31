@@ -12115,11 +12115,11 @@ components:
         type: string
         example: 5aaa9b059007ba08c9ebaf58
   responses:
-    200:
+    '200':
       description: OK
-    201:
+    '201':
       description: Created
-    400:
+    '400':
       description: >-
         Bad Request. The request is not properly formatted, does not properly
         specify response format or contains improper parameters or data. Code
@@ -12159,7 +12159,7 @@ components:
                     description: Reason why this parameter is invalid
                     readOnly: true
                     example: '{attribute_name} is invalid or missing'
-    401:
+    '401':
       description: >-
         Unauthorized. Authorization data is absent, invalid or expired.
         Generally this means that a login form should be displayed to a user.
@@ -12192,25 +12192,25 @@ components:
               errors:
                 type: object
                 readOnly: true
-    403:
+    '403':
       description: >-
         Forbidden. Issued when user is logged in, but does not have permission
         for requested operation. This includes cases when user has reached
         limits like allowed number of contacts. Code 403 means operation is
         forbidden for a user. Fault is on user. Although in some cases, you
         could have prevented this by not sending the request in the first place.
-    404:
+    '404':
       description: >-
         Resource Not Found. When an id was provided for a request but no
         resource exists for that object.
-    409:
+    '409':
       description: >-
         Precondition Failed. Server state does not allow requested operation to
         be carried on. Issued in cases such as when trying to add an assigned
         next action to a contact which already has one assigned for a user. Code
         409 means the stars were not aligned for this to happen. Sometimes you
         could have foreseen it, sometimes not.
-    500:
+    '500':
       description: Internal Server Error. Code 500 means server messed up. Fault is on us.
   securitySchemes:
     BasicAuth:
