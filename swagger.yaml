@@ -8633,7 +8633,7 @@ components:
           description: List of titles which can be used to prefix the names of contacts
           items:
             type: string
-          maxLength: 7
+            maxLength: 7
           readOnly: true
           example:
           - Mr
