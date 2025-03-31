@@ -8535,8 +8535,6 @@ components:
           example: c+g0Y3VGHdIztKbHcjVcOuwf34EmFlXI9Qot5hTvb2F=
         user:
           $ref: '#/components/schemas/User'
-          description: The logged API user
-          readOnly: true
         team:
           type: array
           description: List of users who make up the rest of the logged API users team
@@ -8554,12 +8552,8 @@ components:
           example: pro
         settings:
           $ref: '#/components/schemas/Settings'
-          description: Settings for the logged API user
-          readOnly: true
         cost_setup:
           $ref: '#/components/schemas/Cost_setup'
-          description: Cost setup for the logged API user
-          readOnly: true
         custom_fields:
           type: array
           description: List of custom fields for the logged API user's account
