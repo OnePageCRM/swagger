@@ -10490,7 +10490,9 @@ components:
         choices:
           description: >-
             A list of possible choices (for fields of type `multiple_choice` or `select_box`)
-          type: string
+          type: array
+          items:
+            type: string
           maxItems: 60
           example:
           - Spring
@@ -10542,7 +10544,9 @@ components:
         choices:
           description: >-
             A list of possible choices (for fields of type `multiple_choice` or `select_box`)
-          type: string
+          type: array
+          items:
+            type: string
           maxItems: 60
           example:
           - Small
@@ -10593,7 +10597,9 @@ components:
         choices:
           description: >-
             A list of possible choices (for fields of type `multiple_choice` or `select_box`)
-          type: string
+          type: array
+          items:
+            type: string
           maxItems: 60
           example:
           - Small
