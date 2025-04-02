@@ -2799,6 +2799,8 @@ paths:
                   $ref: '#/components/schemas/Meeting/properties/contact_id'
                 meeting_time_int:
                   $ref: '#/components/schemas/Meeting/properties/meeting_time_int'
+                place:
+                  $ref: '#/components/schemas/Meeting/properties/place'
                 text:
                   $ref: '#/components/schemas/Meeting/properties/text'
                 # meeting_result:
@@ -2893,6 +2895,8 @@ paths:
                   $ref: '#/components/schemas/Meeting/properties/contact_id'
                 meeting_time_int:
                   $ref: '#/components/schemas/Meeting/properties/meeting_time_int'
+                place:
+                  $ref: '#/components/schemas/Meeting/properties/place'
                 text:
                   $ref: '#/components/schemas/Meeting/properties/text'
                 # meeting_result:
@@ -6824,6 +6828,8 @@ paths:
               properties:
                 meeting_time_int:
                   $ref: '#/components/schemas/Meeting/properties/meeting_time_int'
+                place:
+                  $ref: '#/components/schemas/Meeting/properties/place'
                 text:
                   $ref: '#/components/schemas/Meeting/properties/text'
                 # meeting_result:
@@ -8529,8 +8535,6 @@ components:
           example: c+g0Y3VGHdIztKbHcjVcOuwf34EmFlXI9Qot5hTvb2F=
         user:
           $ref: '#/components/schemas/User'
-          description: The logged API user
-          readOnly: true
         team:
           type: array
           description: List of users who make up the rest of the logged API users team
@@ -8548,12 +8552,8 @@ components:
           example: pro
         settings:
           $ref: '#/components/schemas/Settings'
-          description: Settings for the logged API user
-          readOnly: true
         cost_setup:
           $ref: '#/components/schemas/Cost_setup'
-          description: Cost setup for the logged API user
-          readOnly: true
         custom_fields:
           type: array
           description: List of custom fields for the logged API user's account
@@ -8633,7 +8633,7 @@ components:
           description: List of titles which can be used to prefix the names of contacts
           items:
             type: string
-          maxLength: 7
+            maxLength: 7
           readOnly: true
           example:
           - Mr
@@ -9582,6 +9582,7 @@ components:
         place:
           type: string
           description: The place in which the meeting take place
+          maxLength: 100
           example: Meeting room 1
         author:
           type: string
@@ -10489,7 +10490,9 @@ components:
         choices:
           description: >-
             A list of possible choices (for fields of type `multiple_choice` or `select_box`)
-          type: string
+          type: array
+          items:
+            type: string
           maxItems: 60
           example:
           - Spring
@@ -10541,7 +10544,9 @@ components:
         choices:
           description: >-
             A list of possible choices (for fields of type `multiple_choice` or `select_box`)
-          type: string
+          type: array
+          items:
+            type: string
           maxItems: 60
           example:
           - Small
@@ -10592,7 +10597,9 @@ components:
         choices:
           description: >-
             A list of possible choices (for fields of type `multiple_choice` or `select_box`)
-          type: string
+          type: array
+          items:
+            type: string
           maxItems: 60
           example:
           - Small
@@ -10652,7 +10659,7 @@ components:
           type: array
           items:
             properties:
-              1:
+              '1':
                 type: integer
                 format: int32
                 description: Contacts who's name begins with a non-alphabetic character
@@ -10824,7 +10831,7 @@ components:
           type: array
           items:
             properties:
-              1:
+              '1':
                 type: integer
                 format: int32
                 description: Contacts who's name begins with a non-alphabetic character
@@ -12114,11 +12121,11 @@ components:
         type: string
         example: 5aaa9b059007ba08c9ebaf58
   responses:
-    200:
+    '200':
       description: OK
-    201:
+    '201':
       description: Created
-    400:
+    '400':
       description: >-
         Bad Request. The request is not properly formatted, does not properly
         specify response format or contains improper parameters or data. Code
@@ -12158,7 +12165,7 @@ components:
                     description: Reason why this parameter is invalid
                     readOnly: true
                     example: '{attribute_name} is invalid or missing'
-    401:
+    '401':
       description: >-
         Unauthorized. Authorization data is absent, invalid or expired.
         Generally this means that a login form should be displayed to a user.
@@ -12191,25 +12198,25 @@ components:
               errors:
                 type: object
                 readOnly: true
-    403:
+    '403':
       description: >-
         Forbidden. Issued when user is logged in, but does not have permission
         for requested operation. This includes cases when user has reached
         limits like allowed number of contacts. Code 403 means operation is
         forbidden for a user. Fault is on user. Although in some cases, you
         could have prevented this by not sending the request in the first place.
-    404:
+    '404':
       description: >-
         Resource Not Found. When an id was provided for a request but no
         resource exists for that object.
-    409:
+    '409':
       description: >-
         Precondition Failed. Server state does not allow requested operation to
         be carried on. Issued in cases such as when trying to add an assigned
         next action to a contact which already has one assigned for a user. Code
         409 means the stars were not aligned for this to happen. Sometimes you
         could have foreseen it, sometimes not.
-    500:
+    '500':
       description: Internal Server Error. Code 500 means server messed up. Fault is on us.
   securitySchemes:
     BasicAuth:
