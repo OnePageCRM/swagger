@@ -5429,6 +5429,137 @@ paths:
           $ref: '#/components/responses/409'
         500:
           $ref: '#/components/responses/500'
+  /companies/{company_id}/logo:
+    post:
+      summary: Update logo for the given company
+      description: Update company logo with the given image. The previous logo is removed and then new image is set
+      tags:
+        - Companies
+      parameters:
+        - $ref: '#/components/parameters/path_company_id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                image:
+                  $ref: '#/components/schemas/Company/properties/image'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    $ref: '#/components/schemas/Success/properties/status'
+                  message:
+                    $ref: '#/components/schemas/Success/properties/message'
+                  timestamp:
+                    $ref: '#/components/schemas/Success/properties/timestamp'
+                  data:
+                    properties:
+                      company:
+                        $ref: '#/components/schemas/Company'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        415:
+          $ref: '#/components/responses/415'
+        422:
+          $ref: '#/components/responses/422'
+        500:
+          $ref: '#/components/responses/500'
+    patch:
+      summary: Update logo for the given company
+      description: Update company logo with the given image. The previous logo is removed and then new image is set
+      tags:
+        - Companies
+      parameters:
+        - $ref: '#/components/parameters/path_company_id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                image:
+                  $ref: '#/components/schemas/Company/properties/image'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    $ref: '#/components/schemas/Success/properties/status'
+                  message:
+                    $ref: '#/components/schemas/Success/properties/message'
+                  timestamp:
+                    $ref: '#/components/schemas/Success/properties/timestamp'
+                  data:
+                    properties:
+                      company:
+                        $ref: '#/components/schemas/Company'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        415:
+          $ref: '#/components/responses/415'
+        422:
+          $ref: '#/components/responses/422'
+        500:
+          $ref: '#/components/responses/500'
+    delete:
+      summary: Delete logo in then given company
+      description: >-
+        Delete logo in the given company.
+        When successfully deleted the `photo_url` field value is `null` in the company
+      tags:
+        - Companies
+      parameters:
+        - $ref: '#/components/parameters/path_company_id'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    $ref: '#/components/schemas/Success/properties/status'
+                  message:
+                    $ref: '#/components/schemas/Success/properties/message'
+                  timestamp:
+                    $ref: '#/components/schemas/Success/properties/timestamp'
+                  data:
+                    properties:
+                      company:
+                        $ref: '#/components/schemas/Company'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        500:
+          $ref: '#/components/responses/500'
   /contacts:
     get:
       summary: Get a list of contacts
@@ -8961,6 +9092,10 @@ components:
           description: ID of the company
           readOnly: true
           example: 5aba31e99007ba0f570c92ac
+        image:
+          type: string
+          description: Base64 encoded binary image
+          example: data:image/png;base64,iVBORw...
         name:
           type: string
           description: Name of the company
@@ -8975,6 +9110,10 @@ components:
           type: string
           description: Phone number of the company
           example: (912) 644-1771
+        photo_url:
+          type: string
+          description: URL to company logo
+          example: https://someserver.com/someimage.png
         url:
           type: string
           description: URL of the company
@@ -12216,6 +12355,12 @@ components:
         next action to a contact which already has one assigned for a user. Code
         409 means the stars were not aligned for this to happen. Sometimes you
         could have foreseen it, sometimes not.
+    '415':
+      description: >-
+        The request entity has a media type which the server or resource does not support.
+        For example, the client uploads an image as image/svg+xml, but the server requires that images use a different format.
+    '422':
+      description: The request was well-formed (i.e., syntactically correct) but could not be processed.
     '500':
       description: Internal Server Error. Code 500 means server messed up. Fault is on us.
   securitySchemes:
