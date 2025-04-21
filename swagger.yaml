@@ -694,7 +694,7 @@ paths:
   /statuses:
     get:
       summary: Get the list of statuses (for the logged API user's account)
-      description:
+      description: ''
       tags:
       - Statuses
       parameters: []
@@ -731,7 +731,7 @@ paths:
           $ref: '#/components/responses/500'
     post:
       summary: Create a new status
-      description:
+      description: ''
       tags:
       - Statuses
       parameters: []
@@ -773,7 +773,7 @@ paths:
   /statuses/{status_id}:
     get:
       summary: Get a specific status
-      description:
+      description: ''
       tags:
       - Statuses
       parameters:
@@ -809,7 +809,7 @@ paths:
           $ref: '#/components/responses/500'
     put:
       summary: Update a specific status
-      description:
+      description: ''
       tags:
       - Statuses
       parameters:
@@ -851,7 +851,7 @@ paths:
           $ref: '#/components/responses/500'
     delete:
       summary: Delete a specific status
-      description:
+      description: ''
       tags:
       - Statuses
       parameters:
@@ -874,7 +874,7 @@ paths:
   /deal_fields:
     get:
       summary: Get the list of deal fields (for the logged API user's account)
-      description:
+      description: ''
       tags:
       - Deal Fields
       parameters:
@@ -967,7 +967,7 @@ paths:
   /deal_fields/{deal_field_id}:
     get:
       summary: Get a specific deal field
-      description:
+      description: ''
       tags:
       - Deal Fields
       parameters:
@@ -1068,7 +1068,7 @@ paths:
   /custom_fields:
     get:
       summary: Get the list of custom fields (for the logged API user's account)
-      description:
+      description: ''
       tags:
       - Custom Fields
       parameters:
@@ -1161,7 +1161,7 @@ paths:
   /custom_fields/{custom_field_id}:
     get:
       summary: Get a specific custom field
-      description:
+      description: ''
       tags:
       - Custom Fields
       parameters:
@@ -1262,7 +1262,7 @@ paths:
   /company_fields:
     get:
       summary: Get the list of company fields (for the logged API user's account)
-      description:
+      description: ''
       tags:
       - Company Fields
       parameters:
@@ -1355,7 +1355,7 @@ paths:
   /company_fields/{company_field_id}:
     get:
       summary: Get a specific company field
-      description:
+      description: ''
       tags:
       - Company Fields
       parameters:
@@ -1456,7 +1456,7 @@ paths:
   /predefined_actions:
     get:
       summary: Get the list of predefined actions (for the logged API user's account)
-      description:
+      description: ''
       tags:
       - Predefined Actions
       parameters: []
@@ -1495,7 +1495,7 @@ paths:
           $ref: '#/components/responses/500'
     post:
       summary: Create a new predefined action
-      description:
+      description: ''
       tags:
       - Predefined Actions
       parameters: []
@@ -1537,7 +1537,7 @@ paths:
   /predefined_actions/{predefined_action_id}:
     get:
       summary: Get a specific predefined action
-      description:
+      description: ''
       tags:
       - Predefined Actions
       parameters:
@@ -1573,7 +1573,7 @@ paths:
           $ref: '#/components/responses/500'
     put:
       summary: Update a specific predefined action
-      description:
+      description: ''
       tags:
       - Predefined Actions
       parameters:
@@ -1615,7 +1615,7 @@ paths:
           $ref: '#/components/responses/500'
     delete:
       summary: Delete a specific predefined action
-      description:
+      description: ''
       tags:
       - Predefined Actions
       parameters:
@@ -1638,7 +1638,7 @@ paths:
   /predefined_items:
     get:
       summary: Get the list of predefined items (for the logged API user's account)
-      description:
+      description: ''
       tags:
       - Predefined Items
       parameters: []
@@ -1677,7 +1677,7 @@ paths:
           $ref: '#/components/responses/500'
     post:
       summary: Create a new predefined item
-      description:
+      description: ''
       tags:
       - Predefined Items
       parameters: []
@@ -1737,7 +1737,7 @@ paths:
   /predefined_items/{predefined_item_id}:
     get:
       summary: Get a specific predefined item
-      description:
+      description: ''
       tags:
       - Predefined Items
       parameters:
@@ -1773,7 +1773,7 @@ paths:
           $ref: '#/components/responses/500'
     put:
       summary: Update a specific predefined item
-      description:
+      description: ''
       tags:
       - Predefined Items
       parameters:
@@ -1833,7 +1833,7 @@ paths:
           $ref: '#/components/responses/500'
     delete:
       summary: Delete a specific predefined item
-      description:
+      description: ''
       tags:
       - Predefined Items
       parameters:
@@ -1856,7 +1856,7 @@ paths:
   /predefined_item_groups:
     get:
       summary: Get the list of predefined item groups (for the logged API user's account)
-      description:
+      description: ''
       tags:
       - Predefined Item Groups
       parameters: []
@@ -1895,7 +1895,7 @@ paths:
           $ref: '#/components/responses/500'
     post:
       summary: Create a new predefined item group
-      description:
+      description: ''
       tags:
       - Predefined Item Groups
       parameters: []
@@ -1950,7 +1950,7 @@ paths:
   /predefined_item_groups/{predefined_item_group_id}:
     get:
       summary: Get a specific predefined item group
-      description:
+      description: ''
       tags:
       - Predefined Item Groups
       parameters:
@@ -1986,7 +1986,7 @@ paths:
           $ref: '#/components/responses/500'
     delete:
       summary: Delete a specific predefined item group
-      description:
+      description: ''
       tags:
       - Predefined Item Groups
       parameters:
@@ -2009,7 +2009,7 @@ paths:
   /notes:
     get:
       summary: Get a list of notes
-      description:
+      description: ''
       tags:
       - Notes
       parameters:
@@ -2067,7 +2067,7 @@ paths:
           $ref: '#/components/responses/500'
     post:
       summary: Create a new note
-      description:
+      description: ''
       tags:
       - Notes
       parameters: []
@@ -2127,7 +2127,7 @@ paths:
   /notes/{note_id}:
     get:
       summary: Get a specific note
-      description:
+      description: ''
       tags:
       - Notes
       parameters:
@@ -2163,7 +2163,7 @@ paths:
           $ref: '#/components/responses/500'
     put:
       summary: Update a specific note
-      description:
+      description: ''
       tags:
       - Notes
       parameters:
@@ -2223,7 +2223,7 @@ paths:
           $ref: '#/components/responses/500'
     delete:
       summary: Delete a specific note
-      description:
+      description: ''
       tags:
       - Notes
       parameters:
@@ -2327,7 +2327,7 @@ paths:
   /calls:
     get:
       summary: Get a list of calls
-      description:
+      description: ''
       tags:
       - Calls
       parameters:
@@ -2385,7 +2385,7 @@ paths:
           $ref: '#/components/responses/500'
     post:
       summary: Create a call
-      description:
+      description: ''
       tags:
       - Calls
       parameters: []
@@ -2448,7 +2448,7 @@ paths:
   /calls/{call_id}:
     get:
       summary: Get a specific call
-      description:
+      description: ''
       tags:
       - Calls
       parameters:
@@ -2484,7 +2484,7 @@ paths:
           $ref: '#/components/responses/500'
     put:
       summary: Update a specific call
-      description:
+      description: ''
       tags:
       - Calls
       parameters:
@@ -2547,7 +2547,7 @@ paths:
           $ref: '#/components/responses/500'
     delete:
       summary: Delete a specific call
-      description:
+      description: ''
       tags:
       - Calls
       parameters:
@@ -2727,7 +2727,7 @@ paths:
   /meetings:
     get:
       summary: Get a list of meetings
-      description:
+      description: ''
       tags:
       - Meetings
       parameters:
@@ -2785,7 +2785,7 @@ paths:
           $ref: '#/components/responses/500'
     post:
       summary: Create a meeting
-      description:
+      description: ''
       tags:
       - Meetings
       parameters: []
@@ -2799,16 +2799,12 @@ paths:
                   $ref: '#/components/schemas/Meeting/properties/contact_id'
                 meeting_time_int:
                   $ref: '#/components/schemas/Meeting/properties/meeting_time_int'
+                place:
+                  $ref: '#/components/schemas/Meeting/properties/place'
                 text:
                   $ref: '#/components/schemas/Meeting/properties/text'
-                phone_number:
-                  $ref: '#/components/schemas/Meeting/properties/phone_number'
                 # meeting_result:
                 #   $ref: '#/components/schemas/Meeting/properties/meeting_result'
-                via:
-                  $ref: '#/components/schemas/Meeting/properties/via'
-                recording_link:
-                  $ref: '#/components/schemas/Meeting/properties/recording_link'
                 user_ids_to_notify:
                   type: array
                   description: A list of user IDs to notify
@@ -2848,7 +2844,7 @@ paths:
   /meetings/{meeting_id}:
     get:
       summary: Get a specific meeting
-      description:
+      description: ''
       tags:
       - Meetings
       parameters:
@@ -2884,7 +2880,7 @@ paths:
           $ref: '#/components/responses/500'
     put:
       summary: Update a specific meeting
-      description:
+      description: ''
       tags:
       - Meetings
       parameters:
@@ -2899,16 +2895,12 @@ paths:
                   $ref: '#/components/schemas/Meeting/properties/contact_id'
                 meeting_time_int:
                   $ref: '#/components/schemas/Meeting/properties/meeting_time_int'
+                place:
+                  $ref: '#/components/schemas/Meeting/properties/place'
                 text:
                   $ref: '#/components/schemas/Meeting/properties/text'
-                phone_number:
-                  $ref: '#/components/schemas/Meeting/properties/phone_number'
                 # meeting_result:
                 #   $ref: '#/components/schemas/Meeting/properties/meeting_result'
-                via:
-                  $ref: '#/components/schemas/Meeting/properties/via'
-                recording_link:
-                  $ref: '#/components/schemas/Meeting/properties/recording_link'
                 user_ids_to_notify:
                   type: array
                   description: A list of user IDs to notify
@@ -2947,7 +2939,7 @@ paths:
           $ref: '#/components/responses/500'
     delete:
       summary: Delete a specific meeting
-      description:
+      description: ''
       tags:
       - Meetings
       parameters:
@@ -3051,7 +3043,7 @@ paths:
   /deals:
     get:
       summary: Get a list of deals
-      description:
+      description: ''
       tags:
       - Deals
       parameters:
@@ -3119,7 +3111,7 @@ paths:
           $ref: '#/components/responses/500'
     post:
       summary: Create a new deal
-      description:
+      description: ''
       tags:
       - Deals
       parameters: []
@@ -3243,7 +3235,7 @@ paths:
   /deals/{deal_id}:
     get:
       summary: Get a specific deal
-      description:
+      description: ''
       tags:
       - Deals
       parameters:
@@ -3280,7 +3272,7 @@ paths:
           $ref: '#/components/responses/500'
     put:
       summary: Update a specific deal
-      description:
+      description: ''
       tags:
       - Deals
       parameters:
@@ -3723,7 +3715,7 @@ paths:
           $ref: '#/components/responses/500'
     delete:
       summary: Delete a specific attachment
-      description:
+      description: ''
       tags:
       - Attachments
       parameters:
@@ -3746,7 +3738,7 @@ paths:
   /attachments/{attachment_id}/pin:
     patch:
       summary: Pin attachment to its owner contact through its note/call/deal
-      description:
+      description: ''
       tags:
         - Attachments
       parameters:
@@ -3781,7 +3773,7 @@ paths:
   /attachments/{attachment_id}/unpin:
     patch:
       summary: Unpin attachment from its owner contact through its note/call/deal
-      description:
+      description: ''
       tags:
         - Attachments
       parameters:
@@ -3816,7 +3808,7 @@ paths:
   /relationship_types:
     get:
       summary: Get a list of relationship types
-      description:
+      description: ''
       tags:
       - Relationship Types
       parameters:
@@ -3874,7 +3866,7 @@ paths:
           $ref: '#/components/responses/500'
     post:
       summary: Create a new relationship type
-      description:
+      description: ''
       tags:
       - Relationship Types
       parameters: []
@@ -3930,7 +3922,7 @@ paths:
   /relationship_types/{relationship_type_id}:
     get:
       summary: Get a specific relationship type
-      description:
+      description: ''
       tags:
       - Relationship Types
       parameters:
@@ -3966,7 +3958,7 @@ paths:
           $ref: '#/components/responses/500'
     put:
       summary: Update a specific relationship type
-      description:
+      description: ''
       tags:
       - Relationship Types
       parameters:
@@ -4023,7 +4015,7 @@ paths:
           $ref: '#/components/responses/500'
     delete:
       summary: Delete a relationship type
-      description:
+      description: ''
       tags:
       - Relationship Types
       parameters:
@@ -4157,7 +4149,7 @@ paths:
           $ref: '#/components/responses/500'
     post:
       summary: Create a new action
-      description:
+      description: ''
       tags:
       - Actions
       parameters: []
@@ -4213,7 +4205,7 @@ paths:
   /actions/{action_id}:
     get:
       summary: Get a specific action
-      description:
+      description: ''
       tags:
       - Actions
       parameters:
@@ -4249,7 +4241,7 @@ paths:
           $ref: '#/components/responses/500'
     put:
       summary: Update a specific action
-      description:
+      description: ''
       tags:
       - Actions
       parameters:
@@ -4372,7 +4364,7 @@ paths:
   /actions/{action_id}/mark_as_done:
     put:
       summary: Mark a specific action as complete
-      description:
+      description: ''
       tags:
       - Actions
       parameters:
@@ -4409,7 +4401,7 @@ paths:
   /actions/{action_id}/undo_completion:
     put:
       summary: Undo action completion
-      description:
+      description: ''
       tags:
       - Actions
       parameters:
@@ -4484,7 +4476,7 @@ paths:
   /actions/{action_id}/revert_promotion:
     put:
       summary: Undo action promotion
-      description:
+      description: ''
       tags:
       - Actions
       parameters:
@@ -4565,7 +4557,7 @@ paths:
   /filters:
     get:
       summary: Get the list of custom filters (for the logged API user's account)
-      description:
+      description: ''
       tags:
       - Filters
       parameters:
@@ -4722,7 +4714,7 @@ paths:
   /companies/{company_id}:
     get:
       summary: Get a specific company
-      description:
+      description: ''
       tags:
       - Companies
       parameters:
@@ -4829,7 +4821,7 @@ paths:
   /companies/{company_id}/actions:
     get:
       summary: Get actions associated with a specific company
-      description:
+      description: ''
       tags:
       - Companies
       parameters:
@@ -4890,7 +4882,7 @@ paths:
   /companies/{company_id}/deals:
     get:
       summary: Get deals associated with a specific company
-      description:
+      description: ''
       tags:
       - Companies
       parameters:
@@ -4953,7 +4945,7 @@ paths:
   /companies/{company_id}/notes:
     get:
       summary: Get notes associated with a specific company
-      description:
+      description: ''
       tags:
       - Companies
       parameters:
@@ -5011,7 +5003,7 @@ paths:
   /companies/{company_id}/calls:
     get:
       summary: Get calls associated with a specific company
-      description:
+      description: ''
       tags:
       - Companies
       parameters:
@@ -5069,7 +5061,7 @@ paths:
   /companies/{company_id}/meetings:
     get:
       summary: Get meetings associated with a specific company
-      description:
+      description: ''
       tags:
       - Companies
       parameters:
@@ -5127,7 +5119,7 @@ paths:
   /companies/{company_id}/linked_contacts:
     get:
       summary: Get contacts linked with a specific company
-      description:
+      description: ''
       tags:
       - Companies
       parameters:
@@ -5282,7 +5274,7 @@ paths:
   /companies/{company_id}/linked_contacts/{contact_id}:
     delete:
       summary: Unlink a contact from a company
-      description:
+      description: ''
       tags:
       - Companies
       parameters:
@@ -5359,7 +5351,7 @@ paths:
           $ref: '#/components/responses/500'
     delete:
       summary: Disable company status sync
-      description:
+      description: ''
       tags:
       - Companies
       parameters:
@@ -5571,7 +5563,7 @@ paths:
           $ref: '#/components/responses/500'
     post:
       summary: Create a contact
-      description:
+      description: ''
       tags:
       - Contacts
       parameters: []
@@ -5703,7 +5695,7 @@ paths:
   /contacts/{contact_id}:
     get:
       summary: Get a specific contact
-      description:
+      description: ''
       tags:
       - Contacts
       parameters:
@@ -6062,7 +6054,7 @@ paths:
           $ref: '#/components/responses/500'
     delete:
       summary: Remove a contact's photo
-      description:
+      description: ''
       tags:
       - Contacts
       parameters:
@@ -6099,7 +6091,7 @@ paths:
   /contacts/filters/{filter_id}:
     get:
       summary: Show contacts that meet the criteria of a filter
-      description:
+      description: ''
       tags:
       - Contacts
       parameters:
@@ -6150,7 +6142,7 @@ paths:
   /contacts/delete:
     delete:
       summary: Delete multiple contacts
-      description:
+      description: ''
       tags:
       - Contacts
       parameters:
@@ -6269,7 +6261,7 @@ paths:
   /contacts/{contact_id}/actions:
     get:
       summary: Get all actions for a specific contact
-      description:
+      description: ''
       tags:
       - Contacts
       parameters:
@@ -6329,7 +6321,7 @@ paths:
           $ref: '#/components/responses/500'
     post:
       summary: Create an action for a specific contact
-      description:
+      description: ''
       tags:
       - Contacts
       parameters:
@@ -6384,7 +6376,7 @@ paths:
   /contacts/{contact_id}/deals:
     get:
       summary: Get all deals for a specific contact
-      description:
+      description: ''
       tags:
       - Contacts
       parameters:
@@ -6446,7 +6438,7 @@ paths:
           $ref: '#/components/responses/500'
     post:
       summary: Create a deal for a specific contact
-      description:
+      description: ''
       tags:
       - Contacts
       parameters:
@@ -6536,7 +6528,7 @@ paths:
   /contacts/{contact_id}/notes:
     get:
       summary: Get all notes for a specific contact
-      description:
+      description: ''
       tags:
       - Contacts
       parameters:
@@ -6593,7 +6585,7 @@ paths:
           $ref: '#/components/responses/500'
     post:
       summary: Create a note for a specific contact
-      description:
+      description: ''
       tags:
       - Contacts
       parameters:
@@ -6652,7 +6644,7 @@ paths:
   /contacts/{contact_id}/calls:
     get:
       summary: Get all calls for a specific contact
-      description:
+      description: ''
       tags:
       - Contacts
       parameters:
@@ -6709,7 +6701,7 @@ paths:
           $ref: '#/components/responses/500'
     post:
       summary: Create a call for a specific contact
-      description:
+      description: ''
       tags:
       - Contacts
       parameters:
@@ -6771,7 +6763,7 @@ paths:
   /contacts/{contact_id}/meetings:
     get:
       summary: Get all meetings for a specific contact
-      description:
+      description: ''
       tags:
       - Contacts
       parameters:
@@ -6828,7 +6820,7 @@ paths:
           $ref: '#/components/responses/500'
     post:
       summary: Create a meeting for a specific contact
-      description:
+      description: ''
       tags:
       - Contacts
       parameters:
@@ -6841,16 +6833,12 @@ paths:
               properties:
                 meeting_time_int:
                   $ref: '#/components/schemas/Meeting/properties/meeting_time_int'
+                place:
+                  $ref: '#/components/schemas/Meeting/properties/place'
                 text:
                   $ref: '#/components/schemas/Meeting/properties/text'
-                phone_number:
-                  $ref: '#/components/schemas/Meeting/properties/phone_number'
                 # meeting_result:
                 #   $ref: '#/components/schemas/Meeting/properties/meeting_result'
-                via:
-                  $ref: '#/components/schemas/Meeting/properties/via'
-                recording_link:
-                  $ref: '#/components/schemas/Meeting/properties/recording_link'
                 user_ids_to_notify:
                   type: array
                   description: A list of user IDs to notify
@@ -6890,7 +6878,7 @@ paths:
   /contacts/{contact_id}/relationships:
     get:
       summary: Get all relationships for a specific contact
-      description:
+      description: ''
       tags:
       - Contacts
       parameters:
@@ -6952,7 +6940,7 @@ paths:
           $ref: '#/components/responses/500'
     post:
       summary: Create a relationships for a specific contact
-      description:
+      description: ''
       tags:
       - Contacts
       parameters:
@@ -7023,7 +7011,7 @@ paths:
   /contacts/{contact_id}/relationships/{relationship_id}:
     get:
       summary: Get a specific relationship
-      description:
+      description: ''
       tags:
       - Contacts
       parameters:
@@ -7060,7 +7048,7 @@ paths:
           $ref: '#/components/responses/500'
     put:
       summary: Update a specific relationship
-      description:
+      description: ''
       tags:
       - Contacts
       parameters:
@@ -7131,7 +7119,7 @@ paths:
           $ref: '#/components/responses/500'
     delete:
       summary: Delete a relationship
-      description:
+      description: ''
       tags:
       - Contacts
       parameters:
@@ -7163,7 +7151,7 @@ paths:
   /contacts/{contact_id}/assign_tag/{tag_name}:
     put:
       summary: Assign a tag to a specific contact
-      description:
+      description: ''
       tags:
       - Contacts
       parameters:
@@ -7224,7 +7212,7 @@ paths:
   /contacts/{contact_id}/unassign_tag/{tag_name}:
     put:
       summary: Remove a tag from a specific contact
-      description:
+      description: ''
       tags:
       - Contacts
       parameters:
@@ -7285,7 +7273,7 @@ paths:
   /contacts/{contact_id}/change_status/{status_id}:
     put:
       summary: Change the status of a specific contact
-      description:
+      description: ''
       tags:
       - Contacts
       parameters:
@@ -7364,7 +7352,7 @@ paths:
   /contacts/{contact_id}/change_owner/{owner_id}:
     put:
       summary: Change the owner of a specific contact
-      description:
+      description: ''
       tags:
       - Contacts
       parameters:
@@ -7443,7 +7431,7 @@ paths:
   /contacts/{contact_id}/star:
     put:
       summary: Apply a star to a specific contact
-      description:
+      description: ''
       tags:
       - Contacts
       parameters:
@@ -7521,7 +7509,7 @@ paths:
   /contacts/{contact_id}/unstar:
     put:
       summary: Remove star from a specific contact
-      description:
+      description: ''
       tags:
       - Contacts
       parameters:
@@ -7615,7 +7603,7 @@ paths:
               properties:
                 comment:
                   type: string
-                  maxLength: 140 chars
+                  maxLength: 140
                   example: Joe is not interested in buying windmills at this time.
       responses:
         200:
@@ -7665,7 +7653,7 @@ paths:
   /contacts/{contact_id}/reopen_sales_cycle:
     put:
       summary: Reopen the sales cycle for a specific contact
-      description:
+      description: ''
       tags:
       - Contacts
       parameters:
@@ -7736,7 +7724,7 @@ paths:
                 company_name:
                   type: string
                   description: The name of the company the contact is joining (leave blank to remain without a company)
-                  maxLength: 55 chars
+                  maxLength: 55
                   example: Fancy New Company Inc.
       responses:
         200:
@@ -7911,7 +7899,7 @@ paths:
       tags:
         - Contacts
       parameters:
-        name: contact_id
+      - name: last_id
         in: path
         required: true
         description: Contact ID
@@ -8239,7 +8227,7 @@ paths:
   /notifications/{notification_id}:
     get:
       summary: Get serialised notification by ID
-      description:
+      description: ''
       tags:
         - Notifications
       parameters:
@@ -8316,7 +8304,7 @@ paths:
       description: Marks all users' notifications as read
       tags:
         - Notifications
-      parameters:
+      parameters: []
       responses:
         201:
           description: Created
@@ -8347,7 +8335,7 @@ paths:
   /webhooks:
     get:
       summary: Get all webhooks (associated with the logged API user's account)
-      description:
+      description: ''
       tags:
       - Web Hooks
       parameters: []
@@ -8393,7 +8381,7 @@ paths:
   /webhooks/{webhook_id}:
     get:
       summary: Get a specific webhook
-      description:
+      description: ''
       tags:
       - Web Hooks
       parameters:
@@ -8427,7 +8415,7 @@ paths:
           $ref: '#/components/responses/500'
     delete:
       summary: Delete a specific webhook
-      description:
+      description: ''
       tags:
       - Web Hooks
       parameters:
@@ -8450,7 +8438,7 @@ paths:
   /pipelines:
     get:
       summary: Get all pipelines (associated with the logged API user's account)
-      description:
+      description: ''
       tags:
         - Pipelines
       parameters: []
@@ -8498,7 +8486,7 @@ paths:
   /pipelines/{pipeline_id}:
     get:
       summary: Get a specific pipeline
-      description:
+      description: ''
       tags:
         - Pipelines
       parameters:
@@ -8552,8 +8540,6 @@ components:
           example: c+g0Y3VGHdIztKbHcjVcOuwf34EmFlXI9Qot5hTvb2F=
         user:
           $ref: '#/components/schemas/User'
-          description: The logged API user
-          readOnly: true
         team:
           type: array
           description: List of users who make up the rest of the logged API users team
@@ -8571,12 +8557,8 @@ components:
           example: pro
         settings:
           $ref: '#/components/schemas/Settings'
-          description: Settings for the logged API user
-          readOnly: true
         cost_setup:
           $ref: '#/components/schemas/Cost_setup'
-          description: Cost setup for the logged API user
-          readOnly: true
         custom_fields:
           type: array
           description: List of custom fields for the logged API user's account
@@ -8656,7 +8638,7 @@ components:
           description: List of titles which can be used to prefix the names of contacts
           items:
             type: string
-          maxLength: 7 chars
+            maxLength: 7
           readOnly: true
           example:
           - Mr
@@ -8750,17 +8732,17 @@ components:
         first_name:
           type: string
           description: First name of the contact
-          maxLength: 25 chars
+          maxLength: 25
           example: Joe
         last_name:
           type: string
           description: Last name of the contact
-          maxLength: 25 chars
+          maxLength: 25
           example: Bloggs
         job_title:
           type: string
           description: Job title of the contact
-          maxLength: 1000 chars
+          maxLength: 1000
           example: Engineer
         starred:
           type: boolean
@@ -8780,7 +8762,7 @@ components:
         company_name:
           type: string
           description: Name of the company, to whom the contact belongs
-          maxLength: 55 chars
+          maxLength: 55
           example: Morgan's Forensic Lab
         url:
           type: array
@@ -8827,7 +8809,7 @@ components:
         address_list:
           description: An array of contact addresses.
           type: array
-          maxItems: 2 addresses
+          maxItems: 2
           items:
             $ref: '#/components/schemas/Typed_address'
         status:
@@ -8857,7 +8839,7 @@ components:
         background:
           type: string
           description: Background infomation about the contact
-          maxLength: 10240 chars
+          maxLength: 10240
           example: >-
             I met Joe Bloggs at the annual Eco Conference in Florida. Her company currently provides
             solar panels (along with a lot of other stuff) to the State Government of California, Nevada, Oregon,
@@ -8934,7 +8916,7 @@ components:
                 example: 1524818902
               comment:
                 type: string
-                maxLength: 140 chars
+                maxLength: 140
                 description: An optional message detailing why the sales cycle was closed
                 readOnly: true
                 example:
@@ -8987,12 +8969,12 @@ components:
         name:
           type: string
           description: Name of the company
-          maxLength: 55 chars
+          maxLength: 55
           example: Crockett & Tubbs Security
         description:
           type: string
           description: Description of the company
-          maxLength: 10240 chars
+          maxLength: 10240
           example: For all your security needs
         phone:
           type: string
@@ -9134,7 +9116,7 @@ components:
         text:
           type: string
           description: The main text/description of the action
-          maxLength: 140 chars
+          maxLength: 140
           example: '#1 Email Jane introducing our organization'
         status:
           type: string
@@ -9228,12 +9210,12 @@ components:
         name:
           type: string
           description: Name of the deal
-          maxLength: 60 chars
+          maxLength: 60
           example: Solar panels
         text:
           type: string
           description: Extra notes related to the deal (supports `[b]bold[/b]` and `[i]italic[/i]` formatting)
-          maxLength: 7168 chars
+          maxLength: 7168
           example: Fingers crossed!
         stage:
           type: integer
@@ -9352,7 +9334,7 @@ components:
         has_deal_items:
           type: boolean
           description: Does the deal have deal items?
-          deafult: false
+          default: false
           example: true
         deal_items:
           type: array
@@ -9448,7 +9430,7 @@ components:
         text:
           type: string
           description: Extra details related to the note(supports `[b]bold[/b]` and `[i]italic[/i]` formatting)
-          maxLength: 7168 chars
+          maxLength: 7168
           example: I met Jane Doe at the ABC conference. She's interested in hearing about XYZ.
         date:
           type: string
@@ -9509,7 +9491,7 @@ components:
         text:
           type: string
           description: Extra details related to the call (supports `[b]bold[/b]` and `[i]italic[/i]` formatting)
-          maxLength: 7168 chars
+          maxLength: 7168
           example: Mary is interested in coming into the office on Tuesday.
         call_result:
           type: string
@@ -9593,7 +9575,7 @@ components:
         text:
           type: string
           description: Extra details related to the meeting (supports `[b]bold[/b]` and `[i]italic[/i]` formatting)
-          maxLength: 7168 chars
+          maxLength: 7168
           example: Mary is interested in coming into the office on Tuesday.
         # meeting_result:
         #   type: string
@@ -9610,6 +9592,7 @@ components:
         place:
           type: string
           description: The place in which the meeting take place
+          maxLength: 100
           example: Meeting room 1
         author:
           type: string
@@ -9813,7 +9796,7 @@ components:
           variant_name:
             type: string
             description: The name of the variant
-            maxLength: 35 chars
+            maxLength: 35
             readOnly: true
             example: Partner
           contact_id:
@@ -9824,13 +9807,13 @@ components:
           first_name:
             type: string
             description: The first name of the contact
-            maxLength: 35 chars
+            maxLength: 35
             readOnly: true
             example: Joe
           last_name:
             type: string
             description: The last name of the contact
-            maxLength: 35 chars
+            maxLength: 35
             readOnly: true
             example: Bloggs
           photo_url:
@@ -9847,7 +9830,7 @@ components:
           company_name:
             type: string
             description: Name of the company, to whom the contact belongs
-            maxLength: 55 chars
+            maxLength: 55
             readOnly: true
             example: Morgan's Forensic Lab
           owner_id:
@@ -10141,12 +10124,12 @@ components:
         text:
           type: string
           description: Display text of the status
-          maxLength: 20 chars
+          maxLength: 20
           example: Prospect
         description:
           type: string
           description: Longer description of what the status is for
-          maxLength: 33 chars
+          maxLength: 33
           example: Actively trying to sell to these people
         color:
           type: string
@@ -10209,7 +10192,7 @@ components:
         text:
           type: string
           description: Description of the lead source
-          maxLength: 40 chars
+          maxLength: 40
           example: Advertisement
         counts:
           type: integer
@@ -10486,11 +10469,18 @@ components:
         name:
           type: string
           description: Name of the custom field
-          maxLength: 60 chars
+          maxLength: 60
           example: Favorite season
         type:
           type: string
-          description: Type of the custom field
+          description: >-
+            Type of the custom field. There are several types of custom fields that may store data in different formats.
+            External ID type is a special type introduced for referencing entities in the external systems. It's value
+            is <em>unique</em> amid the whole system. Secton divider type is introduced just for visual purpose: it
+            allows grouping custom fields. If custom fields in the section don't have values then they are hidden in
+            the 'view' UI (but always shown in 'edit' UI). This logic is applied in the API: if a contact doesn't have
+            values for all the custom fields in the section then this section divider custom field isn't exposed
+            in the API (along with other custom fields inside the section).
           enum:
           - anniversary
           - date
@@ -10499,6 +10489,8 @@ components:
           - number
           - select_box
           - single_line_text
+          - external_id
+          - section_divider
           example: select_box
         position:
           type: integer
@@ -10508,8 +10500,10 @@ components:
         choices:
           description: >-
             A list of possible choices (for fields of type `multiple_choice` or `select_box`)
-          type: string
-          maxLength: 60 choices
+          type: array
+          items:
+            type: string
+          maxItems: 60
           example:
           - Spring
           - Summer
@@ -10530,11 +10524,18 @@ components:
         name:
           type: string
           description: Name of the company field
-          maxLength: 60 chars
+          maxLength: 60
           example: Company size
         type:
           type: string
-          description: Type of the company field
+          description: >-
+            Type of the company field. There are several types of custom fields that may store data in different formats.
+            External ID type is a special type introduced for referencing entities in the external systems. It's value
+            is <em>unique</em> amid the whole system. Secton divider type is introduced just for visual purpose: it
+            allows grouping custom fields. If custom fields in the section don't have values then they are hidden in
+            the 'view' UI (but always shown in 'edit' UI). This logic is applied in the API: if a company doesn't have
+            values for all the custom fields in the section then this section divider custom field isn't exposed
+            in the API (along with other custom fields inside the section).
           enum:
           - date
           - multi_line_text
@@ -10542,6 +10543,8 @@ components:
           - number
           - select_box
           - single_line_text
+          - external_id
+          - section_divider
           example: select_box
         position:
           type: integer
@@ -10551,8 +10554,10 @@ components:
         choices:
           description: >-
             A list of possible choices (for fields of type `multiple_choice` or `select_box`)
-          type: string
-          maxItems: 60 choices
+          type: array
+          items:
+            type: string
+          maxItems: 60
           example:
           - Small
           - Medium
@@ -10572,10 +10577,17 @@ components:
         name:
           type: string
           description: Name of the deal field
-          maxItems: 60 chars
+          maxLength: 60
           example: Deal size
         type:
-          description: Type of the deal field
+          description: >-
+            Type of the deal field. There are several types of custom fields that may store data in different formats.
+            External ID type is a special type introduced for referencing entities in the external systems. It's value
+            is <em>unique</em> amid the whole system. Secton divider type is introduced just for visual purpose: it
+            allows grouping custom fields. If custom fields in the section don't have values then they are hidden in
+            the 'view' UI (but always shown in 'edit' UI). This logic is applied in the API: if a deal doesn't have
+            values for all the custom fields in the section then this section divider custom field isn't exposed
+            in the API (along with other custom fields inside the section).
           type: string
           enum:
           - date
@@ -10584,6 +10596,8 @@ components:
           - number
           - select_box
           - single_line_text
+          - external_id
+          - section_divider
           example: select_box
         position:
           type: integer
@@ -10593,8 +10607,10 @@ components:
         choices:
           description: >-
             A list of possible choices (for fields of type `multiple_choice` or `select_box`)
-          type: string
-          maxItems: 60 choices
+          type: array
+          items:
+            type: string
+          maxItems: 60
           example:
           - Small
           - Medium
@@ -10653,7 +10669,7 @@ components:
           type: array
           items:
             properties:
-              1:
+              '1':
                 type: integer
                 format: int32
                 description: Contacts who's name begins with a non-alphabetic character
@@ -10825,7 +10841,7 @@ components:
           type: array
           items:
             properties:
-              1:
+              '1':
                 type: integer
                 format: int32
                 description: Contacts who's name begins with a non-alphabetic character
@@ -11033,7 +11049,7 @@ components:
         name:
           type: string
           description: Name of the webhook
-          maxLength: 140 chars
+          maxLength: 140
           example: Awesome integration
         hook_url:
           type: string
@@ -12123,11 +12139,11 @@ components:
         type: string
         example: 5aaa9b059007ba08c9ebaf58
   responses:
-    200:
+    '200':
       description: OK
-    201:
+    '201':
       description: Created
-    400:
+    '400':
       description: >-
         Bad Request. The request is not properly formatted, does not properly
         specify response format or contains improper parameters or data. Code
@@ -12167,7 +12183,7 @@ components:
                     description: Reason why this parameter is invalid
                     readOnly: true
                     example: '{attribute_name} is invalid or missing'
-    401:
+    '401':
       description: >-
         Unauthorized. Authorization data is absent, invalid or expired.
         Generally this means that a login form should be displayed to a user.
@@ -12200,25 +12216,25 @@ components:
               errors:
                 type: object
                 readOnly: true
-    403:
+    '403':
       description: >-
         Forbidden. Issued when user is logged in, but does not have permission
         for requested operation. This includes cases when user has reached
         limits like allowed number of contacts. Code 403 means operation is
         forbidden for a user. Fault is on user. Although in some cases, you
         could have prevented this by not sending the request in the first place.
-    404:
+    '404':
       description: >-
         Resource Not Found. When an id was provided for a request but no
         resource exists for that object.
-    409:
+    '409':
       description: >-
         Precondition Failed. Server state does not allow requested operation to
         be carried on. Issued in cases such as when trying to add an assigned
         next action to a contact which already has one assigned for a user. Code
         409 means the stars were not aligned for this to happen. Sometimes you
         could have foreseen it, sometimes not.
-    500:
+    '500':
       description: Internal Server Error. Code 500 means server messed up. Fault is on us.
   securitySchemes:
     BasicAuth:
