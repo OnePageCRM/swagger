@@ -3052,6 +3052,7 @@ paths:
       - $ref: '#/components/parameters/query_deals_status'
       - $ref: '#/components/parameters/query_stage'
       - $ref: '#/components/parameters/query_pipeline_id'
+      - $ref: '#/components/parameters/query_sales_pipeline_id'
       - $ref: '#/components/parameters/query_deals_owner_id'
       - $ref: '#/components/parameters/query_deals_contact_id'
       - $ref: '#/components/parameters/query_deals_company_id'
@@ -3126,6 +3127,8 @@ paths:
                   $ref: '#/components/schemas/Deal/properties/owner_id'
                 pipeline_id:
                   $ref: '#/components/schemas/Deal/properties/pipeline_id'
+                sales_pipeline_id:
+                  $ref: '#/components/schemas/Deal/properties/sales_pipeline_id'
                 name:
                   $ref: '#/components/schemas/Deal/properties/name'
                 text:
@@ -3286,6 +3289,8 @@ paths:
                   $ref: '#/components/schemas/Deal/properties/owner_id'
                 pipeline_id:
                   $ref: '#/components/schemas/Deal/properties/pipeline_id'
+                sales_pipeline_id:
+                  $ref: '#/components/schemas/Deal/properties/sales_pipeline_id'
                 name:
                   $ref: '#/components/schemas/Deal/properties/name'
                 text:
@@ -9336,6 +9341,11 @@ components:
           format: bson-id
           description: ID of a pipeline the deal belongs to
           example: 5cfa87a4849d7873db082f98
+        sales_pipeline_id:
+          type: string
+          format: bson-id
+          description: ID of a sales pipeline the deal belongs to
+          example: 5cfa87a4849d7873db082f98
         name:
           type: string
           description: Name of the deal
@@ -12210,6 +12220,14 @@ components:
       in: query
       required: false
       description: Return deals from the specified pipeline only
+      schema:
+        type: string
+        example: 5cfa87a4849d7873db082f98
+    query_sales_pipeline_id:
+      name: sales_pipeline_id
+      in: query
+      required: false
+      description: Return deals referencing a specified sales pipeline only
       schema:
         type: string
         example: 5cfa87a4849d7873db082f98
