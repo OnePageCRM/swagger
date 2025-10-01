@@ -7787,7 +7787,6 @@ paths:
       description: >-
         This will first delete any actions assigned to the contact. <br>
         Add an optional closing comment with the `comment` field in the request body. <br> <br>
-        Note: cannot close sales cycle if the user has any active (not complete) actions with the contact. <br>
       tags:
       - Contacts
       parameters:
