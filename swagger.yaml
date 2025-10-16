@@ -7780,6 +7780,71 @@ paths:
           $ref: '#/components/responses/409'
         500:
           $ref: '#/components/responses/500'
+  /contacts/{contact_id}/force_close_sales_cycle:
+    put:
+      summary: Force close the sales cycle for a specific contact
+      description: >-
+        This will first delete any actions assigned to the contact. <br>
+        Add an optional closing comment with the `comment` field in the request body. <br> <br>
+      tags:
+      - Contacts
+      parameters:
+      - $ref: '#/components/parameters/path_contact_id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                comment:
+                  type: string
+                  maxLength: 140
+                  example: Joe is not interested in buying windmills at this time.
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    $ref: '#/components/schemas/Success/properties/status'
+                  message:
+                    $ref: '#/components/schemas/Success/properties/message'
+                  timestamp:
+                    $ref: '#/components/schemas/Success/properties/timestamp'
+                  data:
+                    properties:
+                      contact:
+                        $ref: '#/components/schemas/Contact'
+                      next_actions:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Action'
+                      next_action:
+                        $ref: '#/components/schemas/Action'
+                      queued_actions:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Action'
+                      next_action_conflicts:
+                        type: array
+                        items: {}
+                        example: []
+                      company:
+                        $ref: '#/components/schemas/Company'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
   /contacts/{contact_id}/reopen_sales_cycle:
     put:
       summary: Reopen the sales cycle for a specific contact
