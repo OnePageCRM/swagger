@@ -162,6 +162,34 @@ info:
       </p>
 
     <br><br>
+    <h3>Partial update</h3>
+      <table class="table table-striped table-bordered">
+        <thead>
+          <tr>
+            <td>Name</td>
+            <td>Type</td>
+            <td>Description</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>partial</td>
+            <td>boolean</td>
+            <td>Whether you would like to provide a partial update or not.</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        Using the partial field, you can provide only the updated fields in the request body while updating a resource instead of sending all the fields:
+      </p>
+      <p class="url">
+        <code class="bluetext">
+          <span class="get-text">PUT</span>
+          contacts.json?partial=true
+        </code>
+      </p>
+
+    <br><br>
     <h3>Using this Documentation</h3>
       <p>
       You can use these docs to interact directly with the API. Simply:
