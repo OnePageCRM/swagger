@@ -184,7 +184,7 @@ info:
       </p>
       <p class="url">
         <code class="bluetext">
-          <span class="get-text">PUT</span>
+          <span class="put-text">PUT</span>
           contacts.json?partial=true
         </code>
       </p>
