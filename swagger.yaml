@@ -285,6 +285,9 @@ tags:
 - name: Relationship Types
   description: >-
     Information about the relationship types that's used to identify the relationships between the contacts.
+- name: Email Templates
+  description: >-
+    The saved email templates accessible by the user.
 - name: Pipelines
   description: >-
     Information about the sales process of products or services, including deal stages.
@@ -4026,7 +4029,7 @@ paths:
                     $ref: '#/components/schemas/Success/properties/timestamp'
                   data:
                     properties:
-                      deal:
+                      relationship_type:
                         $ref: '#/components/schemas/Relationship_Type'
         400:
           $ref: '#/components/responses/400'
@@ -4050,6 +4053,100 @@ paths:
       responses:
         200:
           $ref: '#/components/responses/200'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
+  /email_templates:
+    get:
+      summary: Get a list of email templates
+      description:
+      tags:
+      - Email Templates
+      parameters:
+      - $ref: '#/components/parameters/query_date_filter'
+      - $ref: '#/components/parameters/query_since'
+      - $ref: '#/components/parameters/query_until'
+      - $ref: '#/components/parameters/query_modified_since'
+      - $ref: '#/components/parameters/query_unmodified_since'
+      - $ref: '#/components/parameters/query_sort_by'
+      - $ref: '#/components/parameters/query_order'
+      - $ref: '#/components/parameters/query_page'
+      - $ref: '#/components/parameters/query_per_page'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    $ref: '#/components/schemas/Success/properties/status'
+                  message:
+                    $ref: '#/components/schemas/Success/properties/message'
+                  timestamp:
+                    $ref: '#/components/schemas/Success/properties/timestamp'
+                  data:
+                    properties:
+                      email_templates:
+                        type: array
+                        items:
+                          properties:
+                            email_template:
+                              $ref: '#/components/schemas/Email_Template'
+                      total_count:
+                        $ref: '#/components/schemas/Page_data/properties/total_count'
+                      page:
+                        $ref: '#/components/schemas/Page_data/properties/page'
+                      per_page:
+                        $ref: '#/components/schemas/Page_data/properties/per_page'
+                      max_page:
+                        $ref: '#/components/schemas/Page_data/properties/max_page'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
+  /email_templates/{email_template_id}:
+    get:
+      summary: Get a specific email template
+      description:
+      tags:
+      - Email Templates
+      parameters:
+      - $ref: '#/components/parameters/path_email_template_id'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    $ref: '#/components/schemas/Success/properties/status'
+                  message:
+                    $ref: '#/components/schemas/Success/properties/message'
+                  timestamp:
+                    $ref: '#/components/schemas/Success/properties/timestamp'
+                  data:
+                    properties:
+                      email_template:
+                        $ref: '#/components/schemas/Email_Template'
         400:
           $ref: '#/components/responses/400'
         401:
@@ -9976,7 +10073,7 @@ components:
         id:
           type: string
           format: bson-id
-          description: ID of the deal
+          description: ID of the relationship type
           readOnly: true
           example: 5aaa9b059007ba08c9ebaf58
         symmetrical:
@@ -10002,13 +10099,93 @@ components:
         created_at:
           type: string
           format: date-time
-          description: Creation time of the deal
+          description: Creation time of the relationship type
           readOnly: true
           example: '2018-03-15T16:10:45Z'
         modified_at:
           type: string
           format: date-time
-          description: Last modification time of the deal
+          description: Last modification time of the relationship type
+          readOnly: true
+          example: '2018-03-15T16:10:45Z'
+    Email_Template:
+      description: >-
+        The saved email templates accessible by the user.
+      properties:
+        id:
+          type: string
+          format: bson-id
+          description: ID of the email template
+          readOnly: true
+          example: 5aaa9b059007ba08c9ebaf78
+        name:
+          type: string
+          description: The name of the email template
+          readOnly: true
+          example: Welcome template
+        subject:
+          type: string
+          description: The subject of the email template
+          readOnly: true
+          example: Welcome
+        body:
+          type: string
+          description: The body of the email template
+          readOnly: true
+          example: Hi Cutomer
+        account_id:
+          type: string
+          format: bson-id
+          description: The ID of account to which the template belongs
+          readOnly: true
+          example: 5aead4809007ba56ffca942c
+        user_id:
+          type: string
+          format: bson-id
+          description: The ID of template owner
+          readOnly: true
+          example: 5aead4809007ba56ffca942e
+        group_id:
+          type: string
+          format: bson-id
+          description: The ID of the owner group of the template
+          readOnly: true
+          example: 5aead4809007ba56ffca942d
+        is_private:
+          type: boolean
+          description: Is the email template accessible only by the owning user
+          readOnly: true
+          example: true
+        has_quote_block:
+          type: boolean
+          description: Does the email template contain quoted blocks that could be substituted from other resources
+          readOnly: true
+          example: true
+        used_in_quick_quotes:
+          type: boolean
+          description: Is the email template used in the default deals' quoted emails
+          readOnly: true
+          example: true
+        used_in_autoflow_config:
+          type: boolean
+          description: Is the email template used in autoflow configurations
+          readOnly: true
+          example: true
+        attachments:
+          type: array
+          readOnly: true
+          items:
+            $ref: '#/components/schemas/Attachment'
+        created_at:
+          type: string
+          format: date-time
+          description: Creation time of the email template
+          readOnly: true
+          example: '2018-03-15T16:10:45Z'
+        modified_at:
+          type: string
+          format: date-time
+          description: Last modification time of the email template
           readOnly: true
           example: '2018-03-15T16:10:45Z'
     Related_contact:
@@ -10099,7 +10276,7 @@ components:
         id:
           type: string
           format: bson-id
-          description: ID of the deal
+          description: ID of the contact relationship
           readOnly: true
           example: 5aaa9b059007ba08c9ebaf57
         relationship_type_id:
@@ -10112,13 +10289,13 @@ components:
         created_at:
           type: string
           format: date-time
-          description: Creation time of the deal
+          description: Creation time of the contact relationship
           readOnly: true
           example: '2018-03-15T16:10:45Z'
         modified_at:
           type: string
           format: date-time
-          description: Last modification time of the deal
+          description: Last modification time of the contact relationship
           readOnly: true
           example: '2018-03-15T16:10:45Z'
     Email_address:
@@ -11533,6 +11710,14 @@ components:
       in: path
       required: true
       description: Relationship ID
+      schema:
+        type: string
+        minimum: 1
+    path_email_template_id:
+      name: email_template_id
+      in: path
+      required: true
+      description: Email template ID
       schema:
         type: string
         minimum: 1
