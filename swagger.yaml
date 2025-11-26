@@ -9454,6 +9454,11 @@ components:
           description: >-
             A numerical representation of the progress of a pending deal (number ranging from 0 to 100 exclusive)
           example: 50
+        last_stage:
+          type: integer
+          format: int32
+          description: This represents the last pending stage of a closed deal (`won` or `lost`)
+          example: 50
         status:
           type: string
           description: Status of the deal
