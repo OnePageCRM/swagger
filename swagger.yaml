@@ -9009,7 +9009,7 @@ components:
               type:
                 type: string
                 description: The type of phone number
-                enum: [work, mobile, home, direct, fax, skype, company, other]
+                enum: [work, mobile, home, direct, fax, company, other]
                 example: work
               value:
                 type: string
@@ -9741,7 +9741,6 @@ components:
           description: Through which application did the call take place
           enum:
           - unknown
-          - skype
           - jabber
           - talkdesk
           - phone
