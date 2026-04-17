@@ -3306,6 +3306,7 @@ paths:
       - $ref: '#/components/parameters/query_deals_company_id'
       - $ref: '#/components/parameters/query_deals_tag'
       - $ref: '#/components/parameters/query_deals_filter_id'
+      - $ref: '#/components/parameters/query_deals_fields'
       - $ref: '#/components/parameters/query_deals_date_filter'
       - $ref: '#/components/parameters/query_since'
       - $ref: '#/components/parameters/query_until'
@@ -3337,6 +3338,13 @@ paths:
                           properties:
                             deal:
                               $ref: '#/components/schemas/Deal'
+                            contacts:
+                              type: array
+                              description: >-
+                                Full `Contact` objects for the deal (primary contact plus linked contacts).
+                                Returned only when `fields=contacts(all)` is supplied.
+                              items:
+                                $ref: '#/components/schemas/Contact'
                       total_count:
                         $ref: '#/components/schemas/Page_data/properties/total_count'
                       page:
@@ -9860,6 +9868,43 @@ components:
           description: Last modification time of the deal
           readOnly: true
           example: '2018-03-15T16:10:45Z'
+        linked_contacts:
+          type: array
+          readOnly: true
+          description: >-
+            Short form of contacts linked to the deal. Always returned with the deal payload
+            (on both `GET /deals` and `GET /deals/{deal_id}`). For full contact objects use
+            `fields=contacts(all)` on `GET /deals`.
+          items:
+            type: object
+            readOnly: true
+            properties:
+              id:
+                type: string
+                format: bson-id
+                description: ID of the linked contact
+                readOnly: true
+                example: 68b5edd78b3ee61b685c8692
+              contact_name:
+                type: string
+                description: Full display name of the linked contact
+                readOnly: true
+                example: Sajed Almorsy
+              company:
+                type: string
+                description: Display name of the company the contact belongs to (empty string if none)
+                readOnly: true
+                example: OnePageCRM
+              photo_url:
+                type: string
+                description: URL of the contact's profile picture (empty string if none)
+                readOnly: true
+                example: ''
+          example:
+            - id: 68b5edd78b3ee61b685c8692
+              contact_name: Sajed Almorsy
+              company: OnePageCRM
+              photo_url: ''
     Note:
       description: >-
         Allow you to keep track of additional information related to your contacts. Notes can include any
@@ -12051,6 +12096,22 @@ components:
       schema:
         type: string
         example: 5ae9cc2a9007ba5b856c7bb8
+    query_deals_fields:
+      name: fields
+      in: query
+      required: false
+      description: |
+        Include related resources alongside each deal in the response. <br/>
+        Syntax: `fields=<resource>(all)`. Use a comma-separated list to request multiple resources. <br/>
+        Supported resources: `contacts`. <br/>
+        When `fields=contacts(all)` is supplied, each deal entry includes a `contacts` array
+        of full `Contact` objects (the primary contact plus any linked contacts). The short-form
+        `linked_contacts` array on each deal is always returned regardless of this parameter. <br/>
+        Example: <br/>
+        `fields=contacts(all)`
+      schema:
+        type: string
+        example: contacts(all)
     query_actions_date_filter:
       name: date_filter
       in: query
