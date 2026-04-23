@@ -5854,6 +5854,8 @@ paths:
       - $ref: '#/components/parameters/query_contacts_company_id'
       - $ref: '#/components/parameters/query_contacts_tag'
       - $ref: '#/components/parameters/query_contacts_filter_id'
+      # Include related resources
+      - $ref: '#/components/parameters/query_contacts_fields'
       # Date filters
       - $ref: '#/components/parameters/query_date_filter'
       - $ref: '#/components/parameters/query_since'
@@ -5903,6 +5905,31 @@ paths:
                               example: []
                             company:
                               $ref: '#/components/schemas/Company'
+                            deals:
+                              type: array
+                              description: Returned only when `fields=deals(all)` is supplied. Full deal objects.
+                              items:
+                                $ref: '#/components/schemas/Deal'
+                            notes:
+                              type: array
+                              description: Returned only when `fields=notes(all)` is supplied. Full note objects.
+                              items:
+                                $ref: '#/components/schemas/Note'
+                            calls:
+                              type: array
+                              description: Returned only when `fields=calls(all)` is supplied. Full call objects.
+                              items:
+                                $ref: '#/components/schemas/Call'
+                            meetings:
+                              type: array
+                              description: Returned only when `fields=meetings(all)` is supplied. Full meeting objects.
+                              items:
+                                $ref: '#/components/schemas/Meeting'
+                            pinned_attachments:
+                              type: array
+                              description: Returned only when `fields=pinned_attachments(all)` is supplied. Full attachment objects.
+                              items:
+                                $ref: '#/components/schemas/Attachment'
                       total_count:
                         $ref: '#/components/schemas/Page_data/properties/total_count'
                       page:
@@ -12087,6 +12114,23 @@ components:
       schema:
         type: string
         example: 5ae9cc2a9007ba5b856c7bb8
+    query_contacts_fields:
+      name: fields
+      in: query
+      required: false
+      description: |
+        Include related resources alongside each contact in the response. <br/>
+        Syntax: `fields=<resource>(all)`. Use a comma-separated list to request multiple resources. <br/>
+        Each requested resource is returned as an array of full objects nested under the matching key inside the contact entry
+        (e.g. `fields=calls(all)` adds a `calls` array next to `contact` for each item in the `contacts` array).
+        Supported resources: `deals`, `notes`, `calls`, `meetings`, `pinned_attachments`. <br/>
+        Examples: <br/>
+        `fields=calls(all)` <br/>
+        `fields=calls(all),notes(all)` <br/>
+        `fields=deals(all),notes(all),calls(all),meetings(all),pinned_attachments(all)`
+      schema:
+        type: string
+        example: calls(all),notes(all)
     query_deals_filter_id:
       name: filter_id
       in: query
