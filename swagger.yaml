@@ -336,6 +336,7 @@ tags:
 paths:
   /bootstrap:
     get:
+      operationId: getBootstrap
       summary: Get useful information about the logged API user's account
       description: >-
         Includes things like: <br>
@@ -392,6 +393,7 @@ paths:
           $ref: '#/components/responses/401'
   /change_auth_key:
     post:
+      operationId: changeAuthKey
       summary: Invalidate the current API key and return a new API key
       description: >-
         **Warning:** This will change the users authentication key, and therefore log them out of all applications. <br>
@@ -423,6 +425,7 @@ paths:
           $ref: '#/components/responses/401'
   /users:
     get:
+      operationId: listUsers
       summary: Get the list of users (for the logged API user's account)
       tags:
       - Users
@@ -460,6 +463,7 @@ paths:
           $ref: '#/components/responses/500'
   /users/{user_id}:
     get:
+      operationId: getUser
       summary: Get a specific user
       tags:
       - Users
@@ -495,6 +499,7 @@ paths:
         500:
           $ref: '#/components/responses/500'
     put:
+      operationId: updateUser
       summary: Update a specific user
       description: >-
         Each team member can edit their own details, admins can update all. <br>
@@ -556,6 +561,7 @@ paths:
           $ref: '#/components/responses/500'
   /lead_sources:
     get:
+      operationId: listLeadSources
       summary: Get the list of lead sources (for the logged API user's account)
       tags:
       - Lead Sources
@@ -590,6 +596,7 @@ paths:
         500:
           $ref: '#/components/responses/500'
     post:
+      operationId: createLeadSource
       summary: Create a new lead source
       tags:
       - Lead Sources
@@ -629,6 +636,7 @@ paths:
           $ref: '#/components/responses/500'
   /lead_sources/{lead_source_id}:
     get:
+      operationId: getLeadSource
       summary: Get a specific lead source
       tags:
       - Lead Sources
@@ -662,6 +670,7 @@ paths:
         500:
           $ref: '#/components/responses/500'
     put:
+      operationId: updateLeadSource
       summary: Update a specific lead source
       tags:
       - Lead Sources
@@ -701,6 +710,7 @@ paths:
         500:
           $ref: '#/components/responses/500'
     delete:
+      operationId: deleteLeadSource
       summary: Delete a specific lead source
       tags:
       - Lead Sources
@@ -723,6 +733,7 @@ paths:
           $ref: '#/components/responses/500'
   /statuses:
     get:
+      operationId: listStatuses
       summary: Get the list of statuses (for the logged API user's account)
       description: ''
       tags:
@@ -760,6 +771,7 @@ paths:
         500:
           $ref: '#/components/responses/500'
     post:
+      operationId: createStatus
       summary: Create a new status
       description: ''
       tags:
@@ -802,6 +814,7 @@ paths:
           $ref: '#/components/responses/500'
   /statuses/{status_id}:
     get:
+      operationId: getStatus
       summary: Get a specific status
       description: ''
       tags:
@@ -838,6 +851,7 @@ paths:
         500:
           $ref: '#/components/responses/500'
     put:
+      operationId: updateStatus
       summary: Update a specific status
       description: ''
       tags:
@@ -880,6 +894,7 @@ paths:
         500:
           $ref: '#/components/responses/500'
     delete:
+      operationId: deleteStatus
       summary: Delete a specific status
       description: ''
       tags:
@@ -903,6 +918,7 @@ paths:
           $ref: '#/components/responses/500'
   /deal_fields:
     get:
+      operationId: listDealFields
       summary: Get the list of deal fields (for the logged API user's account)
       description: ''
       tags:
@@ -954,6 +970,7 @@ paths:
         500:
           $ref: '#/components/responses/500'
     post:
+      operationId: createDealField
       summary: Create a new deal field
       description: Only admins can create deal fields.
       tags:
@@ -996,6 +1013,7 @@ paths:
           $ref: '#/components/responses/500'
   /deal_fields/{deal_field_id}:
     get:
+      operationId: getDealField
       summary: Get a specific deal field
       description: ''
       tags:
@@ -1032,6 +1050,7 @@ paths:
         500:
           $ref: '#/components/responses/500'
     put:
+      operationId: updateDealField
       summary: Update a specific deal field
       description: Only admins can update deal fields.
       tags:
@@ -1074,6 +1093,7 @@ paths:
         500:
           $ref: '#/components/responses/500'
     delete:
+      operationId: deleteDealField
       summary: Delete a specific deal field
       description: Only admins can delete deal fields.
       tags:
@@ -1097,6 +1117,7 @@ paths:
           $ref: '#/components/responses/500'
   /custom_fields:
     get:
+      operationId: listCustomFields
       summary: Get the list of custom fields (for the logged API user's account)
       description: ''
       tags:
@@ -1148,6 +1169,7 @@ paths:
         500:
           $ref: '#/components/responses/500'
     post:
+      operationId: createCustomField
       summary: Create a new custom field
       description: Only admins can create custom fields.
       tags:
@@ -1190,6 +1212,7 @@ paths:
           $ref: '#/components/responses/500'
   /custom_fields/{custom_field_id}:
     get:
+      operationId: getCustomField
       summary: Get a specific custom field
       description: ''
       tags:
@@ -1226,6 +1249,7 @@ paths:
         500:
           $ref: '#/components/responses/500'
     put:
+      operationId: updateCustomField
       summary: Update a specific custom field
       description: Only admins can update custom fields.
       tags:
@@ -1268,6 +1292,7 @@ paths:
         500:
           $ref: '#/components/responses/500'
     delete:
+      operationId: deleteCustomField
       summary: Delete a specific custom field
       description: Only admins can delete custom fields.
       tags:
@@ -1291,6 +1316,7 @@ paths:
           $ref: '#/components/responses/500'
   /company_fields:
     get:
+      operationId: listCompanyFields
       summary: Get the list of company fields (for the logged API user's account)
       description: ''
       tags:
@@ -1342,6 +1368,7 @@ paths:
         500:
           $ref: '#/components/responses/500'
     post:
+      operationId: createCompanyField
       summary: Create a new company field
       description: Only admins can create company fields.
       tags:
@@ -1384,6 +1411,7 @@ paths:
           $ref: '#/components/responses/500'
   /company_fields/{company_field_id}:
     get:
+      operationId: getCompanyField
       summary: Get a specific company field
       description: ''
       tags:
@@ -1420,6 +1448,7 @@ paths:
         500:
           $ref: '#/components/responses/500'
     put:
+      operationId: updateCompanyField
       summary: Update a specific company field
       description: Only admins can update company fields.
       tags:
@@ -1462,6 +1491,7 @@ paths:
         500:
           $ref: '#/components/responses/500'
     delete:
+      operationId: deleteCompanyField
       summary: Delete a specific company field
       description: Only admins can delete company fields.
       tags:
@@ -1485,6 +1515,7 @@ paths:
           $ref: '#/components/responses/500'
   /predefined_actions:
     get:
+      operationId: listPredefinedActions
       summary: Get the list of predefined actions (for the logged API user's account)
       description: ''
       tags:
@@ -1524,6 +1555,7 @@ paths:
         500:
           $ref: '#/components/responses/500'
     post:
+      operationId: createPredefinedAction
       summary: Create a new predefined action
       description: ''
       tags:
@@ -1566,6 +1598,7 @@ paths:
           $ref: '#/components/responses/500'
   /predefined_actions/{predefined_action_id}:
     get:
+      operationId: getPredefinedAction
       summary: Get a specific predefined action
       description: ''
       tags:
@@ -1602,6 +1635,7 @@ paths:
         500:
           $ref: '#/components/responses/500'
     put:
+      operationId: updatePredefinedAction
       summary: Update a specific predefined action
       description: ''
       tags:
@@ -1644,6 +1678,7 @@ paths:
         500:
           $ref: '#/components/responses/500'
     delete:
+      operationId: deletePredefinedAction
       summary: Delete a specific predefined action
       description: ''
       tags:
@@ -1667,6 +1702,7 @@ paths:
           $ref: '#/components/responses/500'
   /predefined_action_groups:
     get:
+      operationId: listPredefinedActionGroups
       summary: Get the list of predefined action groups (for the logged API user's account)
       description: ''
       tags:
@@ -1706,6 +1742,7 @@ paths:
         500:
           $ref: '#/components/responses/500'
     post:
+      operationId: createPredefinedActionGroup
       summary: Create a new predefined action group
       description: ''
       tags:
@@ -1766,6 +1803,7 @@ paths:
           $ref: '#/components/responses/500'
   /predefined_action_groups/{predefined_action_group_id}:
     get:
+      operationId: getPredefinedActionGroup
       summary: Get a specific predefined action group
       description: ''
       tags:
@@ -1802,6 +1840,7 @@ paths:
         500:
           $ref: '#/components/responses/500'
     put:
+      operationId: updatePredefinedActionGroup
       summary: Update a specific predefined action group
       description: ''
       tags:
@@ -1862,6 +1901,7 @@ paths:
         500:
           $ref: '#/components/responses/500'
     delete:
+      operationId: deletePredefinedActionGroup
       summary: Delete a specific predefined action group
       description: ''
       tags:
@@ -1885,6 +1925,7 @@ paths:
           $ref: '#/components/responses/500'
   /predefined_items:
     get:
+      operationId: listPredefinedItems
       summary: Get the list of predefined items (for the logged API user's account)
       description: ''
       tags:
@@ -1924,6 +1965,7 @@ paths:
         500:
           $ref: '#/components/responses/500'
     post:
+      operationId: createPredefinedItem
       summary: Create a new predefined item
       description: ''
       tags:
@@ -1984,6 +2026,7 @@ paths:
           $ref: '#/components/responses/500'
   /predefined_items/{predefined_item_id}:
     get:
+      operationId: getPredefinedItem
       summary: Get a specific predefined item
       description: ''
       tags:
@@ -2020,6 +2063,7 @@ paths:
         500:
           $ref: '#/components/responses/500'
     put:
+      operationId: updatePredefinedItem
       summary: Update a specific predefined item
       description: ''
       tags:
@@ -2080,6 +2124,7 @@ paths:
         500:
           $ref: '#/components/responses/500'
     delete:
+      operationId: deletePredefinedItem
       summary: Delete a specific predefined item
       description: ''
       tags:
@@ -2103,6 +2148,7 @@ paths:
           $ref: '#/components/responses/500'
   /predefined_item_groups:
     get:
+      operationId: listPredefinedItemGroups
       summary: Get the list of predefined item groups (for the logged API user's account)
       description: ''
       tags:
@@ -2142,6 +2188,7 @@ paths:
         500:
           $ref: '#/components/responses/500'
     post:
+      operationId: createPredefinedItemGroup
       summary: Create a new predefined item group
       description: ''
       tags:
@@ -2197,6 +2244,7 @@ paths:
           $ref: '#/components/responses/500'
   /predefined_item_groups/{predefined_item_group_id}:
     get:
+      operationId: getPredefinedItemGroup
       summary: Get a specific predefined item group
       description: ''
       tags:
@@ -2233,6 +2281,7 @@ paths:
         500:
           $ref: '#/components/responses/500'
     delete:
+      operationId: deletePredefinedItemGroup
       summary: Delete a specific predefined item group
       description: ''
       tags:
@@ -2256,6 +2305,7 @@ paths:
           $ref: '#/components/responses/500'
   /notes:
     get:
+      operationId: listNotes
       summary: Get a list of notes
       description: ''
       tags:
@@ -2314,6 +2364,7 @@ paths:
         500:
           $ref: '#/components/responses/500'
     post:
+      operationId: createNote
       summary: Create a new note
       description: ''
       tags:
@@ -2374,6 +2425,7 @@ paths:
           $ref: '#/components/responses/500'
   /notes/{note_id}:
     get:
+      operationId: getNote
       summary: Get a specific note
       description: ''
       tags:
@@ -2410,6 +2462,7 @@ paths:
         500:
           $ref: '#/components/responses/500'
     put:
+      operationId: updateNote
       summary: Update a specific note
       description: ''
       tags:
@@ -2470,6 +2523,7 @@ paths:
         500:
           $ref: '#/components/responses/500'
     delete:
+      operationId: deleteNote
       summary: Delete a specific note
       description: ''
       tags:
@@ -2493,6 +2547,7 @@ paths:
           $ref: '#/components/responses/500'
   /notes/{note_id}/attachments:
     post:
+      operationId: addNoteAttachment
       summary: Create attachment and assign it to an existing note
       tags:
       - Notes
@@ -2574,6 +2629,7 @@ paths:
           $ref: '#/components/responses/500'
   /calls:
     get:
+      operationId: listCalls
       summary: Get a list of calls
       description: ''
       tags:
@@ -2632,6 +2688,7 @@ paths:
         500:
           $ref: '#/components/responses/500'
     post:
+      operationId: createCall
       summary: Create a call
       description: ''
       tags:
@@ -2695,6 +2752,7 @@ paths:
           $ref: '#/components/responses/500'
   /calls/{call_id}:
     get:
+      operationId: getCall
       summary: Get a specific call
       description: ''
       tags:
@@ -2731,6 +2789,7 @@ paths:
         500:
           $ref: '#/components/responses/500'
     put:
+      operationId: updateCall
       summary: Update a specific call
       description: ''
       tags:
@@ -2794,6 +2853,7 @@ paths:
         500:
           $ref: '#/components/responses/500'
     delete:
+      operationId: deleteCall
       summary: Delete a specific call
       description: ''
       tags:
@@ -2817,6 +2877,7 @@ paths:
           $ref: '#/components/responses/500'
   /calls/{call_id}/attachments:
     post:
+      operationId: addCallAttachment
       summary: Create attachment and assign it to an existing call
       description: >-
         Before creating an attachment, the file should be uploaded to S3. <br> <br>
@@ -2898,6 +2959,7 @@ paths:
           $ref: '#/components/responses/500'
   /call_results:
     get:
+      operationId: listCallResults
       summary: Get the list of call results (for the logged API user's account)
       description: >-
         Includes: <br>
@@ -2974,6 +3036,7 @@ paths:
           $ref: '#/components/responses/500'
   /meetings:
     get:
+      operationId: listMeetings
       summary: Get a list of meetings
       description: ''
       tags:
@@ -3032,6 +3095,7 @@ paths:
         500:
           $ref: '#/components/responses/500'
     post:
+      operationId: createMeeting
       summary: Create a meeting
       description: ''
       tags:
@@ -3091,6 +3155,7 @@ paths:
           $ref: '#/components/responses/500'
   /meetings/{meeting_id}:
     get:
+      operationId: getMeeting
       summary: Get a specific meeting
       description: ''
       tags:
@@ -3127,6 +3192,7 @@ paths:
         500:
           $ref: '#/components/responses/500'
     put:
+      operationId: updateMeeting
       summary: Update a specific meeting
       description: ''
       tags:
@@ -3186,6 +3252,7 @@ paths:
         500:
           $ref: '#/components/responses/500'
     delete:
+      operationId: deleteMeeting
       summary: Delete a specific meeting
       description: ''
       tags:
@@ -3209,6 +3276,7 @@ paths:
           $ref: '#/components/responses/500'
   /meetings/{meeting_id}/attachments:
     post:
+      operationId: addMeetingAttachment
       summary: Create attachment and assign it to an existing meeting
       description: >-
         Before creating an attachment, the file should be uploaded to S3. <br> <br>
@@ -3290,6 +3358,7 @@ paths:
           $ref: '#/components/responses/500'
   /deals:
     get:
+      operationId: listDeals
       summary: Get a list of deals
       description: ''
       tags:
@@ -3366,6 +3435,7 @@ paths:
         500:
           $ref: '#/components/responses/500'
     post:
+      operationId: createDeal
       summary: Create a new deal
       description: ''
       tags:
@@ -3490,6 +3560,7 @@ paths:
           $ref: '#/components/responses/500'
   /deals/{deal_id}:
     get:
+      operationId: getDeal
       summary: Get a specific deal
       description: ''
       tags:
@@ -3527,6 +3598,7 @@ paths:
         500:
           $ref: '#/components/responses/500'
     put:
+      operationId: updateDeal
       summary: Update a specific deal
       description: ''
       tags:
@@ -3651,6 +3723,7 @@ paths:
         500:
           $ref: '#/components/responses/500'
     delete:
+      operationId: deleteDeal
       summary: Delete a specific deal
       description: >-
         Note: only users with the `delete_deals` permission can delete deals.
@@ -3675,6 +3748,7 @@ paths:
           $ref: '#/components/responses/500'
   /deals/{deal_id}/attachments:
     post:
+      operationId: addDealAttachment
       summary: Create attachment and assign it to an existing deal
       description: >-
         Before creating an attachment, the file should be uploaded to S3. <br>
@@ -3756,6 +3830,7 @@ paths:
           $ref: '#/components/responses/500'
   /attachments/s3_form:
     get:
+      operationId: getAttachmentUploadForm
       summary: >-
         Get a pre-authorized S3 upload form (use to upload a file on the client side)
       description: >-
@@ -3843,6 +3918,7 @@ paths:
           $ref: '#/components/responses/500'
   /attachments:
     post:
+      operationId: createAttachment
       summary: Create a new attachment
       description: >-
         Before creating an attachment, the file should be uploaded to S3. <br> <br>
@@ -3924,6 +4000,7 @@ paths:
           $ref: '#/components/responses/500'
   /attachments/{attachment_id}:
     patch:
+      operationId: updateAttachment
       summary: Sets/updates attachment custom file name
       description: Once the custom file name is set it cannot be unset to nil/empty string
       tags:
@@ -3970,6 +4047,7 @@ paths:
         500:
           $ref: '#/components/responses/500'
     delete:
+      operationId: deleteAttachment
       summary: Delete a specific attachment
       description: ''
       tags:
@@ -3993,6 +4071,7 @@ paths:
           $ref: '#/components/responses/500'
   /attachments/{attachment_id}/pin:
     patch:
+      operationId: pinAttachment
       summary: Pin attachment to its owner contact through its note/call/deal
       description: ''
       tags:
@@ -4028,6 +4107,7 @@ paths:
           $ref: '#/components/responses/500'
   /attachments/{attachment_id}/unpin:
     patch:
+      operationId: unpinAttachment
       summary: Unpin attachment from its owner contact through its note/call/deal
       description: ''
       tags:
@@ -4063,6 +4143,7 @@ paths:
           $ref: '#/components/responses/500'
   /relationship_types:
     get:
+      operationId: listRelationshipTypes
       summary: Get a list of relationship types
       description: ''
       tags:
@@ -4121,6 +4202,7 @@ paths:
         500:
           $ref: '#/components/responses/500'
     post:
+      operationId: createRelationshipType
       summary: Create a new relationship type
       description: ''
       tags:
@@ -4177,6 +4259,7 @@ paths:
           $ref: '#/components/responses/500'
   /relationship_types/{relationship_type_id}:
     get:
+      operationId: getRelationshipType
       summary: Get a specific relationship type
       description: ''
       tags:
@@ -4213,6 +4296,7 @@ paths:
         500:
           $ref: '#/components/responses/500'
     put:
+      operationId: updateRelationshipType
       summary: Update a specific relationship type
       description: ''
       tags:
@@ -4270,6 +4354,7 @@ paths:
         500:
           $ref: '#/components/responses/500'
     delete:
+      operationId: deleteRelationshipType
       summary: Delete a relationship type
       description: ''
       tags:
@@ -4293,6 +4378,7 @@ paths:
           $ref: '#/components/responses/500'
   /countries:
     get:
+      operationId: listCountries
       summary: Get the list of all compatible countries
       description: >-
         A read-only list of all compatible countries, alpha sorted based on their ISO-3166 country codes. <br>
@@ -4337,6 +4423,7 @@ paths:
                                   example: '+353'
   /actions:
     get:
+      operationId: listActions
       summary: Get a list of actions
       description: >-
         Default sort order: <br>
@@ -4404,6 +4491,7 @@ paths:
         500:
           $ref: '#/components/responses/500'
     post:
+      operationId: createAction
       summary: Create a new action
       description: ''
       tags:
@@ -4460,6 +4548,7 @@ paths:
           $ref: '#/components/responses/500'
   /actions/{action_id}:
     get:
+      operationId: getAction
       summary: Get a specific action
       description: ''
       tags:
@@ -4496,6 +4585,7 @@ paths:
         500:
           $ref: '#/components/responses/500'
     put:
+      operationId: updateAction
       summary: Update a specific action
       description: ''
       tags:
@@ -4559,6 +4649,7 @@ paths:
         500:
           $ref: '#/components/responses/500'
     delete:
+      operationId: deleteAction
       summary: Delete a specific action
       tags:
       - Actions
@@ -4581,6 +4672,7 @@ paths:
           $ref: '#/components/responses/500'
   /actions/{action_id}/unassign:
     put:
+      operationId: unassignAction
       summary: Unassign a specific action (from the currently assigned user)
       description: >-
         Note: leaving `assignee_id` blank will assign this action to the logged API user.
@@ -4619,6 +4711,7 @@ paths:
           $ref: '#/components/responses/500'
   /actions/{action_id}/mark_as_done:
     put:
+      operationId: markActionAsDone
       summary: Mark a specific action as complete
       description: ''
       tags:
@@ -4656,6 +4749,7 @@ paths:
           $ref: '#/components/responses/500'
   /actions/{action_id}/undo_completion:
     put:
+      operationId: undoActionCompletion
       summary: Undo action completion
       description: ''
       tags:
@@ -4693,6 +4787,7 @@ paths:
           $ref: '#/components/responses/500'
   /actions/{action_id}/promote:
     put:
+      operationId: promoteAction
       summary: Specify action to be promoted as the logged API users next action
       description: >-
         Only use this method if there is no next action already assigned, otherwise see similar `swap` request. <br>
@@ -4731,6 +4826,7 @@ paths:
           $ref: '#/components/responses/500'
   /actions/{action_id}/revert_promotion:
     put:
+      operationId: revertActionPromotion
       summary: Undo action promotion
       description: ''
       tags:
@@ -4768,6 +4864,7 @@ paths:
           $ref: '#/components/responses/500'
   /actions/{action_id}/swap:
     put:
+      operationId: swapAction
       summary: >-
         Specify action to be swapped in as the logged API users next action
       description: >-
@@ -4812,6 +4909,7 @@ paths:
           $ref: '#/components/responses/500'
   /filters:
     get:
+      operationId: listFilters
       summary: Get the list of custom filters (for the logged API user's account)
       description: ''
       tags:
@@ -4862,6 +4960,7 @@ paths:
           $ref: '#/components/responses/500'
   /filters/{filter_id}:
     get:
+      operationId: getFilter
       summary: Get (and run) a specific custom filter
       description: >-
         This endpoint returns all details of the specified filter, as well as all contacts that meet the criteria of the filter.
@@ -4914,6 +5013,7 @@ paths:
           $ref: '#/components/responses/500'
   /companies:
     get:
+      operationId: listCompanies
       summary: Get a list of companies
       description: Defaults sorting is company name alpha.
       tags:
@@ -4969,6 +5069,7 @@ paths:
           $ref: '#/components/responses/500'
   /companies/{company_id}:
     get:
+      operationId: getCompany
       summary: Get a specific company
       description: ''
       tags:
@@ -5005,6 +5106,7 @@ paths:
         500:
           $ref: '#/components/responses/500'
     put:
+      operationId: updateCompany
       summary: Update a specific company
       description: >-
         Note: when updating a company field, either the `id` or `name` and the `value` must be present.
@@ -5076,6 +5178,7 @@ paths:
           $ref: '#/components/responses/500'
   /companies/{company_id}/actions:
     get:
+      operationId: listCompanyActions
       summary: Get actions associated with a specific company
       description: ''
       tags:
@@ -5137,6 +5240,7 @@ paths:
           $ref: '#/components/responses/500'
   /companies/{company_id}/deals:
     get:
+      operationId: listCompanyDeals
       summary: Get deals associated with a specific company
       description: ''
       tags:
@@ -5200,6 +5304,7 @@ paths:
           $ref: '#/components/responses/500'
   /companies/{company_id}/notes:
     get:
+      operationId: listCompanyNotes
       summary: Get notes associated with a specific company
       description: ''
       tags:
@@ -5258,6 +5363,7 @@ paths:
           $ref: '#/components/responses/500'
   /companies/{company_id}/calls:
     get:
+      operationId: listCompanyCalls
       summary: Get calls associated with a specific company
       description: ''
       tags:
@@ -5316,6 +5422,7 @@ paths:
           $ref: '#/components/responses/500'
   /companies/{company_id}/meetings:
     get:
+      operationId: listCompanyMeetings
       summary: Get meetings associated with a specific company
       description: ''
       tags:
@@ -5374,6 +5481,7 @@ paths:
           $ref: '#/components/responses/500'
   /companies/{company_id}/linked_contacts:
     get:
+      operationId: listCompanyLinkedContacts
       summary: Get contacts linked with a specific company
       description: ''
       tags:
@@ -5451,6 +5559,7 @@ paths:
         500:
           $ref: '#/components/responses/500'
     post:
+      operationId: linkCompanyContact
       summary: Link a contact to a specific company
       description: >-
         Notes: <br>
@@ -5529,6 +5638,7 @@ paths:
           $ref: '#/components/responses/500'
   /companies/{company_id}/linked_contacts/{contact_id}:
     delete:
+      operationId: unlinkCompanyContact
       summary: Unlink a contact from a company
       description: ''
       tags:
@@ -5559,6 +5669,7 @@ paths:
           $ref: '#/components/responses/500'
   /companies/{company_id}/synced_status:
     post:
+      operationId: setCompanySyncedStatus
       summary: Enable company status sync
       description: >-
         Turns on sync so that all contacts in the specified company will have the same status. <br>
@@ -5606,6 +5717,7 @@ paths:
         500:
           $ref: '#/components/responses/500'
     delete:
+      operationId: removeCompanySyncedStatus
       summary: Disable company status sync
       description: ''
       tags:
@@ -5643,6 +5755,7 @@ paths:
           $ref: '#/components/responses/500'
   /companies/{company_id}/pinned_attachments:
     get:
+      operationId: listCompanyPinnedAttachments
       summary: Gets the list of attachments pinned to this company
       description:
         The list of attachments is collected from the attachments pinned to all the contacts in this company.
@@ -5692,6 +5805,7 @@ paths:
           $ref: '#/components/responses/500'
   /companies/{company_id}/logo:
     patch:
+      operationId: updateCompanyLogo
       summary: Update logo for the given company
       description: Update company logo with the given image. The previous logo is removed and then new image is set
       tags:
@@ -5740,6 +5854,7 @@ paths:
         500:
           $ref: '#/components/responses/500'
     delete:
+      operationId: deleteCompanyLogo
       summary: Delete logo in then given company
       description: >-
         Delete logo in the given company.
@@ -5775,6 +5890,7 @@ paths:
           $ref: '#/components/responses/500'
   /contacts:
     get:
+      operationId: listContacts
       summary: Get a list of contacts
       description: Defaults to contacts owned by the logged user, alpha sorted.
       tags:
@@ -5928,6 +6044,7 @@ paths:
         500:
           $ref: '#/components/responses/500'
     post:
+      operationId: createContact
       summary: Create a contact
       description: ''
       tags:
@@ -6060,6 +6177,7 @@ paths:
           $ref: '#/components/responses/500'
   /contacts/{contact_id}:
     get:
+      operationId: getContact
       summary: Get a specific contact
       description: ''
       tags:
@@ -6112,6 +6230,7 @@ paths:
         500:
           $ref: '#/components/responses/500'
     put:
+      operationId: updateContact
       summary: Update a specific contact
       description: >-
         Note: when updating a custom field, either the `id` or `name` and the `value` must be present.<br/>
@@ -6248,6 +6367,7 @@ paths:
         500:
           $ref: '#/components/responses/500'
     delete:
+      operationId: deleteContact
       summary: Delete a specific contact
       description: >-
         Note: only users with the `delete_contacts` permission can delete contacts.
@@ -6316,6 +6436,7 @@ paths:
           $ref: '#/components/responses/500'
   /contacts/{contact_id}/contact_photo:
     post:
+      operationId: createContactPhoto
       summary: Add a new contact photo
       description: >-
         Use this endpoint to add a new photo to an existing contact. <br> <br>
@@ -6367,6 +6488,7 @@ paths:
         500:
           $ref: '#/components/responses/500'
     put:
+      operationId: updateContactPhoto
       summary: Update a contact's photo
       description: >
         Use this endpoint to update the photo of an existing contact. <br> <br>
@@ -6419,6 +6541,7 @@ paths:
         500:
           $ref: '#/components/responses/500'
     delete:
+      operationId: deleteContactPhoto
       summary: Remove a contact's photo
       description: ''
       tags:
@@ -6456,6 +6579,7 @@ paths:
           $ref: '#/components/responses/500'
   /contacts/filters/{filter_id}:
     get:
+      operationId: listContactsByFilter
       summary: Show contacts that meet the criteria of a filter
       description: ''
       tags:
@@ -6507,6 +6631,7 @@ paths:
           $ref: '#/components/responses/500'
   /contacts/delete:
     delete:
+      operationId: deleteContacts
       summary: Delete multiple contacts
       description: ''
       tags:
@@ -6567,6 +6692,7 @@ paths:
           $ref: '#/components/responses/500'
   /contacts/{contact_id}/google_contacts:
     post:
+      operationId: saveContactToGoogleContacts
       summary: Save a specific OnePageCRM contact to Google Contacts
       description: >-
         OnePageCRM must be authorized to save contacts to Google Contacts on your behalf, in order to complete this request. <br>
@@ -6626,6 +6752,7 @@ paths:
           $ref: '#/components/responses/500'
   /contacts/{contact_id}/actions:
     get:
+      operationId: listContactActions
       summary: Get all actions for a specific contact
       description: ''
       tags:
@@ -6686,6 +6813,7 @@ paths:
         500:
           $ref: '#/components/responses/500'
     post:
+      operationId: createContactAction
       summary: Create an action for a specific contact
       description: ''
       tags:
@@ -6741,6 +6869,7 @@ paths:
           $ref: '#/components/responses/500'
   /contacts/{contact_id}/deals:
     get:
+      operationId: listContactDeals
       summary: Get all deals for a specific contact
       description: ''
       tags:
@@ -6803,6 +6932,7 @@ paths:
         500:
           $ref: '#/components/responses/500'
     post:
+      operationId: createContactDeal
       summary: Create a deal for a specific contact
       description: ''
       tags:
@@ -6893,6 +7023,7 @@ paths:
           $ref: '#/components/responses/500'
   /contacts/{contact_id}/notes:
     get:
+      operationId: listContactNotes
       summary: Get all notes for a specific contact
       description: ''
       tags:
@@ -6950,6 +7081,7 @@ paths:
         500:
           $ref: '#/components/responses/500'
     post:
+      operationId: createContactNote
       summary: Create a note for a specific contact
       description: ''
       tags:
@@ -7009,6 +7141,7 @@ paths:
           $ref: '#/components/responses/500'
   /contacts/{contact_id}/calls:
     get:
+      operationId: listContactCalls
       summary: Get all calls for a specific contact
       description: ''
       tags:
@@ -7066,6 +7199,7 @@ paths:
         500:
           $ref: '#/components/responses/500'
     post:
+      operationId: createContactCall
       summary: Create a call for a specific contact
       description: ''
       tags:
@@ -7128,6 +7262,7 @@ paths:
           $ref: '#/components/responses/500'
   /contacts/{contact_id}/meetings:
     get:
+      operationId: listContactMeetings
       summary: Get all meetings for a specific contact
       description: ''
       tags:
@@ -7185,6 +7320,7 @@ paths:
         500:
           $ref: '#/components/responses/500'
     post:
+      operationId: createContactMeeting
       summary: Create a meeting for a specific contact
       description: ''
       tags:
@@ -7243,6 +7379,7 @@ paths:
           $ref: '#/components/responses/500'
   /contacts/{contact_id}/relationships:
     get:
+      operationId: listContactRelationships
       summary: Get all relationships for a specific contact
       description: ''
       tags:
@@ -7305,6 +7442,7 @@ paths:
         500:
           $ref: '#/components/responses/500'
     post:
+      operationId: createContactRelationship
       summary: Create a relationships for a specific contact
       description: ''
       tags:
@@ -7376,6 +7514,7 @@ paths:
           $ref: '#/components/responses/500'
   /contacts/{contact_id}/relationships/{relationship_id}:
     get:
+      operationId: getContactRelationship
       summary: Get a specific relationship
       description: ''
       tags:
@@ -7413,6 +7552,7 @@ paths:
         500:
           $ref: '#/components/responses/500'
     put:
+      operationId: updateContactRelationship
       summary: Update a specific relationship
       description: ''
       tags:
@@ -7484,6 +7624,7 @@ paths:
         500:
           $ref: '#/components/responses/500'
     delete:
+      operationId: deleteContactRelationship
       summary: Delete a relationship
       description: ''
       tags:
@@ -7516,6 +7657,7 @@ paths:
 
   /contacts/{contact_id}/assign_tag/{tag_name}:
     put:
+      operationId: assignContactTag
       summary: Assign a tag to a specific contact
       description: ''
       tags:
@@ -7577,6 +7719,7 @@ paths:
           $ref: '#/components/responses/500'
   /contacts/{contact_id}/unassign_tag/{tag_name}:
     put:
+      operationId: unassignContactTag
       summary: Remove a tag from a specific contact
       description: ''
       tags:
@@ -7638,6 +7781,7 @@ paths:
           $ref: '#/components/responses/500'
   /contacts/{contact_id}/change_status/{status_id}:
     put:
+      operationId: changeContactStatus
       summary: Change the status of a specific contact
       description: ''
       tags:
@@ -7717,6 +7861,7 @@ paths:
           $ref: '#/components/responses/500'
   /contacts/{contact_id}/change_owner/{owner_id}:
     put:
+      operationId: changeContactOwner
       summary: Change the owner of a specific contact
       description: ''
       tags:
@@ -7796,6 +7941,7 @@ paths:
           $ref: '#/components/responses/500'
   /contacts/{contact_id}/star:
     put:
+      operationId: starContact
       summary: Apply a star to a specific contact
       description: ''
       tags:
@@ -7874,6 +8020,7 @@ paths:
           $ref: '#/components/responses/500'
   /contacts/{contact_id}/unstar:
     put:
+      operationId: unstarContact
       summary: Remove star from a specific contact
       description: ''
       tags:
@@ -7952,6 +8099,7 @@ paths:
           $ref: '#/components/responses/500'
   /contacts/{contact_id}/close_sales_cycle:
     put:
+      operationId: closeContactSalesCycle
       summary: Close the sales cycle for a specific contact
       description: >-
         Only do this when you are no longer actively trying to sell to this contact. <br>
@@ -8018,6 +8166,7 @@ paths:
           $ref: '#/components/responses/500'
   /contacts/{contact_id}/force_close_sales_cycle:
     put:
+      operationId: forceCloseContactSalesCycle
       summary: Force close the sales cycle for a specific contact
       description: >-
         This will first delete any actions assigned to the contact. <br>
@@ -8083,6 +8232,7 @@ paths:
           $ref: '#/components/responses/500'
   /contacts/{contact_id}/reopen_sales_cycle:
     put:
+      operationId: reopenContactSalesCycle
       summary: Reopen the sales cycle for a specific contact
       description: ''
       tags:
@@ -8136,6 +8286,7 @@ paths:
           $ref: '#/components/responses/500'
   /contacts/{contact_id}/split:
     put:
+      operationId: splitContact
       summary: Split a contact from their current company (and potentially to a new company)
       description: >-
         Contact is removed (split) from it's current company, and optionally joins another. <br>
@@ -8204,6 +8355,7 @@ paths:
           $ref: '#/components/responses/500'
   /contacts/{contact_id}/pinned_attachments:
     get:
+      operationId: listContactPinnedAttachments
       summary: Gets a list of attachments pinned to this contact
       description:
         The list of pinned attachments is sorted based on "pinned_at" field, i.e. most recent attachments come first, the list of attachments is paginated.
@@ -8252,6 +8404,7 @@ paths:
           $ref: '#/components/responses/500'
   /contacts/cascade:
     get:
+      operationId: listContactsCascade
       summary: Get contacts past the 10,000 contact in the account
       description: >-
         Defaults to contacts owned by the logged user, alpha sorted.
@@ -8322,6 +8475,7 @@ paths:
 
   /contacts/cascade/{last_id}:
     get:
+      operationId: listContactsCascadeAfter
       summary: Get contacts past the 10,000 contact in the account.
       description: >-
         Defaults to contacts owned by the logged user, alpha sorted.
@@ -8401,6 +8555,7 @@ paths:
   #/contacts/cascade/{last_id}
   /action_stream:
     get:
+      operationId: getActionStream
       summary: Get a list of contacts prioritized by their next action
       description: >-
         Defaults to the logged API users action stream. <br>
@@ -8502,6 +8657,7 @@ paths:
           $ref: '#/components/responses/500'
   /team_stream:
     get:
+      operationId: getTeamStream
       summary: Get a list of contacts prioritized by their next action
       description: >-
         Defaults to the action stream for entire account in a single list. <br>
@@ -8605,6 +8761,7 @@ paths:
           $ref: '#/components/responses/500'
   /notifications:
     get:
+      operationId: listNotifications
       summary: Get a list of notifications that user has
       description: >-
         Returns all notifications (except emails and links) for the given user
@@ -8657,6 +8814,7 @@ paths:
           $ref: '#/components/responses/500'
   /notifications/{notification_id}:
     get:
+      operationId: getNotification
       summary: Get serialised notification by ID
       description: ''
       tags:
@@ -8694,6 +8852,7 @@ paths:
           $ref: '#/components/responses/500'
   /notifications/{notification_id}/mark_as_read:
     post:
+      operationId: markNotificationAsRead
       summary: Marks given notification as read
       description: Marks given notification as read
       tags:
@@ -8731,6 +8890,7 @@ paths:
           $ref: '#/components/responses/500'
   /notifications/mark_all_as_read:
     post:
+      operationId: markAllNotificationsAsRead
       summary: Marks all users' notifications as read
       description: Marks all users' notifications as read
       tags:
@@ -8765,6 +8925,7 @@ paths:
           $ref: '#/components/responses/500'
   /webhooks:
     get:
+      operationId: listWebhooks
       summary: Get all webhooks (associated with the logged API user's account)
       description: ''
       tags:
@@ -8811,6 +8972,7 @@ paths:
           $ref: '#/components/responses/500'
   /webhooks/{webhook_id}:
     get:
+      operationId: getWebhook
       summary: Get a specific webhook
       description: ''
       tags:
@@ -8845,6 +9007,7 @@ paths:
         500:
           $ref: '#/components/responses/500'
     delete:
+      operationId: deleteWebhook
       summary: Delete a specific webhook
       description: ''
       tags:
@@ -8868,6 +9031,7 @@ paths:
           $ref: '#/components/responses/500'
   /pipelines:
     get:
+      operationId: listPipelines
       summary: Get all pipelines (associated with the logged API user's account)
       description: ''
       tags:
@@ -8916,6 +9080,7 @@ paths:
           $ref: '#/components/responses/500'
   /pipelines/{pipeline_id}:
     get:
+      operationId: getPipeline
       summary: Get a specific pipeline
       description: ''
       tags:
