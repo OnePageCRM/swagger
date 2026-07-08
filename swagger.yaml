@@ -11998,14 +11998,6 @@ components:
       schema:
         type: string
         example: Jane Doe
-    query_companies_search:
-      name: search
-      in: query
-      required: false
-      description: Search companies by name
-      schema:
-        type: string
-        example: Big Company Inc
     query_deals_search:
       name: search
       in: query
@@ -12284,15 +12276,6 @@ components:
       schema:
         type: string
         example: 5ae06ef9d55673108fe8877b
-    query_emails_contact_id:
-      name: contact_id
-      in: query
-      description: >-
-        Return emails for a specific contact (only use one of `contact_id` or `company_id` at a time)
-      required: false
-      schema:
-        type: string
-        example: 5ae06ef9d55673108fe8877b
     query_contacts_company_id:
       name: company_id
       in: query
@@ -12343,15 +12326,6 @@ components:
       in: query
       description: >-
         Return meetings for a specific company (only use one of `contact_id` or `company_id` at a time)
-      required: false
-      schema:
-        type: string
-        example: 6se06df9d55673108re84745
-    query_emails_company_id:
-      name: company_id
-      in: query
-      description: >-
-        Return emails for a specific company (only use one of `contact_id` or `company_id` at a time)
       required: false
       schema:
         type: string
@@ -12690,8 +12664,6 @@ components:
   responses:
     '200':
       description: OK
-    '201':
-      description: Created
     '400':
       description: >-
         Bad Request. The request is not properly formatted, does not properly
