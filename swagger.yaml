@@ -1733,8 +1733,8 @@ paths:
                     type: string
                     format: bson-id
                   example:
-                  - 5acddaa7d556733c507tf405
-                  - 5acddaa7d556733c507tf406
+                  - 5acddaa7d556733c507ff405
+                  - 5acddaa7d556733c507ff406
       responses:
         201:
           description: Created
@@ -1830,8 +1830,8 @@ paths:
                     type: string
                     format: bson-id
                   example:
-                  - 5acddaa7d556733c507tf405
-                  - 5acddaa7d556733c507tf406
+                  - 5acddaa7d556733c507ff405
+                  - 5acddaa7d556733c507ff406
       responses:
         200:
           description: OK
@@ -2537,7 +2537,7 @@ paths:
                   description: Type of external link (for external `storage_provider`s)
                   enum: [ dropbox, google_drive, evernote ]
                   nullable: true
-                  example: ''
+                  example: null
                 external_url:
                   type: string
                   description: URL for the file (for use with external `storage_provider`s)
@@ -2861,7 +2861,7 @@ paths:
                   description: Type of external link (for external `storage_provider`s)
                   enum: [ dropbox, google_drive, evernote ]
                   nullable: true
-                  example: ''
+                  example: null
                 external_url:
                   type: string
                   description: URL for the file (for use with external `storage_provider`s)
@@ -3253,7 +3253,7 @@ paths:
                   description: Type of external link (for external `storage_provider`s)
                   enum: [ dropbox, google_drive, evernote ]
                   nullable: true
-                  example: ''
+                  example: null
                 external_url:
                   type: string
                   description: URL for the file (for use with external `storage_provider`s)
@@ -3719,7 +3719,7 @@ paths:
                   description: Type of external link (for external `storage_provider`s)
                   enum: [ dropbox, google_drive, evernote ]
                   nullable: true
-                  example: ''
+                  example: null
                 external_url:
                   type: string
                   description: URL for the file (for use with external `storage_provider`s)
@@ -3887,7 +3887,7 @@ paths:
                   description: Type of external link (for external `storage_provider`s)
                   enum: [ dropbox, google_drive, evernote ]
                   nullable: true
-                  example: ''
+                  example: null
                 external_url:
                   type: string
                   description: URL for the file (for use with external `storage_provider`s)
@@ -7320,7 +7320,7 @@ paths:
                 relationship_type_id:
                   type: string
                   format: bson-id
-                  description: ID of the contact
+                  description: ID of the relationship type
                   example: 5aaa9b059007ba08c9ebaf58
                 related_contacts:
                   minItems: 2
@@ -9112,12 +9112,21 @@ components:
             - account_owner
             - admin
             - activity
+            - create_report
             - edit_target
+            - deal_items
             - delete_contacts
             - delete_deals
             - pipeline
             - export
             - private_contacts
+            - bulk_status
+            - bulk_owner
+            - save_to_google_contacts
+            - download_contact_vcard
+            - emails_full_sync
+            - manage_autoflows
+            - webforms
           example:
           - activity
           - edit_target
@@ -9260,7 +9269,6 @@ components:
           example: [ Java, Android, iOS ]
         lead_source_id:
           type: string
-          format: bson-id
           description: ID of the lead source of the contact
           example: email_web
         lead_source:
@@ -9350,7 +9358,7 @@ components:
                 maxLength: 140
                 description: An optional message detailing why the sales cycle was closed
                 readOnly: true
-                example:
+                example: Client is no longer interested
         google_contacts_data:
           description: The google contacts data associated with this contact
           readOnly: true
@@ -9971,8 +9979,7 @@ components:
           example: Mary is interested in coming into the office on Tuesday.
         call_result:
           type: string
-          format: bson-id
-          description: ID of the `call_result` which best describes the result of the call
+          description: Key of the `call_result` which best describes the result of the call
           example: interested
         call_time_int:
           type: integer
@@ -10031,7 +10038,7 @@ components:
           example: 1
     Meeting:
       description: >-
-        Allow you to keep track of phone meetings made to your contacts. meetings include information like the place
+        Allow you to keep track of meetings held with your contacts. Meetings include information like the place
         and the meeting result. Meetings support file attachments.
       required:
       - contact_id
@@ -10220,7 +10227,7 @@ components:
         id:
           type: string
           format: bson-id
-          description: ID of the deal
+          description: ID of the relationship type
           readOnly: true
           example: 5aaa9b059007ba08c9ebaf58
         symmetrical:
@@ -10246,13 +10253,13 @@ components:
         created_at:
           type: string
           format: date-time
-          description: Creation time of the deal
+          description: Creation time of the relationship type
           readOnly: true
           example: '2018-03-15T16:10:45Z'
         modified_at:
           type: string
           format: date-time
-          description: Last modification time of the deal
+          description: Last modification time of the relationship type
           readOnly: true
           example: '2018-03-15T16:10:45Z'
     Related_contact:
@@ -10293,7 +10300,7 @@ components:
             example: Bloggs
           photo_url:
             type: string
-            description: URL of the user’s profile picture
+            description: URL of the contact’s photo
             readOnly: true
             example: "https://{foo.bar}/joe-bloggs.jpg"
           company_id:
@@ -10343,26 +10350,26 @@ components:
         id:
           type: string
           format: bson-id
-          description: ID of the deal
+          description: ID of the relationship
           readOnly: true
           example: 5aaa9b059007ba08c9ebaf57
         relationship_type_id:
           type: string
           format: bson-id
-          description: ID of the contact
+          description: ID of the relationship type
           example: 5aaa9b059007ba08c9ebaf58
         related_contacts:
           $ref: '#/components/schemas/Related_contact'
         created_at:
           type: string
           format: date-time
-          description: Creation time of the deal
+          description: Creation time of the relationship
           readOnly: true
           example: '2018-03-15T16:10:45Z'
         modified_at:
           type: string
           format: date-time
-          description: Last modification time of the deal
+          description: Last modification time of the relationship
           readOnly: true
           example: '2018-03-15T16:10:45Z'
     Email_address:
@@ -10370,12 +10377,12 @@ components:
       properties:
         address:
           type: string
-          description: Type of the notification
+          description: Email address
           example: 'joes.boss@bar.foo'
         name:
           type: string
           nullable: true
-          description: Type of the notification
+          description: Name associated with the email address
           example: 'Joes Boss'
     Notification:
       description: A serialised notification. There are different types of notifications, each can have its own properties
@@ -10383,7 +10390,7 @@ components:
         id:
           type: string
           format: bson-id
-          description: ID of the status
+          description: ID of the notification
           readOnly: true
           example: 5aead4809007ba56ffca942e
         type:
@@ -10605,7 +10612,7 @@ components:
           type: string
           description: Longer description of what the status is for
           maxLength: 33
-          example: Actively trying to sell to these people
+          example: Actively selling to these people
         color:
           type: string
           format: hex-color
@@ -10660,7 +10667,6 @@ components:
       properties:
         id:
           type: string
-          format: bson-id
           description: ID of the lead source
           readOnly: true
           example: advertisement
@@ -10771,7 +10777,7 @@ components:
           format: bson-id
           description: ID of the predefined action
           readOnly: true
-          example: 5acddaa7d556733c507tf405
+          example: 5acddaa7d556733c507ff405
         text:
           type: string
           description: Description text of the predefined action
@@ -10808,8 +10814,8 @@ components:
             type: string
             format: bson-id
           example:
-          - 5acddaa7d556733c507tf405
-          - 5acddaa7d556733c507tf406
+          - 5acddaa7d556733c507ff405
+          - 5acddaa7d556733c507ff406
     Predefined_item:
       description: >-
         A user-configured item which can aid in the creation of deal items
@@ -11551,7 +11557,7 @@ components:
           format: bson-id
           description: ID of the webhook
           readOnly: true
-          example: 5417f8291da41712270G0042
+          example: 5417f8291da41712270a0042
         name:
           type: string
           description: Name of the webhook
@@ -11906,7 +11912,7 @@ components:
       description: Search contacts by phone number
       schema:
         type: string
-        example: 3736344458
+        example: '3736344458'
     query_companies_phone:
       name: phone
       in: query
@@ -11914,7 +11920,7 @@ components:
       description: Search companies by phone number
       schema:
         type: string
-        example: 3736344458
+        example: '3736344458'
     query_contacts_letter:
       name: letter
       in: query
@@ -12205,7 +12211,6 @@ components:
         (use with `date_filter` - date must be in format `YYYY-MM-DD` or UNIX timestamp)
       schema:
         type: string
-        format: date-time
         example: '2018-07-01'
     query_until:
       in: query
@@ -12215,7 +12220,6 @@ components:
         (use with `date_filter` - date must be in format `YYYY-MM-DD` or UNIX timestamp)
       schema:
         type: string
-        format: date-time
         example: '2018-07-31'
     query_modified_since:
       in: query
@@ -12225,7 +12229,6 @@ components:
         - date must be in format `YYYY-MM-DD` or UNIX timestamp)
       schema:
         type: string
-        format: date-time
         example: '2018-07-01'
     query_unmodified_since:
       in: query
@@ -12235,7 +12238,6 @@ components:
         - date must be in format `YYYY-MM-DD` or UNIX timestamp)
       schema:
         type: string
-        format: date-time
         example: '2018-07-01'
     query_actions_contact_id:
       name: contact_id
