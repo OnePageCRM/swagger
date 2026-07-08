@@ -888,17 +888,11 @@ paths:
                           deal_fields:
                             type: array
                             items:
+                              allOf:
+                                - $ref: '#/components/schemas/Page_data'
                               properties:
                                 deal_field:
                                   $ref: '#/components/schemas/Deal_field'
-                                total_count:
-                                  $ref: '#/components/schemas/Page_data/properties/total_count'
-                                page:
-                                  $ref: '#/components/schemas/Page_data/properties/page'
-                                per_page:
-                                  $ref: '#/components/schemas/Page_data/properties/per_page'
-                                max_page:
-                                  $ref: '#/components/schemas/Page_data/properties/max_page'
         400:
           $ref: '#/components/responses/400'
         401:
@@ -1066,6 +1060,8 @@ paths:
                   - type: object
                     properties:
                       data:
+                        allOf:
+                          - $ref: '#/components/schemas/Page_data'
                         properties:
                           custom_fields:
                             type: array
@@ -1073,14 +1069,6 @@ paths:
                               properties:
                                 custom_field:
                                   $ref: '#/components/schemas/Custom_field'
-                          total_count:
-                            $ref: '#/components/schemas/Page_data/properties/total_count'
-                          page:
-                            $ref: '#/components/schemas/Page_data/properties/page'
-                          per_page:
-                            $ref: '#/components/schemas/Page_data/properties/per_page'
-                          max_page:
-                            $ref: '#/components/schemas/Page_data/properties/max_page'
         400:
           $ref: '#/components/responses/400'
         401:
@@ -1248,6 +1236,8 @@ paths:
                   - type: object
                     properties:
                       data:
+                        allOf:
+                          - $ref: '#/components/schemas/Page_data'
                         properties:
                           company_fields:
                             type: array
@@ -1255,14 +1245,6 @@ paths:
                               properties:
                                 company_field:
                                   $ref: '#/components/schemas/Company_field'
-                          total_count:
-                            $ref: '#/components/schemas/Page_data/properties/total_count'
-                          page:
-                            $ref: '#/components/schemas/Page_data/properties/page'
-                          per_page:
-                            $ref: '#/components/schemas/Page_data/properties/per_page'
-                          max_page:
-                            $ref: '#/components/schemas/Page_data/properties/max_page'
         400:
           $ref: '#/components/responses/400'
         401:
@@ -2163,6 +2145,8 @@ paths:
                   - type: object
                     properties:
                       data:
+                        allOf:
+                          - $ref: '#/components/schemas/Page_data'
                         properties:
                           notes:
                             type: array
@@ -2170,14 +2154,6 @@ paths:
                               properties:
                                 note:
                                   $ref: '#/components/schemas/Note'
-                          total_count:
-                            $ref: '#/components/schemas/Page_data/properties/total_count'
-                          page:
-                            $ref: '#/components/schemas/Page_data/properties/page'
-                          per_page:
-                            $ref: '#/components/schemas/Page_data/properties/per_page'
-                          max_page:
-                            $ref: '#/components/schemas/Page_data/properties/max_page'
         400:
           $ref: '#/components/responses/400'
         401:
@@ -2466,6 +2442,8 @@ paths:
                   - type: object
                     properties:
                       data:
+                        allOf:
+                          - $ref: '#/components/schemas/Page_data'
                         properties:
                           calls:
                             type: array
@@ -2473,14 +2451,6 @@ paths:
                               properties:
                                 call:
                                   $ref: '#/components/schemas/Call'
-                          total_count:
-                            $ref: '#/components/schemas/Page_data/properties/total_count'
-                          page:
-                            $ref: '#/components/schemas/Page_data/properties/page'
-                          per_page:
-                            $ref: '#/components/schemas/Page_data/properties/per_page'
-                          max_page:
-                            $ref: '#/components/schemas/Page_data/properties/max_page'
         400:
           $ref: '#/components/responses/400'
         401:
@@ -2848,6 +2818,8 @@ paths:
                   - type: object
                     properties:
                       data:
+                        allOf:
+                          - $ref: '#/components/schemas/Page_data'
                         properties:
                           meetings:
                             type: array
@@ -2855,14 +2827,6 @@ paths:
                               properties:
                                 meeting:
                                   $ref: '#/components/schemas/Meeting'
-                          total_count:
-                            $ref: '#/components/schemas/Page_data/properties/total_count'
-                          page:
-                            $ref: '#/components/schemas/Page_data/properties/page'
-                          per_page:
-                            $ref: '#/components/schemas/Page_data/properties/per_page'
-                          max_page:
-                            $ref: '#/components/schemas/Page_data/properties/max_page'
         400:
           $ref: '#/components/responses/400'
         401:
@@ -3160,6 +3124,8 @@ paths:
                   - type: object
                     properties:
                       data:
+                        allOf:
+                          - $ref: '#/components/schemas/Page_data'
                         properties:
                           deals:
                             type: array
@@ -3174,14 +3140,6 @@ paths:
                                     Returned only when `fields=contacts(all)` is supplied.
                                   items:
                                     $ref: '#/components/schemas/Contact'
-                          total_count:
-                            $ref: '#/components/schemas/Page_data/properties/total_count'
-                          page:
-                            $ref: '#/components/schemas/Page_data/properties/page'
-                          per_page:
-                            $ref: '#/components/schemas/Page_data/properties/per_page'
-                          max_page:
-                            $ref: '#/components/schemas/Page_data/properties/max_page'
         400:
           $ref: '#/components/responses/400'
         401:
@@ -3892,6 +3850,8 @@ paths:
                   - type: object
                     properties:
                       data:
+                        allOf:
+                          - $ref: '#/components/schemas/Page_data'
                         properties:
                           relationship_types:
                             type: array
@@ -3899,14 +3859,6 @@ paths:
                               properties:
                                 relationship_type:
                                   $ref: '#/components/schemas/Relationship_Type'
-                          total_count:
-                            $ref: '#/components/schemas/Page_data/properties/total_count'
-                          page:
-                            $ref: '#/components/schemas/Page_data/properties/page'
-                          per_page:
-                            $ref: '#/components/schemas/Page_data/properties/per_page'
-                          max_page:
-                            $ref: '#/components/schemas/Page_data/properties/max_page'
         400:
           $ref: '#/components/responses/400'
         401:
@@ -4160,6 +4112,8 @@ paths:
                   - type: object
                     properties:
                       data:
+                        allOf:
+                          - $ref: '#/components/schemas/Page_data'
                         properties:
                           actions:
                             type: array
@@ -4167,14 +4121,6 @@ paths:
                               properties:
                                 action:
                                   $ref: '#/components/schemas/Action'
-                          total_count:
-                            $ref: '#/components/schemas/Page_data/properties/total_count'
-                          page:
-                            $ref: '#/components/schemas/Page_data/properties/page'
-                          per_page:
-                            $ref: '#/components/schemas/Page_data/properties/per_page'
-                          max_page:
-                            $ref: '#/components/schemas/Page_data/properties/max_page'
         400:
           $ref: '#/components/responses/400'
         401:
@@ -4587,6 +4533,8 @@ paths:
                   - type: object
                     properties:
                       data:
+                        allOf:
+                          - $ref: '#/components/schemas/Page_data'
                         properties:
                           filters:
                             type: array
@@ -4594,14 +4542,6 @@ paths:
                               properties:
                                 filter:
                                   $ref: '#/components/schemas/Filter'
-                          total_count:
-                            $ref: '#/components/schemas/Page_data/properties/total_count'
-                          page:
-                            $ref: '#/components/schemas/Page_data/properties/page'
-                          per_page:
-                            $ref: '#/components/schemas/Page_data/properties/per_page'
-                          max_page:
-                            $ref: '#/components/schemas/Page_data/properties/max_page'
         400:
           $ref: '#/components/responses/400'
         401:
@@ -4634,17 +4574,11 @@ paths:
                   - type: object
                     properties:
                       data:
+                        allOf:
+                          - $ref: '#/components/schemas/Page_data'
                         properties:
                           filter:
                             $ref: '#/components/schemas/Filter'
-                          total_count:
-                            $ref: '#/components/schemas/Page_data/properties/total_count'
-                          page:
-                            $ref: '#/components/schemas/Page_data/properties/page'
-                          per_page:
-                            $ref: '#/components/schemas/Page_data/properties/per_page'
-                          max_page:
-                            $ref: '#/components/schemas/Page_data/properties/max_page'
                           contacts:
                             type: array
                             items:
@@ -4688,6 +4622,8 @@ paths:
                   - type: object
                     properties:
                       data:
+                        allOf:
+                          - $ref: '#/components/schemas/Page_data'
                         properties:
                           companies:
                             type: array
@@ -4695,14 +4631,6 @@ paths:
                               properties:
                                 company:
                                   $ref: '#/components/schemas/Company'
-                          total_count:
-                            $ref: '#/components/schemas/Page_data/properties/total_count'
-                          page:
-                            $ref: '#/components/schemas/Page_data/properties/page'
-                          per_page:
-                            $ref: '#/components/schemas/Page_data/properties/per_page'
-                          max_page:
-                            $ref: '#/components/schemas/Page_data/properties/max_page'
         400:
           $ref: '#/components/responses/400'
         401:
@@ -4847,6 +4775,8 @@ paths:
                   - type: object
                     properties:
                       data:
+                        allOf:
+                          - $ref: '#/components/schemas/Page_data'
                         properties:
                           actions:
                             type: array
@@ -4854,14 +4784,6 @@ paths:
                               properties:
                                 action:
                                   $ref: '#/components/schemas/Action'
-                          total_count:
-                            $ref: '#/components/schemas/Page_data/properties/total_count'
-                          page:
-                            $ref: '#/components/schemas/Page_data/properties/page'
-                          per_page:
-                            $ref: '#/components/schemas/Page_data/properties/per_page'
-                          max_page:
-                            $ref: '#/components/schemas/Page_data/properties/max_page'
         400:
           $ref: '#/components/responses/400'
         401:
@@ -4907,6 +4829,8 @@ paths:
                   - type: object
                     properties:
                       data:
+                        allOf:
+                          - $ref: '#/components/schemas/Page_data'
                         properties:
                           deals:
                             type: array
@@ -4914,14 +4838,6 @@ paths:
                               properties:
                                 deal:
                                   $ref: '#/components/schemas/Deal'
-                          total_count:
-                            $ref: '#/components/schemas/Page_data/properties/total_count'
-                          page:
-                            $ref: '#/components/schemas/Page_data/properties/page'
-                          per_page:
-                            $ref: '#/components/schemas/Page_data/properties/per_page'
-                          max_page:
-                            $ref: '#/components/schemas/Page_data/properties/max_page'
         400:
           $ref: '#/components/responses/400'
         401:
@@ -4962,6 +4878,8 @@ paths:
                   - type: object
                     properties:
                       data:
+                        allOf:
+                          - $ref: '#/components/schemas/Page_data'
                         properties:
                           notes:
                             type: array
@@ -4969,14 +4887,6 @@ paths:
                               properties:
                                 note:
                                   $ref: '#/components/schemas/Note'
-                          total_count:
-                            $ref: '#/components/schemas/Page_data/properties/total_count'
-                          page:
-                            $ref: '#/components/schemas/Page_data/properties/page'
-                          per_page:
-                            $ref: '#/components/schemas/Page_data/properties/per_page'
-                          max_page:
-                            $ref: '#/components/schemas/Page_data/properties/max_page'
         400:
           $ref: '#/components/responses/400'
         401:
@@ -5017,6 +4927,8 @@ paths:
                   - type: object
                     properties:
                       data:
+                        allOf:
+                          - $ref: '#/components/schemas/Page_data'
                         properties:
                           calls:
                             type: array
@@ -5024,14 +4936,6 @@ paths:
                               properties:
                                 call:
                                   $ref: '#/components/schemas/Call'
-                          total_count:
-                            $ref: '#/components/schemas/Page_data/properties/total_count'
-                          page:
-                            $ref: '#/components/schemas/Page_data/properties/page'
-                          per_page:
-                            $ref: '#/components/schemas/Page_data/properties/per_page'
-                          max_page:
-                            $ref: '#/components/schemas/Page_data/properties/max_page'
         400:
           $ref: '#/components/responses/400'
         401:
@@ -5072,6 +4976,8 @@ paths:
                   - type: object
                     properties:
                       data:
+                        allOf:
+                          - $ref: '#/components/schemas/Page_data'
                         properties:
                           meetings:
                             type: array
@@ -5079,14 +4985,6 @@ paths:
                               properties:
                                 meeting:
                                   $ref: '#/components/schemas/Meeting'
-                          total_count:
-                            $ref: '#/components/schemas/Page_data/properties/total_count'
-                          page:
-                            $ref: '#/components/schemas/Page_data/properties/page'
-                          per_page:
-                            $ref: '#/components/schemas/Page_data/properties/per_page'
-                          max_page:
-                            $ref: '#/components/schemas/Page_data/properties/max_page'
         400:
           $ref: '#/components/responses/400'
         401:
@@ -5122,6 +5020,8 @@ paths:
                   - type: object
                     properties:
                       data:
+                        allOf:
+                          - $ref: '#/components/schemas/Page_data'
                         properties:
                           linked_contacts:
                             type: array
@@ -5154,14 +5054,6 @@ paths:
                                         type: string
                                         format: bson-id
                                         example: 5aba31e99007ba0f570c92ab
-                          total_count:
-                            $ref: '#/components/schemas/Page_data/properties/total_count'
-                          page:
-                            $ref: '#/components/schemas/Page_data/properties/page'
-                          per_page:
-                            $ref: '#/components/schemas/Page_data/properties/per_page'
-                          max_page:
-                            $ref: '#/components/schemas/Page_data/properties/max_page'
         400:
           $ref: '#/components/responses/400'
         401:
@@ -5375,6 +5267,8 @@ paths:
                 allOf:
                   - $ref: '#/components/schemas/ResponseEnvelope'
                   - type: object
+                    allOf:
+                      - $ref: '#/components/schemas/Page_data'
                     properties:
                       data:
                         properties:
@@ -5382,14 +5276,6 @@ paths:
                             type: array
                             items:
                               $ref: '#/components/schemas/Attachment'
-                      total_count:
-                        $ref: '#/components/schemas/Page_data/properties/total_count'
-                      page:
-                        $ref: '#/components/schemas/Page_data/properties/page'
-                      per_page:
-                        $ref: '#/components/schemas/Page_data/properties/per_page'
-                      max_page:
-                        $ref: '#/components/schemas/Page_data/properties/max_page'
         400:
           $ref: '#/components/responses/400'
         401:
@@ -5537,6 +5423,8 @@ paths:
                   - type: object
                     properties:
                       data:
+                        allOf:
+                          - $ref: '#/components/schemas/Page_data'
                         properties:
                           contacts:
                             type: array
@@ -5585,14 +5473,6 @@ paths:
                                   description: Returned only when `fields=pinned_attachments(all)` is supplied. Full attachment objects.
                                   items:
                                     $ref: '#/components/schemas/Attachment'
-                          total_count:
-                            $ref: '#/components/schemas/Page_data/properties/total_count'
-                          page:
-                            $ref: '#/components/schemas/Page_data/properties/page'
-                          per_page:
-                            $ref: '#/components/schemas/Page_data/properties/per_page'
-                          max_page:
-                            $ref: '#/components/schemas/Page_data/properties/max_page'
                       lead_sources:
                         type: array
                         items:
@@ -6155,17 +6035,11 @@ paths:
                   - type: object
                     properties:
                       data:
+                        allOf:
+                          - $ref: '#/components/schemas/Page_data'
                         properties:
                           filter:
                             $ref: '#/components/schemas/Filter'
-                          total_count:
-                            $ref: '#/components/schemas/Page_data/properties/total_count'
-                          page:
-                            $ref: '#/components/schemas/Page_data/properties/page'
-                          per_page:
-                            $ref: '#/components/schemas/Page_data/properties/per_page'
-                          max_page:
-                            $ref: '#/components/schemas/Page_data/properties/max_page'
                           contacts:
                             type: array
                             items:
@@ -6328,6 +6202,8 @@ paths:
                   - type: object
                     properties:
                       data:
+                        allOf:
+                          - $ref: '#/components/schemas/Page_data'
                         properties:
                           actions:
                             type: array
@@ -6335,14 +6211,6 @@ paths:
                               properties:
                                 action:
                                   $ref: '#/components/schemas/Action'
-                          total_count:
-                            $ref: '#/components/schemas/Page_data/properties/total_count'
-                          page:
-                            $ref: '#/components/schemas/Page_data/properties/page'
-                          per_page:
-                            $ref: '#/components/schemas/Page_data/properties/per_page'
-                          max_page:
-                            $ref: '#/components/schemas/Page_data/properties/max_page'
         400:
           $ref: '#/components/responses/400'
         401:
@@ -6439,6 +6307,8 @@ paths:
                   - type: object
                     properties:
                       data:
+                        allOf:
+                          - $ref: '#/components/schemas/Page_data'
                         properties:
                           deals:
                             type: array
@@ -6446,14 +6316,6 @@ paths:
                               properties:
                                 deal:
                                   $ref: '#/components/schemas/Deal'
-                          total_count:
-                            $ref: '#/components/schemas/Page_data/properties/total_count'
-                          page:
-                            $ref: '#/components/schemas/Page_data/properties/page'
-                          per_page:
-                            $ref: '#/components/schemas/Page_data/properties/per_page'
-                          max_page:
-                            $ref: '#/components/schemas/Page_data/properties/max_page'
         400:
           $ref: '#/components/responses/400'
         401:
@@ -6580,6 +6442,8 @@ paths:
                   - type: object
                     properties:
                       data:
+                        allOf:
+                          - $ref: '#/components/schemas/Page_data'
                         properties:
                           notes:
                             type: array
@@ -6587,14 +6451,6 @@ paths:
                               properties:
                                 note:
                                   $ref: '#/components/schemas/Note'
-                          total_count:
-                            $ref: '#/components/schemas/Page_data/properties/total_count'
-                          page:
-                            $ref: '#/components/schemas/Page_data/properties/page'
-                          per_page:
-                            $ref: '#/components/schemas/Page_data/properties/per_page'
-                          max_page:
-                            $ref: '#/components/schemas/Page_data/properties/max_page'
         400:
           $ref: '#/components/responses/400'
         401:
@@ -6690,6 +6546,8 @@ paths:
                   - type: object
                     properties:
                       data:
+                        allOf:
+                          - $ref: '#/components/schemas/Page_data'
                         properties:
                           calls:
                             type: array
@@ -6697,14 +6555,6 @@ paths:
                               properties:
                                 call:
                                   $ref: '#/components/schemas/Call'
-                          total_count:
-                            $ref: '#/components/schemas/Page_data/properties/total_count'
-                          page:
-                            $ref: '#/components/schemas/Page_data/properties/page'
-                          per_page:
-                            $ref: '#/components/schemas/Page_data/properties/per_page'
-                          max_page:
-                            $ref: '#/components/schemas/Page_data/properties/max_page'
         400:
           $ref: '#/components/responses/400'
         401:
@@ -6803,6 +6653,8 @@ paths:
                   - type: object
                     properties:
                       data:
+                        allOf:
+                          - $ref: '#/components/schemas/Page_data'
                         properties:
                           meetings:
                             type: array
@@ -6810,14 +6662,6 @@ paths:
                               properties:
                                 meeting:
                                   $ref: '#/components/schemas/Meeting'
-                          total_count:
-                            $ref: '#/components/schemas/Page_data/properties/total_count'
-                          page:
-                            $ref: '#/components/schemas/Page_data/properties/page'
-                          per_page:
-                            $ref: '#/components/schemas/Page_data/properties/per_page'
-                          max_page:
-                            $ref: '#/components/schemas/Page_data/properties/max_page'
         400:
           $ref: '#/components/responses/400'
         401:
@@ -6917,6 +6761,8 @@ paths:
                   - type: object
                     properties:
                       data:
+                        allOf:
+                          - $ref: '#/components/schemas/Page_data'
                         properties:
                           relationships:
                             type: array
@@ -6924,14 +6770,6 @@ paths:
                               properties:
                                 relationship:
                                   $ref: '#/components/schemas/Relationship'
-                          total_count:
-                            $ref: '#/components/schemas/Page_data/properties/total_count'
-                          page:
-                            $ref: '#/components/schemas/Page_data/properties/page'
-                          per_page:
-                            $ref: '#/components/schemas/Page_data/properties/per_page'
-                          max_page:
-                            $ref: '#/components/schemas/Page_data/properties/max_page'
         400:
           $ref: '#/components/responses/400'
         401:
@@ -7821,6 +7659,8 @@ paths:
                 allOf:
                   - $ref: '#/components/schemas/ResponseEnvelope'
                   - type: object
+                    allOf:
+                      - $ref: '#/components/schemas/Page_data'
                     properties:
                       data:
                         properties:
@@ -7828,14 +7668,6 @@ paths:
                             type: array
                             items:
                               $ref: '#/components/schemas/Attachment'
-                      total_count:
-                        $ref: '#/components/schemas/Page_data/properties/total_count'
-                      page:
-                        $ref: '#/components/schemas/Page_data/properties/page'
-                      per_page:
-                        $ref: '#/components/schemas/Page_data/properties/per_page'
-                      max_page:
-                        $ref: '#/components/schemas/Page_data/properties/max_page'
         400:
           $ref: '#/components/responses/400'
         401:
@@ -8046,6 +7878,8 @@ paths:
                   - type: object
                     properties:
                       data:
+                        allOf:
+                          - $ref: '#/components/schemas/Page_data'
                         properties:
                           contacts:
                             type: array
@@ -8069,14 +7903,6 @@ paths:
                                   example: []
                                 company:
                                   $ref: '#/components/schemas/Company'
-                          total_count:
-                            $ref: '#/components/schemas/Page_data/properties/total_count'
-                          page:
-                            $ref: '#/components/schemas/Page_data/properties/page'
-                          per_page:
-                            $ref: '#/components/schemas/Page_data/properties/per_page'
-                          max_page:
-                            $ref: '#/components/schemas/Page_data/properties/max_page'
         400:
           $ref: '#/components/responses/400'
         401:
@@ -8146,6 +7972,8 @@ paths:
                   - type: object
                     properties:
                       data:
+                        allOf:
+                          - $ref: '#/components/schemas/Page_data'
                         properties:
                           contacts:
                             type: array
@@ -8169,14 +7997,6 @@ paths:
                                   example: []
                                 company:
                                   $ref: '#/components/schemas/Company'
-                          total_count:
-                            $ref: '#/components/schemas/Page_data/properties/total_count'
-                          page:
-                            $ref: '#/components/schemas/Page_data/properties/page'
-                          per_page:
-                            $ref: '#/components/schemas/Page_data/properties/per_page'
-                          max_page:
-                            $ref: '#/components/schemas/Page_data/properties/max_page'
         400:
           $ref: '#/components/responses/400'
         401:
@@ -8211,6 +8031,8 @@ paths:
                   - type: object
                     properties:
                       data:
+                        allOf:
+                          - $ref: '#/components/schemas/Page_data'
                         properties:
                           notifications:
                             type: array
@@ -8218,14 +8040,6 @@ paths:
                               properties:
                                 notification:
                                   $ref: '#/components/schemas/Notification'
-                          total_count:
-                            $ref: '#/components/schemas/Page_data/properties/total_count'
-                          page:
-                            $ref: '#/components/schemas/Page_data/properties/page'
-                          per_page:
-                            $ref: '#/components/schemas/Page_data/properties/per_page'
-                          max_page:
-                            $ref: '#/components/schemas/Page_data/properties/max_page'
         400:
           $ref: '#/components/responses/400'
         401:
@@ -8355,19 +8169,13 @@ paths:
                   - type: object
                     properties:
                       data:
+                        allOf:
+                          - $ref: '#/components/schemas/Page_data'
                         properties:
                           webhooks:
                             type: array
                             items:
                               $ref: '#/components/schemas/Webhook'
-                          total_count:
-                            $ref: '#/components/schemas/Page_data/properties/total_count'
-                          page:
-                            $ref: '#/components/schemas/Page_data/properties/page'
-                          per_page:
-                            $ref: '#/components/schemas/Page_data/properties/per_page'
-                          max_page:
-                            $ref: '#/components/schemas/Page_data/properties/max_page'
         400:
           $ref: '#/components/responses/400'
         401:
@@ -8452,6 +8260,8 @@ paths:
                   - type: object
                     properties:
                       data:
+                        allOf:
+                          - $ref: '#/components/schemas/Page_data'
                         properties:
                           pipelines:
                             type: array
@@ -8459,14 +8269,6 @@ paths:
                               properties:
                                 pipeline:
                                   $ref: '#/components/schemas/Pipeline'
-                          total_count:
-                            $ref: '#/components/schemas/Page_data/properties/total_count'
-                          page:
-                            $ref: '#/components/schemas/Page_data/properties/page'
-                          per_page:
-                            $ref: '#/components/schemas/Page_data/properties/per_page'
-                          max_page:
-                            $ref: '#/components/schemas/Page_data/properties/max_page'
         400:
           $ref: '#/components/responses/400'
         401:
