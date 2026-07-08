@@ -2065,8 +2065,8 @@ paths:
                     $ref: '#/components/schemas/Success/properties/timestamp'
                   data:
                     properties:
-                      predefined_action:
-                        $ref: '#/components/schemas/Predefined_action'
+                      predefined_item:
+                        $ref: '#/components/schemas/Predefined_item'
         400:
           $ref: '#/components/responses/400'
         401:
@@ -3935,10 +3935,10 @@ paths:
         content:
           application/json:
             schema:
-              required:
-                - custom_filename
               properties:
                 attachment:
+                  required:
+                    - custom_filename
                   properties:
                     custom_filename:
                       $ref: '#/components/schemas/Attachment/properties/custom_filename'
@@ -4198,7 +4198,7 @@ paths:
                     $ref: '#/components/schemas/Success/properties/timestamp'
                   data:
                     properties:
-                      deal:
+                      relationship_type:
                         $ref: '#/components/schemas/Relationship_Type'
         400:
           $ref: '#/components/responses/400'
@@ -4255,7 +4255,7 @@ paths:
                     $ref: '#/components/schemas/Success/properties/timestamp'
                   data:
                     properties:
-                      deal:
+                      relationship_type:
                         $ref: '#/components/schemas/Relationship_Type'
         400:
           $ref: '#/components/responses/400'
@@ -5691,54 +5691,6 @@ paths:
         500:
           $ref: '#/components/responses/500'
   /companies/{company_id}/logo:
-    post:
-      summary: Update logo for the given company
-      description: Update company logo with the given image. The previous logo is removed and then new image is set
-      tags:
-        - Companies
-      parameters:
-        - $ref: '#/components/parameters/path_company_id'
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              properties:
-                image:
-                  $ref: '#/components/schemas/Company/properties/image'
-      responses:
-        200:
-          description: OK
-          content:
-            application/json:
-              schema:
-                properties:
-                  status:
-                    $ref: '#/components/schemas/Success/properties/status'
-                  message:
-                    $ref: '#/components/schemas/Success/properties/message'
-                  timestamp:
-                    $ref: '#/components/schemas/Success/properties/timestamp'
-                  data:
-                    properties:
-                      company:
-                        $ref: '#/components/schemas/Company'
-        400:
-          $ref: '#/components/responses/400'
-        401:
-          $ref: '#/components/responses/401'
-        403:
-          $ref: '#/components/responses/403'
-        404:
-          $ref: '#/components/responses/404'
-        409:
-          $ref: '#/components/responses/409'
-        415:
-          $ref: '#/components/responses/415'
-        422:
-          $ref: '#/components/responses/422'
-        500:
-          $ref: '#/components/responses/500'
     patch:
       summary: Update logo for the given company
       description: Update company logo with the given image. The previous logo is removed and then new image is set
@@ -6417,7 +6369,7 @@ paths:
     put:
       summary: Update a contact's photo
       description: >
-        Use this endpoint to add a new photo to an existing contact. <br> <br>
+        Use this endpoint to update the photo of an existing contact. <br> <br>
         It takes a parameter `image`, which must be a Base64 encoded string of the image data. <br>
         Images will be cropped to a centered square and resized to 200x200 pixels. <br> <br>
         Note: updating a contact photo will remove the existing photo! <br>
@@ -6438,8 +6390,8 @@ paths:
                   example: >-
                     iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4gkFCR0iiEuUHQAAA8tJREFUaN7tmX1IlHccwD/PvZRpGb0ZTcK6C9ksanIVvQ0rV4RTK5cy9keLbETOGmRBW1SMmX9sLCrbjDKrJfRqucqgyBoUW3EmRYZFXRmzFmmvXL502rM/vkIpPXenPl6Xe37wcHDP73e/3+f7/v2douai0g2GiW4yDBADxAAxQAwQA8QA+X+CNALNATzZq5Y9VT1BIhyQpULaeYhKAE8XAniAiLGQeFj2jFmgI8jwZPkcMhmSSuCbp+D4DkxWkVxnh9qigZh0SL8NaU6wzZV39s/92sM/ELWNfnv0hYk5kPESZu2FAaM6pqVmIHQwxG2GZSpMz4fw4d731hgW/zZs0H4X/YU8TyqhLAeuFYIZUHyYj30mOL6HyLgAOnv5z3LI5kbtOf0+ghl74NsmmPwT9OzX2iRUQDFD7ErIeAzJJ3WDAFD87hDVFlP4MBXGroaBY3yvubAWnD+KdmxzIOFI+0945xgcS/YpclO77NkM3DoIhR9DYTRc/937GvtcWacCwz4LgjwSFgnzr8GUXyBkgEj46U049RX8aoLzWdDwSEON7XPargUZ+TX0j4HY5bCoFlJOQeTUFmmrcHkD/DYQij+F6jOv1zXVeXd6HYelQ6uGzpCn7iFcyoErm8AKVJfC3VLoPQhGLobru8UcA3BP42ce0chIoRHwyUbIVCF+B4Tb5ND1NVCWDe5/gqzWqsiD6rPe58QshPku+LIMbCldW8Z0GKS+BoqmQ/4g8QdvjhvhgIQiWFoP9pQgrH5NQEMtnMuCzSY4vUAil6b3hUi+aQomEHNPiM+HEakSqUyII++Mhn2xklvei34kdoVUprMOQGY9TPgBrGESkWovw4k0yAuBi2vA4/YdJN4ZiMna2mTGrYXFbkgshsHjRUvNjeDMhi19oGQ2VJVIorQEBqRz29hmy/P8LlxaD1e3yy/eOQquozo10oqOGnEdAk+d9vvwKJi2TXqKuFwIHaJfEqzc4dcp/QN5VAFbwuB4Ejz42/vc0Zmw8D6knoP+ozp2+GcuKE2HTQq4inUOv1ag6jjsmwS7hkLFVu/zP5gC8QXtu7BwFcF+BxSMgMoC3w1ap66DLIC7Gs4ugVwF/swA9z2NXzf7NjHPC7i4DraGQsk8qCkXoQXM2ZU3ypfyPIiaJK1rq77jDXEqbWT20Cld541iOYXSuVs2fYJjD+Dfv+CPROgVDo5VUvpX5L02j8oCsM+TwOHMhidVsrtVn5igdMmfoSpSmlja2LjnLd8FRR7xZnZWjYDxzovGIB8GiAFigBggBogBYoB0J5D/ACApEz8hyMzGAAAAAElFTkSuQmCC
       responses:
-        201:
-          description: Created
+        200:
+          description: OK
           content:
             application/json:
               schema:
@@ -6474,8 +6426,8 @@ paths:
       parameters:
       - $ref: '#/components/parameters/path_contact_id'
       responses:
-        201:
-          description: Created
+        200:
+          description: OK
           content:
             application/json:
               schema:
@@ -9063,9 +9015,9 @@ components:
           items:
             $ref: '#/components/schemas/Filter'
         call_results:
-          type: array
-          description: List of call results for the logged API's users account
-          items:
+          type: object
+          description: Map of call result keys to their display labels for the logged API's users account
+          additionalProperties:
             type: string
           readOnly: true
           example:
@@ -9154,18 +9106,18 @@ components:
           type: array
           description: List of permissions which the user possesses
           readOnly: true
-          enum:
-          - account_owner
-          - admin
-          - activity
-          - edit_target
-          - delete_contacts
-          - delete_deals
-          - pipeline
-          - export
-          - private_contacts
           items:
             type: string
+            enum:
+            - account_owner
+            - admin
+            - activity
+            - edit_target
+            - delete_contacts
+            - delete_deals
+            - pipeline
+            - export
+            - private_contacts
           example:
           - activity
           - edit_target
@@ -9489,7 +9441,7 @@ components:
           description: Should all contacts in this company share the same status?
           example: true
         synced_status_id:
-          type: boolean
+          type: string
           format: bson-id
           description: ID of the status, that all contacts within this company are synced to
           example: 5aaa9b039007ba08c9ebaf0a
@@ -9779,7 +9731,7 @@ components:
           enum:
           - amount
           - margin
-          example: none
+          example: amount
         commission_type:
           type: string
           description: Type of commission for the deal
@@ -10363,30 +10315,30 @@ components:
             readOnly: true
             example: 5aba31e99007ba0f570c92a5
       example:
-        - variant_id: 5aaa9b059007ba08c9ebaf59,
-          variant_name: Partner,
-          contact_id: 5aba31ea9007ba0f570c92d4,
-          first_name: Joe,
-          last_name: Bloggs,
-          company_id: 5aba31ea9007ba0f570c92f1,
-          company_name: Morgan's Forensic Lab,
-          photo_url: https://{foo.bar}/joe-bloggs.jpg,
+        - variant_id: 5aaa9b059007ba08c9ebaf59
+          variant_name: Partner
+          contact_id: 5aba31ea9007ba0f570c92d4
+          first_name: Joe
+          last_name: Bloggs
+          company_id: 5aba31ea9007ba0f570c92f1
+          company_name: Morgan's Forensic Lab
+          photo_url: https://{foo.bar}/joe-bloggs.jpg
           owner_id: 5aba31ea9007ba0f570c92c3
-        - variant_id: 5aaa9b059007ba08c9ebaf59,
-          variant_name: Partner,
-          contact_id: 5aba31ea9007ba0f570c92d5,
-          first_name: Jane,
-          last_name: Doe,
-          company_id: 5aba31ea9007ba0f570c92f3,
-          company_name: Acme Inc,
-          photo_url: https://{foo.bar}/jane-doe.jpg,
+        - variant_id: 5aaa9b059007ba08c9ebaf59
+          variant_name: Partner
+          contact_id: 5aba31ea9007ba0f570c92d5
+          first_name: Jane
+          last_name: Doe
+          company_id: 5aba31ea9007ba0f570c92f3
+          company_name: Acme Inc
+          photo_url: https://{foo.bar}/jane-doe.jpg
           owner_id: 5aba31ea9007ba0f570c92c3
     Relationship:
       description: >-
         The relationship mapping between contacts
       required:
-      - relationship_mapping
-      - relationship_type
+      - relationship_type_id
+      - related_contacts
       properties:
         id:
           type: string
@@ -10770,7 +10722,9 @@ components:
           description: Conditions of the custom filter
           readOnly: true
           items:
-            type: string
+            type: array
+            items:
+              type: string
           example:
           - - deal_owner_id
             - is
