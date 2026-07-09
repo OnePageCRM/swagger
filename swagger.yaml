@@ -1733,8 +1733,8 @@ paths:
                     type: string
                     format: bson-id
                   example:
-                  - 5acddaa7d556733c507tf405
-                  - 5acddaa7d556733c507tf406
+                  - 5acddaa7d556733c507ff405
+                  - 5acddaa7d556733c507ff406
       responses:
         201:
           description: Created
@@ -1830,8 +1830,8 @@ paths:
                     type: string
                     format: bson-id
                   example:
-                  - 5acddaa7d556733c507tf405
-                  - 5acddaa7d556733c507tf406
+                  - 5acddaa7d556733c507ff405
+                  - 5acddaa7d556733c507ff406
       responses:
         200:
           description: OK
@@ -2065,8 +2065,8 @@ paths:
                     $ref: '#/components/schemas/Success/properties/timestamp'
                   data:
                     properties:
-                      predefined_action:
-                        $ref: '#/components/schemas/Predefined_action'
+                      predefined_item:
+                        $ref: '#/components/schemas/Predefined_item'
         400:
           $ref: '#/components/responses/400'
         401:
@@ -2537,7 +2537,7 @@ paths:
                   description: Type of external link (for external `storage_provider`s)
                   enum: [ dropbox, google_drive, evernote ]
                   nullable: true
-                  example: ''
+                  example: null
                 external_url:
                   type: string
                   description: URL for the file (for use with external `storage_provider`s)
@@ -2861,7 +2861,7 @@ paths:
                   description: Type of external link (for external `storage_provider`s)
                   enum: [ dropbox, google_drive, evernote ]
                   nullable: true
-                  example: ''
+                  example: null
                 external_url:
                   type: string
                   description: URL for the file (for use with external `storage_provider`s)
@@ -3253,7 +3253,7 @@ paths:
                   description: Type of external link (for external `storage_provider`s)
                   enum: [ dropbox, google_drive, evernote ]
                   nullable: true
-                  example: ''
+                  example: null
                 external_url:
                   type: string
                   description: URL for the file (for use with external `storage_provider`s)
@@ -3719,7 +3719,7 @@ paths:
                   description: Type of external link (for external `storage_provider`s)
                   enum: [ dropbox, google_drive, evernote ]
                   nullable: true
-                  example: ''
+                  example: null
                 external_url:
                   type: string
                   description: URL for the file (for use with external `storage_provider`s)
@@ -3887,7 +3887,7 @@ paths:
                   description: Type of external link (for external `storage_provider`s)
                   enum: [ dropbox, google_drive, evernote ]
                   nullable: true
-                  example: ''
+                  example: null
                 external_url:
                   type: string
                   description: URL for the file (for use with external `storage_provider`s)
@@ -3935,10 +3935,10 @@ paths:
         content:
           application/json:
             schema:
-              required:
-                - custom_filename
               properties:
                 attachment:
+                  required:
+                    - custom_filename
                   properties:
                     custom_filename:
                       $ref: '#/components/schemas/Attachment/properties/custom_filename'
@@ -4198,7 +4198,7 @@ paths:
                     $ref: '#/components/schemas/Success/properties/timestamp'
                   data:
                     properties:
-                      deal:
+                      relationship_type:
                         $ref: '#/components/schemas/Relationship_Type'
         400:
           $ref: '#/components/responses/400'
@@ -4255,7 +4255,7 @@ paths:
                     $ref: '#/components/schemas/Success/properties/timestamp'
                   data:
                     properties:
-                      deal:
+                      relationship_type:
                         $ref: '#/components/schemas/Relationship_Type'
         400:
           $ref: '#/components/responses/400'
@@ -5691,54 +5691,6 @@ paths:
         500:
           $ref: '#/components/responses/500'
   /companies/{company_id}/logo:
-    post:
-      summary: Update logo for the given company
-      description: Update company logo with the given image. The previous logo is removed and then new image is set
-      tags:
-        - Companies
-      parameters:
-        - $ref: '#/components/parameters/path_company_id'
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              properties:
-                image:
-                  $ref: '#/components/schemas/Company/properties/image'
-      responses:
-        200:
-          description: OK
-          content:
-            application/json:
-              schema:
-                properties:
-                  status:
-                    $ref: '#/components/schemas/Success/properties/status'
-                  message:
-                    $ref: '#/components/schemas/Success/properties/message'
-                  timestamp:
-                    $ref: '#/components/schemas/Success/properties/timestamp'
-                  data:
-                    properties:
-                      company:
-                        $ref: '#/components/schemas/Company'
-        400:
-          $ref: '#/components/responses/400'
-        401:
-          $ref: '#/components/responses/401'
-        403:
-          $ref: '#/components/responses/403'
-        404:
-          $ref: '#/components/responses/404'
-        409:
-          $ref: '#/components/responses/409'
-        415:
-          $ref: '#/components/responses/415'
-        422:
-          $ref: '#/components/responses/422'
-        500:
-          $ref: '#/components/responses/500'
     patch:
       summary: Update logo for the given company
       description: Update company logo with the given image. The previous logo is removed and then new image is set
@@ -6417,7 +6369,7 @@ paths:
     put:
       summary: Update a contact's photo
       description: >
-        Use this endpoint to add a new photo to an existing contact. <br> <br>
+        Use this endpoint to update the photo of an existing contact. <br> <br>
         It takes a parameter `image`, which must be a Base64 encoded string of the image data. <br>
         Images will be cropped to a centered square and resized to 200x200 pixels. <br> <br>
         Note: updating a contact photo will remove the existing photo! <br>
@@ -6438,8 +6390,8 @@ paths:
                   example: >-
                     iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4gkFCR0iiEuUHQAAA8tJREFUaN7tmX1IlHccwD/PvZRpGb0ZTcK6C9ksanIVvQ0rV4RTK5cy9keLbETOGmRBW1SMmX9sLCrbjDKrJfRqucqgyBoUW3EmRYZFXRmzFmmvXL502rM/vkIpPXenPl6Xe37wcHDP73e/3+f7/v2douai0g2GiW4yDBADxAAxQAwQA8QA+X+CNALNATzZq5Y9VT1BIhyQpULaeYhKAE8XAniAiLGQeFj2jFmgI8jwZPkcMhmSSuCbp+D4DkxWkVxnh9qigZh0SL8NaU6wzZV39s/92sM/ELWNfnv0hYk5kPESZu2FAaM6pqVmIHQwxG2GZSpMz4fw4d731hgW/zZs0H4X/YU8TyqhLAeuFYIZUHyYj30mOL6HyLgAOnv5z3LI5kbtOf0+ghl74NsmmPwT9OzX2iRUQDFD7ErIeAzJJ3WDAFD87hDVFlP4MBXGroaBY3yvubAWnD+KdmxzIOFI+0945xgcS/YpclO77NkM3DoIhR9DYTRc/937GvtcWacCwz4LgjwSFgnzr8GUXyBkgEj46U049RX8aoLzWdDwSEON7XPargUZ+TX0j4HY5bCoFlJOQeTUFmmrcHkD/DYQij+F6jOv1zXVeXd6HYelQ6uGzpCn7iFcyoErm8AKVJfC3VLoPQhGLobru8UcA3BP42ce0chIoRHwyUbIVCF+B4Tb5ND1NVCWDe5/gqzWqsiD6rPe58QshPku+LIMbCldW8Z0GKS+BoqmQ/4g8QdvjhvhgIQiWFoP9pQgrH5NQEMtnMuCzSY4vUAil6b3hUi+aQomEHNPiM+HEakSqUyII++Mhn2xklvei34kdoVUprMOQGY9TPgBrGESkWovw4k0yAuBi2vA4/YdJN4ZiMna2mTGrYXFbkgshsHjRUvNjeDMhi19oGQ2VJVIorQEBqRz29hmy/P8LlxaD1e3yy/eOQquozo10oqOGnEdAk+d9vvwKJi2TXqKuFwIHaJfEqzc4dcp/QN5VAFbwuB4Ejz42/vc0Zmw8D6knoP+ozp2+GcuKE2HTQq4inUOv1ag6jjsmwS7hkLFVu/zP5gC8QXtu7BwFcF+BxSMgMoC3w1ap66DLIC7Gs4ugVwF/swA9z2NXzf7NjHPC7i4DraGQsk8qCkXoQXM2ZU3ypfyPIiaJK1rq77jDXEqbWT20Cld541iOYXSuVs2fYJjD+Dfv+CPROgVDo5VUvpX5L02j8oCsM+TwOHMhidVsrtVn5igdMmfoSpSmlja2LjnLd8FRR7xZnZWjYDxzovGIB8GiAFigBggBogBYoB0J5D/ACApEz8hyMzGAAAAAElFTkSuQmCC
       responses:
-        201:
-          description: Created
+        200:
+          description: OK
           content:
             application/json:
               schema:
@@ -6474,8 +6426,8 @@ paths:
       parameters:
       - $ref: '#/components/parameters/path_contact_id'
       responses:
-        201:
-          description: Created
+        200:
+          description: OK
           content:
             application/json:
               schema:
@@ -7368,7 +7320,7 @@ paths:
                 relationship_type_id:
                   type: string
                   format: bson-id
-                  description: ID of the contact
+                  description: ID of the relationship type
                   example: 5aaa9b059007ba08c9ebaf58
                 related_contacts:
                   minItems: 2
@@ -9063,9 +9015,9 @@ components:
           items:
             $ref: '#/components/schemas/Filter'
         call_results:
-          type: array
-          description: List of call results for the logged API's users account
-          items:
+          type: object
+          description: Map of call result keys to their display labels for the logged API's users account
+          additionalProperties:
             type: string
           readOnly: true
           example:
@@ -9154,18 +9106,27 @@ components:
           type: array
           description: List of permissions which the user possesses
           readOnly: true
-          enum:
-          - account_owner
-          - admin
-          - activity
-          - edit_target
-          - delete_contacts
-          - delete_deals
-          - pipeline
-          - export
-          - private_contacts
           items:
             type: string
+            enum:
+            - account_owner
+            - admin
+            - activity
+            - create_report
+            - edit_target
+            - deal_items
+            - delete_contacts
+            - delete_deals
+            - pipeline
+            - export
+            - private_contacts
+            - bulk_status
+            - bulk_owner
+            - save_to_google_contacts
+            - download_contact_vcard
+            - emails_full_sync
+            - manage_autoflows
+            - webforms
           example:
           - activity
           - edit_target
@@ -9308,7 +9269,6 @@ components:
           example: [ Java, Android, iOS ]
         lead_source_id:
           type: string
-          format: bson-id
           description: ID of the lead source of the contact
           example: email_web
         lead_source:
@@ -9398,7 +9358,7 @@ components:
                 maxLength: 140
                 description: An optional message detailing why the sales cycle was closed
                 readOnly: true
-                example:
+                example: Client is no longer interested
         google_contacts_data:
           description: The google contacts data associated with this contact
           readOnly: true
@@ -9489,7 +9449,7 @@ components:
           description: Should all contacts in this company share the same status?
           example: true
         synced_status_id:
-          type: boolean
+          type: string
           format: bson-id
           description: ID of the status, that all contacts within this company are synced to
           example: 5aaa9b039007ba08c9ebaf0a
@@ -9779,7 +9739,7 @@ components:
           enum:
           - amount
           - margin
-          example: none
+          example: amount
         commission_type:
           type: string
           description: Type of commission for the deal
@@ -10019,8 +9979,7 @@ components:
           example: Mary is interested in coming into the office on Tuesday.
         call_result:
           type: string
-          format: bson-id
-          description: ID of the `call_result` which best describes the result of the call
+          description: Key of the `call_result` which best describes the result of the call
           example: interested
         call_time_int:
           type: integer
@@ -10079,7 +10038,7 @@ components:
           example: 1
     Meeting:
       description: >-
-        Allow you to keep track of phone meetings made to your contacts. meetings include information like the place
+        Allow you to keep track of meetings held with your contacts. Meetings include information like the place
         and the meeting result. Meetings support file attachments.
       required:
       - contact_id
@@ -10268,7 +10227,7 @@ components:
         id:
           type: string
           format: bson-id
-          description: ID of the deal
+          description: ID of the relationship type
           readOnly: true
           example: 5aaa9b059007ba08c9ebaf58
         symmetrical:
@@ -10294,13 +10253,13 @@ components:
         created_at:
           type: string
           format: date-time
-          description: Creation time of the deal
+          description: Creation time of the relationship type
           readOnly: true
           example: '2018-03-15T16:10:45Z'
         modified_at:
           type: string
           format: date-time
-          description: Last modification time of the deal
+          description: Last modification time of the relationship type
           readOnly: true
           example: '2018-03-15T16:10:45Z'
     Related_contact:
@@ -10341,7 +10300,7 @@ components:
             example: Bloggs
           photo_url:
             type: string
-            description: URL of the user’s profile picture
+            description: URL of the contact’s photo
             readOnly: true
             example: "https://{foo.bar}/joe-bloggs.jpg"
           company_id:
@@ -10363,54 +10322,54 @@ components:
             readOnly: true
             example: 5aba31e99007ba0f570c92a5
       example:
-        - variant_id: 5aaa9b059007ba08c9ebaf59,
-          variant_name: Partner,
-          contact_id: 5aba31ea9007ba0f570c92d4,
-          first_name: Joe,
-          last_name: Bloggs,
-          company_id: 5aba31ea9007ba0f570c92f1,
-          company_name: Morgan's Forensic Lab,
-          photo_url: https://{foo.bar}/joe-bloggs.jpg,
+        - variant_id: 5aaa9b059007ba08c9ebaf59
+          variant_name: Partner
+          contact_id: 5aba31ea9007ba0f570c92d4
+          first_name: Joe
+          last_name: Bloggs
+          company_id: 5aba31ea9007ba0f570c92f1
+          company_name: Morgan's Forensic Lab
+          photo_url: https://{foo.bar}/joe-bloggs.jpg
           owner_id: 5aba31ea9007ba0f570c92c3
-        - variant_id: 5aaa9b059007ba08c9ebaf59,
-          variant_name: Partner,
-          contact_id: 5aba31ea9007ba0f570c92d5,
-          first_name: Jane,
-          last_name: Doe,
-          company_id: 5aba31ea9007ba0f570c92f3,
-          company_name: Acme Inc,
-          photo_url: https://{foo.bar}/jane-doe.jpg,
+        - variant_id: 5aaa9b059007ba08c9ebaf59
+          variant_name: Partner
+          contact_id: 5aba31ea9007ba0f570c92d5
+          first_name: Jane
+          last_name: Doe
+          company_id: 5aba31ea9007ba0f570c92f3
+          company_name: Acme Inc
+          photo_url: https://{foo.bar}/jane-doe.jpg
           owner_id: 5aba31ea9007ba0f570c92c3
     Relationship:
       description: >-
         The relationship mapping between contacts
       required:
-      - relationship_mapping
-      - relationship_type
+      - relationship_type_id
+      - related_contacts
       properties:
         id:
           type: string
           format: bson-id
-          description: ID of the deal
+          description: ID of the relationship
           readOnly: true
           example: 5aaa9b059007ba08c9ebaf57
         relationship_type_id:
           type: string
           format: bson-id
-          description: ID of the contact
+          description: ID of the relationship type
           example: 5aaa9b059007ba08c9ebaf58
         related_contacts:
           $ref: '#/components/schemas/Related_contact'
         created_at:
           type: string
           format: date-time
-          description: Creation time of the deal
+          description: Creation time of the relationship
           readOnly: true
           example: '2018-03-15T16:10:45Z'
         modified_at:
           type: string
           format: date-time
-          description: Last modification time of the deal
+          description: Last modification time of the relationship
           readOnly: true
           example: '2018-03-15T16:10:45Z'
     Email_address:
@@ -10418,12 +10377,12 @@ components:
       properties:
         address:
           type: string
-          description: Type of the notification
+          description: Email address
           example: 'joes.boss@bar.foo'
         name:
           type: string
           nullable: true
-          description: Type of the notification
+          description: Name associated with the email address
           example: 'Joes Boss'
     Notification:
       description: A serialised notification. There are different types of notifications, each can have its own properties
@@ -10431,7 +10390,7 @@ components:
         id:
           type: string
           format: bson-id
-          description: ID of the status
+          description: ID of the notification
           readOnly: true
           example: 5aead4809007ba56ffca942e
         type:
@@ -10653,7 +10612,7 @@ components:
           type: string
           description: Longer description of what the status is for
           maxLength: 33
-          example: Actively trying to sell to these people
+          example: Actively selling to these people
         color:
           type: string
           format: hex-color
@@ -10708,7 +10667,6 @@ components:
       properties:
         id:
           type: string
-          format: bson-id
           description: ID of the lead source
           readOnly: true
           example: advertisement
@@ -10770,7 +10728,9 @@ components:
           description: Conditions of the custom filter
           readOnly: true
           items:
-            type: string
+            type: array
+            items:
+              type: string
           example:
           - - deal_owner_id
             - is
@@ -10817,7 +10777,7 @@ components:
           format: bson-id
           description: ID of the predefined action
           readOnly: true
-          example: 5acddaa7d556733c507tf405
+          example: 5acddaa7d556733c507ff405
         text:
           type: string
           description: Description text of the predefined action
@@ -10854,8 +10814,8 @@ components:
             type: string
             format: bson-id
           example:
-          - 5acddaa7d556733c507tf405
-          - 5acddaa7d556733c507tf406
+          - 5acddaa7d556733c507ff405
+          - 5acddaa7d556733c507ff406
     Predefined_item:
       description: >-
         A user-configured item which can aid in the creation of deal items
@@ -11597,7 +11557,7 @@ components:
           format: bson-id
           description: ID of the webhook
           readOnly: true
-          example: 5417f8291da41712270G0042
+          example: 5417f8291da41712270a0042
         name:
           type: string
           description: Name of the webhook
@@ -11952,7 +11912,7 @@ components:
       description: Search contacts by phone number
       schema:
         type: string
-        example: 3736344458
+        example: '3736344458'
     query_companies_phone:
       name: phone
       in: query
@@ -11960,7 +11920,7 @@ components:
       description: Search companies by phone number
       schema:
         type: string
-        example: 3736344458
+        example: '3736344458'
     query_contacts_letter:
       name: letter
       in: query
@@ -12038,14 +11998,6 @@ components:
       schema:
         type: string
         example: Jane Doe
-    query_companies_search:
-      name: search
-      in: query
-      required: false
-      description: Search companies by name
-      schema:
-        type: string
-        example: Big Company Inc
     query_deals_search:
       name: search
       in: query
@@ -12251,7 +12203,6 @@ components:
         (use with `date_filter` - date must be in format `YYYY-MM-DD` or UNIX timestamp)
       schema:
         type: string
-        format: date-time
         example: '2018-07-01'
     query_until:
       in: query
@@ -12261,7 +12212,6 @@ components:
         (use with `date_filter` - date must be in format `YYYY-MM-DD` or UNIX timestamp)
       schema:
         type: string
-        format: date-time
         example: '2018-07-31'
     query_modified_since:
       in: query
@@ -12271,7 +12221,6 @@ components:
         - date must be in format `YYYY-MM-DD` or UNIX timestamp)
       schema:
         type: string
-        format: date-time
         example: '2018-07-01'
     query_unmodified_since:
       in: query
@@ -12281,7 +12230,6 @@ components:
         - date must be in format `YYYY-MM-DD` or UNIX timestamp)
       schema:
         type: string
-        format: date-time
         example: '2018-07-01'
     query_actions_contact_id:
       name: contact_id
@@ -12324,15 +12272,6 @@ components:
       in: query
       description: >-
         Return meetings for a specific contact (only use one of `contact_id` or `company_id` at a time)
-      required: false
-      schema:
-        type: string
-        example: 5ae06ef9d55673108fe8877b
-    query_emails_contact_id:
-      name: contact_id
-      in: query
-      description: >-
-        Return emails for a specific contact (only use one of `contact_id` or `company_id` at a time)
       required: false
       schema:
         type: string
@@ -12387,15 +12326,6 @@ components:
       in: query
       description: >-
         Return meetings for a specific company (only use one of `contact_id` or `company_id` at a time)
-      required: false
-      schema:
-        type: string
-        example: 6se06df9d55673108re84745
-    query_emails_company_id:
-      name: company_id
-      in: query
-      description: >-
-        Return emails for a specific company (only use one of `contact_id` or `company_id` at a time)
       required: false
       schema:
         type: string
@@ -12734,8 +12664,6 @@ components:
   responses:
     '200':
       description: OK
-    '201':
-      description: Created
     '400':
       description: >-
         Bad Request. The request is not properly formatted, does not properly
