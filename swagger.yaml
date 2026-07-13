@@ -2,230 +2,23 @@ openapi: 3.0.0
 info:
   title: OnePageCRM API
   description: >-
-    <p style="font-size: 16px">At OnePageCRM, we love to see people using our software in new and exciting ways. If you've built an integration with OnePageCRM, fill out <a target="_blank" href="https://forms.onepagecrm.com/65d470e49e344574cb4b3e5b/" style="font-size: 16px"> this web form</a>, and we'll get back to you.</p>
-    <br>
+    The OnePageCRM REST API. Full guides, a per-endpoint reference, and
+    copy-ready examples live at https://developer.onepagecrm.com/.
 
-    If you have any questions, please reach out to us at support(at)onepagecrm(dot)com.<br>
 
-    <br>
-    <h3>OpenAPI Spec 3 Compliance</h3>
-    We've rebuilt the OnePageCRM API documentation from the ground up to be cleaner, simpler and to comply with the
-    <a target="_blank" href="https://github.com/OAI/OpenAPI-Specification">OpenAPI Spec 3</a>.<br>
-    We are also releasing our OAS3 compliant documentation to the public:
-    <a target="_blank" href="https://github.com/OnePageCRM/swagger">https://github.com/OnePageCRM/swagger</a>.<br>
-    If you think our docs could be clearer or notice any issues, please let us know (we would also be delighted to
-    receive pull requests!).<br>
-    Here is a <a target="_blank" href="http://openapi.tools/">list of tools</a> for working with OpenAPI e.g. client
-    SDK generation (free to use any or all of these tools with the OnePageCRM spec).<br>
-    In rewriting this documentation we have exposed lots of new features of the API - we hope you enjoy using them!<br>
-    If you have trouble using the OnePageCRM API or notice any issue with this documentation please contact us on our
-    <a target="_blank" href="http://forum.developer.onepagecrm.com/">developer forum</a>.<br>
+    Built something with OnePageCRM? Tell us at
+    https://forms.onepagecrm.com/65d470e49e344574cb4b3e5b/ or email
+    support(at)onepagecrm(dot)com.
 
-    <br><br>
-    <h3>Authentication</h3>
-    The OnePageCRM API makes use of
-    <a target="_blank" href="https://en.wikipedia.org/wiki/Basic_access_authentication">HTTP Basic Authentication</a>.
-    To authenticate using HTTP Basic Auth, you need the <code>user_id</code> and <code>api_key</code> associated
-    with your OnePageCRM account. Your username is your <code>user_id</code> and your password is your
-    <code>api_key</code>.<br>
 
-    <br>
-    <i>This information can be found by logging into your OnePageCRM account and navigating to
-    <a target="_blank" href="https://app.onepagecrm.com/app/api">https://app.onepagecrm.com/app/api</a>
-    and selecting the configuration tab.</i><br>
+    Authentication is HTTP Basic: your username is your user_id and your
+    password is your api_key. Find both at https://app.onepagecrm.com/app/api
+    (API tab).
 
-    <br><br>
-    <h3>Pagination</h3>
-    <p>Whenever you are fetching a list of records, you can paginate the response with these standard parameters:</p>
-    <table class="table table-striped table-bordered">
-      <thead>
-        <tr>
-          <td>Name</td>
-          <td>Type</td>
-          <td>Description</td>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="nowrap">page</td>
-          <td class="nowrap">integer</td>
-          <td>Page number. Starts from 1. Default is 1</td>
-        </tr>
-        <tr>
-          <td>per_page</td>
-          <td>integer</td>
-          <td>Number of records to return. Maximum 100 allowed. Default is 10</td>
-        </tr>
-      </tbody>
-    </table>
-    <p>So, for example, to fetch the first batch of 20 contacts:</p>
-    <p class="url"><code class="bluetext"><span class="get-text">GET</span> contacts.json?per_page=20&page=1</code></p>
-    <p>And to fetch the second batch of 20 contacts:</p>
-    <p class="url"><code class="bluetext"><span class="get-text">GET</span> contacts.json?per_page=20&page=2</code></p>
 
-    <br><br>
-    <h3>Undo Deletion</h3>
-    <table class="table table-striped table-bordered">
-      <thead>
-        <tr>
-          <td>Name</td>
-          <td>Type</td>
-          <td>Description</td>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="nowrap">undo</td>
-          <td class="nowrap">boolean</td>
-          <td>Revert the deleting operation.</td>
-        </tr>
-      </tbody>
-    </table>
-    <p>If you delete a contact with a <span class="delete-text">DELETE</span> request like this:</p>
-    <p class="url"><code class="bluetext"><span class="delete-text">DELETE</span> contacts/51f251d5eb899749f7000006.json</code></p>
-    <p>You can undo it by specifying an undo flag:</p>
-    <p class="url"><code class="bluetext"><span class="delete-text">DELETE</span> contacts/51f251d5eb899749f7000006.json?undo=true</code></p>
-
-    <br><br>
-    <h3>Sort Listings by Time</h3>
-      <p>
-        When fetching collections, you can request the API only returns records that were modified in a given time range.
-      </p>
-      <table class="table table-striped table-bordered">
-        <thead>
-          <tr>
-            <td>Name</td>
-            <td>Type</td>
-            <td>Description</td>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>date_filter</td>
-            <td>Unix timestamp</td>
-            <td>Filter returned data by a particular field when combined with since and until.</td>
-          </tr>
-          <tr>
-            <td>since</td>
-            <td>Unix timestamp</td>
-            <td>Return resources with dates in the provided date_filter parameter since this time. Otherwise it will return resources that were modified since this time.</td>
-          </tr>
-          <tr>
-            <td>until</td>
-            <td>Unix timestamp</td>
-            <td>Return resources with dates in the provided date_filter parameter until this time. Otherwise it will return resources that were modified until this time.</td>
-          </tr>
-          <tr>
-            <td>unmodified_since</td>
-            <td>Unix timestamp</td>
-            <td>Return only records that were unmodified since specified time.</td>
-          </tr>
-          <tr>
-            <td>modified_since</td>
-            <td>Unix timestamp</td>
-            <td>Return only records that were modified since specified time.</td>
-          </tr>
-        <tbody>
-      </table>
-
-    <br><br>
-    <h3>Sort Listings by Field</h3>
-      <table class="table table-striped table-bordered">
-        <thead>
-          <tr>
-            <td>Name</td>
-            <td>Type</td>
-            <td>Description</td>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>sort_by</td>
-            <td>string</td>
-            <td>Name of field to sort results by (eg. 'email' or 'date').</td>
-          </tr>
-          <tr>
-            <td>order</td>
-            <td>string</td>
-            <td><code> asc || desc </code></td>
-          </tr>
-        </tbody>
-      </table>
-      <p>
-        Using these two fields you can sort the response by a specific field in either ascending or descending order. Ascending is the default order. Here is an example for sorting contacts by firstname in reverse alphabetical order:
-      </p>
-      <p class="url">
-        <code class="bluetext">
-          <span class="get-text">GET</span>
-          contacts.json?sort_by=first_name&amp;order=desc
-        </code>
-      </p>
-
-    <br><br>
-    <h3>Partial update</h3>
-      <table class="table table-striped table-bordered">
-        <thead>
-          <tr>
-            <td>Name</td>
-            <td>Type</td>
-            <td>Description</td>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>partial</td>
-            <td>boolean</td>
-            <td>Whether you would like to provide a partial update or not.</td>
-          </tr>
-        </tbody>
-      </table>
-      <p>
-        Using the partial field, you can provide only the updated fields in the request body while updating a resource instead of sending all the fields:
-      </p>
-      <p class="url">
-        <code class="bluetext">
-          <span class="put-text">PUT</span>
-          contacts.json?partial=true
-        </code>
-      </p>
-
-    <br><br>
-    <h3>Using this Documentation</h3>
-      <p>
-      You can use these docs to interact directly with the API. Simply:
-      <ol>
-        <li>
-          Click the green "Authorise" button below
-        </li>
-        <li>
-          Supply your username (<code>user_id</code>) and password (<code>api_key</code>)
-        </li>
-        <li>
-          Find the endpoint you wish to interact with, and method you wish to use
-        </li>
-        <li>
-          Clicking "Try it out" lets you edit the query params, request body and run requests
-        </li>
-        <li>
-          For <code>GET</code> requests - you can change the query params
-        </li>
-        <li>
-          For <code>POST</code>/<code>PUT</code> requests - you can edit the request body
-        </li>
-        <li>
-          When you're happy to do so - click "Execute"
-        </li>
-      </ol>
-
-      Sample responses are shown for all requests below.
-      </p>
-      <div class="alert alert-danger">
-        <strong>Warning:</strong> Any changes made in this way will effect your OnePageCRM data. If this is your
-        main account, please exercise caution when making any changes.
-      </div>
-    </div>
-    <br><br>
-
+    Conventions — pagination (page, per_page), sorting (sort_by, order), time
+    filters (since, until, modified_since), partial updates (partial=true) and
+    undo deletion (undo=true) — are documented on the developer portal.
   termsOfService: 'https://www.onepagecrm.com/api-use'
   version: '3.0'
 servers:
@@ -235,112 +28,64 @@ security:
 - BasicAuth: []
 tags:
 - name: Bootstrap
-  description: >-
-    Get account information like settings and lead sources, log yourself out or change your authentication key.
+  description: "Account start-up data in a single call — settings, the logged user, and reference lists such as statuses and lead sources. Also used to log out or roll your API key."
 - name: Users
-  description: >-
-    Useful information about the logged user and other members of the team. Each can update their own info. Admins
-    can update all.
+  description: "The logged user and the other members of the account. Each user can update their own details; admins can update anyone's."
 - name: Contacts
-  description: >-
-    Information about the people you are actively trying to sell to, and related sub-resources like Actions,
-    Deals, Notes, Calls and Meetings.
+  description: "The people you're actively selling to. Each contact is the hub for its related actions, deals, notes, calls and meetings."
 - name: Companies
-  description: >-
-    Referred to as 'organizations' in the web application. Companies are logical collections of Contacts and
-    related sub-resources e.g. Deals, Actions and some basic info on the org. e.g. postal address, website. A
-    Company may not be created directly or exist without a Contact.
+  description: "Organizations that group related contacts, with shared details like postal address and website. A company can hold its own deals and actions, and always exists alongside a contact (they're called 'organizations' in the app)."
 - name: Actions
-  description: >-
-    Completable tasks related to Contacts. ASAP first, then dated actions ordered by due date (overdue first),
-    followed by waiting for (blocked) and finally queued actions (without any date).
+  description: "The next steps to take on a contact — the heart of OnePageCRM. Actions sort ASAP first, then by due date (overdue first), then waiting-for, then undated queued items."
 - name: Action Stream
-  description: >-
-    A listing of contacts prioritized by when their next action is due. The Action Stream is the default view in
-    the OnePageCRM web application.
+  description: "Your contacts ordered by when their next action is due — the default view in the OnePageCRM app."
 - name: Team Stream
-  description: >-
-    The Action Stream for all users on the account in a single list, or for any individual user on the account
-    (not just the logged user). The same Action Stream sorting is applied.
+  description: "The Action Stream across the whole account in one list, or for any single user — using the same next-action-due ordering."
 - name: Deals
-  description: >-
-    Represent (potential) financial transactions with your contacts. Deals include information like
-    amount, deal stage, closed date or expected close date. Deals support file attachments.
+  description: "Potential sales tracked against a contact — amount, stage, and expected or actual close date. Deals support file attachments."
 - name: Notes
-  description: >-
-    Allow you to keep track of additional information related to your contacts. Notes can include any
-    information you feel is relevant e.g. interactions with that contact. Notes support file attachments.
+  description: "Free-form information logged against a contact — meeting notes, context, or anything else relevant. Notes support file attachments."
 - name: Calls
-  description: >-
-    Allow you to keep track of phone calls made to your contacts. Calls include information like the phone
-    number dialled and the call result. Calls support file attachments.
+  description: "Phone calls logged against a contact, including the number dialled and the result. Calls support file attachments."
 - name: Meetings
-  description: >-
-    Allow you to keep track of phone meetings made to your contacts. Meetings include information like the phone
-    number dialled and the meeting result. Meetings support file attachments.
+  description: "Meetings logged against a contact, including when they happened and the outcome. Meetings support file attachments."
 - name: Attachments
-  description: >-
-    Additional files associated with Deals, Notes, Calls or Meetings. They can be uploaded and stored in S3, or stored in
-    external providers i.e. Google Drive, Dropbox, Evernote.
+  description: "Files attached to a deal, note, call or meeting — stored in OnePageCRM (S3) or linked from Google Drive, Dropbox or Evernote."
 - name: Relationship Types
-  description: >-
-    Information about the relationship types that's used to identify the relationships between the contacts.
+  description: "The labels used to describe how two contacts are related — for example 'colleague', 'spouse' or 'referred by'."
 - name: Pipelines
-  description: >-
-    Information about the sales process of products or services, including deal stages.
-    Each product/service/group may have a different pipeline.
+  description: "Your sales processes and the deal stages within them. Each product or service group can have its own pipeline."
 - name: Statuses
-  description: >-
-    Values which help qualify where contacts are in the sales pipeline. The list of Statuses is
-    already populated but it may be updated if needed, to better fit your organization.
+  description: "The stages a contact moves through in your sales process. The list comes pre-populated and can be edited to fit your account."
 - name: Lead Sources
-  description: >-
-    A way to classify the source of any contact that is added to OnePageCRM. Like Statuses, this list is
-    pre-populated, and can be later edited to fit individual needs.
+  description: "How a contact first came to you. Like statuses, this list is pre-populated and can be edited to fit your account."
 - name: Filters
-  description: >-
-    Allow you to query contacts in your own custom way. These filters can only be created on the website but they
-    can be used through the API.
+  description: "Saved, custom queries over your contacts. Filters are created in the app and can then be applied through the API."
 - name: Predefined Actions
-  description: >-
-    Template actions users may use frequently in their sales process. Referred to as 'Saved Actions' in the web
-    application.
+  description: "Reusable action templates for steps you take often (called 'Saved Actions' in the app)."
 - name: Predefined Items
-  description: >-
-    A user-configured list of items representing products or services, which can be used to standardize deal creation.
+  description: "A configurable list of products or services, used to standardize deal creation."
 - name: Predefined Action Groups
-  description: >-
-    A grouping of predefined actions. Useful if actions can be assigned together as part of a workflow.
+  description: "Groups of predefined actions that can be applied together as a workflow."
 - name: Predefined Item Groups
-  description: >-
-    A grouping of predefined/deal items. Useful if items can be sold as part of a package or compliment one another.
+  description: "Groups of predefined deal items that are sold together or complement one another."
 - name: Custom Fields
-  description: >-
-    Extra user-configurable data fields for Contacts. Only editable by admins.
+  description: "Extra, user-defined fields on contacts. Configurable by admins."
 - name: Company Fields
-  description: >-
-    Extra user-configurable data fields for Companies. Only editable by admins.
+  description: "Extra, user-defined fields on companies. Configurable by admins."
 - name: Deal Fields
-  description: >-
-    Extra user-configurable data fields for Deals. Only editable by admins.
+  description: "Extra, user-defined fields on deals. Configurable by admins."
 - name: Notifications
-  description: >-
-    Allows you to fetch notifications that logged in user has, except email and link notifications.
+  description: "The logged user's in-app notifications (excludes email and link notifications)."
 - name: Countries
-  description: >-
-    A list of all compatible countries and their ISO-3166 codes.
+  description: "The countries OnePageCRM supports, with their ISO-3166 codes."
 - name: Web Hooks
-  description: >-
-    A simple, effective way to be notified when things happen in OnePageCRM. For more information, go to the
-    'WebHooks & More' tab at the top of the page.
+  description: "A simple way to be notified when records change in OnePageCRM. Subscribe an endpoint and OnePageCRM POSTs each event as it happens."
 paths:
   /bootstrap:
     get:
       summary: Get useful information about the logged API user's account
-      description: >-
-        Includes things like: <br>
-        -> Global account config e.g. lead sources and deal stages. <br>
-        -> User specific config e.g. date format, time zone info. <br>
+      description: "Includes global account configuration such as lead sources and deal stages, and user-specific configuration such as date format and time zone."
       parameters: []
       tags:
       - Bootstrap
@@ -394,8 +139,7 @@ paths:
     post:
       summary: Invalidate the current API key and return a new API key
       description: >-
-        **Warning:** This will change the users authentication key, and therefore log them out of all applications. <br>
-        Note: this includes the mobile applications. <br>
+        **Warning:** This will change the users authentication key, and therefore log them out of all applications. Note: this includes the mobile applications.
       tags:
       - Bootstrap
       responses:
@@ -497,13 +241,10 @@ paths:
     put:
       summary: Update a specific user
       description: >-
-        Each team member can edit their own details, admins can update all. <br>
-        Only the following fields may be edited through the API: <br>
-        -> <b>first_name</b> <br>
-        -> <b>last_name</b> <br>
-        -> <b>company</b> <br>
-        -> <b>bcc_email</b> <i>(Set this field to `true` to generate a new BCC email address,
-        otherwise omit the field entirely. You can only update this field for yourself.)</i> <br>
+        Each team member can edit their own details; admins can update anyone's.
+        The API can edit these fields: first_name, last_name, company, and
+        bcc_email. Set bcc_email to true to generate a new BCC email address,
+        otherwise omit it — you can only update bcc_email for yourself.
       tags:
       - Users
       parameters:
@@ -954,7 +695,7 @@ paths:
         500:
           $ref: '#/components/responses/500'
     post:
-      summary: Create a new deal field
+      summary: Create a deal field
       description: Only admins can create deal fields.
       tags:
       - Deal Fields
@@ -2257,7 +1998,7 @@ paths:
   /notes:
     get:
       summary: Get a list of notes
-      description: ''
+      description: "Returns notes logged against your contacts. A note can also be linked to a deal."
       tags:
       - Notes
       parameters:
@@ -2314,8 +2055,8 @@ paths:
         500:
           $ref: '#/components/responses/500'
     post:
-      summary: Create a new note
-      description: ''
+      summary: Create a note
+      description: "Logs a note against a contact. contact_id is required; text carries the note body; link a deal with linked_deal_id. Logging a note updates the contact's last activity date."
       tags:
       - Notes
       parameters: []
@@ -2411,7 +2152,7 @@ paths:
           $ref: '#/components/responses/500'
     put:
       summary: Update a specific note
-      description: ''
+      description: "Updates a note. The author display name stays with the original author."
       tags:
       - Notes
       parameters:
@@ -2497,9 +2238,7 @@ paths:
       tags:
       - Notes
       description: >-
-        Before creating an attachment, the file should be uploaded to S3. <br> <br>
-        Make a request to `attachments/s3_form` for a pre-authorized upload form. <br>
-        Following successful upload to S3, files can be attached via this endpoint. <br>
+        Before creating an attachment, the file should be uploaded to S3.  Make a request to `attachments/s3_form` for a pre-authorized upload form. Following successful upload to S3, files can be attached via this endpoint.
       parameters:
       - $ref: '#/components/parameters/path_note_id'
       requestBody:
@@ -2575,7 +2314,7 @@ paths:
   /calls:
     get:
       summary: Get a list of calls
-      description: ''
+      description: "Returns calls logged against your contacts, including the result of each."
       tags:
       - Calls
       parameters:
@@ -2633,7 +2372,7 @@ paths:
           $ref: '#/components/responses/500'
     post:
       summary: Create a call
-      description: ''
+      description: "Logs a phone call against a contact. contact_id is required; record the outcome with call_result (from the account's configured results), plus the number dialled and an optional recording link."
       tags:
       - Calls
       parameters: []
@@ -2732,7 +2471,7 @@ paths:
           $ref: '#/components/responses/500'
     put:
       summary: Update a specific call
-      description: ''
+      description: "Updates a call. The author display name stays with the original author."
       tags:
       - Calls
       parameters:
@@ -2819,9 +2558,7 @@ paths:
     post:
       summary: Create attachment and assign it to an existing call
       description: >-
-        Before creating an attachment, the file should be uploaded to S3. <br> <br>
-        Make a request to `attachments/s3_form` for a pre-authorized upload form. <br>
-        Following successful upload to S3, files can be attached via this endpoint. <br>
+        Before creating an attachment, the file should be uploaded to S3.  Make a request to `attachments/s3_form` for a pre-authorized upload form. Following successful upload to S3, files can be attached via this endpoint.
       tags:
       - Calls
       parameters:
@@ -2900,9 +2637,7 @@ paths:
     get:
       summary: Get the list of call results (for the logged API user's account)
       description: >-
-        Includes: <br>
-        -> The call results for the account. <br>
-        -> The counts of their usages for the logged API user, and their team. <br>
+        Includes: The call results for the account.; The counts of their usages for the logged API user, and their team.
       tags:
       - Calls
       parameters: []
@@ -2975,7 +2710,7 @@ paths:
   /meetings:
     get:
       summary: Get a list of meetings
-      description: ''
+      description: "Returns meetings logged against your contacts."
       tags:
       - Meetings
       parameters:
@@ -3033,7 +2768,7 @@ paths:
           $ref: '#/components/responses/500'
     post:
       summary: Create a meeting
-      description: ''
+      description: "Logs a meeting against a contact. contact_id is required; place is free-form text (max 100 characters) and meeting_time records when it happened."
       tags:
       - Meetings
       parameters: []
@@ -3128,7 +2863,7 @@ paths:
           $ref: '#/components/responses/500'
     put:
       summary: Update a specific meeting
-      description: ''
+      description: "Updates a meeting. The author display name stays with the original author."
       tags:
       - Meetings
       parameters:
@@ -3211,9 +2946,7 @@ paths:
     post:
       summary: Create attachment and assign it to an existing meeting
       description: >-
-        Before creating an attachment, the file should be uploaded to S3. <br> <br>
-        Make a request to `attachments/s3_form` for a pre-authorized upload form. <br>
-        Following successful upload to S3, files can be attached via this endpoint. <br>
+        Before creating an attachment, the file should be uploaded to S3.  Make a request to `attachments/s3_form` for a pre-authorized upload form. Following successful upload to S3, files can be attached via this endpoint.
       tags:
       - Meetings
       parameters:
@@ -3291,7 +3024,7 @@ paths:
   /deals:
     get:
       summary: Get a list of deals
-      description: ''
+      description: "Returns the account's deals. Each deal belongs to one primary contact and moves through your pipeline as pending, then won or lost."
       tags:
       - Deals
       parameters:
@@ -3366,8 +3099,8 @@ paths:
         500:
           $ref: '#/components/responses/500'
     post:
-      summary: Create a new deal
-      description: ''
+      summary: Create a deal
+      description: "Creates a deal on a contact. contact_id and name are required (name up to 60 characters; longer names are truncated). status defaults to pending; stage is a per-pipeline integer and applies to pending deals only. amount is the per-month deal value; for recurring deals the total is amount multiplied by the number of months."
       tags:
       - Deals
       parameters: []
@@ -3491,7 +3224,7 @@ paths:
   /deals/{deal_id}:
     get:
       summary: Get a specific deal
-      description: ''
+      description: "Returns one deal, including its stage, financial fields and any deal items."
       tags:
       - Deals
       parameters:
@@ -3528,7 +3261,7 @@ paths:
           $ref: '#/components/responses/500'
     put:
       summary: Update a specific deal
-      description: ''
+      description: "Updates a deal. contact_id cannot be changed — a deal stays with its contact. expected_close_date applies to pending deals; close_date is set when the deal becomes won or lost."
       tags:
       - Deals
       parameters:
@@ -3652,8 +3385,7 @@ paths:
           $ref: '#/components/responses/500'
     delete:
       summary: Delete a specific deal
-      description: >-
-        Note: only users with the `delete_deals` permission can delete deals.
+      description: "Deletes a deal. Only users with the delete_deals permission can delete deals."
       tags:
       - Deals
       parameters:
@@ -3677,9 +3409,7 @@ paths:
     post:
       summary: Create attachment and assign it to an existing deal
       description: >-
-        Before creating an attachment, the file should be uploaded to S3. <br>
-        Make a request to `attachments/s3_form` for a pre-authorized upload form. <br>
-        Following successful upload to S3, files can be attached via this endpoint. <br>
+        Before creating an attachment, the file should be uploaded to S3. Make a request to `attachments/s3_form` for a pre-authorized upload form. Following successful upload to S3, files can be attached via this endpoint.
       tags:
       - Deals
       parameters:
@@ -3759,26 +3489,17 @@ paths:
       summary: >-
         Get a pre-authorized S3 upload form (use to upload a file on the client side)
       description: >-
-        Files must be uploaded to S3 before they can be attached to Deals, Notes, Calls or Meetings. <br>
-        This request will return all the information needed to upload a file to S3. <br> <br>
-
-        Steps to upload a file to S3: <br>
-        -> Make a `POST` request to the `URL` in the response (to this request). <br>
-        -> Include all the params returned as part of the `fields` construct in the response. <br>
-        -> These should be sent as headers of the upload request to S3. <br>
-        -> Most can be sent as they are, but the `key` field must be constructed. <br>
-        -> `"key":"{contact_id}/{timestamp}/{filename}"` <br>
-        -> `filename` field must be present (and the same as the `filename` specified at the end of the `key` field). <br>
-        -> `file` is the file to upload. <br> <br>
-
-        Following successful upload to S3, files may now be attached to Deals, Notes, Calls or Meetings. <br> <br>
-
-        Notes: <br>
-        -> Maximum file size is 10 MB / 10485760 bytes. <br>
-        -> Each account has 1 GB of storage per user. <br>
-        -> Here's some additional information on the
-        <a target="_blank" href="https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-post-example.html">
-        upload process</a>. <br>
+        Files must be uploaded to S3 before they can be attached to deals,
+        notes, calls or meetings, and this request returns everything needed
+        for that upload. Send a POST request to the URL in the response and
+        include every param from the fields construct as form fields of that
+        upload. Most can be sent as they are, but key must be constructed as
+        {contact_id}/{timestamp}/{filename}, the filename field must match the
+        filename at the end of key, and file is the file to upload. After a
+        successful upload the file can be attached. Maximum file size is 10 MB;
+        each account has 1 GB of storage per user. Additional information on
+        the upload process:
+        https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-post-example.html
       tags:
       - Attachments
       parameters:
@@ -3845,10 +3566,7 @@ paths:
     post:
       summary: Create a new attachment
       description: >-
-        Before creating an attachment, the file should be uploaded to S3. <br> <br>
-        Make a request to `attachments/s3_form` for a pre-authorized upload form. <br>
-        Following successful upload to S3, files can be attached via this endpoint. <br> <br>
-        Note: file attachments are supported by Deals, Notes, Calls or Meetings. <br>
+        Before creating an attachment, the file should be uploaded to S3.  Make a request to `attachments/s3_form` for a pre-authorized upload form. Following successful upload to S3, files can be attached via this endpoint.  Note: file attachments are supported by Deals, Notes, Calls or Meetings.
       tags:
       - Attachments
       parameters: []
@@ -4295,7 +4013,7 @@ paths:
     get:
       summary: Get the list of all compatible countries
       description: >-
-        A read-only list of all compatible countries, alpha sorted based on their ISO-3166 country codes. <br>
+        A read-only list of all compatible countries, alpha sorted based on their ISO-3166 country codes.
       tags:
       - Countries
       parameters: []
@@ -4338,13 +4056,7 @@ paths:
   /actions:
     get:
       summary: Get a list of actions
-      description: >-
-        Default sort order: <br>
-        -> ASAP first <br>
-        -> Dated actions (ordered by due date, overdue first) <br>
-        -> Waiting for (blocked) <br>
-        -> Queued actions (without any date) <br>
-        -> Completed actions <br>
+      description: "Returns actions in Action Stream order: ASAP first, then dated actions by due date (overdue first), then waiting-for, then queued actions without a date, then completed."
       tags:
       - Actions
       parameters:
@@ -4404,8 +4116,8 @@ paths:
         500:
           $ref: '#/components/responses/500'
     post:
-      summary: Create a new action
-      description: ''
+      summary: Create an action
+      description: "Creates an action on a contact. contact_id and text are required — text is the step to take, max 140 characters. status sets the action type: asap, date, date_time, waiting or queued (default date); assignee_id defaults to the calling user. A contact holds one ASAP action per assignee — creating a second demotes the existing one to a dated action for today."
       tags:
       - Actions
       parameters: []
@@ -4461,7 +4173,7 @@ paths:
   /actions/{action_id}:
     get:
       summary: Get a specific action
-      description: ''
+      description: "Returns one action, including its computed weight — higher means more urgent."
       tags:
       - Actions
       parameters:
@@ -4497,7 +4209,7 @@ paths:
           $ref: '#/components/responses/500'
     put:
       summary: Update a specific action
-      description: ''
+      description: "Updates an action. contact_id cannot be changed. Changing status between asap, date, date_time, waiting and queued moves the action between stream groups."
       tags:
       - Actions
       parameters:
@@ -4560,10 +4272,18 @@ paths:
           $ref: '#/components/responses/500'
     delete:
       summary: Delete a specific action
+      description: "Deletes an action. Repeat the same request with undo=true to restore it."
       tags:
       - Actions
       parameters:
       - $ref: '#/components/parameters/path_action_id'
+      - in: query
+        name: undo
+        description: Undo action deletion
+        schema:
+          type: boolean
+          format: boolean
+          example: true
       responses:
         200:
           $ref: '#/components/responses/200'
@@ -4620,7 +4340,7 @@ paths:
   /actions/{action_id}/mark_as_done:
     put:
       summary: Mark a specific action as complete
-      description: ''
+      description: "Marks the action complete."
       tags:
       - Actions
       parameters:
@@ -4657,7 +4377,7 @@ paths:
   /actions/{action_id}/undo_completion:
     put:
       summary: Undo action completion
-      description: ''
+      description: "Reverts a completed action to its previous state."
       tags:
       - Actions
       parameters:
@@ -4695,7 +4415,7 @@ paths:
     put:
       summary: Specify action to be promoted as the logged API users next action
       description: >-
-        Only use this method if there is no next action already assigned, otherwise see similar `swap` request. <br>
+        Only use this method if there is no next action already assigned, otherwise see similar `swap` request.
       tags:
       - Actions
       parameters:
@@ -4771,12 +4491,11 @@ paths:
       summary: >-
         Specify action to be swapped in as the logged API users next action
       description: >-
-        Resolve date conflicts between next action and dated queued action by swapping them. <br> <br>
-        The swap should consist of: <br>
-        -> A next action of status `date`, `date_time` or `waiting` <br>
-        -> A queued action of status `queued_with_date` <br> <br>
-        Both actions should be for the current user,
-        and the date for the queued action should be before the date of the next action. <br>
+        Resolves a date conflict between a next action and a dated queued
+        action by swapping them. The swap needs a next action of status date,
+        date_time or waiting, and a queued action of status queued_with_date.
+        Both actions must belong to the current user, and the queued action's
+        date must be before the next action's date.
       tags:
       - Actions
       parameters:
@@ -4915,7 +4634,7 @@ paths:
   /companies:
     get:
       summary: Get a list of companies
-      description: Defaults sorting is company name alpha.
+      description: "Returns the account's companies, sorted by name."
       tags:
       - Companies
       parameters:
@@ -4970,7 +4689,7 @@ paths:
   /companies/{company_id}:
     get:
       summary: Get a specific company
-      description: ''
+      description: "Returns one company with its shared details and roll-ups. Company size is the count of its non-deleted contacts."
       tags:
       - Companies
       parameters:
@@ -5453,9 +5172,7 @@ paths:
     post:
       summary: Link a contact to a specific company
       description: >-
-        Notes: <br>
-        -> Cannot link a contact to the company they already work at. <br>
-        -> A company is not allowed to have more than 100 linked contacts. <br>
+        Notes: Cannot link a contact to the company they already work at.; A company is not allowed to have more than 100 linked contacts.
       tags:
       - Companies
       parameters:
@@ -5530,7 +5247,7 @@ paths:
   /companies/{company_id}/linked_contacts/{contact_id}:
     delete:
       summary: Unlink a contact from a company
-      description: ''
+      description: "Unlinks the contact from the company. A company that still holds data cannot lose its last contact."
       tags:
       - Companies
       parameters:
@@ -5561,9 +5278,7 @@ paths:
     post:
       summary: Enable company status sync
       description: >-
-        Turns on sync so that all contacts in the specified company will have the same status. <br>
-        An initial `status_id` must be provided in the request body. <br> <br>
-        Note: the statuses of this company's contacts will remain in sync, until sync is disabled for this company. <br>
+        Turns on sync so that all contacts in the specified company will have the same status. An initial `status_id` must be provided in the request body.  Note: the statuses of this company's contacts will remain in sync, until sync is disabled for this company.
       tags:
       - Companies
       parameters:
@@ -5607,7 +5322,7 @@ paths:
           $ref: '#/components/responses/500'
     delete:
       summary: Disable company status sync
-      description: ''
+      description: "Turns off status sync for the company. Contacts keep their current statuses."
       tags:
       - Companies
       parameters:
@@ -5643,7 +5358,7 @@ paths:
           $ref: '#/components/responses/500'
   /companies/{company_id}/pinned_attachments:
     get:
-      summary: Gets the list of attachments pinned to this company
+      summary: Get the list of attachments pinned to this company
       description:
         The list of attachments is collected from the attachments pinned to all the contacts in this company.
         The list of attachments is sorted based on "pinned_at" field, i.e. most recent attachments come first, the list of attachments is paginated.
@@ -5692,7 +5407,7 @@ paths:
           $ref: '#/components/responses/500'
   /companies/{company_id}/logo:
     patch:
-      summary: Update logo for the given company
+      summary: Update the company logo
       description: Update company logo with the given image. The previous logo is removed and then new image is set
       tags:
         - Companies
@@ -5740,7 +5455,7 @@ paths:
         500:
           $ref: '#/components/responses/500'
     delete:
-      summary: Delete logo in then given company
+      summary: Delete the company logo
       description: >-
         Delete logo in the given company.
         When successfully deleted the `photo_url` field value is `null` in the company
@@ -5776,7 +5491,7 @@ paths:
   /contacts:
     get:
       summary: Get a list of contacts
-      description: Defaults to contacts owned by the logged user, alpha sorted.
+      description: "Returns the contacts you can access, sorted by name. Filter by company_id, email, phone, tag, status_id, starred, owner_id and more. has_actions and has_actions_for_me are mutually exclusive, as are lead_source and lead_source_id. sort_by accepts created_at, modified_at, first_name, last_name, company_name and name, each with order=asc or desc (ascending is the default). When results are filtered by a created_at or modified_at date range and no sort_by is given, they default to newest first."
       tags:
       - Contacts
       parameters:
@@ -5929,7 +5644,7 @@ paths:
           $ref: '#/components/responses/500'
     post:
       summary: Create a contact
-      description: ''
+      description: "Creates a contact. Provide last_name or company_name — one of the two is required. owner_id defaults to the calling user and status_id to lead. company_name links the contact to an existing company (matched case-insensitively) or creates one; company_id is ignored on create. Optional next_action_name (max 140 characters) creates the contact's first next action, with next_action_date set to asap, waiting or a YYYY-MM-DD date."
       tags:
       - Contacts
       parameters: []
@@ -6061,7 +5776,7 @@ paths:
   /contacts/{contact_id}:
     get:
       summary: Get a specific contact
-      description: ''
+      description: "Returns one contact — names, company link, status, tags, communication lists (phones, emails, urls, addresses) and custom fields."
       tags:
       - Contacts
       parameters:
@@ -6113,11 +5828,7 @@ paths:
           $ref: '#/components/responses/500'
     put:
       summary: Update a specific contact
-      description: >-
-        Note: when updating a custom field, either the `id` or `name` and the `value` must be present.<br/>
-        Please note the following when changing addresses:<br/>
-        `"address_list": [] // to clear all addresses` <br/>
-        `"address_list": [{"city": "NY"}, {}] // to keep/update first and clear second address`
+      description: "Updates a contact. Without partial=true this replaces the whole record: any writable field you leave out is cleared or reset to its default (tags and communication lists are emptied, status_id returns to lead). Pass partial=true to change only the fields you send — arrays still replace rather than merge. Company linking: company_name renames or moves, company_id moves to an existing company, and a full update sending neither removes the company. When updating a custom field, send its id (or name) together with value. To clear all addresses send an empty address_list."
       tags:
       - Contacts
       parameters:
@@ -6249,8 +5960,7 @@ paths:
           $ref: '#/components/responses/500'
     delete:
       summary: Delete a specific contact
-      description: >-
-        Note: only users with the `delete_contacts` permission can delete contacts.
+      description: "Deletes a contact. Only users with the delete_contacts permission can delete contacts. Repeat the same request with undo=true to restore the most recent deletion for that ID — the restore window depends on the account plan, from 1 day up to 60 days."
       tags:
       - Contacts
       parameters:
@@ -6316,11 +6026,9 @@ paths:
           $ref: '#/components/responses/500'
   /contacts/{contact_id}/contact_photo:
     post:
-      summary: Add a new contact photo
+      summary: Add a contact photo
       description: >-
-        Use this endpoint to add a new photo to an existing contact. <br> <br>
-        It takes a parameter `image`, which must be a Base64 encoded string of the image data. <br>
-        Images will be cropped to a centered square and resized to 200x200 pixels. <br>
+        Use this endpoint to add a new photo to an existing contact.  It takes a parameter `image`, which must be a Base64 encoded string of the image data. Images will be cropped to a centered square and resized to 200x200 pixels.
       tags:
       - Contacts
       parameters:
@@ -6369,10 +6077,7 @@ paths:
     put:
       summary: Update a contact's photo
       description: >
-        Use this endpoint to update the photo of an existing contact. <br> <br>
-        It takes a parameter `image`, which must be a Base64 encoded string of the image data. <br>
-        Images will be cropped to a centered square and resized to 200x200 pixels. <br> <br>
-        Note: updating a contact photo will remove the existing photo! <br>
+        Use this endpoint to update the photo of an existing contact.  It takes a parameter `image`, which must be a Base64 encoded string of the image data. Images will be cropped to a centered square and resized to 200x200 pixels.  Note: updating a contact photo will remove the existing photo!
       tags:
       - Contacts
       parameters:
@@ -6508,7 +6213,7 @@ paths:
   /contacts/delete:
     delete:
       summary: Delete multiple contacts
-      description: ''
+      description: "Deletes multiple contacts by ID. Only users with the delete_contacts permission can delete contacts."
       tags:
       - Contacts
       parameters:
@@ -6569,12 +6274,11 @@ paths:
     post:
       summary: Save a specific OnePageCRM contact to Google Contacts
       description: >-
-        OnePageCRM must be authorized to save contacts to Google Contacts on your behalf, in order to complete this request. <br>
-        Please visit
-        <a target="_blank" href="https://app.onepagecrm.com/app/google_contacts">our integration page</a>
+        OnePageCRM must be authorized to save contacts to Google Contacts on your behalf, in order to complete this request. Please visit
+        our integration page (https://app.onepagecrm.com/app/google_contacts)
         to authorize, or
-        <a target="_blank" href="https://help.onepagecrm.com/article/370-how-to-save-contacts-to-google-contacts-from-onepagecrm">our help article</a>
-        for more information. <br>
+        our help article (https://help.onepagecrm.com/article/370-how-to-save-contacts-to-google-contacts-from-onepagecrm)
+        for more information.
       tags:
       - Contacts
       parameters:
@@ -6687,7 +6391,7 @@ paths:
           $ref: '#/components/responses/500'
     post:
       summary: Create an action for a specific contact
-      description: ''
+      description: "Creates an action on this contact. text is required — the step to take, max 140 characters. status sets the action type: asap, date, date_time, waiting or queued (default date); assignee_id defaults to the calling user. A contact holds one ASAP action per assignee — creating a second demotes the existing one to a dated action for today."
       tags:
       - Contacts
       parameters:
@@ -6804,7 +6508,7 @@ paths:
           $ref: '#/components/responses/500'
     post:
       summary: Create a deal for a specific contact
-      description: ''
+      description: "Creates a deal on this contact. name is required (up to 60 characters; longer names are truncated). status is pending, won or lost (default pending); stage is a per-pipeline integer and applies to pending deals only. amount is the per-month deal value; for recurring deals the total is amount multiplied by the number of months."
       tags:
       - Contacts
       parameters:
@@ -6951,7 +6655,7 @@ paths:
           $ref: '#/components/responses/500'
     post:
       summary: Create a note for a specific contact
-      description: ''
+      description: "Logs a note against this contact. text carries the note body; link a deal with linked_deal_id. Logging a note updates the contact's last activity date."
       tags:
       - Contacts
       parameters:
@@ -7067,7 +6771,7 @@ paths:
           $ref: '#/components/responses/500'
     post:
       summary: Create a call for a specific contact
-      description: ''
+      description: "Logs a phone call against this contact. Record the outcome with call_result (from the account's configured results), plus the number dialled and an optional recording link."
       tags:
       - Contacts
       parameters:
@@ -7186,7 +6890,7 @@ paths:
           $ref: '#/components/responses/500'
     post:
       summary: Create a meeting for a specific contact
-      description: ''
+      description: "Logs a meeting against this contact. place is free-form text (max 100 characters); meeting_time records when it happened."
       tags:
       - Contacts
       parameters:
@@ -7485,7 +7189,7 @@ paths:
           $ref: '#/components/responses/500'
     delete:
       summary: Delete a relationship
-      description: ''
+      description: "Deletes a relationship between two contacts. Repeat the same request with undo=true to restore it."
       tags:
       - Contacts
       parameters:
@@ -7517,7 +7221,7 @@ paths:
   /contacts/{contact_id}/assign_tag/{tag_name}:
     put:
       summary: Assign a tag to a specific contact
-      description: ''
+      description: "Adds the tag to the contact. Tag names match the account's existing tags case-insensitively."
       tags:
       - Contacts
       parameters:
@@ -7578,7 +7282,7 @@ paths:
   /contacts/{contact_id}/unassign_tag/{tag_name}:
     put:
       summary: Remove a tag from a specific contact
-      description: ''
+      description: "Removes the tag from the contact."
       tags:
       - Contacts
       parameters:
@@ -7639,7 +7343,7 @@ paths:
   /contacts/{contact_id}/change_status/{status_id}:
     put:
       summary: Change the status of a specific contact
-      description: ''
+      description: "Sets the contact's status. The status must be one of the account's configured statuses."
       tags:
       - Contacts
       parameters:
@@ -7718,7 +7422,7 @@ paths:
   /contacts/{contact_id}/change_owner/{owner_id}:
     put:
       summary: Change the owner of a specific contact
-      description: ''
+      description: "Sets the contact's owner."
       tags:
       - Contacts
       parameters:
@@ -7797,7 +7501,7 @@ paths:
   /contacts/{contact_id}/star:
     put:
       summary: Apply a star to a specific contact
-      description: ''
+      description: "Stars the contact for the calling user. Starring is per user — it does not change how teammates see the contact."
       tags:
       - Contacts
       parameters:
@@ -7875,7 +7579,7 @@ paths:
   /contacts/{contact_id}/unstar:
     put:
       summary: Remove star from a specific contact
-      description: ''
+      description: "Removes the calling user's star from the contact. Starring is per user."
       tags:
       - Contacts
       parameters:
@@ -7954,9 +7658,7 @@ paths:
     put:
       summary: Close the sales cycle for a specific contact
       description: >-
-        Only do this when you are no longer actively trying to sell to this contact. <br>
-        Add an optional closing comment with the `comment` field in the request body. <br> <br>
-        Note: cannot close sales cycle if the user has any active (not complete) actions with the contact. <br>
+        Only do this when you are no longer actively trying to sell to this contact. Add an optional closing comment with the `comment` field in the request body.  Note: cannot close sales cycle if the user has any active (not complete) actions with the contact.
       tags:
       - Contacts
       parameters:
@@ -8020,8 +7722,7 @@ paths:
     put:
       summary: Force close the sales cycle for a specific contact
       description: >-
-        This will first delete any actions assigned to the contact. <br>
-        Add an optional closing comment with the `comment` field in the request body. <br> <br>
+        This will first delete any actions assigned to the contact. Add an optional closing comment with the `comment` field in the request body.
       tags:
       - Contacts
       parameters:
@@ -8084,7 +7785,7 @@ paths:
   /contacts/{contact_id}/reopen_sales_cycle:
     put:
       summary: Reopen the sales cycle for a specific contact
-      description: ''
+      description: "Reopens a closed sales cycle for the contact, for the calling user."
       tags:
       - Contacts
       parameters:
@@ -8138,10 +7839,8 @@ paths:
     put:
       summary: Split a contact from their current company (and potentially to a new company)
       description: >-
-        Contact is removed (split) from it's current company, and optionally joins another. <br>
-        Send the field `company_name` in the body with the new company's name, or leave blank. <br> <br>
-        **Warning**: splitting the last contact from a company, will cause that company to be deleted,
-        and loss of company data may occur e.g. company phone number or postal address. <br>
+        Contact is removed (split) from it's current company, and optionally joins another. Send the field `company_name` in the body with the new company's name, or leave blank.  **Warning**: splitting the last contact from a company, will cause that company to be deleted,
+        and loss of company data may occur e.g. company phone number or postal address.
       tags:
       - Contacts
       parameters:
@@ -8204,7 +7903,7 @@ paths:
           $ref: '#/components/responses/500'
   /contacts/{contact_id}/pinned_attachments:
     get:
-      summary: Gets a list of attachments pinned to this contact
+      summary: Get a list of attachments pinned to this contact
       description:
         The list of pinned attachments is sorted based on "pinned_at" field, i.e. most recent attachments come first, the list of attachments is paginated.
       tags:
@@ -8403,7 +8102,7 @@ paths:
     get:
       summary: Get a list of contacts prioritized by their next action
       description: >-
-        Defaults to the logged API users action stream. <br>
+        Defaults to the logged API users action stream.
       tags:
       - Action Stream
       parameters:
@@ -8504,8 +8203,7 @@ paths:
     get:
       summary: Get a list of contacts prioritized by their next action
       description: >-
-        Defaults to the action stream for entire account in a single list. <br>
-        See the action stream of account users, by providing the `user_id` param. <br>
+        Defaults to the action stream for entire account in a single list. See the action stream of account users, by providing the `user_id` param.
       tags:
       - Team Stream
       parameters:
@@ -8766,7 +8464,7 @@ paths:
   /webhooks:
     get:
       summary: Get all webhooks (associated with the logged API user's account)
-      description: ''
+      description: "Returns the account's webhook subscriptions — each endpoint, its secret and the events it receives."
       tags:
       - Web Hooks
       parameters: []
@@ -8812,7 +8510,7 @@ paths:
   /webhooks/{webhook_id}:
     get:
       summary: Get a specific webhook
-      description: ''
+      description: "Returns one webhook subscription."
       tags:
       - Web Hooks
       parameters:
@@ -8846,7 +8544,7 @@ paths:
           $ref: '#/components/responses/500'
     delete:
       summary: Delete a specific webhook
-      description: ''
+      description: "Deletes a webhook subscription. OnePageCRM stops posting events to its endpoint."
       tags:
       - Web Hooks
       parameters:
@@ -9060,6 +8758,7 @@ components:
                 readOnly: true
                 example: days
         predefined_actions:
+          description: "The account's predefined actions (called 'Saved Actions' in the app)."
           type: array
           readOnly: true
           items:
@@ -9263,6 +8962,7 @@ components:
           description: ID of the status of the contact
           example: 5e31e030849d781e837b6ba1
         tags:
+          description: "Tags on the contact — free-form strings from the account's tag list."
           type: array
           items:
             type: string
@@ -9291,6 +8991,7 @@ components:
           example: 5aba31e99007ba0f570c92a5
           default: Logged API user's ID
         custom_fields:
+          description: "Custom field values on the contact, as custom field and value pairs."
           type: array
           items:
             type: object
@@ -9432,8 +9133,10 @@ components:
           description: URL of the company
           example: https://{foo.bar}
         address:
+          description: "The company's postal address."
           $ref: '#/components/schemas/Address'
         company_fields:
+          description: "Custom field values on the company."
           type: array
           items:
             type: object
@@ -9515,6 +9218,7 @@ components:
                 items: {}
                 example: []
         pending_deals:
+          description: "Pending deals across the company's contacts."
           type: array
           readOnly: true
           items:
@@ -9768,6 +9472,7 @@ components:
           readOnly: true
           example: 5aaa9b059007ba08c9ebaf58
         deal_fields:
+          description: "Custom field values on the deal."
           type: array
           items:
             type: object
@@ -9784,6 +9489,7 @@ components:
           default: false
           example: true
         deal_items:
+          description: "Line items on the deal — each with a name, quantity, price, cost and amount."
           type: array
           items:
             $ref: '#/components/schemas/Deal_item'
@@ -9798,6 +9504,7 @@ components:
           readOnly: true
           example: true
         attachments:
+          description: "Files attached to the deal."
           type: array
           readOnly: true
           items:
@@ -9938,6 +9645,7 @@ components:
           example: Jane D.
           default: Logged API user
         attachments:
+          description: "Files attached to the note."
           type: array
           readOnly: true
           items:
@@ -10014,6 +9722,7 @@ components:
           readOnly: true
           default: Logged API user
         attachments:
+          description: "Files attached to the call."
           type: array
           readOnly: true
           items:
@@ -10083,6 +9792,7 @@ components:
           readOnly: true
           default: Logged API user
         attachments:
+          description: "Files attached to the meeting."
           type: array
           readOnly: true
           items:
@@ -10132,14 +9842,19 @@ components:
       description: The physical address of a contact or company.
       properties:
         address:
+          description: "Street address."
           $ref: '#/components/schemas/Address/properties/address'
         city:
+          description: "City."
           $ref: '#/components/schemas/Address/properties/city'
         state:
+          description: "State, province or region."
           $ref: '#/components/schemas/Address/properties/state'
         zip_code:
+          description: "Postal or ZIP code."
           $ref: '#/components/schemas/Address/properties/zip_code'
         country_code:
+          description: "ISO 3166 country code, upper-case."
           $ref: '#/components/schemas/Address/properties/country_code'
         type:
           type: string
@@ -10236,6 +9951,7 @@ components:
           readOnly: true
           example: true
         relationship_variants:
+          description: "The directional variants of this relationship type."
           type: array
           items:
             type: object
@@ -10522,10 +10238,12 @@ components:
           - AU
           - DE
         deal_stages:
+          description: "The account's configured deal stages."
           type: array
           items:
             $ref: '#/components/schemas/Deal_stage'
         pipelines:
+          description: "The account's pipelines."
           type: array
           items:
             properties:
@@ -10564,7 +10282,7 @@ components:
           example: true
         send_push_notifications:
           type: boolean
-          description: Should the user recieve push notifications?
+          description: Should the user receive push notifications?
           example: true
         clipper_beta:
           type: boolean
@@ -10987,8 +10705,8 @@ components:
           type: string
           description: >-
             Type of the custom field. There are several types of custom fields that may store data in different formats.
-            External ID type is a special type introduced for referencing entities in the external systems. It's value
-            is <em>unique</em> amid the whole system. Secton divider type is introduced just for visual purpose: it
+            External ID type is a special type introduced for referencing entities in the external systems. Its value
+            is unique amid the whole system. Section divider type is introduced just for visual purpose: it
             allows grouping custom fields. If custom fields in the section don't have values then they are hidden in
             the 'view' UI (but always shown in 'edit' UI). This logic is applied in the API: if a contact doesn't have
             values for all the custom fields in the section then this section divider custom field isn't exposed
@@ -11042,8 +10760,8 @@ components:
           type: string
           description: >-
             Type of the company field. There are several types of custom fields that may store data in different formats.
-            External ID type is a special type introduced for referencing entities in the external systems. It's value
-            is <em>unique</em> amid the whole system. Secton divider type is introduced just for visual purpose: it
+            External ID type is a special type introduced for referencing entities in the external systems. Its value
+            is unique amid the whole system. Section divider type is introduced just for visual purpose: it
             allows grouping custom fields. If custom fields in the section don't have values then they are hidden in
             the 'view' UI (but always shown in 'edit' UI). This logic is applied in the API: if a company doesn't have
             values for all the custom fields in the section then this section divider custom field isn't exposed
@@ -11094,8 +10812,8 @@ components:
         type:
           description: >-
             Type of the deal field. There are several types of custom fields that may store data in different formats.
-            External ID type is a special type introduced for referencing entities in the external systems. It's value
-            is <em>unique</em> amid the whole system. Secton divider type is introduced just for visual purpose: it
+            External ID type is a special type introduced for referencing entities in the external systems. Its value
+            is unique amid the whole system. Section divider type is introduced just for visual purpose: it
             allows grouping custom fields. If custom fields in the section don't have values then they are hidden in
             the 'view' UI (but always shown in 'edit' UI). This logic is applied in the API: if a deal doesn't have
             values for all the custom fields in the section then this section divider custom field isn't exposed
@@ -11643,6 +11361,7 @@ components:
           readOnly: true
           example: 1528373119
         data:
+          description: "The response payload. Keys depend on the endpoint; list responses include pagination fields alongside the records."
           type: object
           properties:
             total_count:
@@ -12071,15 +11790,9 @@ components:
       in: query
       required: false
       description: |
-        Include related resources alongside each contact in the response. <br/>
-        Syntax: `fields=<resource>(all)`. Use a comma-separated list to request multiple resources. <br/>
-        Each requested resource is returned as an array of full objects nested under the matching key inside the contact entry
+        Include related resources alongside each contact in the response. Syntax: `fields=<resource>(all)`. Use a comma-separated list to request multiple resources. Each requested resource is returned as an array of full objects nested under the matching key inside the contact entry
         (e.g. `fields=calls(all)` adds a `calls` array next to `contact` for each item in the `contacts` array).
-        Supported resources: `deals`, `notes`, `calls`, `meetings`, `pinned_attachments`. <br/>
-        Examples: <br/>
-        `fields=calls(all)` <br/>
-        `fields=calls(all),notes(all)` <br/>
-        `fields=deals(all),notes(all),calls(all),meetings(all),pinned_attachments(all)`
+        Supported resources: `deals`, `notes`, `calls`, `meetings`, `pinned_attachments`. Examples: `fields=calls(all)` `fields=calls(all),notes(all)` `fields=deals(all),notes(all),calls(all),meetings(all),pinned_attachments(all)`
       schema:
         type: string
         example: calls(all),notes(all)
@@ -12097,14 +11810,9 @@ components:
       in: query
       required: false
       description: |
-        Include related resources alongside each deal in the response. <br/>
-        Syntax: `fields=<resource>(all)`. Use a comma-separated list to request multiple resources. <br/>
-        Supported resources: `contacts`. <br/>
-        When `fields=contacts(all)` is supplied, each deal entry includes a `contacts` array
+        Include related resources alongside each deal in the response. Syntax: `fields=<resource>(all)`. Use a comma-separated list to request multiple resources. Supported resources: `contacts`. When `fields=contacts(all)` is supplied, each deal entry includes a `contacts` array
         of full `Contact` objects (the primary contact plus any linked contacts). The short-form
-        `linked_contacts` array on each deal is always returned regardless of this parameter. <br/>
-        Example: <br/>
-        `fields=contacts(all)`
+        `linked_contacts` array on each deal is always returned regardless of this parameter. Example: `fields=contacts(all)`
       schema:
         type: string
         example: contacts(all)
@@ -12595,7 +12303,7 @@ components:
       name: ids
       in: query
       required: true
-      description: Comma seperated list of contact IDs, to be deleted
+      description: Comma separated list of contact IDs, to be deleted
       schema:
         type: string
         minimum: 1
@@ -12620,9 +12328,7 @@ components:
       in: query
       required: false
       description: |
-        Returns deal stages history, i.e. the most recent stages for each pipeline for the deal <br/>
-        This field is returned only when 'include_history=true' param is supplied in request (query string or request body) <br/>
-        Format: pipeline_id => stage
+        Returns deal stages history, i.e. the most recent stages for each pipeline for the deal This field is returned only when 'include_history=true' param is supplied in request (query string or request body) Format: pipeline_id => stage
       schema:
         type: boolean
         example: true
@@ -12666,10 +12372,10 @@ components:
       description: OK
     '400':
       description: >-
-        Bad Request. The request is not properly formatted, does not properly
-        specify response format or contains improper parameters or data. Code
-        400 means a problem is in your implementation. Fault is on you. The
-        example below is the format for all responses in the 4XX range.
+        Bad Request. The request is malformed — missing or invalid parameters,
+        or a body that does not match the expected format. Fix the request
+        before retrying. The example below shows the error envelope used for
+        all responses in the 4XX range.
       content:
         application/json:
           schema:
@@ -12706,9 +12412,8 @@ components:
                     example: '{attribute_name} is invalid or missing'
     '401':
       description: >-
-        Unauthorized. Authorization data is absent, invalid or expired.
-        Generally this means that a login form should be displayed to a user.
-        Code 401 means user just needs to login. Generally, fault is on no one.
+        Unauthorized. Authentication is missing, invalid or expired. Check the
+        user_id and api_key pair, or refresh the OAuth access token.
       content:
         application/json:
           schema:
@@ -12739,22 +12444,17 @@ components:
                 readOnly: true
     '403':
       description: >-
-        Forbidden. Issued when user is logged in, but does not have permission
-        for requested operation. This includes cases when user has reached
-        limits like allowed number of contacts. Code 403 means operation is
-        forbidden for a user. Fault is on user. Although in some cases, you
-        could have prevented this by not sending the request in the first place.
+        Forbidden. The authenticated user does not have permission for this
+        operation, or an account limit has been reached. Note the request-rate
+        throttle also answers 403 with a plain-text body — check the content
+        type before treating a 403 as a permission error.
     '404':
-      description: >-
-        Resource Not Found. When an id was provided for a request but no
-        resource exists for that object.
+      description: Not Found. No resource exists for the ID you provided.
     '409':
       description: >-
-        Precondition Failed. Server state does not allow requested operation to
-        be carried on. Issued in cases such as when trying to add an assigned
-        next action to a contact which already has one assigned for a user. Code
-        409 means the stars were not aligned for this to happen. Sometimes you
-        could have foreseen it, sometimes not.
+        Conflict. The current state of the record does not allow this
+        operation — for example, adding an ASAP action to a contact that
+        already has one for that user.
     '415':
       description: >-
         The request entity has a media type which the server or resource does not support.
@@ -12762,7 +12462,9 @@ components:
     '422':
       description: The request was well-formed (i.e., syntactically correct) but could not be processed.
     '500':
-      description: Internal Server Error. Code 500 means server messed up. Fault is on us.
+      description: >-
+        Internal Server Error. Something went wrong on our side. Retry later,
+        and contact support if it persists.
   securitySchemes:
     BasicAuth:
       type: http
