@@ -20,6 +20,13 @@ info:
     filters (since, until, modified_since), partial updates (partial=true) and
     undo deletion (undo=true) — are documented on the developer portal.
   termsOfService: 'https://www.onepagecrm.com/api-use'
+  contact:
+    name: OnePageCRM API Support
+    url: https://developer.onepagecrm.com/
+    email: support@onepagecrm.com
+  license:
+    name: OnePageCRM API Terms of Use
+    url: https://www.onepagecrm.com/api-use
   version: '3.0'
 servers:
 - url: 'https://app.onepagecrm.com/api/v3'
@@ -12565,7 +12572,7 @@ components:
     '401':
       description: >-
         Unauthorized. Authentication is missing, invalid or expired. Check the
-        user_id and api_key pair, or refresh the OAuth access token.
+        user_id and api_key pair.
       content:
         application/json:
           schema:
