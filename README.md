@@ -15,7 +15,7 @@ In rewriting this documentation we have exposed lots of new features of the API 
 ## Changes (non staff)
 If you think our docs could be clearer, notice any issues, or if you have trouble using the API, please let us know.
 
-You can open a ticket in this repo, the [Developer site repo][2], or our [Developer Forum][6] and one of our developers will get to it when time allows.
+You can open a ticket in this repo or the [Developer site repo][2] and one of our developers will get to it when time allows.
 
 Alternatively, if you would like to make the changes yourself, we'd love to accept pull requests! Just fork the repo, make your changes and submit a pull request related to the ticket you've opened.
 
@@ -23,7 +23,6 @@ Alternatively, if you would like to make the changes yourself, we'd love to acce
 
 ## Useful Links
 - API documentation: [https://developer.onepagecrm.com/api][1]
-- Developer forum: [http://forum.developer.onepagecrm.com][6]
 - Developer site repo: [https://github.com/OnePageCRM/OnePageCRM.github.io][2]
 - Swagger docs: [https://swagger.io/docs/specification][3]
 - OpenAPI Spec 3: [https://github.com/OAI/OpenAPI-Specification][4]
@@ -36,4 +35,3 @@ Alternatively, if you would like to make the changes yourself, we'd love to acce
   [3]: https://swagger.io/docs/specification
   [4]: https://github.com/OAI/OpenAPI-Specification
   [5]: https://openapi.tools
-  [6]: http://forum.developer.onepagecrm.com
