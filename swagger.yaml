@@ -5793,7 +5793,7 @@ paths:
                 company_name:
                   $ref: '#/components/schemas/Contact/properties/company_name'
                 urls:
-                  $ref: '#/components/schemas/Contact/properties/url'
+                  $ref: '#/components/schemas/Contact/properties/urls'
                 phones:
                   $ref: '#/components/schemas/Contact/properties/phones'
                 emails:
@@ -5980,7 +5980,7 @@ paths:
                 company_name:
                   $ref: '#/components/schemas/Contact/properties/company_name'
                 urls:
-                  $ref: '#/components/schemas/Contact/properties/url'
+                  $ref: '#/components/schemas/Contact/properties/urls'
                 phones:
                   $ref: '#/components/schemas/Contact/properties/phones'
                 emails:
@@ -8968,7 +8968,7 @@ components:
         email:
           type: string
           description: Email address of the user
-          example: jane.doe@{foo.bar}
+          example: jane.doe@example.com
         company_name:
           type: string
           description: Name of the company that the user works for
@@ -9023,7 +9023,7 @@ components:
           type: string
           description: Google Contacts email address of the user (you only see your own)
           readOnly: true
-          example: jane.doe@{googles.mail.service}
+          example: jane.doe@example.com
     Contact:
       description: >-
         Information about the people you are actively trying to sell to, and related sub-resources like
@@ -9075,7 +9075,7 @@ components:
           description: Name of the company, to whom the contact belongs
           maxLength: 55
           example: Morgan's Forensic Lab
-        url:
+        urls:
           type: array
           description: URLs associated with the contact
           items:
@@ -9116,7 +9116,7 @@ components:
               value:
                 type: string
                 description: The email address associated with the contact
-                example: joe.bloggs@{foo.bar}
+                example: joe.bloggs@example.com
         address_list:
           description: An array of contact addresses.
           type: array
@@ -9239,7 +9239,7 @@ components:
               type: string
               description: Google contacts email
               readOnly: true
-              example: jane.doe@{googles-mail-service}
+              example: jane.doe@example.com
             id:
               type: string
               description: Google contact id
@@ -9298,7 +9298,7 @@ components:
         photo_url:
           type: string
           description: URL to company logo
-          example: https://someserver.com/someimage.png
+          example: https://example.com/someimage.png
         url:
           type: string
           description: URL of the company
@@ -9706,7 +9706,7 @@ components:
               type: string
               description: Email address of the deal owner
               readOnly: true
-              example: joe.bloggs@{foo.bar}
+              example: joe.bloggs@example.com
         previous_pipeline_stages:
           description:
             Returns the last stage in which the deal was for each pipeline (pipeline_id => stage)
@@ -10253,7 +10253,7 @@ components:
         address:
           type: string
           description: Email address
-          example: 'joes.boss@bar.foo'
+          example: 'joes.boss@example.com'
         name:
           type: string
           nullable: true
