@@ -4107,6 +4107,7 @@ paths:
       summary: Get the list of all compatible countries
       description: >-
         A read-only list of all compatible countries, alpha sorted based on their ISO-3166 country codes.
+        The example response below shows only a few sample entries; the live endpoint returns the full list.
       tags:
       - Countries
       parameters: []
@@ -4127,6 +4128,19 @@ paths:
                     properties:
                       countries:
                         type: array
+                        example:
+                          - country:
+                              name: Australia
+                              code: AU
+                              phone_prefix: '+61'
+                          - country:
+                              name: Ireland
+                              code: IE
+                              phone_prefix: '+353'
+                          - country:
+                              name: United States
+                              code: US
+                              phone_prefix: '+1'
                         items:
                           properties:
                             country:
