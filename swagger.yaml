@@ -178,6 +178,7 @@ paths:
     get:
       operationId: listUsers
       summary: Get the list of users (for the logged API user's account)
+      description: "Returns every user on your account — name, email, photo, role and account rights. Your own record also includes bcc_email and google_contacts_email. The full team is returned, unpaginated."
       tags:
       - Users
       parameters: []
@@ -216,6 +217,7 @@ paths:
     get:
       operationId: getUser
       summary: Get a specific user
+      description: "Returns one user on your account by ID, including their name, email, photo, role and account rights. bcc_email and google_contacts_email are only included when the ID is your own."
       tags:
       - Users
       parameters:
@@ -311,6 +313,7 @@ paths:
     get:
       operationId: listLeadSources
       summary: Get the list of lead sources (for the logged API user's account)
+      description: "Returns the account's lead sources with per-user and total contact counts, in alphabetical order. Each id is the source's system_id — the value contacts reference in their lead_source field."
       tags:
       - Lead Sources
       parameters: []
@@ -346,6 +349,7 @@ paths:
     post:
       operationId: createLeadSource
       summary: Create a new lead source
+      description: "Creates a lead source. text is required and limited to 40 characters; the id is server-generated. Admin only. Adding one re-sorts the list, which is kept in alphabetical order."
       tags:
       - Lead Sources
       parameters: []
@@ -386,6 +390,7 @@ paths:
     get:
       operationId: getLeadSource
       summary: Get a specific lead source
+      description: "Returns one lead source with its contact counts. The path id is the source's system_id — the value contacts carry in their lead_source field — which is separate from the record's internal id. Built-in sources use short slugs like advertisement; ones you create get an ObjectId-style id."
       tags:
       - Lead Sources
       parameters:
@@ -420,6 +425,7 @@ paths:
     put:
       operationId: updateLeadSource
       summary: Update a specific lead source
+      description: "Updates a lead source's text (max 40 characters). Admin only. text is the only field; it is required unless you pass partial=true, which leaves the current value unchanged when omitted. The list is re-sorted alphabetically afterwards."
       tags:
       - Lead Sources
       parameters:
@@ -460,6 +466,7 @@ paths:
     delete:
       operationId: deleteLeadSource
       summary: Delete a specific lead source
+      description: "Deletes a lead source. Admin only. Contacts and webhooks referencing it have their lead_source cleared. The last remaining lead source cannot be deleted — an account must always keep at least one."
       tags:
       - Lead Sources
       parameters:
@@ -483,7 +490,7 @@ paths:
     get:
       operationId: listStatuses
       summary: Get the list of statuses (for the logged API user's account)
-      description: ''
+      description: "Returns the account's contact statuses with per-user and total counts, in their configured order. The status field carries the system id (lead, custom1…) that contacts reference."
       tags:
       - Statuses
       parameters: []
@@ -521,7 +528,7 @@ paths:
     post:
       operationId: createStatus
       summary: Create a new status
-      description: ''
+      description: "Creates a contact status. text (max 20 characters) and color are required, description (max 33) is optional. Admin only. color must be one of the allowed palette values; the system id is server-assigned."
       tags:
       - Statuses
       parameters: []
@@ -564,7 +571,7 @@ paths:
     get:
       operationId: getStatus
       summary: Get a specific status
-      description: ''
+      description: "Returns one contact status with its counts. The path id is the status's own ObjectId, not the short system id in the status field — note this differs from lead sources, which are addressed by system id."
       tags:
       - Statuses
       parameters:
@@ -601,7 +608,7 @@ paths:
     put:
       operationId: updateStatus
       summary: Update a specific status
-      description: ''
+      description: "Updates a contact status. Admin only. text and color are required on every request unless you pass partial=true, and description is cleared if you omit it on a non-partial update."
       tags:
       - Statuses
       parameters:
@@ -644,7 +651,7 @@ paths:
     delete:
       operationId: deleteStatus
       summary: Delete a specific status
-      description: ''
+      description: "Deletes a contact status. Admin only. Contacts, companies and webhooks using it fall back to the lead status. The built-in lead status itself cannot be deleted."
       tags:
       - Statuses
       parameters:
@@ -668,7 +675,7 @@ paths:
     get:
       operationId: listDealFields
       summary: Get the list of deal fields (for the logged API user's account)
-      description: ''
+      description: "Returns the custom fields defined for deals on your account — id, name, type, position and, for select_box and multiple_choice fields, their choices. Deal fields are separate from contact and company custom fields."
       tags:
       - Deal Fields
       parameters:
@@ -763,7 +770,7 @@ paths:
     get:
       operationId: getDealField
       summary: Get a specific deal field
-      description: ''
+      description: "Returns one deal custom field by ID, including its type and — for select_box and multiple_choice fields — the choices available. Unlike contact custom fields, deal fields cannot be of type anniversary."
       tags:
       - Deal Fields
       parameters:
@@ -867,7 +874,7 @@ paths:
     get:
       operationId: listCustomFields
       summary: Get the list of custom fields (for the logged API user's account)
-      description: ''
+      description: "Returns the custom fields defined for contacts on your account — id, name, type, position and, for select_box and multiple_choice fields, their choices. Filter by type, and sort by position (the default), created_at or modified_at."
       tags:
       - Custom Fields
       parameters:
@@ -962,7 +969,7 @@ paths:
     get:
       operationId: getCustomField
       summary: Get a specific custom field
-      description: ''
+      description: "Returns one contact custom field by ID, including its type and — for select_box and multiple_choice fields — the list of choices available. Anniversary fields also carry reminder_days."
       tags:
       - Custom Fields
       parameters:
@@ -1066,7 +1073,7 @@ paths:
     get:
       operationId: listCompanyFields
       summary: Get the list of company fields (for the logged API user's account)
-      description: ''
+      description: "Returns the custom fields defined for companies on your account — id, name, type, position and, for select_box and multiple_choice fields, their choices. These are separate from contact custom fields and deal fields."
       tags:
       - Company Fields
       parameters:
@@ -1161,7 +1168,7 @@ paths:
     get:
       operationId: getCompanyField
       summary: Get a specific company field
-      description: ''
+      description: "Returns one company custom field by ID, including its type and — for select_box and multiple_choice fields — the choices available. Company fields are numbered separately from contact and deal fields."
       tags:
       - Company Fields
       parameters:
@@ -1265,7 +1272,7 @@ paths:
     get:
       operationId: listPredefinedActions
       summary: Get the list of predefined actions (for the logged API user's account)
-      description: ''
+      description: "Returns the account's predefined actions — reusable next-action templates, each with the text to apply and a days offset used to calculate the due date. Actions that belong to a group are included, and carry that group's action_group_id."
       tags:
       - Predefined Actions
       parameters: []
@@ -1305,7 +1312,7 @@ paths:
     post:
       operationId: createPredefinedAction
       summary: Create a new predefined action
-      description: ''
+      description: "Creates a predefined action template. text (max 140 characters) and days are required; text can embed placeholders like [first name] that are substituted when the action is applied to a contact."
       tags:
       - Predefined Actions
       parameters: []
@@ -1348,7 +1355,7 @@ paths:
     get:
       operationId: getPredefinedAction
       summary: Get a specific predefined action
-      description: ''
+      description: "Returns one predefined action template, including its text, days offset and the action_group_id of the group it belongs to. Passing a group's ID here returns not-found — use the predefined action groups endpoint for those."
       tags:
       - Predefined Actions
       parameters:
@@ -1385,7 +1392,7 @@ paths:
     put:
       operationId: updatePredefinedAction
       summary: Update a specific predefined action
-      description: ''
+      description: "Updates a predefined action template's text (max 140 characters), days offset or position — but not its group membership, which is silently ignored if you send action_group_id. Use the groups endpoint to move an action between groups."
       tags:
       - Predefined Actions
       parameters:
@@ -1428,7 +1435,7 @@ paths:
     delete:
       operationId: deletePredefinedAction
       summary: Delete a specific predefined action
-      description: ''
+      description: "Deletes a predefined action template. Actions already created from it on contacts are untouched. If this leaves its group with fewer than two members, the group is dissolved automatically."
       tags:
       - Predefined Actions
       parameters:
@@ -1452,7 +1459,7 @@ paths:
     get:
       operationId: listPredefinedActionGroups
       summary: Get the list of predefined action groups (for the logged API user's account)
-      description: ''
+      description: "Returns the account's predefined action groups. A group bundles two or more predefined action templates so they can all be applied to a contact in one request, each with its own due date."
       tags:
       - Predefined Action Groups
       parameters: []
@@ -1492,7 +1499,7 @@ paths:
     post:
       operationId: createPredefinedActionGroup
       summary: Create a new predefined action group
-      description: ''
+      description: "Creates a predefined action group. text is required and action_ids must list at least two existing, currently ungrouped predefined actions. Names longer than 127 characters are truncated on save."
       tags:
       - Predefined Action Groups
       parameters: []
@@ -1553,7 +1560,7 @@ paths:
     get:
       operationId: getPredefinedActionGroup
       summary: Get a specific predefined action group
-      description: ''
+      description: "Returns one predefined action group, including action_ids — the templates that currently belong to it, resolved live. Passing a plain predefined action's ID here returns not-found."
       tags:
       - Predefined Action Groups
       parameters:
@@ -1590,7 +1597,7 @@ paths:
     put:
       operationId: updatePredefinedActionGroup
       summary: Update a specific predefined action group
-      description: ''
+      description: "Updates a predefined action group. action_ids replaces the group's membership outright rather than adding to it; actions dropped from the list are ungrouped, not deleted. Actions already in another group are rejected."
       tags:
       - Predefined Action Groups
       parameters:
@@ -1651,7 +1658,7 @@ paths:
     delete:
       operationId: deletePredefinedActionGroup
       summary: Delete a specific predefined action group
-      description: ''
+      description: "Deletes a predefined action group. The action templates it contained are kept and simply become ungrouped — deleting a group never deletes its actions."
       tags:
       - Predefined Action Groups
       parameters:
@@ -1675,7 +1682,7 @@ paths:
     get:
       operationId: listPredefinedItems
       summary: Get the list of predefined items (for the logged API user's account)
-      description: ''
+      description: "Returns the account's predefined items — reusable products or services with a name, description, cost and price that can be dropped onto a deal as line items. Search by name, and page through with page and per_page."
       tags:
       - Predefined Items
       parameters: []
@@ -1715,7 +1722,7 @@ paths:
     post:
       operationId: createPredefinedItem
       summary: Create a new predefined item
-      description: ''
+      description: "Creates a predefined item. name is required and must be unique on the account; description, cost and price are optional. Requires the deal items permission. Accounts are capped at 1000 predefined items."
       tags:
       - Predefined Items
       parameters: []
@@ -1776,7 +1783,7 @@ paths:
     get:
       operationId: getPredefinedItem
       summary: Get a specific predefined item
-      description: ''
+      description: "Returns one predefined item — a reusable product or service with its name, description, cost and price, used as a template for deal line items."
       tags:
       - Predefined Items
       parameters:
@@ -1813,7 +1820,7 @@ paths:
     put:
       operationId: updatePredefinedItem
       summary: Update a specific predefined item
-      description: ''
+      description: "Updates a predefined item. Requires the deal items permission. Pass partial=true to leave omitted fields untouched; without it, an omitted description, cost or price is reset to its default."
       tags:
       - Predefined Items
       parameters:
@@ -1874,7 +1881,7 @@ paths:
     delete:
       operationId: deletePredefinedItem
       summary: Delete a specific predefined item
-      description: ''
+      description: "Deletes a predefined item. Requires the deal items permission. Line items already added to deals keep their own copy of the name, cost and price, so existing deals are unaffected."
       tags:
       - Predefined Items
       parameters:
@@ -1898,7 +1905,7 @@ paths:
     get:
       operationId: listPredefinedItemGroups
       summary: Get the list of predefined item groups (for the logged API user's account)
-      description: ''
+      description: "Returns the account's predefined item groups. A group bundles predefined items under one name, and its cost and price are the sums of its members. Pass include_items to embed the items themselves."
       tags:
       - Predefined Item Groups
       parameters: []
@@ -1938,7 +1945,7 @@ paths:
     post:
       operationId: createPredefinedItemGroup
       summary: Create a new predefined item group
-      description: ''
+      description: "Creates a predefined item group. name is required and must be unique on the account, and items_ids lists the predefined items to bundle (up to 200). The group's cost and price are derived from its members."
       tags:
       - Predefined Item Groups
       parameters: []
@@ -1994,7 +2001,7 @@ paths:
     get:
       operationId: getPredefinedItemGroup
       summary: Get a specific predefined item group
-      description: ''
+      description: "Returns one predefined item group with the items it bundles. Its cost and price are the totals of its member items, and subcount is the number of item IDs the group holds."
       tags:
       - Predefined Item Groups
       parameters:
@@ -2031,7 +2038,7 @@ paths:
     delete:
       operationId: deletePredefinedItemGroup
       summary: Delete a specific predefined item group
-      description: ''
+      description: "Deletes a predefined item group. The predefined items it bundled are not deleted — only the grouping is removed."
       tags:
       - Predefined Item Groups
       parameters:
@@ -2175,7 +2182,7 @@ paths:
     get:
       operationId: getNote
       summary: Get a specific note
-      description: ''
+      description: "Returns one note — its text, author, date, the contact it belongs to, any attachments, and the linked deal if there is one. Any user who can see the note's contact can read it, not just its author."
       tags:
       - Notes
       parameters:
@@ -2273,7 +2280,7 @@ paths:
     delete:
       operationId: deleteNote
       summary: Delete a specific note
-      description: ''
+      description: "Deletes a note permanently — the API has no undo, unlike deleting from the web app. Its attachments are removed with it and the note disappears from the contact's timeline. Any user who can see the contact can delete it."
       tags:
       - Notes
       parameters:
@@ -2500,7 +2507,7 @@ paths:
     get:
       operationId: getCall
       summary: Get a specific call
-      description: ''
+      description: "Returns one logged call — its text, author, result, call time, phone number, the contact it belongs to, and any attachments. Any user who can see the call's contact can read it, not just its author."
       tags:
       - Calls
       parameters:
@@ -2601,7 +2608,7 @@ paths:
     delete:
       operationId: deleteCall
       summary: Delete a specific call
-      description: ''
+      description: "Deletes a logged call permanently — the API has no undo, unlike the web app. Its attachments go with it, it leaves the contact's timeline, and the author's call targets are recalculated."
       tags:
       - Calls
       parameters:
@@ -2899,7 +2906,7 @@ paths:
     get:
       operationId: getMeeting
       summary: Get a specific meeting
-      description: ''
+      description: "Returns one meeting — its text, author, meeting time, place, the contact it belongs to, and any attachments. Any user who can see the meeting's contact can read it, not just its author."
       tags:
       - Meetings
       parameters:
@@ -2996,7 +3003,7 @@ paths:
     delete:
       operationId: deleteMeeting
       summary: Delete a specific meeting
-      description: ''
+      description: "Deletes a meeting permanently — the API has no undo, unlike the web app. Its attachments go with it, it leaves the contact's timeline, and the author's meeting targets are recalculated."
       tags:
       - Meetings
       parameters:
@@ -3774,7 +3781,7 @@ paths:
     delete:
       operationId: deleteAttachment
       summary: Delete a specific attachment
-      description: ''
+      description: "Deletes an attachment from the note, call, meeting or deal it was uploaded to. The file stops being returned by the API immediately; the stored copy is retained rather than purged straight away."
       tags:
       - Attachments
       parameters:
@@ -3798,7 +3805,7 @@ paths:
     patch:
       operationId: pinAttachment
       summary: Pin attachment to its owner contact through its note/call/deal
-      description: ''
+      description: "Pins an attachment so it surfaces on the profile of the contact it belongs to, rather than only on the note, call, meeting or deal it was uploaded to. Pinned files are listed by GET /contacts/{contact_id}/pinned_attachments."
       tags:
         - Attachments
       parameters:
@@ -3834,7 +3841,7 @@ paths:
     patch:
       operationId: unpinAttachment
       summary: Unpin attachment from its owner contact through its note/call/deal
-      description: ''
+      description: "Unpins an attachment, so it no longer surfaces on its contact's profile and appears only against the note, call, meeting or deal it was uploaded to. The file itself is not deleted."
       tags:
         - Attachments
       parameters:
@@ -3870,7 +3877,7 @@ paths:
     get:
       operationId: listRelationshipTypes
       summary: Get a list of relationship types
-      description: ''
+      description: "Returns the relationship types defined on your account, each with its variants — the labels used for the two ends of a relationship. A type with one variant is symmetrical (Partner/Partner); one with two is directional (Manager/Reports to)."
       tags:
       - Relationship Types
       parameters:
@@ -3929,7 +3936,7 @@ paths:
     post:
       operationId: createRelationshipType
       summary: Create a new relationship type
-      description: ''
+      description: "Creates a relationship type from a variants list: one variant name makes a symmetrical type (Partner/Partner), two make a directional one (Manager/Reports to). Whether a type is symmetrical is derived from that count, not set directly. An account is limited to 50 types, and variant names to 35 characters."
       tags:
       - Relationship Types
       parameters: []
@@ -3986,7 +3993,7 @@ paths:
     get:
       operationId: getRelationshipType
       summary: Get a specific relationship type
-      description: ''
+      description: "Returns one relationship type with its variants. A single variant means the type is symmetrical and both contacts get the same label; two variants mean each end of the relationship gets a different one."
       tags:
       - Relationship Types
       parameters:
@@ -4023,7 +4030,7 @@ paths:
     put:
       operationId: updateRelationshipType
       summary: Update a specific relationship type
-      description: ''
+      description: "Renames a relationship type's variants: send the full set of existing variant ids with new names. Variants cannot be added or removed, and a type cannot switch between symmetrical and directional."
       tags:
       - Relationship Types
       parameters:
@@ -4081,7 +4088,7 @@ paths:
     delete:
       operationId: deleteRelationshipType
       summary: Delete a relationship type
-      description: ''
+      description: "Deletes a relationship type and every relationship using it — including ones that were soft-deleted and could otherwise have been restored. This cascade is permanent, so check usage before calling it."
       tags:
       - Relationship Types
       parameters:
@@ -4569,7 +4576,7 @@ paths:
     put:
       operationId: revertActionPromotion
       summary: Undo action promotion
-      description: ''
+      description: "Retained for backwards compatibility only — this endpoint no longer changes anything and simply returns the action unmodified. The promotion it used to reverse can no longer be undone, and the endpoint is due for removal."
       tags:
       - Actions
       parameters:
@@ -4651,7 +4658,7 @@ paths:
     get:
       operationId: listFilters
       summary: Get the list of custom filters (for the logged API user's account)
-      description: ''
+      description: "Returns the account's saved contact filters, each with its name and the conditions that define it — the filter definitions themselves, not the contacts they match. To get matching contacts, use GET /contacts/filters/{filter_id}."
       tags:
       - Filters
       parameters:
@@ -4920,7 +4927,7 @@ paths:
     get:
       operationId: listCompanyActions
       summary: Get actions associated with a specific company
-      description: ''
+      description: "Returns actions across the contacts that belong to this company, with the same paging, sorting and date filters as GET /actions. This covers the company's own contacts, not contacts merely linked to it."
       tags:
       - Companies
       parameters:
@@ -4982,7 +4989,7 @@ paths:
     get:
       operationId: listCompanyDeals
       summary: Get deals associated with a specific company
-      description: ''
+      description: "Returns deals across the contacts that belong to this company, with the same paging, sorting and filters as GET /deals. This covers the company's own contacts, not contacts merely linked to it."
       tags:
       - Companies
       parameters:
@@ -5046,7 +5053,7 @@ paths:
     get:
       operationId: listCompanyNotes
       summary: Get notes associated with a specific company
-      description: ''
+      description: "Returns notes logged against the contacts that belong to this company, most recently updated first — the company's own contacts only, not contacts merely linked to it. Paging and date filters match GET /notes."
       tags:
       - Companies
       parameters:
@@ -5105,7 +5112,7 @@ paths:
     get:
       operationId: listCompanyCalls
       summary: Get calls associated with a specific company
-      description: ''
+      description: "Returns calls logged against the contacts that belong to this company, most recently updated first — the company's own contacts only, not contacts merely linked to it. Paging and date filters match GET /calls."
       tags:
       - Companies
       parameters:
@@ -5164,7 +5171,7 @@ paths:
     get:
       operationId: listCompanyMeetings
       summary: Get meetings associated with a specific company
-      description: ''
+      description: "Returns meetings logged against the contacts that belong to this company, most recently updated first — the company's own contacts only, not contacts merely linked to it. Paging and date filters match GET /meetings."
       tags:
       - Companies
       parameters:
@@ -5223,7 +5230,7 @@ paths:
     get:
       operationId: listCompanyLinkedContacts
       summary: Get contacts linked with a specific company
-      description: ''
+      description: "Returns contacts from other companies that have been linked to this company's own contacts. Each entry carries linked_with, listing which of this company's contacts it is linked to. Paging and sorting only — no filters."
       tags:
       - Companies
       parameters:
@@ -6269,7 +6276,7 @@ paths:
     delete:
       operationId: deleteContactPhoto
       summary: Remove a contact's photo
-      description: ''
+      description: "Removes a contact's photo and returns the updated contact, whose photo_url is then empty. No placeholder or default avatar is substituted by the API."
       tags:
       - Contacts
       parameters:
@@ -6307,7 +6314,7 @@ paths:
     get:
       operationId: listContactsByFilter
       summary: Show contacts that meet the criteria of a filter
-      description: ''
+      description: "Returns the contacts matching a saved filter, alongside the filter's own definition. Results come back in Action Stream order and are fixed at 25 per page — per_page is accepted but ignored here."
       tags:
       - Contacts
       parameters:
@@ -6479,7 +6486,7 @@ paths:
     get:
       operationId: listContactActions
       summary: Get all actions for a specific contact
-      description: ''
+      description: "Returns the actions on this contact, with the same paging, sorting and date filters as GET /actions. Pass status to narrow to asap, waiting, date, queued or done."
       tags:
       - Contacts
       parameters:
@@ -6596,7 +6603,7 @@ paths:
     get:
       operationId: listContactDeals
       summary: Get all deals for a specific contact
-      description: ''
+      description: "Returns the deals on this contact, with the same paging, sorting and filters as GET /deals — including filtering by status, stage, pipeline_id or owner_id."
       tags:
       - Contacts
       parameters:
@@ -6750,7 +6757,7 @@ paths:
     get:
       operationId: listContactNotes
       summary: Get all notes for a specific contact
-      description: ''
+      description: "Returns the notes logged against this contact, most recently updated first, with the same paging and date filters as GET /notes. Each note carries its attachments and linked deal, if any."
       tags:
       - Contacts
       parameters:
@@ -6868,7 +6875,7 @@ paths:
     get:
       operationId: listContactCalls
       summary: Get all calls for a specific contact
-      description: ''
+      description: "Returns the calls logged against this contact, most recently updated first, with the same paging and date filters as GET /calls. Each call carries its result, call time and any attachments."
       tags:
       - Contacts
       parameters:
@@ -6989,7 +6996,7 @@ paths:
     get:
       operationId: listContactMeetings
       summary: Get all meetings for a specific contact
-      description: ''
+      description: "Returns the meetings logged against this contact, most recently updated first, with the same paging and date filters as GET /meetings. Each meeting carries its time, place and any attachments."
       tags:
       - Contacts
       parameters:
@@ -7106,7 +7113,7 @@ paths:
     get:
       operationId: listContactRelationships
       summary: Get all relationships for a specific contact
-      description: ''
+      description: "Returns the relationships this contact is part of. Each one is a single record naming both contacts, with the variant label that applies to each end. Filter by relationship_type_id or narrow to a specific pair."
       tags:
       - Contacts
       parameters:
@@ -7169,7 +7176,7 @@ paths:
     post:
       operationId: createContactRelationship
       summary: Create a relationships for a specific contact
-      description: ''
+      description: "Links this contact to another. related_contacts must hold exactly two entries — one of them this contact — each with the variant_id for its end. No reverse record is created; the relationship is a single document covering both. A contact can hold at most one relationship with any given other contact."
       tags:
       - Contacts
       parameters:
@@ -7241,7 +7248,7 @@ paths:
     get:
       operationId: getContactRelationship
       summary: Get a specific relationship
-      description: ''
+      description: "Returns one relationship for this contact, naming both parties and the variant label at each end. The contact in the path must be one of the two parties, otherwise the request is rejected as invalid."
       tags:
       - Contacts
       parameters:
@@ -7279,7 +7286,7 @@ paths:
     put:
       operationId: updateContactRelationship
       summary: Update a specific relationship
-      description: ''
+      description: "Replaces a relationship outright: send relationship_type_id and both related_contacts entries in full. The type can change and one contact can be swapped, but the path contact must remain a party."
       tags:
       - Contacts
       parameters:
@@ -8535,7 +8542,7 @@ paths:
     get:
       operationId: getNotification
       summary: Get serialised notification by ID
-      description: ''
+      description: "Returns one of your notifications by ID. The type field identifies what it is about — for example an assigned action, a note, call, meeting, email or contact assignment — and read shows whether it has been seen. Notifications are removed once 100 newer ones have been generated for you."
       tags:
         - Notifications
       parameters:
@@ -8752,7 +8759,7 @@ paths:
     get:
       operationId: listPipelines
       summary: Get all pipelines (associated with the logged API user's account)
-      description: ''
+      description: "Returns the account's deal pipelines, each with its ordered stages. default marks the pipeline that is default for you specifically, and stages carry a numeric position and a label."
       tags:
         - Pipelines
       parameters: []
@@ -8801,7 +8808,7 @@ paths:
     get:
       operationId: getPipeline
       summary: Get a specific pipeline
-      description: ''
+      description: "Returns one pipeline with its ordered stages. Each stage has a numeric stage position and a label; a pipeline holds between one and nine stages. default reflects whether it is your own default pipeline."
       tags:
         - Pipelines
       parameters:
