@@ -4538,7 +4538,7 @@ paths:
       operationId: unlinkAction
       summary: Unlink an action from the external event it mirrors
       description: >-
-        Detaches an action whose `externally_controlled` flag is true, making it an ordinary action:
+        Detaches an action from the external event it mirrors, making it an ordinary action:
         `text`, `date`, `exact_time`, `status` and `done` become writable again, and it can be
         completed or deleted. Nothing is sent to the external provider — unlinking does not cancel
         or change the meeting there.
