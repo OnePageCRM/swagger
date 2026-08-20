@@ -4533,6 +4533,48 @@ paths:
           $ref: '#/components/responses/409'
         500:
           $ref: '#/components/responses/500'
+  /actions/{action_id}/unlink:
+    put:
+      operationId: unlinkAction
+      summary: Unlink an action from the external event it mirrors
+      description: >-
+        Detaches an action from the external event it mirrors, making it an ordinary action:
+        `text`, `date`, `exact_time`, `status` and `done` become writable again, and it can be
+        completed or deleted. Nothing is sent to the external provider — unlinking does not cancel
+        or change the meeting there.
+      tags:
+      - Actions
+      parameters:
+      - $ref: '#/components/parameters/path_action_id'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    $ref: '#/components/schemas/Success/properties/status'
+                  message:
+                    $ref: '#/components/schemas/Success/properties/message'
+                  timestamp:
+                    $ref: '#/components/schemas/Success/properties/timestamp'
+                  data:
+                    properties:
+                      action:
+                        $ref: '#/components/schemas/Action'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
   /actions/{action_id}/promote:
     put:
       operationId: promoteAction
@@ -9501,6 +9543,16 @@ components:
           description: The date the action was completed (only returned, if action complete)
           readOnly: true
           example: '2018-05-16'
+        externally_controlled:
+          type: boolean
+          description: >-
+            True while this action mirrors an external event (for example a booked meeting) that has
+            not happened yet. Such an action cannot be rescheduled, completed or deleted — it can
+            only be reassigned. The external provider owns `text`, `date`, `exact_time`, `status`
+            and `done`. Call `PUT /actions/{action_id}/unlink` to detach the action and regain full
+            control. The flag clears by itself once the event time has passed.
+          readOnly: true
+          example: false
         created_at:
           type: string
           format: date-time
