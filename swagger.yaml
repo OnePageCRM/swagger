@@ -4540,7 +4540,7 @@ paths:
       description: >-
         Detaches an action from the external event it mirrors, making it an ordinary action:
         `text`, `date`, `exact_time`, `status` and `done` become writable again, and it can be
-        completed or deleted. Nothing is sent to the external provider — unlinking does not cancel
+        completed or deleted. Nothing is sent to the external app — unlinking does not cancel
         or change the meeting there.
       tags:
       - Actions
@@ -9548,11 +9548,44 @@ components:
           description: >-
             True while this action mirrors an external event (for example a booked meeting) that has
             not happened yet. Such an action cannot be rescheduled, completed or deleted — it can
-            only be reassigned. The external provider owns `text`, `date`, `exact_time`, `status`
-            and `done`. Call `PUT /actions/{action_id}/unlink` to detach the action and regain full
-            control. The flag clears by itself once the event time has passed.
+            only be reassigned. The external app is the source of truth for these facts: it owns
+            `text`, `date`, `exact_time`, `status` and `done`. Call `PUT /actions/{action_id}/unlink`
+            to detach the action and regain full control. The flag clears by itself once the event
+            time has passed. When `true`, `external_event` is always present.
           readOnly: true
           example: false
+        external_event:
+          type: object
+          nullable: true
+          readOnly: true
+          description: >-
+            The external event this action is attached to, or `null` when there is none. Present
+            while the action is still attached to an event that has not happened yet. Use
+            `externally_controlled` to decide whether editing is allowed.
+          required:
+          - app
+          - url
+          - sync_healthy
+          properties:
+            app:
+              type: string
+              description: >-
+                Identifier of the external app that owns the event.
+              readOnly: true
+              example: calendly
+            url:
+              type: string
+              description: >-
+                Link that opens the event in the external app.
+              readOnly: true
+              example: 'https://calendly.com/app/scheduled_events/user/me?uuid=abc123'
+            sync_healthy:
+              type: boolean
+              description: >-
+                Whether the external app is connected, authorised and still sending changes. When
+                `false`, changes between this action and the event are not getting through.
+              readOnly: true
+              example: true
         created_at:
           type: string
           format: date-time
