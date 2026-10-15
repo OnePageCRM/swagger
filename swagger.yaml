@@ -4804,13 +4804,23 @@ paths:
     get:
       operationId: listCompanies
       summary: Get a list of companies
-      description: "Returns the account's companies, sorted by name."
+      description: "Returns the account's companies, sorted by name. The contact filters (status_id, tag, lead_source or lead_source_id, owner_id, team, starred, filter_id and search) work as on GET /contacts and return only the companies with at least one matching contact. As on GET /contacts, the matching contacts are your own unless team=true or owner_id is given. Each company still lists all of its contacts and its full contacts_count. Without contact filters, all companies are returned."
       tags:
       - Companies
       parameters:
       - $ref: '#/components/parameters/query_companies_name'
       - $ref: '#/components/parameters/query_companies_phone'
       - $ref: '#/components/parameters/query_companies_letter'
+      # Contact filters
+      - $ref: '#/components/parameters/query_companies_team'
+      - $ref: '#/components/parameters/query_companies_owner_id'
+      - $ref: '#/components/parameters/query_companies_status_id'
+      - $ref: '#/components/parameters/query_companies_tag'
+      - $ref: '#/components/parameters/query_companies_lead_source'
+      - $ref: '#/components/parameters/query_companies_lead_source_id'
+      - $ref: '#/components/parameters/query_companies_starred'
+      - $ref: '#/components/parameters/query_companies_filter_id'
+      - $ref: '#/components/parameters/query_companies_search'
       - $ref: '#/components/parameters/query_companies_sort_by'
       - $ref: '#/components/parameters/query_order'
       - $ref: '#/components/parameters/query_page'
@@ -11890,6 +11900,87 @@ components:
       schema:
         type: string
         example: a
+    query_companies_team:
+      name: team
+      in: query
+      required: false
+      description: >-
+        Include contacts owned by other users in the contact filters. Without it, the contact filters
+        only match your own contacts (unless `owner_id` is given)
+      schema:
+        type: boolean
+        example: true
+    query_companies_owner_id:
+      name: owner_id
+      in: query
+      required: false
+      description: Return companies with at least one contact owned by a specific user
+      schema:
+        type: string
+        example: 5aba36b19007ba0f570c9523
+    query_companies_status_id:
+      name: status_id
+      in: query
+      required: false
+      description: Return companies with at least one contact of a particular status
+      schema:
+        type: string
+        example: 5aaa9b039007ba08c9ebaf0b
+    query_companies_tag:
+      name: tag
+      in: query
+      required: false
+      description: Return companies with at least one contact with this tag
+      schema:
+        type: string
+        example: VIP
+    query_companies_lead_source:
+      name: lead_source
+      in: query
+      required: false
+      description: >-
+        Return companies with at least one contact of a specific lead source (only use one of `lead_source`
+        and `lead_source_id` at a time)
+      schema:
+        type: string
+        example: email_web
+    query_companies_lead_source_id:
+      name: lead_source_id
+      in: query
+      required: false
+      description: >-
+        Return companies with at least one contact of a specific lead source (only use one of `lead_source`
+        and `lead_source_id` at a time)
+      schema:
+        type: string
+        example: email_web
+    query_companies_starred:
+      name: starred
+      in: query
+      required: false
+      description: >-
+        Return companies with at least one contact you starred (or, with `false`, one you have not starred)
+      schema:
+        type: boolean
+        example: true
+    query_companies_filter_id:
+      name: filter_id
+      in: query
+      required: false
+      description: Return companies with at least one contact matching a saved contact filter
+      schema:
+        type: string
+        example: 5ae9cc2a9007ba5b856c7bb8
+    query_companies_search:
+      name: search
+      in: query
+      required: false
+      description: >-
+        Return companies with at least one contact matching the search (contact name, company name or
+        phone number)
+      schema:
+        type: string
+        example: Jane Doe
     query_assignee_id:
       name: assignee_id
       in: query
