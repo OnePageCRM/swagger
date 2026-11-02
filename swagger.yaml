@@ -11138,176 +11138,175 @@ components:
       properties:
         all:
           description: Counters for the entire account
-          type: array
-          items:
-            properties:
-              '1':
-                type: integer
-                format: int32
-                description: Contacts who's name begins with a non-alphabetic character
-                readOnly: true
-                example: 1
-              a:
-                type: integer
-                format: int32
-                description: Contacts who's name begins with A
-                readOnly: true
-                example: 2
-              b:
-                type: integer
-                format: int32
-                description: Contacts who's name begins with B
-                readOnly: true
-                example: 2
-              c:
-                type: integer
-                format: int32
-                description: Contacts who's name begins with C
-                readOnly: true
-                example: 1
-              d:
-                type: integer
-                format: int32
-                description: Contacts who's name begins with D
-                readOnly: true
-                example: 1
-              e:
-                type: integer
-                format: int32
-                description: Contacts who's name begins with E
-                readOnly: true
-                example: 0
-              f:
-                type: integer
-                format: int32
-                description: Contacts who's name begins with F
-                readOnly: true
-                example: 0
-              g:
-                type: integer
-                format: int32
-                description: Contacts who's name begins with G
-                readOnly: true
-                example: 3
-              h:
-                type: integer
-                format: int32
-                description: Contacts who's name begins with H
-                readOnly: true
-                example: 0
-              i:
-                type: integer
-                format: int32
-                description: Contacts who's name begins with I
-                readOnly: true
-                example: 3
-              j:
-                type: integer
-                format: int32
-                description: Contacts who's name begins with J
-                readOnly: true
-                example: 0
-              k:
-                type: integer
-                format: int32
-                description: Contacts who's name begins with K
-                readOnly: true
-                example: 0
-              l:
-                type: integer
-                format: int32
-                description: Contacts who's name begins with L
-                readOnly: true
-                example: 2
-              m:
-                type: integer
-                format: int32
-                description: Contacts who's name begins with M
-                readOnly: true
-                example: 2
-              n:
-                type: integer
-                format: int32
-                description: Contacts who's name begins with N
-                readOnly: true
-                example: 3
-              o:
-                type: integer
-                format: int32
-                description: Contacts who's name begins with O
-                readOnly: true
-                example: 0
-              p:
-                type: integer
-                format: int32
-                description: Contacts who's name begins with P
-                readOnly: true
-                example: 2
-              q:
-                type: integer
-                format: int32
-                description: Contacts who's name begins with Q
-                readOnly: true
-                example: 0
-              r:
-                type: integer
-                format: int32
-                description: Contacts who's name begins with R
-                readOnly: true
-                example: 0
-              s:
-                type: integer
-                format: int32
-                description: Contacts who's name begins with S
-                readOnly: true
-                example: 0
-              t:
-                type: integer
-                format: int32
-                description: Contacts who's name begins with T
-                readOnly: true
-                example: 1
-              u:
-                type: integer
-                format: int32
-                description: Contacts who's name begins with U
-                readOnly: true
-                example: 1
-              v:
-                type: integer
-                format: int32
-                description: Contacts who's name begins with V
-                readOnly: true
-                example: 1
-              w:
-                type: integer
-                format: int32
-                description: Contacts who's name begins with W
-                readOnly: true
-                example: 0
-              x:
-                type: integer
-                format: int32
-                description: Contacts who's name begins with X
-                readOnly: true
-                example: 1
-              y:
-                type: integer
-                format: int32
-                description: Contacts who's name begins with Y
-                readOnly: true
-                example: 1
-              z:
-                type: integer
-                format: int32
-                description: Contacts who's name begins with Z
-                readOnly: true
-                example: 0
-              total_count:
-                type: integer
-                format: int32
-                readOnly: true
-                example: 27
+          type: object
+          properties:
+            '1':
+              type: integer
+              format: int32
+              description: Contacts who's name begins with a non-alphabetic character
+              readOnly: true
+              example: 1
+            a:
+              type: integer
+              format: int32
+              description: Contacts who's name begins with A
+              readOnly: true
+              example: 2
+            b:
+              type: integer
+              format: int32
+              description: Contacts who's name begins with B
+              readOnly: true
+              example: 2
+            c:
+              type: integer
+              format: int32
+              description: Contacts who's name begins with C
+              readOnly: true
+              example: 1
+            d:
+              type: integer
+              format: int32
+              description: Contacts who's name begins with D
+              readOnly: true
+              example: 1
+            e:
+              type: integer
+              format: int32
+              description: Contacts who's name begins with E
+              readOnly: true
+              example: 0
+            f:
+              type: integer
+              format: int32
+              description: Contacts who's name begins with F
+              readOnly: true
+              example: 0
+            g:
+              type: integer
+              format: int32
+              description: Contacts who's name begins with G
+              readOnly: true
+              example: 3
+            h:
+              type: integer
+              format: int32
+              description: Contacts who's name begins with H
+              readOnly: true
+              example: 0
+            i:
+              type: integer
+              format: int32
+              description: Contacts who's name begins with I
+              readOnly: true
+              example: 3
+            j:
+              type: integer
+              format: int32
+              description: Contacts who's name begins with J
+              readOnly: true
+              example: 0
+            k:
+              type: integer
+              format: int32
+              description: Contacts who's name begins with K
+              readOnly: true
+              example: 0
+            l:
+              type: integer
+              format: int32
+              description: Contacts who's name begins with L
+              readOnly: true
+              example: 2
+            m:
+              type: integer
+              format: int32
+              description: Contacts who's name begins with M
+              readOnly: true
+              example: 2
+            n:
+              type: integer
+              format: int32
+              description: Contacts who's name begins with N
+              readOnly: true
+              example: 3
+            o:
+              type: integer
+              format: int32
+              description: Contacts who's name begins with O
+              readOnly: true
+              example: 0
+            p:
+              type: integer
+              format: int32
+              description: Contacts who's name begins with P
+              readOnly: true
+              example: 2
+            q:
+              type: integer
+              format: int32
+              description: Contacts who's name begins with Q
+              readOnly: true
+              example: 0
+            r:
+              type: integer
+              format: int32
+              description: Contacts who's name begins with R
+              readOnly: true
+              example: 0
+            s:
+              type: integer
+              format: int32
+              description: Contacts who's name begins with S
+              readOnly: true
+              example: 0
+            t:
+              type: integer
+              format: int32
+              description: Contacts who's name begins with T
+              readOnly: true
+              example: 1
+            u:
+              type: integer
+              format: int32
+              description: Contacts who's name begins with U
+              readOnly: true
+              example: 1
+            v:
+              type: integer
+              format: int32
+              description: Contacts who's name begins with V
+              readOnly: true
+              example: 1
+            w:
+              type: integer
+              format: int32
+              description: Contacts who's name begins with W
+              readOnly: true
+              example: 0
+            x:
+              type: integer
+              format: int32
+              description: Contacts who's name begins with X
+              readOnly: true
+              example: 1
+            y:
+              type: integer
+              format: int32
+              description: Contacts who's name begins with Y
+              readOnly: true
+              example: 1
+            z:
+              type: integer
+              format: int32
+              description: Contacts who's name begins with Z
+              readOnly: true
+              example: 0
+            total_count:
+              type: integer
+              format: int32
+              readOnly: true
+              example: 27
         users:
           description: Counters per user
           type: array
